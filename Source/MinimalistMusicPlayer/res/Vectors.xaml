@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+	<GeometryGroup x:Key="Close" >
+		<PathGeometry Figures="	M 151.51723 121.09406 256.5 225 361.54073 121.09406 l 72.95927 0 L 300.20984 256 434.5 391.78319 l -72.95927 0 L 256.5 290.04 151.51723 391.78319 78 391.78319 213 256 78 121.09406 Z" FillRule="Nonzero" />
+	</GeometryGroup>
+	
+	<GeometryGroup x:Key="Minimize" >
+		<PathGeometry Figures="m 389 374 0 55 -266 0 0 -55 z" FillRule="Nonzero" />
+	</GeometryGroup>
+
+	<GeometryGroup x:Key="Pin" >
+		<PathGeometry Figures="	m 300.5 169 0 95 17.5 0 0 16 -54 0 0 67 -16 0 0 -67 -54 0 0 -16 18 0 0 -95 z" FillRule="Nonzero" />
+	</GeometryGroup>
+	
+	
+</ResourceDictionary>

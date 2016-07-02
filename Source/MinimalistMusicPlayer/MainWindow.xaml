@@ -1,0 +1,135 @@
+﻿<Window x:Name="Window" x:Class="MinimalistMusicPlayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        Title="Minimalist" Height="150" Width="525"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+		Icon="img/LogoMulti.ico" KeyUp="Window_KeyUp" MouseWheel="Window_MouseWheel">
+
+	<Border x:Name="BorderMain" BorderBrush="{DynamicResource BlueBrush}" BorderThickness="1" CornerRadius="0" Margin="0,0,0,0">
+		<Grid x:Name="GridMain" Background="{DynamicResource BackgroundBrush}" Margin="0,0,0,0" MouseMove="GridMain_MouseMove" MouseDown="GridMain_MouseDown" MouseUp="GridMain_MouseUp">
+
+			<!-- Window controls -->
+			<Button x:Name="ButtonClose" Style="{DynamicResource ResourceKey=BackGroundButtonStyle}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="35" Height="25" Click="ButtonClose_Click" Focusable="False" >
+				<Image Source="img\close.png" Height="25" Width="35" />
+			</Button>
+			<Button x:Name="ButtonMinimize" Style="{DynamicResource ResourceKey=BackGroundButtonStyle}" Margin="0,0,35,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="35" Height="25" Click="ButtonMinimize_Click" Focusable="False">
+				<Image Source="img\minimize.png" Height="25" Width="35" />
+
+				<!--<Path Fill="White" Margin="-256" RenderTransformOrigin=".5,.5" Data="{StaticResource Minimize}">
+					<Path.RenderTransform>
+						<ScaleTransform ScaleX="0.04" ScaleY="0.04"/>
+					</Path.RenderTransform>
+				</Path>-->
+
+			</Button>
+			<Button x:Name="ButtonPinToTop" Style="{DynamicResource ResourceKey=BackGroundButtonStyle}" Margin="0,0,99,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="34" Height="25" Click="ButtonPinToTop_Click" Focusable="False">
+				<Image Source="img\pin.png" Height="25" Width="35" />
+			</Button>
+
+			<Grid x:Name="PlayingIcon" HorizontalAlignment="Left" Margin="17,14,0,0" VerticalAlignment="Top" Height="15" Width="15">
+				<Ellipse Stroke="White" StrokeThickness="2" />
+				<Rectangle Height="3" Fill="{DynamicResource BackgroundBrush}" StrokeThickness="2" Width="17" Margin="-1,6" />
+			</Grid>
+
+			<!-- Track information/open -->
+			<Button x:Name="ButtonTrackInfo" VerticalAlignment="Top" HorizontalAlignment="Left" Height="46" Width="238" Margin="40,6,0,0" Padding="0" Style="{DynamicResource BackGroundButtonStyle2}" PreviewMouseUp="ButtonTrackInfo_PreviewMouseUp">
+				<Grid Height="46" Width="238">
+					<Label x:Name="LabelSongTitle" Content="Open Track(s)" HorizontalAlignment="Left" Margin="0,-6,0,0" VerticalAlignment="Top" Foreground="{DynamicResource TextBrushWhite}" FontSize="22">
+						<Label.ToolTip>
+							<ToolTip x:Name="ToolTipTrackTitle" Style="{DynamicResource ToolTipBordered}" ToolTipService.Placement="RelativePoint" VerticalOffset="2" Margin="20,20" Foreground="{DynamicResource DisabledBackgroundBrush}" />
+						</Label.ToolTip>
+					</Label>
+					<Label x:Name="LabelArtistAlbum" Content="" HorizontalAlignment="Left" Margin="0,23,0,-2" VerticalAlignment="Top" Foreground="{DynamicResource TextBrushGrey}" FontSize="12">
+						<Label.ToolTip>
+							<ToolTip x:Name="ToolTipTrackArtistAlbum" Style="{DynamicResource ToolTipBordered}" Foreground="{DynamicResource DisabledBackgroundBrush}" ToolTipService.Placement="RelativePoint" VerticalOffset="2" />
+						</Label.ToolTip>
+					</Label>
+				</Grid>
+			</Button>
+
+			<!-- Seek controls -->
+			<Button x:Name="ButtonPrev" Style="{DynamicResource AlphaButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="10,49,0,0" BorderBrush="{x:Null}" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" Click="ButtonPrevious_Click">
+				<Button.OpacityMask>
+					<ImageBrush ImageSource="img/Prev.png" Stretch="None"/>
+				</Button.OpacityMask>
+			</Button>
+
+			<Slider x:Name="SliderSeek" Style="{DynamicResource HorizontalSlider}" Margin="45,59,45,0" VerticalAlignment="Top" Value="0" ValueChanged="SliderSeek_ValueChanged" PreviewMouseDown="SliderSeek_PreviewMouseDown" PreviewMouseUp="SliderSeek_PreviewMouseUp" PreviewMouseMove="SliderSeek_PreviewMouseMove">
+				<Slider.ToolTip>
+					<ToolTip x:Name="ToolTipSeek" ToolTipService.Placement="Top" Style="{DynamicResource ToolTipBordered}" Foreground="{DynamicResource DisabledBackgroundBrush}"></ToolTip>
+				</Slider.ToolTip>
+			</Slider>
+
+			<Button x:Name="ButtonNext" Style="{DynamicResource AlphaButtonStyle}" VerticalAlignment="Top" Height="30" Margin="0,49,10,0" HorizontalAlignment="Right" Width="30" BorderBrush="{x:Null}" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="ButtonNext_Click">
+				<Button.RenderTransform>
+					<RotateTransform Angle="180"/>
+				</Button.RenderTransform>
+
+				<Button.OpacityMask>
+					<ImageBrush ImageSource="img/Prev.png" Stretch="None"/>
+				</Button.OpacityMask>
+			</Button>
+
+			<!-- Play controls -->
+
+			<!--<Button x:Name="ButtonRewind" Style="{DynamicResource AlphaButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="42,108,0,0" BorderBrush="{x:Null}" Foreground="{x:Null}" Background="{DynamicResource TextBrushWhite}" RenderTransformOrigin="0.5,0.5">
+				<Button.RenderTransform>
+					<RotateTransform Angle="180"/>
+				</Button.RenderTransform>
+				<Button.OpacityMask>
+					<ImageBrush ImageSource="img/FF.png" Stretch="None"/>
+				</Button.OpacityMask>
+			</Button>-->
+
+			<Button x:Name="ButtonPlayPause" Style="{DynamicResource AlphaButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="41,108,0,0" BorderBrush="{x:Null}" Background="{DynamicResource TextBrushWhite}" RenderTransformOrigin="0.967,0.533" Click="ButtonPlayPause_Click" Focusable="False">
+				<Button.OpacityMask>
+					<ImageBrush ImageSource="img/Play.png" Stretch="None"/>
+				</Button.OpacityMask>
+			</Button>
+
+			<Button x:Name="ButtonVolume" Style="{DynamicResource AlphaButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="76,108,0,0" BorderBrush="{x:Null}" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" Click="ButtonVolume_Click" MouseEnter="Volume_MouseEnter" MouseLeave="Volume_MouseLeave" Focusable="False">
+				<Button.OpacityMask>
+					<ImageBrush ImageSource="img/volumeHigh.png" Stretch="None"/>
+				</Button.OpacityMask>
+			</Button>
+
+			<Slider x:Name="SliderVolume" Style="{DynamicResource HorizontalSlider}" HorizontalAlignment="Left" Margin="115,118,0,0" VerticalAlignment="Top" Width="77" Value="50" MouseLeave="Volume_MouseLeave" MouseEnter="Volume_MouseEnter" LargeChange="20" Maximum="100" ValueChanged="SliderVolume_ValueChanged" Focusable="False" />
+
+			<!-- Time elapsed/Total time -->
+			<StackPanel HorizontalAlignment="Left" Height="20" Margin="382,74,0,0" VerticalAlignment="Top" Width="100" Orientation="Horizontal" FlowDirection="RightToLeft">
+				<Label x:Name="LabelTotalTime" Content="--:--" VerticalAlignment="Top" Margin="0,-5,0,0" Foreground="{DynamicResource TextBrushGrey}"/>
+				<Label x:Name="LabelSeekTime" Content="--:--" VerticalAlignment="Top" Margin="0,-5,0,0" Foreground="{DynamicResource TextBrushWhite}" FontWeight="Bold"/>
+			</StackPanel>
+
+			<!-- Playlist controls -->
+			<Button x:Name="ButtonRepeat" Style="{DynamicResource AlphaButtonStyle}" VerticalAlignment="Top" Width="30" Height="30" Margin="0,108,112,0" BorderBrush="{x:Null}" HorizontalAlignment="Right" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" Click="ButtonRepeat_Click" Focusable="False">
+				<Button.OpacityMask>
+					<ImageBrush Stretch="None" ImageSource="img/Re.png"/>
+				</Button.OpacityMask>
+			</Button>
+
+			<Button x:Name="ButtonShuffle" Style="{DynamicResource AlphaButtonStyle}" VerticalAlignment="Top" Width="30" Height="30" Margin="0,108,77,0" BorderBrush="{x:Null}" HorizontalAlignment="Right" Foreground="{x:Null}" Background="{DynamicResource TextBrushWhite}" Click="ButtonShuffle_Click" Focusable="False">
+				<Button.OpacityMask>
+					<ImageBrush Stretch="None" ImageSource="img/Sh.png"/>
+				</Button.OpacityMask>
+			</Button>
+
+			<Button x:Name="ButtonPlaylist" Style="{DynamicResource AlphaButtonStyle}" VerticalAlignment="Top" Width="30" Height="30" Margin="0,108,42,0" BorderBrush="{x:Null}" HorizontalAlignment="Right" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" Click="ButtonPlaylist_Click" Focusable="False">
+				<Button.OpacityMask>
+					<ImageBrush Stretch="None" ImageSource="img/Playlist.png"/>
+				</Button.OpacityMask>
+			</Button>
+
+			<ScrollViewer Margin="45,155,25,10">
+				<StackPanel x:Name="StackPanelPlaylist" AllowDrop="True" Drop="StackPanelPlaylist_Drop" Background="{DynamicResource BackgroundBrush}" >
+
+				</StackPanel>
+			</ScrollViewer>
+		</Grid>
+	</Border>
+
+</Window>

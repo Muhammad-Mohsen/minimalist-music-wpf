@@ -1,0 +1,66 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Style x:Key="AlphaButtonStyle" TargetType="{x:Type Button}">
+		<Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+		<Setter Property="Width" Value="80" />
+		<Setter Property="Margin" Value="10" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid Width="{TemplateBinding Width}"  
+						Height="{TemplateBinding Height}" 
+						ClipToBounds="True">
+
+						<Rectangle x:Name="outerRectangle"  
+							HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  
+							Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1"
+							Fill="{TemplateBinding Background}" />
+
+						<!-- Present Content of the button. -->
+						<DockPanel Name="myContentPresenterDockPanel">
+							<ContentPresenter x:Name="myContentPresenter" Margin="0" Content="{TemplateBinding Content}" />
+						</DockPanel>
+					</Grid>
+
+					<!-- http://stackoverflow.com/questions/2432790/animate-button-on-mouseover-and-mousedown -->
+					<ControlTemplate.Resources>
+						<Storyboard x:Key="MouseEnterAnimation">
+							<ColorAnimation Storyboard.TargetName="outerRectangle" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="{StaticResource HoverColorBlue}" Duration="0:0:0.3" />
+						</Storyboard>
+						<Storyboard x:Key="MouseExitAnimation" FillBehavior="Stop">
+							<ColorAnimation Storyboard.TargetName="outerRectangle" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="{StaticResource WhiteColor}" Duration="0:0:0.3" />
+						</Storyboard>
+					</ControlTemplate.Resources>
+
+					<ControlTemplate.Triggers>
+						<!-- Set properties when mouse pointer is over the button. -->
+						<Trigger Property="IsMouseOver" Value="True">
+							
+							<!--Animate the background change --> 
+							<!-- http://stackoverflow.com/questions/2432790/animate-button-on-mouseover-and-mousedown -->
+							<Trigger.EnterActions>
+								<BeginStoryboard Storyboard="{StaticResource MouseEnterAnimation}" />
+							</Trigger.EnterActions>
+							<Trigger.ExitActions>
+								<BeginStoryboard Storyboard="{StaticResource MouseExitAnimation}" />
+							</Trigger.ExitActions>
+							
+							<!-- Immediate background change -->
+							<!--<Setter Property ="Rectangle.Fill" TargetName="outerRectangle" Value="{DynamicResource HoverBrush}" />-->
+						</Trigger>
+
+						<Trigger Property="IsPressed" Value="True">
+							<Setter Property="Rectangle.Fill" TargetName="outerRectangle" Value="{DynamicResource BlueBrush}" />
+						</Trigger>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Rectangle.Fill" TargetName="outerRectangle" Value="{DynamicResource DisabledForegroundBrush}" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>

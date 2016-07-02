@@ -1,0 +1,106 @@
+D:\Personal\MinimalistMusicPlayer\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.exe.config
+D:\Personal\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.exe
+D:\Personal\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.pdb
+D:\Personal\MinimalistMusicPlayer\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.exe
+D:\Personal\MinimalistMusicPlayer\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.pdb
+D:\Personal\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.csprojResolveAssemblyReference.cache
+D:\Personal\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MainWindow.baml
+D:\Personal\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\Styles.baml
+D:\Personal\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\App.baml
+D:\Personal\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MainWindow.g.cs
+D:\Personal\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\App.g.cs
+D:\Personal\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer_MarkupCompile.cache
+D:\Personal\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.g.resources
+D:\Personal\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.Properties.Resources.resources
+D:\Personal\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.csproj.GenerateResource.Cache
+D:\Personal\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\Interop.WMPLib.dll
+D:\Personal\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.csproj.ResolveComReference.cache
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.exe.config
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.exe.manifest
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.application
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.exe
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.pdb
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\Interop.WMPLib.dll
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.csproj.ResolveComReference.cache
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MainWindow.baml
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\AlphaButton.baml
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\BackgroundButton.baml
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\PlaylistItem.baml
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\ScrollBar.baml
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\Slider.baml
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\Colors.baml
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\ToolTip.baml
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\App.baml
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MainWindow.g.cs
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\App.g.cs
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer_MarkupCompile.cache
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.g.resources
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.Properties.Resources.resources
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.csproj.GenerateResource.Cache
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.exe.manifest
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.application
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.exe
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.pdb
+D:\iTi\otherProjects\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.csprojResolveAssemblyReference.cache
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.exe.config
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\Interop.WMPLib.dll
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.csproj.ResolveComReference.cache
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.exe
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.pdb
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.exe.manifest
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.application
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.exe
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.pdb
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.csprojResolveAssemblyReference.cache
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MainWindow.baml
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\AlphaButton.baml
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\BackgroundButton.baml
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\PlaylistItem.baml
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\ScrollBar.baml
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\Slider.baml
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\Colors.baml
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\ToolTip.baml
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\App.baml
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MainWindow.g.cs
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\App.g.cs
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer_MarkupCompile.cache
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.g.resources
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.Properties.Resources.resources
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.csproj.GenerateResource.Cache
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.exe.manifest
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.application
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\AlphaButtonToggle.baml
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\BackgroundButtonToggle.baml
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\Vectors.baml
+D:\Books + Notes\PROJECTS\MinimalistMusicPlayer\MinimalistMusicPlayer\obj\Debug\res\BackgroundButton2.baml
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.exe.config
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\Interop.WMPLib.dll
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.csproj.ResolveComReference.cache
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.exe
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.pdb
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.exe.manifest
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.application
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.exe
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\bin\Debug\MinimalistMusicPlayer.pdb
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.csprojResolveAssemblyReference.cache
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\MainWindow.baml
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\res\AlphaButtonToggle.baml
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\res\AlphaButton.baml
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\res\BackgroundButton2.baml
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\res\BackgroundButtonToggle.baml
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\res\BackgroundButton.baml
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\res\PlaylistItem.baml
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\res\ScrollBar.baml
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\res\Slider.baml
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\res\Colors.baml
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\res\ToolTip.baml
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\res\Vectors.baml
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\App.baml
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\MainWindow.g.cs
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\App.g.cs
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer_MarkupCompile.cache
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.g.resources
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.Properties.Resources.resources
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.csproj.GenerateResource.Cache
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.exe.manifest
+D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Source\MinimalistMusicPlayer\obj\Debug\MinimalistMusicPlayer.application

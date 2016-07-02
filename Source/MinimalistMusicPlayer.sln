@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalistMusicPlayer", "MinimalistMusicPlayer\MinimalistMusicPlayer.csproj", "{B8264454-B0A0-4D9F-8A8E-25EFC1823247}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CD_ROM|Any CPU = CD_ROM|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		DVD-5|Any CPU = DVD-5|Any CPU
+		Release|Any CPU = Release|Any CPU
+		SingleImage|Any CPU = SingleImage|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8264454-B0A0-4D9F-8A8E-25EFC1823247}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{B8264454-B0A0-4D9F-8A8E-25EFC1823247}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{B8264454-B0A0-4D9F-8A8E-25EFC1823247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8264454-B0A0-4D9F-8A8E-25EFC1823247}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8264454-B0A0-4D9F-8A8E-25EFC1823247}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8264454-B0A0-4D9F-8A8E-25EFC1823247}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{B8264454-B0A0-4D9F-8A8E-25EFC1823247}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8264454-B0A0-4D9F-8A8E-25EFC1823247}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8264454-B0A0-4D9F-8A8E-25EFC1823247}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{B8264454-B0A0-4D9F-8A8E-25EFC1823247}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
