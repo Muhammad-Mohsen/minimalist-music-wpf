@@ -38,7 +38,7 @@
 			</Grid>
 
 			<!-- Track information/open -->
-			<Button x:Name="ButtonTrackInfo" VerticalAlignment="Top" HorizontalAlignment="Left" Height="46" Width="238" Margin="40,6,0,0" Padding="0" Style="{DynamicResource BackGroundButtonStyle2}" PreviewMouseUp="ButtonTrackInfo_PreviewMouseUp">
+			<Button x:Name="ButtonTrackInfo" VerticalAlignment="Top" HorizontalAlignment="Left" Height="46" Width="238" Margin="40,6,0,0" Padding="0" Style="{DynamicResource BackGroundButtonStyle2}" Click="ButtonTrackInfo_Click">
 				<Grid Height="46" Width="238">
 					<Label x:Name="LabelSongTitle" Content="Open Track(s)" HorizontalAlignment="Left" Margin="0,-6,0,0" VerticalAlignment="Top" Foreground="{DynamicResource TextBrushWhite}" FontSize="22">
 						<Label.ToolTip>

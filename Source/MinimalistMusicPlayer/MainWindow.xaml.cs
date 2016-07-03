@@ -67,7 +67,7 @@ namespace MinimalistMusicPlayer
 		//
 		// Track info grid Events - Cutting corners! To sleepy to do anything decent.
 		//
-		private void ButtonTrackInfo_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+		private void ButtonTrackInfo_Click(object sender, RoutedEventArgs e)
 		{
 			OpenFileDialog OpenDialog = new OpenFileDialog();
 			OpenDialog.Title = "Open media";
