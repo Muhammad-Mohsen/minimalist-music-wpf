@@ -14,16 +14,18 @@
 
 			<!-- Window controls -->
 			<Button x:Name="ButtonClose" Style="{DynamicResource ResourceKey=BackGroundButtonStyle}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="35" Height="25" Click="ButtonClose_Click" Focusable="False" >
-				<Image Source="img\close.png" Height="25" Width="35" />
+				<!--<Image Source="img\close.png" Height="25" Width="35" />-->
+				<Path Fill="White" Margin="-9" Data="{StaticResource Close}" />
+
 			</Button>
 			<Button x:Name="ButtonMinimize" Style="{DynamicResource ResourceKey=BackGroundButtonStyle}" Margin="0,0,35,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="35" Height="25" Click="ButtonMinimize_Click" Focusable="False">
-				<Image Source="img\minimize.png" Height="25" Width="35" />
+				<!--<Image Source="img\minimize.png" Height="25" Width="35" />-->
 
-				<!--<Path Fill="White" Margin="-256" RenderTransformOrigin=".5,.5" Data="{StaticResource Minimize}">
+				<Path Fill="White" Margin="-256" RenderTransformOrigin=".5,.5" Data="{StaticResource Minimize}">
 					<Path.RenderTransform>
 						<ScaleTransform ScaleX="0.04" ScaleY="0.04"/>
 					</Path.RenderTransform>
-				</Path>-->
+				</Path>
 
 			</Button>
 			<Button x:Name="ButtonPinToTop" Style="{DynamicResource ResourceKey=BackGroundButtonStyle}" Margin="0,0,99,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="34" Height="25" Click="ButtonPinToTop_Click" Focusable="False">
@@ -85,7 +87,7 @@
 				</Button.OpacityMask>
 			</Button>-->
 
-			<Button x:Name="ButtonPlayPause" Style="{DynamicResource AlphaButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="41,108,0,0" BorderBrush="{x:Null}" Background="{DynamicResource TextBrushWhite}" RenderTransformOrigin="0.967,0.533" Click="ButtonPlayPause_Click" Focusable="False">
+			<Button x:Name="ButtonPlayPause" Style="{DynamicResource AlphaButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="41,108,0,0" BorderBrush="{x:Null}" Background="{DynamicResource TextBrushWhite}" Click="ButtonPlayPause_Click" Focusable="False">
 				<Button.OpacityMask>
 					<ImageBrush ImageSource="img/Play.png" Stretch="None"/>
 				</Button.OpacityMask>
