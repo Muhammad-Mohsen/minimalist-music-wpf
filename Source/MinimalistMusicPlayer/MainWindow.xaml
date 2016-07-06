@@ -7,7 +7,7 @@
         Title="Minimalist" Height="150" Width="525"
         WindowStyle="None"
         ResizeMode="NoResize"
-		Icon="img/LogoMulti.ico" KeyUp="Window_KeyUp" MouseWheel="Window_MouseWheel">
+		Icon="img/AppIcon.ico" KeyUp="Window_KeyUp" MouseWheel="Window_MouseWheel">
 
 	<Border x:Name="BorderMain" BorderBrush="{DynamicResource BlueBrush}" BorderThickness="1" CornerRadius="0" Margin="0,0,0,0">
 		<Grid x:Name="GridMain" Background="{DynamicResource BackgroundBrush}" Margin="0,0,0,0" MouseMove="GridMain_MouseMove" MouseDown="GridMain_MouseDown" MouseUp="GridMain_MouseUp">
@@ -15,21 +15,16 @@
 			<!-- Window controls -->
 			<Button x:Name="ButtonClose" Style="{DynamicResource ResourceKey=BackGroundButtonStyle}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="35" Height="25" Click="ButtonClose_Click" Focusable="False" >
 				<!--<Image Source="img\close.png" Height="25" Width="35" />-->
-				<Path Fill="White" Margin="-9" Data="{StaticResource Close}" />
+				<Path Fill="White" Data="{StaticResource Close}" />
 
 			</Button>
 			<Button x:Name="ButtonMinimize" Style="{DynamicResource ResourceKey=BackGroundButtonStyle}" Margin="0,0,35,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="35" Height="25" Click="ButtonMinimize_Click" Focusable="False">
 				<!--<Image Source="img\minimize.png" Height="25" Width="35" />-->
-
-				<Path Fill="White" Margin="-256" RenderTransformOrigin=".5,.5" Data="{StaticResource Minimize}">
-					<Path.RenderTransform>
-						<ScaleTransform ScaleX="0.04" ScaleY="0.04"/>
-					</Path.RenderTransform>
-				</Path>
-
+				<Path Fill="White" Data="{StaticResource Minimize}" />
 			</Button>
 			<Button x:Name="ButtonPinToTop" Style="{DynamicResource ResourceKey=BackGroundButtonStyle}" Margin="0,0,99,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="34" Height="25" Click="ButtonPinToTop_Click" Focusable="False">
-				<Image Source="img\pin.png" Height="25" Width="35" />
+				<!--<Image Source="img\pin.png" Height="25" Width="35" />-->
+				<Path Fill="White" Data="{StaticResource Pin}" />
 			</Button>
 
 			<Grid x:Name="PlayingIcon" HorizontalAlignment="Left" Margin="17,14,0,0" VerticalAlignment="Top" Height="15" Width="15">
@@ -56,7 +51,12 @@
 			<!-- Seek controls -->
 			<Button x:Name="ButtonPrev" Style="{DynamicResource AlphaButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="10,49,0,0" BorderBrush="{x:Null}" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" Click="ButtonPrevious_Click">
 				<Button.OpacityMask>
-					<ImageBrush ImageSource="img/Prev.png" Stretch="None"/>
+					<VisualBrush>
+						<VisualBrush.Stretch>None</VisualBrush.Stretch>
+						<VisualBrush.Visual>
+							<Path Fill="White" Data="{StaticResource Previous}" />
+						</VisualBrush.Visual>
+					</VisualBrush>
 				</Button.OpacityMask>
 			</Button>
 
@@ -72,7 +72,13 @@
 				</Button.RenderTransform>
 
 				<Button.OpacityMask>
-					<ImageBrush ImageSource="img/Prev.png" Stretch="None"/>
+					<VisualBrush>
+						<VisualBrush.Stretch>None</VisualBrush.Stretch>
+						<VisualBrush.Visual>
+							<Path Fill="White" Data="{StaticResource Previous}" />
+						</VisualBrush.Visual>
+					</VisualBrush>
+
 				</Button.OpacityMask>
 			</Button>
 
@@ -89,13 +95,23 @@
 
 			<Button x:Name="ButtonPlayPause" Style="{DynamicResource AlphaButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="41,108,0,0" BorderBrush="{x:Null}" Background="{DynamicResource TextBrushWhite}" Click="ButtonPlayPause_Click" Focusable="False">
 				<Button.OpacityMask>
-					<ImageBrush ImageSource="img/Play.png" Stretch="None"/>
+					<VisualBrush>
+						<VisualBrush.Stretch>None</VisualBrush.Stretch>
+						<VisualBrush.Visual>
+							<Path Fill="White" Data="{StaticResource Play}" />
+						</VisualBrush.Visual>
+					</VisualBrush>
 				</Button.OpacityMask>
 			</Button>
 
 			<Button x:Name="ButtonVolume" Style="{DynamicResource AlphaButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="76,108,0,0" BorderBrush="{x:Null}" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" Click="ButtonVolume_Click" MouseEnter="Volume_MouseEnter" MouseLeave="Volume_MouseLeave" Focusable="False">
 				<Button.OpacityMask>
-					<ImageBrush ImageSource="img/volumeHigh.png" Stretch="None"/>
+					<VisualBrush>
+						<VisualBrush.Stretch>None</VisualBrush.Stretch>
+						<VisualBrush.Visual>
+							<Path Fill="White" Data="{StaticResource VolumeHigh}" />
+						</VisualBrush.Visual>
+					</VisualBrush>
 				</Button.OpacityMask>
 			</Button>
 
@@ -110,19 +126,34 @@
 			<!-- Playlist controls -->
 			<Button x:Name="ButtonRepeat" Style="{DynamicResource AlphaButtonStyle}" VerticalAlignment="Top" Width="30" Height="30" Margin="0,108,112,0" BorderBrush="{x:Null}" HorizontalAlignment="Right" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" Click="ButtonRepeat_Click" Focusable="False">
 				<Button.OpacityMask>
-					<ImageBrush Stretch="None" ImageSource="img/Re.png"/>
+					<VisualBrush>
+						<VisualBrush.Stretch>None</VisualBrush.Stretch>
+						<VisualBrush.Visual>
+							<Path Fill="White" Data="{StaticResource Repeat}" />
+						</VisualBrush.Visual>
+					</VisualBrush>
 				</Button.OpacityMask>
 			</Button>
 
 			<Button x:Name="ButtonShuffle" Style="{DynamicResource AlphaButtonStyle}" VerticalAlignment="Top" Width="30" Height="30" Margin="0,108,77,0" BorderBrush="{x:Null}" HorizontalAlignment="Right" Foreground="{x:Null}" Background="{DynamicResource TextBrushWhite}" Click="ButtonShuffle_Click" Focusable="False">
 				<Button.OpacityMask>
-					<ImageBrush Stretch="None" ImageSource="img/Sh.png"/>
+					<VisualBrush>
+						<VisualBrush.Stretch>None</VisualBrush.Stretch>
+						<VisualBrush.Visual>
+							<Path Fill="White" Data="{StaticResource Shuffle}" />
+						</VisualBrush.Visual>
+					</VisualBrush>
 				</Button.OpacityMask>
 			</Button>
 
 			<Button x:Name="ButtonPlaylist" Style="{DynamicResource AlphaButtonStyle}" VerticalAlignment="Top" Width="30" Height="30" Margin="0,108,42,0" BorderBrush="{x:Null}" HorizontalAlignment="Right" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" Click="ButtonPlaylist_Click" Focusable="False">
 				<Button.OpacityMask>
-					<ImageBrush Stretch="None" ImageSource="img/Playlist.png"/>
+					<VisualBrush>
+						<VisualBrush.Stretch>None</VisualBrush.Stretch>
+						<VisualBrush.Visual>
+							<Path Fill="White" Data="{StaticResource Playlist}" />
+						</VisualBrush.Visual>
+					</VisualBrush>
 				</Button.OpacityMask>
 			</Button>
 

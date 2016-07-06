@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows;
+using System.Windows.Shapes;
 
 namespace MinimalistMusicPlayer
 {
@@ -20,9 +21,6 @@ namespace MinimalistMusicPlayer
 		// window heights when the playlist is collapsed/expanded
 		public const int CollapsedWindowHeight = 155;
 		public const int ExpandedWindowHeight = 500;
-
-		private const string ImgBaseUriDevelopment = @"../../img/";
-		private const string ImgBaseUriDeployment = @"img/";
 
 		// Uri where the IWMPPlaylist will be created each time the app starts
 		public const string PlaylistUri = @"";
@@ -59,49 +57,76 @@ namespace MinimalistMusicPlayer
 
 
 		// programmatically-assigned icons are newed-up here
+		// sorry about that initializer syntax.
 		public static class Icons
 		{
-			private static string BaseUri = ImgBaseUriDevelopment;
-
-			public static ImageBrush Play = new ImageBrush()
+			public static VisualBrush Play = new VisualBrush() // VisualBrush is used to get that GeometryGroup resource
 			{
-				ImageSource = new BitmapImage(new Uri(BaseUri + "play.png", UriKind.Relative)),
+				Visual = new Path() // Remember: Geometry objects can't render themselves; They need Shape objects to render them.
+				{
+					Data = (GeometryGroup)Application.Current.Resources["Play"],
+					Fill = Brushes.WhiteBrush
+				},
 				Stretch = Stretch.None
 			};
 
-			public static ImageBrush Pause = new ImageBrush()
+			public static VisualBrush Pause = new VisualBrush()
 			{
-				ImageSource = new BitmapImage(new Uri(BaseUri + "pause.png", UriKind.Relative)),
+				Visual = new Path()
+				{
+					Data = (GeometryGroup)Application.Current.Resources["Pause"],
+					Fill = Brushes.WhiteBrush
+				},
 				Stretch = Stretch.None
 			};
 
-			public static ImageBrush VolumeMute = new ImageBrush()
+			public static VisualBrush VolumeMute = new VisualBrush()
 			{
-				ImageSource = new BitmapImage(new Uri(BaseUri + "volumeMute.png", UriKind.Relative)),
+				Visual = new Path()
+				{
+					Data = (GeometryGroup)Application.Current.Resources["VolumeMute"],
+					Fill = Brushes.WhiteBrush
+				},
 				Stretch = Stretch.None
 			};
 
-			public static ImageBrush VolumeLow = new ImageBrush()
+			public static VisualBrush VolumeLow = new VisualBrush()
 			{
-				ImageSource = new BitmapImage(new Uri(BaseUri + "volumeLow.png", UriKind.Relative)),
+				Visual = new Path()
+				{
+					Data = (GeometryGroup)Application.Current.Resources["VolumeLow"],
+					Fill = Brushes.WhiteBrush
+				},
 				Stretch = Stretch.None
 			};
 
-			public static ImageBrush VolumeHigh = new ImageBrush()
+			public static VisualBrush VolumeHigh = new VisualBrush()
 			{
-				ImageSource = new BitmapImage(new Uri(BaseUri + "volumeHigh.png", UriKind.Relative)),
+				Visual = new Path()
+				{
+					Data = (GeometryGroup)Application.Current.Resources["VolumeHigh"],
+					Fill = Brushes.WhiteBrush
+				},
 				Stretch = Stretch.None
 			};
 
-			public static ImageBrush RepeatOne = new ImageBrush()
+			public static VisualBrush RepeatOne = new VisualBrush()
 			{
-				ImageSource = new BitmapImage(new Uri(BaseUri + "ReOne.png", UriKind.Relative)),
+				Visual = new Path()
+				{
+					Data = (GeometryGroup)Application.Current.Resources["RepeatOne"],
+					Fill = Brushes.WhiteBrush
+				},
 				Stretch = Stretch.None
 			};
 
-			public static ImageBrush Repeat = new ImageBrush()
+			public static VisualBrush Repeat = new VisualBrush()
 			{
-				ImageSource = new BitmapImage(new Uri(BaseUri + "Re.png", UriKind.Relative)),
+				Visual = new Path()
+				{
+					Data = (GeometryGroup)Application.Current.Resources["Repeat"],
+					Fill = Brushes.WhiteBrush
+				},
 				Stretch = Stretch.None
 			};
 		}

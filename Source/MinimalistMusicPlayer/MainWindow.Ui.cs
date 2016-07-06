@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
 using WMPLib;
 
 namespace MinimalistMusicPlayer
@@ -75,17 +67,14 @@ namespace MinimalistMusicPlayer
 		// sets the icon of the volume button depending on current volume level, and whether the player is muted.
 		private void SetVolumeIcon(double volume, bool isMute)
 		{
-			ImageBrush icon = null;
 			if (volume == 0 || isMute)
-				icon = Util.Icons.VolumeMute;
+				ButtonVolume.OpacityMask = Util.Icons.VolumeMute;
 
 			else if (volume < Util.VolumeMid)
-				icon = Util.Icons.VolumeLow;
+				ButtonVolume.OpacityMask = Util.Icons.VolumeLow;
 
 			else if (volume >= Util.VolumeMid)
-				icon = Util.Icons.VolumeHigh;
-
-			ButtonVolume.OpacityMask = icon;
+				ButtonVolume.OpacityMask = Util.Icons.VolumeHigh;
 		}
 
 		private async void SetRepeatIcon(RepeatMode repeatMode)
