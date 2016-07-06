@@ -14,7 +14,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>D:\iTi\otherProjects\</PublishUrl>
+    <PublishUrl>D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Installer\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -24,7 +24,9 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ProductName>Minimalist Music Player</ProductName>
+    <PublisherName>Muhammad Mohsen</PublisherName>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -59,15 +61,18 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Installer|AnyCPU'">
     <OutputPath>bin\Installer\</OutputPath>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>img\logoMulti.ico</ApplicationIcon>
+    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -181,32 +186,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\FF.png" />
-    <Resource Include="img\Pause.png" />
-    <Resource Include="img\Play.png" />
-    <Resource Include="img\Playlist.png" />
-    <Resource Include="img\Prev.png" />
-    <Resource Include="img\Re.png" />
-    <Resource Include="img\Sh.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\close.png" />
-    <Resource Include="img\minimize.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\volumeHigh.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\ReOne.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\volumeLow.png" />
-    <Resource Include="img\volumeMute.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\pin.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
@@ -235,16 +214,28 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\Logo.png" />
+    <Resource Include="img\logo.png" />
+    <Resource Include="img\Original PNGs\close.png" />
+    <Resource Include="img\Original PNGs\FF.png" />
+    <Resource Include="img\Original PNGs\minimize.png" />
+    <Resource Include="img\Original PNGs\Pause.png" />
+    <Resource Include="img\Original PNGs\pin.png" />
+    <Resource Include="img\Original PNGs\Play.png" />
+    <Resource Include="img\Original PNGs\PlayingIcon.png" />
+    <Resource Include="img\Original PNGs\Playlist.png" />
+    <Resource Include="img\Original PNGs\Prev.png" />
+    <Resource Include="img\Original PNGs\Re.png" />
+    <Resource Include="img\Original PNGs\ReOne.png" />
+    <Resource Include="img\Original PNGs\Sh.png" />
+    <Resource Include="img\Original PNGs\volumeHigh.png" />
+    <Resource Include="img\Original PNGs\volumeLow.png" />
+    <Resource Include="img\Original PNGs\volumeMute.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\PlayingIcon.png" />
+    <Resource Include="img\AppIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\logoMulti.ico" />
+    <Resource Include="AppIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
