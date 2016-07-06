@@ -97,6 +97,10 @@ namespace MinimalistMusicPlayer
 		// play selected music track based on index
 		public void StartPlay(int index)
 		{
+			// if there's nothing to play...
+			if (PlaylistCount == 0)
+				return;
+
 			// validate index falls within the playlist boundries - probably unnecessary
 			if (index < 0)
 				index = 0;
@@ -107,7 +111,6 @@ namespace MinimalistMusicPlayer
 			PlaylistIndex = index; // set member
 			Player.currentMedia = Playlist.get_Item(index);
 			Controls.play();
-			// Controls.playItem(Playlist.get_Item(index));
 		}
 		// resume media playback
 		public void Resume()
@@ -191,15 +194,13 @@ namespace MinimalistMusicPlayer
 			Playlist.appendItem(Player.newMedia(itemUrl));
 		}
 		// adds a list of items
-		public void AddPlaylistItems(List<string> items)
+		public void AddPlaylistItems(IEnumerable<string> items)
 		{
 			foreach (string item in items)
-				AddPlaylistItem(item);
-		}
-		public void AddPlaylistItems(string[] items)
-		{
-			foreach (string item in items)
-				AddPlaylistItem(item);
+			{
+				if (Util.IsValidMediaFile(item))
+					AddPlaylistItem(item);
+			}
 		}
 		// clears playlist
 		public void ClearPlaylistItems()
