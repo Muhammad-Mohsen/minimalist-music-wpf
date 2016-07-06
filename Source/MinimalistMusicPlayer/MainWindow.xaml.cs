@@ -47,6 +47,14 @@ namespace MinimalistMusicPlayer
 			timer.Interval = TimeSpan.FromSeconds(.1);
 			timer.Tick += timer_Tick;
 			timer.Start();
+
+			// see if the app was started with some command line args
+			if (Environment.GetCommandLineArgs().Length > 0)
+			{
+				Player.AddPlaylistItems(Environment.GetCommandLineArgs());
+				AddTracksToPlaylistStackPanel();
+				Player.StartPlay(Player.PlaylistIndex);
+			}
 		}
 		//
 		// Drag and Drop handlers
