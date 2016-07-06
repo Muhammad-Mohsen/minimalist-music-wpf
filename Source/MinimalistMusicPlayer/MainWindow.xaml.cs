@@ -64,12 +64,8 @@ namespace MinimalistMusicPlayer
 			string[] sourceStrings = ((string[])e.Data.GetData(DataFormats.FileDrop));
 
 			ClearPlaylistStackPanel();
-			foreach (string s in sourceStrings)
-			{
-				if (Util.IsValidMediaFile(s))
-					Player.AddPlaylistItem(s);
-			}
 
+			Player.AddPlaylistItems(sourceStrings);
 			AddTracksToPlaylistStackPanel();
 		}
 		//
@@ -91,11 +87,9 @@ namespace MinimalistMusicPlayer
 				ClearPlaylistStackPanel();
 				Player.PlaylistIndex = 0;
 
-				foreach (string fileName in OpenDialog.FileNames)
-					if (Util.IsValidMediaFile(fileName))
-						Player.AddPlaylistItem(fileName);
-
+				Player.AddPlaylistItems(OpenDialog.FileNames);
 				AddTracksToPlaylistStackPanel();
+
 				Player.StartPlay(Player.PlaylistIndex);
 			}
 		}
