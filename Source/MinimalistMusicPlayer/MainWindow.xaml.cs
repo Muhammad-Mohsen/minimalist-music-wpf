@@ -12,7 +12,7 @@ namespace MinimalistMusicPlayer
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
 	public partial class MainWindow : Window
-    {		
+    {
 		WmpPlayer Player;
 
 		// indicates whether the seek slider value is being manually changed
@@ -73,21 +73,21 @@ namespace MinimalistMusicPlayer
 		//
 		private void ButtonTrackInfo_Click(object sender, RoutedEventArgs e)
 		{
-			OpenFileDialog OpenDialog = new OpenFileDialog();
-			OpenDialog.Title = "Open media";
+			OpenFileDialog openDialog = new OpenFileDialog();
+			openDialog.Title = "Open media";
 
-			OpenDialog.Multiselect = true;
-			OpenDialog.AddExtension = true;
-			OpenDialog.Filter = "Media files (*.mp3, *.wma, *.wav)|*.mp3; *.wma; *.wav";
+			openDialog.Multiselect = true;
+			openDialog.AddExtension = true;
+			openDialog.Filter = "Media files (*.mp3, *.wma, *.wav)|*.mp3; *.wma; *.wav";
 
 			// will only be true if files are selected
-			if ((bool)OpenDialog.ShowDialog())
+			if ((bool)openDialog.ShowDialog())
 			{
 				Player.ClearPlaylistItems();
 				ClearPlaylistStackPanel();
 				Player.PlaylistIndex = 0;
 
-				Player.AddPlaylistItems(OpenDialog.FileNames);
+				Player.AddPlaylistItems(openDialog.FileNames);
 				AddTracksToPlaylistStackPanel();
 
 				Player.StartPlay(Player.PlaylistIndex);
