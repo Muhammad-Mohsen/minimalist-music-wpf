@@ -10,16 +10,14 @@ namespace MinimalistMusicPlayer
 	/// </summary>
 	public class PlaylistItem : Button
 	{
-		private WmpPlayer Player;
-		private int TrackIndex;
+		public int TrackIndex;
 
 		private static PlaylistItem OldItem; // holds a reference to the previously-selected playlist item if any.
 		//
 		// Constructor
 		//
-		public PlaylistItem(WmpPlayer player, IWMPMedia track, int trackIndex, bool isSelected)
+		public PlaylistItem(IWMPMedia track, int trackIndex, bool isSelected)
 		{
-			Player = player;
 			TrackIndex = trackIndex;
 
 			Grid contentGrid = new Grid()
@@ -38,17 +36,9 @@ namespace MinimalistMusicPlayer
 			BorderBrush = null;
 
 			Content = contentGrid;
-			MouseDoubleClick += Item_MouseDoubleClick;
 
 			if (isSelected)
 				SelectPlaylistItem(this);
-		}
-
-		// a lot more elegant than I originally imagined.
-		private void Item_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			SelectPlaylistItem(this); // set selection styling, deselect the old item while you're at it
-			Player.StartPlay(TrackIndex); // start playing the item
 		}
 
 		public static void SelectPlaylistItem(PlaylistItem item)

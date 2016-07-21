@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using WMPLib;
 
 namespace MinimalistMusicPlayer
@@ -22,7 +23,9 @@ namespace MinimalistMusicPlayer
 		{
 			for (int i = 0; i < Player.PlaylistCount; i++)
 			{
-				PlaylistItem item = new PlaylistItem(Player, Player.Playlist.get_Item(i), i, i == Player.PlaylistIndex);
+				PlaylistItem item = new PlaylistItem(Player.Playlist.get_Item(i), i, i == Player.PlaylistIndex);
+				item.MouseDoubleClick += Item_MouseDoubleClick;
+
 				StackPanelPlaylist.Children.Add(item);
 			}
 		}
@@ -175,5 +178,13 @@ namespace MinimalistMusicPlayer
 			// set track artist/album label tooltip
 			ToolTipTrackArtistAlbum.Content = string.Concat(author, " (", album, ")");
 		}
-    }
+
+		// a lot more elegant than I originally imagined.
+		private void Item_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			PlaylistItem item = (PlaylistItem)sender;
+			PlaylistItem.SelectPlaylistItem(item); // set selection styling, deselect the old item while you're at it
+			Player.StartPlay(item.TrackIndex); // start playing the item
+		}
+	}
 }
