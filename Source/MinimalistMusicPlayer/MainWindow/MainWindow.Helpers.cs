@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using MinimalistMusicPlayer.Player;
+using MinimalistMusicPlayer.Utility;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -39,28 +41,28 @@ namespace MinimalistMusicPlayer
 		{
 			if (toExpanded)
 			{
-				ButtonPlaylist.Style = Util.Styles.AlphaButtonToggleStyle; // style with blue background in its rest state
-				ButtonPlaylist.Background = Util.Brushes.BlueBrush;
+				ButtonPlaylist.Style = Styles.AlphaButtonToggleStyle; // style with blue background in its rest state
+				ButtonPlaylist.Background = Brushes.BlueBrush;
 				// animate the grid
-				Anim.AnimateHeight(this, Util.CollapsedWindowHeight, Util.ExpandedWindowHeight, .2);
+				Anim.AnimateHeight(this, Const.CollapsedWindowHeight, Const.ExpandedWindowHeight, .2);
 				Player.IsPlaylistVisible = true;
 			}
 			else
 			{
-				ButtonPlaylist.Style = Util.Styles.AlphaButtonStyle; // style with white background in its rest state
-				Anim.AnimateHeight(this, Util.ExpandedWindowHeight, Util.CollapsedWindowHeight, .2);
+				ButtonPlaylist.Style = Styles.AlphaButtonStyle; // style with white background in its rest state
+				Anim.AnimateHeight(this, Const.ExpandedWindowHeight, Const.CollapsedWindowHeight, .2);
 				Player.IsPlaylistVisible = false;
 
 				// await the animation (defined in AlphaButtonStyle control tempalte) to complete before setting the background to white.
 				await Task.Delay(200);
-				ButtonPlaylist.Background = Util.Brushes.WhiteBrush;
+				ButtonPlaylist.Background = Brushes.WhiteBrush;
 			}
 		}
 
 		private void SetPinToTopIcon(bool isTopMost)
 		{
-			ButtonPinToTop.Style = isTopMost ? Util.Styles.BackgroundButtonToggleStyle : Util.Styles.BackgroundButtonStyle;
-			ButtonPinToTop.Background = isTopMost ? Util.Brushes.BlueBrush : Util.Brushes.BackgroundBrush;
+			ButtonPinToTop.Style = isTopMost ? Styles.BackgroundButtonToggleStyle : Styles.BackgroundButtonStyle;
+			ButtonPinToTop.Background = isTopMost ? Brushes.BlueBrush : Brushes.BackgroundBrush;
 		}
 
 		//
@@ -71,13 +73,13 @@ namespace MinimalistMusicPlayer
 		private void SetVolumeIcon(double volume, bool isMute)
 		{
 			if (volume == 0 || isMute)
-				ButtonVolume.OpacityMask = Util.Icons.VolumeMute;
+				ButtonVolume.OpacityMask = Icons.VolumeMute;
 
-			else if (volume < Util.VolumeMid)
-				ButtonVolume.OpacityMask = Util.Icons.VolumeLow;
+			else if (volume < Const.VolumeMid)
+				ButtonVolume.OpacityMask = Icons.VolumeLow;
 
-			else if (volume >= Util.VolumeMid)
-				ButtonVolume.OpacityMask = Util.Icons.VolumeHigh;
+			else if (volume >= Const.VolumeMid)
+				ButtonVolume.OpacityMask = Icons.VolumeHigh;
 		}
 
 		private async void SetRepeatIcon(RepeatMode repeatMode)
@@ -85,22 +87,22 @@ namespace MinimalistMusicPlayer
 			switch (Player.RepeatMode)
 			{
 				case RepeatMode.NoRepeat:
-					ButtonRepeat.OpacityMask = Util.Icons.Repeat;
-					ButtonRepeat.Style = Util.Styles.AlphaButtonToggleStyle;
-					ButtonRepeat.Background = Util.Brushes.BlueBrush;
+					ButtonRepeat.OpacityMask = Icons.Repeat;
+					ButtonRepeat.Style = Styles.AlphaButtonToggleStyle;
+					ButtonRepeat.Background = Brushes.BlueBrush;
 					break;
 
 				case RepeatMode.Repeat:
-					ButtonRepeat.OpacityMask = Util.Icons.RepeatOne;
-					ButtonRepeat.Style = Util.Styles.AlphaButtonToggleStyle;
-					ButtonRepeat.Background = Util.Brushes.BlueBrush;
+					ButtonRepeat.OpacityMask = Icons.RepeatOne;
+					ButtonRepeat.Style = Styles.AlphaButtonToggleStyle;
+					ButtonRepeat.Background = Brushes.BlueBrush;
 					break;
 
 				case RepeatMode.RepeatOne:
-					ButtonRepeat.OpacityMask = Util.Icons.Repeat;
-					ButtonRepeat.Style = Util.Styles.AlphaButtonStyle;
+					ButtonRepeat.OpacityMask = Icons.Repeat;
+					ButtonRepeat.Style = Styles.AlphaButtonStyle;
 					await Task.Delay(200);
-					ButtonRepeat.Background = Util.Brushes.WhiteBrush;
+					ButtonRepeat.Background = Brushes.WhiteBrush;
 					break;
 			}
 		}
@@ -109,16 +111,16 @@ namespace MinimalistMusicPlayer
 		{
 			if (isShuffle)
 			{
-				ButtonShuffle.Style = Util.Styles.AlphaButtonToggleStyle;
-				ButtonShuffle.Background = Util.Brushes.BlueBrush;
+				ButtonShuffle.Style = Styles.AlphaButtonToggleStyle;
+				ButtonShuffle.Background = Brushes.BlueBrush;
 			}
 
 			else
 			{
-				ButtonShuffle.Style = Util.Styles.AlphaButtonStyle;
+				ButtonShuffle.Style = Styles.AlphaButtonStyle;
 
 				await Task.Delay(200);
-				ButtonShuffle.Background = Util.Brushes.WhiteBrush;
+				ButtonShuffle.Background = Brushes.WhiteBrush;
 			}
 		}
 
@@ -135,19 +137,19 @@ namespace MinimalistMusicPlayer
 			switch (state)
 			{
 				case WMPPlayState.wmppsPlaying:
-					ButtonPlayPause.OpacityMask = Util.Icons.Pause;
+					ButtonPlayPause.OpacityMask = Icons.Pause;
 					Anim.AnimateOpacity(PlayingIcon, 0, 1, .3);
 					break;
 
 				case WMPPlayState.wmppsStopped:
 				case WMPPlayState.wmppsMediaEnded:
 					SliderSeek.Value = 0;
-					ButtonPlayPause.OpacityMask = Util.Icons.Play;
+					ButtonPlayPause.OpacityMask = Icons.Play;
 					Anim.AnimateOpacity(PlayingIcon, 1, 0, .3);
 					break;
 
 				case WMPPlayState.wmppsPaused:
-					ButtonPlayPause.OpacityMask = Util.Icons.Play;
+					ButtonPlayPause.OpacityMask = Icons.Play;
 					Anim.AnimateOpacity(PlayingIcon, 1, 0, .3);
 					break;
 			}
@@ -163,12 +165,12 @@ namespace MinimalistMusicPlayer
 		// sets the track name, album, and artist labels, as well as the application title
 		private void SetTrackInfo(IWMPMedia track)
 		{
-			LabelSongTitle.Content = track.name.Ellipsize(Util.TrackNameMaxLength);
+			LabelSongTitle.Content = track.name.Ellipsize(Const.TrackNameMaxLength);
 
 			string author = !string.IsNullOrEmpty(track.getItemInfo("Author")) ? track.getItemInfo("Author") : "Unknown Artist";
 			string album = !string.IsNullOrEmpty(track.getItemInfo("AlbumID")) ? track.getItemInfo("AlbumID") : "Unknown Album";
 
-			LabelArtistAlbum.Content = string.Concat(author, " (", album, ")").Ellipsize(Util.TrackInfoMaxLength);
+			LabelArtistAlbum.Content = string.Concat(author, " (", album, ")").Ellipsize(Const.TrackInfoMaxLength);
 
 			// set the window title (in the taskbar)
 			this.Title = string.Concat(track.name, " - Minimalist");
@@ -182,7 +184,8 @@ namespace MinimalistMusicPlayer
 		// a lot more elegant than I originally imagined.
 		private void Item_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			PlaylistItem item = (PlaylistItem)sender;
+			PlaylistItem item = (PlaylistItem)sender; // too much faith that the sender is actually a PlayListItem
+
 			PlaylistItem.SelectPlaylistItem(item); // set selection styling, deselect the old item while you're at it
 			Player.StartPlay(item.TrackIndex); // start playing the item
 		}

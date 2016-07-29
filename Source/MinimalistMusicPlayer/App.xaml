@@ -1,22 +1,22 @@
 ﻿<Application x:Class="MinimalistMusicPlayer.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml">
+             StartupUri="MainWindow/MainWindow.xaml">
 
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="res/Colors.xaml" />
-				<ResourceDictionary Source="res/Slider.xaml" />
-				<ResourceDictionary Source="res/Scrollbar.xaml" />
-				<ResourceDictionary Source="res/AlphaButton.xaml" />
-				<ResourceDictionary Source="res/AlphaButtonToggle.xaml" />
-				<ResourceDictionary Source="res/BackgroundButton.xaml" />
-				<ResourceDictionary Source="res/BackgroundButton2.xaml" />
-				<ResourceDictionary Source="res/BackgroundButtonToggle.xaml" />
-				<ResourceDictionary Source="res/PlaylistItem.xaml" />
-				<ResourceDictionary Source="res/ToolTip.xaml" />
-				<ResourceDictionary Source="res/Vectors.xaml" />
+				<ResourceDictionary Source="Resources/Colors.xaml" />
+				<ResourceDictionary Source="Resources/Slider.xaml" />
+				<ResourceDictionary Source="Resources/Scrollbar.xaml" />
+				<ResourceDictionary Source="Resources/AlphaButton.xaml" />
+				<ResourceDictionary Source="Resources/AlphaButtonToggle.xaml" />
+				<ResourceDictionary Source="Resources/BackgroundButton.xaml" />
+				<ResourceDictionary Source="Resources/BackgroundButton2.xaml" />
+				<ResourceDictionary Source="Resources/BackgroundButtonToggle.xaml" />
+				<ResourceDictionary Source="Resources/PlaylistItem.xaml" />
+				<ResourceDictionary Source="Resources/ToolTip.xaml" />
+				<ResourceDictionary Source="Resources/Vectors.xaml" />
 			</ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

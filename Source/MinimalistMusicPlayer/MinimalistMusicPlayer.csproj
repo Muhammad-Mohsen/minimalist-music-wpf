@@ -26,7 +26,7 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Minimalist Music Player</ProductName>
     <PublisherName>Muhammad Mohsen</PublisherName>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -70,8 +70,12 @@
     <ApplicationIcon>AppIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
+  <PropertyGroup />
   <PropertyGroup>
-    <NoWin32Manifest>true</NoWin32Manifest>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -94,7 +98,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Page Include="MainWindow\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -102,61 +106,66 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Util.Extensions.cs" />
-    <Compile Include="MainWindow.Timer.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Explorer\BreadcrumbBar.cs" />
+    <Compile Include="Player\Playlist.cs" />
+    <Compile Include="Player\RepeatMode.cs" />
+    <Compile Include="Utility\Brushes.cs" />
+    <Compile Include="Utility\Const.cs" />
+    <Compile Include="Utility\Extensions.cs" />
+    <Compile Include="MainWindow\MainWindow.Timer.cs" />
+    <Compile Include="MainWindow\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="res\AlphaButtonToggle.xaml">
+    <Page Include="Resources\AlphaButtonToggle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="res\AlphaButton.xaml">
+    <Page Include="Resources\AlphaButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="res\BackgroundButton2.xaml">
+    <Page Include="Resources\BackgroundButton2.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="res\BackgroundButtonToggle.xaml">
+    <Page Include="Resources\BackgroundButtonToggle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="res\BackgroundButton.xaml">
+    <Page Include="Resources\BackgroundButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="res\PlaylistItem.xaml">
+    <Page Include="Resources\PlaylistItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="res\ScrollBar.xaml">
+    <Page Include="Resources\ScrollBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="res\Slider.xaml">
+    <Page Include="Resources\Slider.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="res\Colors.xaml">
+    <Page Include="Resources\Colors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="res\ToolTip.xaml">
+    <Page Include="Resources\ToolTip.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="res\Vectors.xaml">
+    <Page Include="Resources\Vectors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Util.Animation.cs" />
-    <Compile Include="Player.WMP.cs" />
-    <Compile Include="Player.Playlist.Item.cs" />
+    <Compile Include="Utility\Animation.cs" />
+    <Compile Include="Player\Player.cs" />
+    <Compile Include="Explorer\ExplorerItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -174,8 +183,12 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Util.cs" />
-    <Compile Include="MainWindow.Ui.cs" />
+    <Compile Include="Utility\Icons.cs" />
+    <Compile Include="Utility\Styles.cs" />
+    <Compile Include="Utility\Util.cs" />
+    <Compile Include="MainWindow\MainWindow.Helpers.cs" />
+    <Compile Include="Explorer\Explorer.Helper.cs" />
+    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -214,25 +227,25 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\logo.png" />
-    <Resource Include="img\Original PNGs\close.png" />
-    <Resource Include="img\Original PNGs\FF.png" />
-    <Resource Include="img\Original PNGs\minimize.png" />
-    <Resource Include="img\Original PNGs\Pause.png" />
-    <Resource Include="img\Original PNGs\pin.png" />
-    <Resource Include="img\Original PNGs\Play.png" />
-    <Resource Include="img\Original PNGs\PlayingIcon.png" />
-    <Resource Include="img\Original PNGs\Playlist.png" />
-    <Resource Include="img\Original PNGs\Prev.png" />
-    <Resource Include="img\Original PNGs\Re.png" />
-    <Resource Include="img\Original PNGs\ReOne.png" />
-    <Resource Include="img\Original PNGs\Sh.png" />
-    <Resource Include="img\Original PNGs\volumeHigh.png" />
-    <Resource Include="img\Original PNGs\volumeLow.png" />
-    <Resource Include="img\Original PNGs\volumeMute.png" />
+    <Resource Include="Resources\img\logo.png" />
+    <Resource Include="Resources\img\Original PNGs\close.png" />
+    <Resource Include="Resources\img\Original PNGs\FF.png" />
+    <Resource Include="Resources\img\Original PNGs\minimize.png" />
+    <Resource Include="Resources\img\Original PNGs\Pause.png" />
+    <Resource Include="Resources\img\Original PNGs\pin.png" />
+    <Resource Include="Resources\img\Original PNGs\Play.png" />
+    <Resource Include="Resources\img\Original PNGs\PlayingIcon.png" />
+    <Resource Include="Resources\img\Original PNGs\Playlist.png" />
+    <Resource Include="Resources\img\Original PNGs\Prev.png" />
+    <Resource Include="Resources\img\Original PNGs\Re.png" />
+    <Resource Include="Resources\img\Original PNGs\ReOne.png" />
+    <Resource Include="Resources\img\Original PNGs\Sh.png" />
+    <Resource Include="Resources\img\Original PNGs\volumeHigh.png" />
+    <Resource Include="Resources\img\Original PNGs\volumeLow.png" />
+    <Resource Include="Resources\img\Original PNGs\volumeMute.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\AppIcon.ico" />
+    <Resource Include="Resources\img\AppIcon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="AppIcon.ico" />

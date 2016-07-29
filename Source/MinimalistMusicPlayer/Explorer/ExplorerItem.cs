@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using MinimalistMusicPlayer.Utility;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WMPLib;
@@ -49,7 +50,7 @@ namespace MinimalistMusicPlayer
 
 			OldItem = item; // set the OldItem to this one.
 
-			item.BorderBrush = Util.Brushes.BlueBrush;
+			item.BorderBrush = Brushes.BlueBrush;
 			
 			// embolden the text...sigh!
 			Grid contentGrid = (Grid)item.Content;
@@ -72,7 +73,7 @@ namespace MinimalistMusicPlayer
 				HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
 				Content = title,
 				FontSize = 12,
-				Foreground = Util.Brushes.WhiteBrush
+				Foreground = Brushes.WhiteBrush
 			};
 		}
 		// helper that creates a fully-realized duration label
@@ -83,7 +84,7 @@ namespace MinimalistMusicPlayer
 				HorizontalAlignment = System.Windows.HorizontalAlignment.Right,
 				Content = duration,
 				FontSize = 12,
-				Foreground = Util.Brushes.LightGreyBrush
+				Foreground = Brushes.LightGreyBrush
 			};
 		}
 	}

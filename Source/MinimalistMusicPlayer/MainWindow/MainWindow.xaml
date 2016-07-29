@@ -7,7 +7,7 @@
         Title="Minimalist" Height="150" Width="525"
         WindowStyle="None"
         ResizeMode="NoResize"
-		Icon="img/AppIcon.ico" KeyUp="Window_KeyUp" MouseWheel="Window_MouseWheel">
+		Icon="../Resources/img/AppIcon.ico" KeyUp="Window_KeyUp" MouseWheel="Window_MouseWheel">
 
 	<Border x:Name="BorderMain" BorderBrush="{DynamicResource BlueBrush}" BorderThickness="1" CornerRadius="0" Margin="0,0,0,0">
 		<Grid x:Name="GridMain" Background="{DynamicResource BackgroundBrush}" Margin="0,0,0,0" MouseMove="GridMain_MouseMove" MouseDown="GridMain_MouseDown" MouseUp="GridMain_MouseUp">

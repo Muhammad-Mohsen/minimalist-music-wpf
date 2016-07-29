@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MinimalistMusicPlayer.Utility;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -7,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WMPLib;
 
-namespace MinimalistMusicPlayer
+namespace MinimalistMusicPlayer.Player
 {
 	/// <summary>
 	/// Wrapper around WindowsMediaPlayer class
@@ -83,7 +84,7 @@ namespace MinimalistMusicPlayer
 			// WindowsMediaPlayer automatically plays the next track off of its internal "currentPlaylist"
 			// so, the playlist has to be separate from the player.
 			// currentMedia property is used in order to have control over the next track being played.
-			Playlist = Player.newPlaylist("Playlist", Util.PlaylistUri);
+			Playlist = Player.newPlaylist("Playlist", Const.PlaylistUri);
 			Controls = Player.controls;
 			Settings = Player.settings;
 			

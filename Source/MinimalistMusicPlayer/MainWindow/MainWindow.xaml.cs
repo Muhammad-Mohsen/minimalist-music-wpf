@@ -1,4 +1,6 @@
 ﻿using Microsoft.Win32;
+using MinimalistMusicPlayer.Player;
+using MinimalistMusicPlayer.Utility;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -339,9 +341,9 @@ namespace MinimalistMusicPlayer
 		private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
 		{
 			if (e.Delta > 0)
-				SliderVolume.Value += Util.VolumeIncrement;
+				SliderVolume.Value += Const.VolumeIncrement;
 			else
-				SliderVolume.Value -= Util.VolumeIncrement;
+				SliderVolume.Value -= Const.VolumeIncrement;
 		}
 
 	}
