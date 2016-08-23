@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows;
-using System.Windows.Shapes;
 
 namespace MinimalistMusicPlayer.Utility
 {
-    public class Util
+	public class Util
     {
 		// returns a friendly time string from a timespan
 		public static string GetTimeStringFromTimeSpan(TimeSpan t)
@@ -24,13 +17,12 @@ namespace MinimalistMusicPlayer.Utility
 			return TimeSpan.FromSeconds(seconds).ToString().Substring(3, 5);
 		}
 		// validates the extension of a file
-		public static bool IsValidMediaFile(string fileUrl)
+		public static bool IsMediaFile(string fileUrl)
 		{
 			string extension = fileUrl.Split('.').Last().ToLower();
-
-			return extension == "mp3" ||
-				   extension == "wma" ||
-				   extension == "wav";
+			return Const.MediaExtensions.Contains(extension);
 		}
+
+
 	}
 }

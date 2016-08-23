@@ -1,4 +1,5 @@
-﻿using MinimalistMusicPlayer.Player;
+﻿using MinimalistMusicPlayer.Explorer;
+using MinimalistMusicPlayer.Player;
 using MinimalistMusicPlayer.Utility;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,28 +15,6 @@ namespace MinimalistMusicPlayer
 	/// </summary>
 	public partial class MainWindow : Window
     {
-		//
-		// Playlist UI API
-		//
-		private void ClearPlaylistStackPanel()
-		{
-			StackPanelPlaylist.Children.Clear();
-		}
-		private void AddTracksToPlaylistStackPanel()
-		{
-			for (int i = 0; i < Player.PlaylistCount; i++)
-			{
-				PlaylistItem item = new PlaylistItem(Player.Playlist.get_Item(i), i, i == Player.PlaylistIndex);
-				item.MouseDoubleClick += Item_MouseDoubleClick;
-
-				StackPanelPlaylist.Children.Add(item);
-			}
-		}
-		private void SelectPlaylistItem(int index)
-		{
-			PlaylistItem item = (PlaylistItem)StackPanelPlaylist.Children[index];
-			PlaylistItem.SelectPlaylistItem(item);
-		}
 		// expands/collapses Playlist section
 		private async void ExpandCollapsePlaylistStackPanel(bool toExpanded)
 		{
@@ -44,13 +23,13 @@ namespace MinimalistMusicPlayer
 				ButtonPlaylist.Style = Styles.AlphaButtonToggleStyle; // style with blue background in its rest state
 				ButtonPlaylist.Background = Brushes.BlueBrush;
 				// animate the grid
-				Anim.AnimateHeight(this, Const.CollapsedWindowHeight, Const.ExpandedWindowHeight, .2);
+				Anim.AnimateHeight(this, Const.ExpandedWindowHeight, .2);
 				Player.IsPlaylistVisible = true;
 			}
 			else
 			{
 				ButtonPlaylist.Style = Styles.AlphaButtonStyle; // style with white background in its rest state
-				Anim.AnimateHeight(this, Const.ExpandedWindowHeight, Const.CollapsedWindowHeight, .2);
+				Anim.AnimateHeight(this, Const.CollapsedWindowHeight, .2);
 				Player.IsPlaylistVisible = false;
 
 				// await the animation (defined in AlphaButtonStyle control tempalte) to complete before setting the background to white.
@@ -138,19 +117,19 @@ namespace MinimalistMusicPlayer
 			{
 				case WMPPlayState.wmppsPlaying:
 					ButtonPlayPause.OpacityMask = Icons.Pause;
-					Anim.AnimateOpacity(PlayingIcon, 0, 1, .3);
+					Anim.AnimateOpacity(PlayingIcon, Const.OpacityLevel.Opaque, .3);
 					break;
 
 				case WMPPlayState.wmppsStopped:
 				case WMPPlayState.wmppsMediaEnded:
 					SliderSeek.Value = 0;
 					ButtonPlayPause.OpacityMask = Icons.Play;
-					Anim.AnimateOpacity(PlayingIcon, 1, 0, .3);
+					Anim.AnimateOpacity(PlayingIcon, Const.OpacityLevel.Transparent, .3);
 					break;
 
 				case WMPPlayState.wmppsPaused:
 					ButtonPlayPause.OpacityMask = Icons.Play;
-					Anim.AnimateOpacity(PlayingIcon, 1, 0, .3);
+					Anim.AnimateOpacity(PlayingIcon, Const.OpacityLevel.Transparent, .3);
 					break;
 			}
 		}
@@ -181,13 +160,18 @@ namespace MinimalistMusicPlayer
 			ToolTipTrackArtistAlbum.Content = string.Concat(author, " (", album, ")");
 		}
 
-		// a lot more elegant than I originally imagined.
-		private void Item_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		private void SelectMediaItemByIndex(int index)
 		{
-			PlaylistItem item = (PlaylistItem)sender; // too much faith that the sender is actually a PlayListItem
+			MediaItem mediaItem = MapIndexToMediaItem(index);
+			MediaItem.SelectMediaItem(mediaItem);
+		}
 
-			PlaylistItem.SelectPlaylistItem(item); // set selection styling, deselect the old item while you're at it
-			Player.StartPlay(item.TrackIndex); // start playing the item
+		private void ShowHidePlaySelectedButton(bool shouldShow)
+		{
+			if (shouldShow)
+				Anim.AnimateOpacity(ButtonPlaySelected, Const.OpacityLevel.Opaque, .2);
+			else
+				Anim.AnimateOpacity(ButtonPlaySelected, Const.OpacityLevel.Transparent, .2);
 		}
 	}
 }

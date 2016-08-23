@@ -16,5 +16,7 @@ namespace MinimalistMusicPlayer.Utility
 
 		public static Style AlphaButtonToggleStyle = (Style)Application.Current.Resources["AlphaButtonToggleStyle"];
 		public static Style AlphaButtonStyle = (Style)Application.Current.Resources["AlphaButtonStyle"];
+
+		public static Style PlaylistButtonStyle = (Style)Application.Current.Resources["PlaylistButton"];
 	}
 }

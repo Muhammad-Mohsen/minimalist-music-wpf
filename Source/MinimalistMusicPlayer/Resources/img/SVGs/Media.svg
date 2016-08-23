@@ -13,7 +13,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="Pin.svg">
+   sodipodi:docname="Media.svg">
   <metadata
      id="metadata9">
     <rdf:RDF>
@@ -36,20 +36,21 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="701"
-     inkscape:window-height="480"
+     inkscape:window-width="1366"
+     inkscape:window-height="716"
      id="namedview5"
      showgrid="false"
-     inkscape:zoom="0.36875005"
-     inkscape:cx="319.99996"
-     inkscape:cy="319.99996"
+     inkscape:zoom="11.800001"
+     inkscape:cx="11.651187"
+     inkscape:cy="11.753589"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg2" />
   <path
-     id="Pin"
-     d="m 107.5,333.49998 c 0,0 0,63 0,63 0,0 -1,32 -1,32 0,0 18,0 18,0 0,0 0,16 0,16 0,0 -54,0 -54,0 0,0 0,67 0,67 0,0 -16,0 -16,0 0,0 0,-67 0,-67 0,0 -54,0 -54,0 0,0 0,-16 0,-16 0,0 18,0 18,0 0,0 0,-95 0,-95 0,0 89,0 89,0 z"
+     style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.05324611;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="m 7.4377831,499.05086 -4.10808,0 0,8.22764 -1.12668,0 c -1.14514,0 -2.17640004,1.13718 -2.17640004,2.18626 0,1.57856 1.11361004,2.5086 2.32957004,2.5086 1.21597,0 2.32957,-0.88813 2.32957,-2.5086 l 0,-9.15353 2.75202,0 z"
+     id="path3840"
      inkscape:connector-curvature="0"
-     style="fill:none;stroke:#000000;stroke-width:1" />
+     sodipodi:nodetypes="cccsczsccc" />
 </svg>

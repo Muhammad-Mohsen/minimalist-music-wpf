@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace MinimalistMusicPlayer.Explorer
 {
-	class BreadcrumbBar
+	public enum ExplorerItemType
 	{
+		Invalid = 0,
+		DirectoryItem,
+		MediaItem,
+		DriveItem
 	}
 }

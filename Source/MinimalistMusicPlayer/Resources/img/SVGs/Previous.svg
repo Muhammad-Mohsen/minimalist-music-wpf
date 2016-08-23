@@ -1,29 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
-              "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="7.11111in" height="7.11111in"
-     viewBox="0 0 512 512">
-  <path id="Previous"
-        fill="none" stroke="black" stroke-width="1"
-        d="M 234.00,154.00
-           C 234.00,154.00 255.00,133.00 255.00,133.00
-             262.55,125.45 264.03,121.02 275.00,121.00
-             275.00,121.00 324.00,121.00 324.00,121.00
-             320.78,127.81 314.39,132.07 309.00,137.09
-             309.00,137.09 283.00,163.00 283.00,163.00
-             283.00,163.00 189.00,257.00 189.00,257.00
-             194.98,259.83 199.37,265.37 204.00,270.00
-             204.00,270.00 227.00,293.00 227.00,293.00
-             227.00,293.00 294.00,360.00 294.00,360.00
-             294.00,360.00 313.00,379.00 313.00,379.00
-             317.12,383.12 321.48,386.68 324.00,392.00
-             324.00,392.00 276.00,392.00 276.00,392.00
-             265.03,391.98 263.55,387.55 256.00,380.00
-             256.00,380.00 235.00,359.00 235.00,359.00
-             235.00,359.00 221.00,345.99 221.00,345.99
-             221.00,345.99 165.00,290.00 165.00,290.00
-             157.80,282.80 136.79,262.70 132.00,256.00
-             132.00,256.00 234.00,154.00 234.00,154.00 Z" />
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="7.11111in"
+   height="7.11111in"
+   viewBox="0 0 512 512"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="Previous.svg">
+  <metadata
+     id="metadata9">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs7" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="716"
+     id="namedview5"
+     showgrid="false"
+     inkscape:zoom="11.800001"
+     inkscape:cx="17.352209"
+     inkscape:cy="9.1990196"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <path
+     id="Previous"
+     d="m 7.0566915,497.95998 2.8000488,0 -7.0001223,7 7.0001223,7 -2.8000488,0 -7.00012245,-7 z"
+     inkscape:connector-curvature="0"
+     style="fill:none;stroke:#000000;stroke-width:0.08000001;stroke-miterlimit:4;stroke-dasharray:none" />
 </svg>

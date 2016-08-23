@@ -82,5 +82,56 @@ namespace MinimalistMusicPlayer.Utility
 			},
 			Stretch = Stretch.None
 		};
+
+		public static VisualBrush Up = new VisualBrush()
+		{
+			Visual = new Path()
+			{
+				Data = (GeometryGroup)Application.Current.Resources["Up"],
+				Fill = Brushes.WhiteBrush
+			},
+			Stretch = Stretch.None
+		};
+
+		public static VisualBrush Directory = new VisualBrush()
+		{
+			Visual = new Path()
+			{
+				Data = (GeometryGroup)Application.Current.Resources["Directory"],
+				Fill = Brushes.WhiteBrush
+			},
+			Stretch = Stretch.None
+		};
+
+		public static VisualBrush Drive = new VisualBrush()
+		{
+			Visual = new Path()
+			{
+				Data = (GeometryGroup)Application.Current.Resources["Drive"],
+				Fill = Brushes.WhiteBrush
+			},
+			Stretch = Stretch.None
+		};
+
+		public static VisualBrush Media = new VisualBrush()
+		{
+			Visual = new Path()
+			{
+				Data = (GeometryGroup)Application.Current.Resources["Media"],
+				Fill = Brushes.WhiteBrush
+			},
+			Stretch = Stretch.None
+		};
+
+		public static VisualBrush MediaPlaylist = new VisualBrush()
+		{
+			Visual = new Path()
+			{
+				Data = (GeometryGroup)Application.Current.Resources["MediaPlaylist"],
+				Fill = Brushes.WhiteBrush
+			},
+			Stretch = Stretch.None,
+			RelativeTransform = new TranslateTransform(-.1, 0)
+		};
 	}
 }

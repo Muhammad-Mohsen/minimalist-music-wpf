@@ -1,7 +1,11 @@
 ﻿using Microsoft.Win32;
+using MinimalistMusicPlayer.Explorer;
 using MinimalistMusicPlayer.Player;
 using MinimalistMusicPlayer.Utility;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -44,34 +48,24 @@ namespace MinimalistMusicPlayer
 			// start a continuous rotation animation for the playing icon
 			Anim.AnimateAngle(PlayingIcon, 0, 360, 2, true);
 
+			string savedDirectory = Properties.Settings.Default[Const.ExplorerDirectorySetting].ToString();
+			if (string.IsNullOrWhiteSpace(savedDirectory))
+				CurrentDirectory = new DirectoryInfo(Const.DefaultMediaDirectory);
+			else
+				CurrentDirectory = new DirectoryInfo(savedDirectory);
+
+			InitializeBreadcrumbBar(CurrentDirectory);
+			InitializeMediaExplorer(CurrentDirectory);
+
 			// timer to update the seek bar, volume fade, etc.
 			DispatcherTimer timer = new DispatcherTimer();
 			timer.Interval = TimeSpan.FromSeconds(.1);
 			timer.Tick += timer_Tick;
 			timer.Start();
-
-			// see if the app was started with some command line args
-			if (Environment.GetCommandLineArgs().Length > 0)
-			{
-				Player.AddPlaylistItems(Environment.GetCommandLineArgs());
-				AddTracksToPlaylistStackPanel();
-				Player.StartPlay(Player.PlaylistIndex);
-			}
 		}
-		//
-		// Drag and Drop handlers
-		//
-		private void StackPanelPlaylist_Drop(object sender, DragEventArgs e)
-		{
-			string[] sourceStrings = ((string[])e.Data.GetData(DataFormats.FileDrop));
 
-			ClearPlaylistStackPanel();
-
-			Player.AddPlaylistItems(sourceStrings);
-			AddTracksToPlaylistStackPanel();
-		}
 		//
-		// Track info grid Events - Cutting corners! To sleepy to do anything decent.
+		// Track info grid Events - Cutting corners! Too sleepy to do anything decent.
 		//
 		private void ButtonTrackInfo_Click(object sender, RoutedEventArgs e)
 		{
@@ -85,17 +79,23 @@ namespace MinimalistMusicPlayer
 			// will only be true if files are selected
 			if ((bool)openDialog.ShowDialog())
 			{
+				// get the current directory
+				CurrentDirectory = new FileInfo(openDialog.FileName).Directory;
+				// below methods use the member CurrentDirectory for the initialization
+				PopulateBreadcrumbBar(CurrentDirectory);
+				InitializeMediaExplorer(CurrentDirectory);
+
 				Player.ClearPlaylistItems();
-				ClearPlaylistStackPanel();
-				Player.PlaylistIndex = 0;
+				ResetPlaylistMediaItemIcons(Player.PlaylistFullNames);
 
+				// Add selected media to the playlist
 				Player.AddPlaylistItems(openDialog.FileNames);
-				AddTracksToPlaylistStackPanel();
+				SetPlaylistMediaItemIcons(openDialog.FileNames);
 
-				Player.StartPlay(Player.PlaylistIndex);
+				Player.Index = 0;
+				Player.Play(Player.Index);
 			}
 		}
-
 		//
 		// Button events
 		//
@@ -115,46 +115,65 @@ namespace MinimalistMusicPlayer
 			if (Player.CurrentMedia != null)
 			{
 				if (Player.PlayState == WMPPlayState.wmppsPlaying)
-				{
 					Player.Pause();
-				}
 				else
-				{
 					Player.Resume();
-				}
 			}
 		}
 		private void ButtonPrevious_Click(object sender, RoutedEventArgs e)
 		{
-            if (Player.PlaylistIndex > 0)
-				Player.PlaylistIndex--;
+            if (Player.Index > 0)
+				Player.Index--;
 
 			else
-				Player.PlaylistIndex = Player.PlaylistCount - 1;
+				Player.Index = Player.Index - 1;
 
-			if (Player.PlaylistCount > 0)
-				Player.StartPlay(Player.PlaylistIndex);
+			if (Player.Playlist.count > 0)
+				Player.Play(Player.Index);
 		}
 		private void ButtonNext_Click(object sender, RoutedEventArgs e)
 		{
-			if (Player.PlaylistIndex < Player.PlaylistCount - 1)
-				Player.PlaylistIndex++;
+			if (Player.Index < Player.Count - 1)
+				Player.Index++;
 
 			else
-				Player.PlaylistIndex = 0;
+				Player.Index = 0;
 
-			if (Player.PlaylistCount > 0)
-				Player.StartPlay(Player.PlaylistIndex);
+			if (Player.Playlist.count > 0)
+				Player.Play(Player.Index);
 		}
 		private void ButtonRepeat_Click(object sender, RoutedEventArgs e)
 		{
 			SetRepeatIcon(Player.RepeatMode);
-			Player.SetNewRepeatMode(Player.RepeatMode); // method takes the old repeat mode, and sets the new repeat mode.
+			Player.AdvanceRepeatMode(Player.RepeatMode); // method takes the old repeat mode, and sets the new repeat mode.
 		}
 		private void ButtonShuffle_Click(object sender, RoutedEventArgs e)
 		{
 			Player.IsShuffle = !Player.IsShuffle;
 			SetShuffleIcon(Player.IsShuffle);
+		}
+		private void ButtonPlaySelected_Click(object sender, RoutedEventArgs e)
+		{
+			// get marked media files
+			List<string> markedFiles = GetMarkedMediaFiles();
+
+			// reset everything
+			ResetPlaylistMediaItemIcons(Player.PlaylistFullNames);
+
+			// reinitialize playlist
+			Player.ClearPlaylistItems();
+			Player.AddPlaylistItems(markedFiles);
+			
+			// reset marking state
+			ResetMediaItemMarkState();
+			MediaItem.MarkedItemCount = 0;
+
+			SetPlaylistMediaItemIcons(markedFiles);
+			
+			Player.Index = 0;
+			Player.Play(Player.Index);
+
+			Anim.AnimateOpacity(ButtonPlaySelected, Const.OpacityLevel.Transparent, .2);
 		}
 		//
 		// Seek slider events
@@ -195,13 +214,13 @@ namespace MinimalistMusicPlayer
 			SetDurationValues((IWMPMedia)item);
 			SetTrackInfo((IWMPMedia)item);
 
-			SelectPlaylistItem(Player.PlaylistIndex);
+			SelectMediaItemByIndex(Player.Index);
 
 			// play the next track if the current one reaches its end
 			if (Player.PlayState == WMPPlayState.wmppsMediaEnded)
 			{
 				await Task.Delay(100); // work around to ensure that the player actually plays the media. Looks like everything in WPF suffers from racing issues.
-				Player.StartPlayNext();
+				Player.PlayNextTrack(Player.Index);
 			}
 		}
 		//
@@ -229,13 +248,13 @@ namespace MinimalistMusicPlayer
 		//
 		// Volume slider animation events
 		//
-		private void Volume_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+		private void Volume_MouseEnter(object sender, MouseEventArgs e)
 		{
 			VolumeSliderFadeCounter = -1;
 			if (SliderVolume.Opacity == 0 && sender.Equals(ButtonVolume)) // only display the volume slider when the mouse enters the button, not the slider itself
-				Anim.AnimateOpacity(SliderVolume, 0, 1, .1);
+				Anim.AnimateOpacity(SliderVolume, Const.OpacityLevel.Opaque, .1);
 		}
-		private void Volume_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+		private void Volume_MouseLeave(object sender, MouseEventArgs e)
 		{
 			VolumeSliderFadeCounter = 0;
 		}
@@ -321,16 +340,16 @@ namespace MinimalistMusicPlayer
 						// will only be true if files are selected
 						if ((bool)OpenDialog.ShowDialog())
 						{
-							Player.ClearPlaylistItems();
-							ClearPlaylistStackPanel();
-							Player.PlaylistIndex = 0;
+							//Player.ClearPlaylistItems();
+							//ClearPlaylistStackPanel();
+							//Player.PlaylistIndex = 0;
 
-							foreach (string fileName in OpenDialog.FileNames)
-								if (Util.IsValidMediaFile(fileName))
-									Player.AddPlaylistItem(fileName);
+							//foreach (string fileName in OpenDialog.FileNames)
+							//	if (Util.IsMediaFile(fileName))
+							//		Player.AddPlaylistItem(fileName);
 
-							AddTracksToPlaylistStackPanel();
-							Player.StartPlay(Player.PlaylistIndex);
+							//AddTracksToPlaylistStackPanel();
+							//Player.StartPlay(Player.PlaylistIndex);
 						}
 					}
 					break;
@@ -345,6 +364,5 @@ namespace MinimalistMusicPlayer
 			else
 				SliderVolume.Value -= Const.VolumeIncrement;
 		}
-
 	}
 }

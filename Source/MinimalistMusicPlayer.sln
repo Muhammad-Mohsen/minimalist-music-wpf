@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalistMusicPlayer", "MinimalistMusicPlayer\MinimalistMusicPlayer.csproj", "{B8264454-B0A0-4D9F-8A8E-25EFC1823247}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperimentingProject", "ExperimentingProject\ExperimentingProject.csproj", "{E2C8311E-C4C3-4A10-BAF5-425DD2D28B2D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -26,16 +24,6 @@ Global
 		{B8264454-B0A0-4D9F-8A8E-25EFC1823247}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B8264454-B0A0-4D9F-8A8E-25EFC1823247}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
 		{B8264454-B0A0-4D9F-8A8E-25EFC1823247}.SingleImage|Any CPU.Build.0 = Release|Any CPU
-		{E2C8311E-C4C3-4A10-BAF5-425DD2D28B2D}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
-		{E2C8311E-C4C3-4A10-BAF5-425DD2D28B2D}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
-		{E2C8311E-C4C3-4A10-BAF5-425DD2D28B2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2C8311E-C4C3-4A10-BAF5-425DD2D28B2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2C8311E-C4C3-4A10-BAF5-425DD2D28B2D}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2C8311E-C4C3-4A10-BAF5-425DD2D28B2D}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
-		{E2C8311E-C4C3-4A10-BAF5-425DD2D28B2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2C8311E-C4C3-4A10-BAF5-425DD2D28B2D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2C8311E-C4C3-4A10-BAF5-425DD2D28B2D}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
-		{E2C8311E-C4C3-4A10-BAF5-425DD2D28B2D}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

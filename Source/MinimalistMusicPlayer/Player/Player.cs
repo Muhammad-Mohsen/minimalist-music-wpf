@@ -17,7 +17,10 @@ namespace MinimalistMusicPlayer.Player
 	{
 		// wrapper props
 		public WindowsMediaPlayer Player { get; private set; }
+
 		public IWMPPlaylist Playlist { get; private set; }
+		public List<string> PlaylistFullNames { get; private set; } // will be used to run FullName-comparisons against because IWMPPlaylist::get_item is dog slow
+		
 		public IWMPControls Controls { get; private set; }
 		public IWMPSettings Settings { get; private set; }
 		// current playstate (Playing, paused, stopped, etc)
@@ -35,6 +38,12 @@ namespace MinimalistMusicPlayer.Player
 				return Player.currentMedia;
 			}
 		}
+
+		// field is used for optimization
+		// will be used to determine whether to run isSelected/isPlaylistMediaItem comparisons on MediaItems
+		// comparisons will only be made if the MediaExplorer.CurrentDirectory == PlaylistDirectory
+		public string PlaylistDirectory { get; set; }
+
 		// whether the player is muted
 		public bool IsMuted
 		{
@@ -59,60 +68,41 @@ namespace MinimalistMusicPlayer.Player
 				Player.settings.volume = value;
 			}
 		}
+		
+		// whether the playlist is visible
+		public bool IsPlaylistVisible { get; set; }
+
 		// index of currently selected music
-		public int PlaylistIndex { get; set; }
+		public int Index { get; set; }
 		// the playlist item count
-        public int PlaylistCount 
-        {
-            get
-            {
+		public int Count
+		{
+			get
+			{
 				return Playlist.count;
-            } 
-        }
+			}
+		}
 		// whether the playlist is shuffling
 		public bool IsShuffle { get; set; }
 		// playlist repeat mode
 		public RepeatMode RepeatMode { get; set; }
-		// whether the playlist is visible
-		public bool IsPlaylistVisible { get; set; }
 		//
 		// constructor
 		//
         public WmpPlayer()
         {
 			Player = new WindowsMediaPlayer();
-			// WindowsMediaPlayer automatically plays the next track off of its internal "currentPlaylist"
-			// so, the playlist has to be separate from the player.
-			// currentMedia property is used in order to have control over the next track being played.
 			Playlist = Player.newPlaylist("Playlist", Const.PlaylistUri);
+			PlaylistFullNames = new List<string>();
+
 			Controls = Player.controls;
 			Settings = Player.settings;
-			
-			PlaylistIndex = -1;
+
+			Index = Const.InvalidIndex;
 			IsShuffle = false;
 			RepeatMode = RepeatMode.NoRepeat;
-        }
-		//
-		// Player API
-		//
-		// play selected music track based on index
-		public void StartPlay(int index)
-		{
-			// if there's nothing to play...
-			if (PlaylistCount == 0)
-				return;
-
-			// validate index falls within the playlist boundries - probably unnecessary
-			if (index < 0)
-				index = 0;
-
-			if (index >= PlaylistCount)
-				index = PlaylistCount - 1;
-
-			PlaylistIndex = index; // set member
-			Player.currentMedia = Playlist.get_Item(index);
-			Controls.play();
 		}
+		
 		// resume media playback
 		public void Resume()
 		{
@@ -130,21 +120,37 @@ namespace MinimalistMusicPlayer.Player
 			Controls.stop();
 			// return Player.playState == WMPPlayState.wmppsStopped;
 		}
-		// play next music track based on RepeatMode, and shuffle state
-		public void StartPlayNext()
+		//
+		// Player API
+		//
+		// play selected music track
+		public void Play(IWMPMedia media)
 		{
-			PlaylistIndex = GetNextTrackIndex();
-
-			// if you got to the end of the playlist and you're at NoRepeat, stop playing
-			if (RepeatMode == RepeatMode.NoRepeat && PlaylistIndex == 0)
-				Stop();
-
-			// else, just keep on playin'
-			else
-				StartPlay(PlaylistIndex);
+			Player.currentMedia = media;
+			Controls.play();
 		}
-
-		public void SetNewRepeatMode(RepeatMode oldRepeatMode)
+		// play selected music track based on index
+		public void Play(int trackPlaylistIndex)
+		{
+			IWMPMedia item = GetItem(trackPlaylistIndex);
+			Player.currentMedia = item;
+			Controls.play();
+		}
+		// play next music track based on RepeatMode, and shuffle state
+		public void PlayNextTrack(int currentIndex)
+		{
+			IWMPMedia track = GetNextItem(currentIndex);
+			
+			// it's null when nothing should be played (NoRepeat && end of playlist)
+			if (track != null)
+				Play(track);
+			else
+				Stop();
+		}
+		//
+		// Playlist API
+		//
+		public void AdvanceRepeatMode(RepeatMode oldRepeatMode)
 		{
 			switch (oldRepeatMode)
 			{
@@ -162,44 +168,68 @@ namespace MinimalistMusicPlayer.Player
 			}
 		}
 
+		public IWMPMedia GetItem(int index)
+		{
+			return Playlist.get_Item(index);
+		}
+
 		// returns the index of the next track that should play
 		// takes shuffle, repeat modes into account
-		private int GetNextTrackIndex()
+		public int GetNextItemIndex(int index)
 		{
 			if (IsShuffle)
 			{
 				Random r = new Random();
-				return r.Next(0, PlaylistCount - 1);
+				return r.Next(0, Count - 1);
 			}
 
 			switch (RepeatMode)
 			{
 				case RepeatMode.NoRepeat:
+					if (index < Count - 1)
+						return index + 1;
+					else
+						return Const.InvalidIndex;
+
 				case RepeatMode.Repeat:
-					if (PlaylistIndex < PlaylistCount - 1)
-						return PlaylistIndex + 1;
+					if (index < Count - 1)
+						return index + 1;
 					else
 						return 0;
 
 				case RepeatMode.RepeatOne:
 				default:
-					return PlaylistIndex;
+					return index;
 			}
 		}
-		//
-		// Playlist API
-		//
-		// adds a single item
-		public void AddPlaylistItem(string itemUrl)
+		
+		public IWMPMedia GetNextItem(int currentIndex)
 		{
-			Playlist.appendItem(Player.newMedia(itemUrl));
+			int nextIndex = GetNextItemIndex(currentIndex);
+			// set member variable
+			Index = nextIndex;
+
+			if (nextIndex != Const.InvalidIndex)
+				return GetItem(nextIndex);
+
+			return null;
+		}
+
+		// adds a single item to both IWMPPlaylist and List<string> playlist references
+		public void AddPlaylistItem(string itemFullName)
+		{
+			Playlist.appendItem(Player.newMedia(itemFullName));
+			PlaylistFullNames.Add(itemFullName);
 		}
 		// adds a list of items
 		public void AddPlaylistItems(IEnumerable<string> items)
 		{
+			// set playlist directory
+			PlaylistDirectory = new FileInfo(items.First()).DirectoryName;
+
 			foreach (string item in items)
 			{
-				if (Util.IsValidMediaFile(item))
+				if (Util.IsMediaFile(item))
 					AddPlaylistItem(item);
 			}
 		}
@@ -207,6 +237,7 @@ namespace MinimalistMusicPlayer.Player
 		public void ClearPlaylistItems()
 		{
 			Playlist.clear();
+			PlaylistFullNames.Clear();
 		}
 	}
 }

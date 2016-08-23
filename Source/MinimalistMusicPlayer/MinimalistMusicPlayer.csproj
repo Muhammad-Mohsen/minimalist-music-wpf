@@ -106,11 +106,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Explorer\BreadcrumbBar.cs" />
+    <Compile Include="Explorer\DriveItem.cs" />
+    <Compile Include="Explorer\ExplorerItem.cs" />
+    <Compile Include="Explorer\ExplorerItemType.cs" />
+    <Compile Include="MainWindow\MainWindow.BreadcrumbBar.cs" />
+    <Compile Include="Explorer\BreadcrumbButton.cs" />
+    <Compile Include="Explorer\DirectoryItem.cs" />
+    <Compile Include="MainWindow\MainWindow.MediaExplorer.cs" />
+    <Compile Include="Explorer\MediaItem.cs" />
     <Compile Include="Player\Playlist.cs" />
     <Compile Include="Player\RepeatMode.cs" />
     <Compile Include="Utility\Brushes.cs" />
-    <Compile Include="Utility\Const.cs" />
+    <Compile Include="Utility\Consts.cs" />
     <Compile Include="Utility\Extensions.cs" />
     <Compile Include="MainWindow\MainWindow.Timer.cs" />
     <Compile Include="MainWindow\MainWindow.xaml.cs">
@@ -165,7 +172,6 @@
   <ItemGroup>
     <Compile Include="Utility\Animation.cs" />
     <Compile Include="Player\Player.cs" />
-    <Compile Include="Explorer\ExplorerItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -185,9 +191,8 @@
     </EmbeddedResource>
     <Compile Include="Utility\Icons.cs" />
     <Compile Include="Utility\Styles.cs" />
-    <Compile Include="Utility\Util.cs" />
+    <Compile Include="Utility\Utils.cs" />
     <Compile Include="MainWindow\MainWindow.Helpers.cs" />
-    <Compile Include="Explorer\Explorer.Helper.cs" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

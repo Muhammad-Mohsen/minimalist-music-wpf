@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MinimalistMusicPlayer.Utility;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -12,6 +13,10 @@ namespace MinimalistMusicPlayer
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
-    {
-    }
+	{
+		private void Application_Exit(object sender, ExitEventArgs e)
+		{
+			MinimalistMusicPlayer.Properties.Settings.Default.Save();
+		}
+	}
 }
