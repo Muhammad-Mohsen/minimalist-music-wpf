@@ -1,4 +1,4 @@
-# <img width="48px" src="https://raw.githubusercontent.com/Muhammad-Mohsen/Minimalist-Music-Player/master/Source/MinimalistMusicPlayer/img/AppIcon.ico"> Minimalist Music Player
+# <img width="48px" src="https://raw.githubusercontent.com/Muhammad-Mohsen/Minimalist-Music-Player/master/Source/MinimalistMusicPlayer/Resources/img/AppIcon.ico"> Minimalist Music Player
 Simple WPF music player.
 
 This is a very simple music player made using WPF (although there's no MVVM involved). It's by no means a fleshed out player; There's no playlist management, no equalizer, etc. 
