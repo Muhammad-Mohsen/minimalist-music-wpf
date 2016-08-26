@@ -10,32 +10,23 @@
    width="7.11111in"
    height="7.11111in"
    viewBox="0 0 512 512"
-   id="svg2"
+   id="svg3843"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="PlaySelected.svg">
+   sodipodi:docname="Cancel.svg">
   <metadata
-     id="metadata9">
+     id="metadata3850">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <defs
-     id="defs7">
-    <pattern
-       y="0"
-       x="0"
-       height="6"
-       width="6"
-       patternUnits="userSpaceOnUse"
-       id="EMFhbasepattern" />
-  </defs>
+     id="defs3848" />
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -47,18 +38,19 @@
      inkscape:pageshadow="2"
      inkscape:window-width="1366"
      inkscape:window-height="716"
-     id="namedview5"
+     id="namedview3846"
      showgrid="false"
-     inkscape:zoom="5.6568543"
-     inkscape:cx="-5.8912577"
-     inkscape:cy="12.235786"
+     inkscape:zoom="13.600002"
+     inkscape:cx="-15.775913"
+     inkscape:cy="8.6957564"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="svg3843" />
   <path
-     id="Play"
-     style="fill:none;stroke:#000000;stroke-width:0.08339204"
-     d="m 24.435012,503.71666 -14.5936046,8.21202 0,-16.42822 z m -23.3494848,-0.20955 -1.03117003,1.0312 2.47838103,2.47735 5.6141625,-5.61418 -0.9796359,-0.97963 -4.5829855,4.58298 z"
-     inkscape:connector-curvature="0" />
+     id="rect3840-4"
+     style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.04516133;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     d="m 11.034484,510.70974 -1.2583283,1.25832 -4.3043533,-4.30202 -4.2428295,4.24138 -1.13641064,-1.1364 4.24138814,-4.24283 -4.30202089,-4.30435 1.25832419,-1.25835 4.304361,4.30203 4.2428212,-4.24138 1.1364091,1.13641 -4.2413786,4.24283 z"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="ccccccccccccc" />
 </svg>
