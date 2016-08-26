@@ -123,7 +123,7 @@
 				<Label x:Name="LabelSeekTime" Content="--:--" VerticalAlignment="Top" Margin="0,-5,0,0" Foreground="{DynamicResource TextBrushWhite}" FontWeight="Bold"/>
 			</StackPanel>
 
-			<Button x:Name="ButtonPlaySelected" Opacity="0" Style="{DynamicResource AlphaButtonStyle}" VerticalAlignment="Top" Width="30" Height="30" Margin="0,108,267,0" BorderBrush="{x:Null}" HorizontalAlignment="Right" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" Focusable="False" Click="ButtonPlaySelected_Click">
+			<Button x:Name="ButtonPlaySelected" Opacity="0" Style="{DynamicResource AlphaButtonStyle}" VerticalAlignment="Top" Width="30" Height="30" Margin="0,108,267,0" BorderBrush="{x:Null}" HorizontalAlignment="Right" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" Focusable="False" Click="ButtonPlaySelected_Click" IsEnabled="False">
 				<Button.OpacityMask>
 					<VisualBrush>
 						<VisualBrush.Stretch>None</VisualBrush.Stretch>

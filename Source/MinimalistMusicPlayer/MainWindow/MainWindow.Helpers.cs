@@ -166,12 +166,20 @@ namespace MinimalistMusicPlayer
 			MediaItem.SelectMediaItem(mediaItem);
 		}
 
-		private void ShowHidePlaySelectedButton(bool shouldShow)
+		private async void ShowHidePlaySelectedButton(bool shouldShow)
 		{
 			if (shouldShow)
+			{
 				Anim.AnimateOpacity(ButtonPlaySelected, Const.OpacityLevel.Opaque, .2);
+				await Task.Delay(200);
+				ButtonPlaySelected.IsEnabled = true;
+			}
 			else
+			{
 				Anim.AnimateOpacity(ButtonPlaySelected, Const.OpacityLevel.Transparent, .2);
+				await Task.Delay(200);
+				ButtonPlaySelected.IsEnabled = false;
+			}
 		}
 	}
 }
