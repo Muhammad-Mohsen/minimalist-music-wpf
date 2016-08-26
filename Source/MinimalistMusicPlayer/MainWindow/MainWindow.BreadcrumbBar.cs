@@ -1,8 +1,10 @@
 ﻿using MinimalistMusicPlayer.Explorer;
 using MinimalistMusicPlayer.Utility;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace MinimalistMusicPlayer
@@ -24,9 +26,12 @@ namespace MinimalistMusicPlayer
 				return;
 
 			DirectoryInfo parentDirectory = CurrentDirectory.Parent;
-
-			CurrentDirectory = parentDirectory;
-			DirectoryChange(CurrentDirectory);
+			DirectoryChange(parentDirectory);
+		}
+		private void ComputerButton_Click(object sender, RoutedEventArgs e)
+		{
+			// set the current directory to null, and repopulate everything
+			DirectoryChange(null);
 		}
 		private void BreadcrumbButton_Click(object sender, RoutedEventArgs e)
 		{
@@ -39,38 +44,9 @@ namespace MinimalistMusicPlayer
 			if (newDirectory.FullName == CurrentDirectory.FullName)
 				return;
 
-			CurrentDirectory = newDirectory;
-			DirectoryChange(CurrentDirectory);
+			DirectoryChange(newDirectory);
 		}
-		private void ComputerButton_Click(object sender, RoutedEventArgs e)
-		{
-			// set the current directory to null, and repopulate everything
-			CurrentDirectory = null;
-			DirectoryChange(CurrentDirectory);
-		}
-
-		// gets the directory upto the given crumb
-		public string GetDirectory(BreadcrumbButton crumbButton)
-		{
-			StringBuilder directory = new StringBuilder();
-
-			foreach (BreadcrumbButton button in StackPanelDirectory.Children)
-			{
-				directory.Append(button.Content.ToString());
-				if (button.Equals(crumbButton)) // if you get to where you want, break
-					break;
-			}
-			
-			// remove the "Computer/"
-			directory.Replace("Computer/", "");
-
-			// if you get to the root, append a '/'
-			if (directory.Length == 2)
-				directory.Append(Const.BreadcrumbButtonSeparator);
-
-			return directory.ToString();
-		}
-
+		
 		// reinitializes the breadcrumb bar using already existing breadcrumb buttons
 		public void PopulateBreadcrumbBar(DirectoryInfo directory)
 		{
@@ -110,6 +86,44 @@ namespace MinimalistMusicPlayer
 			StackPanelDirectory.Children.RemoveAt(StackPanelDirectory.Children.Count - 1);
 		}
 
+		// gets the directory upto the given crumb
+		public string GetDirectory(BreadcrumbButton crumbButton)
+		{
+			StringBuilder directory = new StringBuilder();
+
+			foreach (BreadcrumbButton button in StackPanelDirectory.Children)
+			{
+				directory.Append(button.Content.ToString());
+				if (button.Equals(crumbButton)) // if you get to where you want, break
+					break;
+			}
+
+			// remove the "Computer/"
+			directory.Replace("Computer/", "");
+
+			// if you get to the root, append a '/'
+			if (directory.Length == 2)
+				directory.Append(Const.BreadcrumbButtonSeparator);
+
+			return directory.ToString();
+		}
+
+		// will be called on directory change (up button click, breadcrumb button click, directory item double click)
+		public void DirectoryChange(DirectoryInfo directory)
+		{
+			CurrentDirectory = directory;
+
+			// set the setting (will be saved in OnExit event in the app class!!)
+			Properties.Settings.Default[Const.ExplorerDirectorySetting] = directory != null ? directory.FullName : null;
+
+			PopulateBreadcrumbBar(directory);
+			InitializeMediaExplorer(directory);
+
+			// reset item markings
+			MediaItem.MarkedItemCount = 0;
+			TogglePlaylistSelectMode(false);
+		}
+
 		private BreadcrumbButton CreateSeparatorButton()
 		{
 			BreadcrumbButton separatorButton = new BreadcrumbButton(Const.BreadcrumbButtonSeparator);
@@ -117,6 +131,49 @@ namespace MinimalistMusicPlayer
 			separatorButton.IsTabStop = false;
 
 			return separatorButton;
+		}
+
+		private async void TogglePlaylistSelectMode(bool shouldShow)
+		{
+			FrameworkElement elementToHide = shouldShow ? GridBreadcrumnBar : GridSelectMode;
+			FrameworkElement elementToShow = shouldShow ? GridSelectMode : GridBreadcrumnBar;
+
+			Util.ShowHideFrameworkElement(elementToHide, false, Const.ShowHideDelay);
+			await Task.Delay(TimeSpan.FromSeconds(Const.ShowHideDelay));
+			Util.ShowHideFrameworkElement(elementToShow, true, Const.ShowHideDelay);
+		}
+
+		private void ButtonPlaySelected_Click(object sender, RoutedEventArgs e)
+		{
+			// get marked media files
+			List<string> markedFiles = GetMarkedMediaFiles();
+
+			// reset everything
+			ResetPlaylistMediaItemIcons(Player.PlaylistFullNames);
+
+			// reinitialize playlist
+			Player.ClearPlaylistItems();
+			Player.AddPlaylistItems(markedFiles);
+
+			// reset marking state
+			ResetMediaItemMarkState();
+			MediaItem.MarkedItemCount = 0;
+
+			SetPlaylistMediaItemIcons(markedFiles);
+
+			Player.Index = 0;
+			Player.Play(Player.Index);
+
+			TogglePlaylistSelectMode(false);
+		}
+
+		private void ButtonCancelPlaySelected_Click(object sender, RoutedEventArgs e)
+		{
+			// reset marking state
+			ResetMediaItemMarkState();
+			MediaItem.MarkedItemCount = 0;
+
+			TogglePlaylistSelectMode(false);
 		}
 	}
 }

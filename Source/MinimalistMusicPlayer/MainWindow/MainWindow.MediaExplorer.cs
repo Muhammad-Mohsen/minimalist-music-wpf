@@ -66,7 +66,7 @@ namespace MinimalistMusicPlayer
 		{
 			MediaItem item = (MediaItem)sender;
 
-			MediaItem.SelectMediaItem(item); // set selection styling, deselect the old item while you're at it
+			MediaItem.Select(item); // set selection styling, deselect the old item while you're at it
 			
 			Player.Index = GetMediaItemPlaylistIndex(item.FullName);
 			// if item is already in the playlist, simply play the itme
@@ -86,10 +86,12 @@ namespace MinimalistMusicPlayer
 				Player.Play(Player.Index); // start playing the item
 			}
 		}
+		
 		// controls whether the Play selected button should be shown
 		private void MediaItem_MarkedItemCountChange(object sender, RoutedEventArgs e)
 		{
-			ShowHidePlaySelectedButton(MediaItem.MarkedItemCount > 0);
+			bool shouldShowSelectMode = MediaItem.MarkedItemCount > 0;
+			TogglePlaylistSelectMode(shouldShowSelectMode);
 		}
 
 		// pretty much a duplicate of DirectoryItem code, but I'm alright with that
@@ -103,9 +105,7 @@ namespace MinimalistMusicPlayer
 		private void DriveItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			DriveItem driveItem = (DriveItem)sender;
-
-			CurrentDirectory = new DirectoryInfo(driveItem.Directory);
-			DirectoryChange(CurrentDirectory);
+			DirectoryChange(new DirectoryInfo(driveItem.Directory));
 		}
 
 		public void AddDirectoryItem(string directory)
@@ -118,9 +118,7 @@ namespace MinimalistMusicPlayer
 		private void DirectoryItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			DirectoryItem directoryItem = (DirectoryItem)sender;
-
-			CurrentDirectory = new DirectoryInfo(directoryItem.Directory);
-			DirectoryChange(CurrentDirectory);
+			DirectoryChange(new DirectoryInfo(directoryItem.Directory));
 		}
 
 		// maps a given playlist index to an actual MediaItem object
@@ -172,7 +170,10 @@ namespace MinimalistMusicPlayer
 		public void ResetMediaItemMarkState()
 		{
 			foreach (MediaItem item in StackPanelExplorer.Children.OfType<MediaItem>())
+			{
 				item.IsMarked = false;
+				item.MarkMediaIcon(item.MediaIcon, false);
+			}
 		}
 		
 		public bool IsPlaylistMedia(string fullName)
@@ -209,18 +210,10 @@ namespace MinimalistMusicPlayer
 			}
 		}
 
-		// will be called on directory change (up button click, breadcrumb button click, directory item double click)
-		public void DirectoryChange(DirectoryInfo directory)
+		private void SelectMediaItemByIndex(int index)
 		{
-			// set the setting (will be saved in OnExit event in the app class!!)
-			Properties.Settings.Default[Const.ExplorerDirectorySetting] = directory != null ? directory.FullName : null;
-
-			PopulateBreadcrumbBar(CurrentDirectory);
-			InitializeMediaExplorer(CurrentDirectory);
-
-			// reset item markings
-			MediaItem.MarkedItemCount = 0;
-			ShowHidePlaySelectedButton(false);
+			MediaItem mediaItem = MapIndexToMediaItem(index);
+			MediaItem.Select(mediaItem);
 		}
 	}
 }

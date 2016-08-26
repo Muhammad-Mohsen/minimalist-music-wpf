@@ -18,6 +18,10 @@ namespace MinimalistMusicPlayer.Explorer
 		public bool IsMarked { get; set; } // specifies whether this item will be added to the custom playlist
 		public string FullName { get; set; } // specifies item full path
 
+		public Button MediaIcon { get; set; }
+		public Label LabelTitle { get; set; }
+		public Label LabelDuration { get; set; }
+
 		protected static MediaItem OldItem { get; set; } // holds a reference to the previously-selected item if any.
 
 		// custom event that will be raised whenever MarkedItemCount is changed
@@ -42,17 +46,17 @@ namespace MinimalistMusicPlayer.Explorer
 			};
 
 			// icon
-			Button buttonIcon = CreateMediaIcon(isPlaylistMedia);
-			buttonIcon.Click += MediaIconButton_Click;
-			contentGrid.Children.Add(buttonIcon);
+			MediaIcon = CreateMediaIcon(isPlaylistMedia);
+			MediaIcon.Click += MediaIconButton_Click;
+			contentGrid.Children.Add(MediaIcon);
 			
 			// title
-			Label labelTitle = CreateTitleLabel(mediaFile.Name);
-			contentGrid.Children.Add(labelTitle);
+			LabelTitle = CreateTitleLabel(mediaFile.Name);
+			contentGrid.Children.Add(LabelTitle);
 
 			// duration
-			Label labelTrackDuration = CreateDurationLabel(duration);
-			contentGrid.Children.Add(labelTrackDuration);
+			LabelDuration = CreateDurationLabel(duration);
+			contentGrid.Children.Add(LabelDuration);
 
 			// styles, margins...
 			Style = Styles.PlaylistButtonStyle;
@@ -62,7 +66,7 @@ namespace MinimalistMusicPlayer.Explorer
 			Content = contentGrid;
 
 			if (isSelected)
-				SelectMediaItem(this);
+				Select(this);
 
 			IsMarked = false;
 		}
@@ -124,7 +128,7 @@ namespace MinimalistMusicPlayer.Explorer
 		}
 
 		// marks the media icon
-		private async void MarkMediaIcon(Button mediaIcon, bool isMarked)
+		public async void MarkMediaIcon(Button mediaIcon, bool isMarked)
 		{
 			if (isMarked)
 			{
@@ -144,19 +148,22 @@ namespace MinimalistMusicPlayer.Explorer
 		// will be used when changing the actual playlist
 		public void SetMediaIcon(bool isPlaylistItem)
 		{
-			Grid contentGrid = (Grid)Content;
-			Button iconButton = (Button)contentGrid.Children[0];
-
 			var icon = isPlaylistItem == true ? Icons.MediaPlaylist : Icons.Media;
-			iconButton.OpacityMask = icon;
-			iconButton.Background = Brushes.WhiteBrush;
+			MediaIcon.OpacityMask = icon;
+			MediaIcon.Background = Brushes.WhiteBrush;
+		}
+
+		public void SetTitleLabelForeground(bool isPlaylistItem)
+		{
+			var foregroundColor = isPlaylistItem == true ? Brushes.WhiteBrush : Brushes.GreyBrush;
+			LabelTitle.Foreground = foregroundColor;
 		}
 		
-		public static void SelectMediaItem(MediaItem item)
+		public static void Select(MediaItem item)
 		{
 			// deselect the old item, if applicable
 			if (OldItem != null)
-				DeselectMediaItem(OldItem);
+				OldItem.Deselect();
 
 			OldItem = item; // set the OldItem to this one.
 
@@ -165,19 +172,18 @@ namespace MinimalistMusicPlayer.Explorer
 			{
 				item.BorderBrush = Brushes.BlueBrush;
 
-				// embolden the text...sigh!
-				Grid contentGrid = (Grid)item.Content;
-				((Label)contentGrid.Children[1]).FontWeight = FontWeights.Bold; // title label
-				((Label)contentGrid.Children[2]).FontWeight = FontWeights.Bold; // duration label
+				// embolden the text
+				item.LabelTitle.FontWeight = FontWeights.Bold;
+				item.LabelDuration.FontWeight = FontWeights.Bold;
 			}
 
 		}
-		protected static void DeselectMediaItem(MediaItem item)
+		protected void Deselect()
 		{
-			item.BorderBrush = null;
-			Grid contentGrid = (Grid)item.Content;
-			((Label)contentGrid.Children[1]).FontWeight = FontWeights.Normal; // title label
-			((Label)contentGrid.Children[2]).FontWeight = FontWeights.Normal; // duration label
+			BorderBrush = null;
+			Grid contentGrid = (Grid)Content;
+			LabelTitle.FontWeight = FontWeights.Normal;
+			LabelDuration.FontWeight = FontWeights.Normal;
 		}
 	}
 }

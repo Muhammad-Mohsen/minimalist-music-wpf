@@ -49,5 +49,7 @@ namespace MinimalistMusicPlayer.Utility
 		public const string Computer = "Computer";
 
 		public const string ExplorerDirectorySetting = "ExplorerDirectory";
+
+		public const double ShowHideDelay = .2;
 	}
 }

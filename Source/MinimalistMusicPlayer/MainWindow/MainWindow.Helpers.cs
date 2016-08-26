@@ -1,6 +1,7 @@
 ﻿using MinimalistMusicPlayer.Explorer;
 using MinimalistMusicPlayer.Player;
 using MinimalistMusicPlayer.Utility;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -158,28 +159,6 @@ namespace MinimalistMusicPlayer
 			ToolTipTrackTitle.Content = track.name;
 			// set track artist/album label tooltip
 			ToolTipTrackArtistAlbum.Content = string.Concat(author, " (", album, ")");
-		}
-
-		private void SelectMediaItemByIndex(int index)
-		{
-			MediaItem mediaItem = MapIndexToMediaItem(index);
-			MediaItem.SelectMediaItem(mediaItem);
-		}
-
-		private async void ShowHidePlaySelectedButton(bool shouldShow)
-		{
-			if (shouldShow)
-			{
-				Anim.AnimateOpacity(ButtonPlaySelected, Const.OpacityLevel.Opaque, .2);
-				await Task.Delay(200);
-				ButtonPlaySelected.IsEnabled = true;
-			}
-			else
-			{
-				Anim.AnimateOpacity(ButtonPlaySelected, Const.OpacityLevel.Transparent, .2);
-				await Task.Delay(200);
-				ButtonPlaySelected.IsEnabled = false;
-			}
 		}
 	}
 }

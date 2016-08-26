@@ -35,14 +35,14 @@
 			<!-- Track information/open -->
 			<Button x:Name="ButtonTrackInfo" VerticalAlignment="Top" HorizontalAlignment="Left" Height="46" Width="238" Margin="40,6,0,0" Padding="0" Style="{DynamicResource BackGroundButtonStyle2}" Click="ButtonTrackInfo_Click" IsTabStop="False" Focusable="False">
 				<Grid Height="46" Width="238">
-					<Label x:Name="LabelSongTitle" Content="Open Track(s)" HorizontalAlignment="Left" Margin="0,-6,0,0" VerticalAlignment="Top" Foreground="{DynamicResource TextBrushWhite}" FontSize="22">
+					<Label x:Name="LabelSongTitle" Content="Browse Tracks" HorizontalAlignment="Left" Margin="0,-6,0,0" VerticalAlignment="Top" Foreground="{DynamicResource TextBrushWhite}" FontSize="22">
 						<Label.ToolTip>
-							<ToolTip x:Name="ToolTipTrackTitle" Content="Open Track(s)" Style="{DynamicResource ToolTipBordered}" ToolTipService.Placement="RelativePoint" VerticalOffset="2" Margin="20,20" Foreground="{DynamicResource DisabledBackgroundBrush}" />
+							<ToolTip x:Name="ToolTipTrackTitle" Content="Browse Tracks" Style="{DynamicResource ToolTipBordered}" ToolTipService.Placement="RelativePoint" VerticalOffset="2" Margin="20,20" Foreground="{DynamicResource DisabledBackgroundBrush}" />
 						</Label.ToolTip>
 					</Label>
-					<Label x:Name="LabelArtistAlbum" Content="Or use the explorer to browse tracks" HorizontalAlignment="Left" Margin="0,25,0,-4" VerticalAlignment="Top" Foreground="{DynamicResource TextBrushGrey}" FontSize="12">
+					<Label x:Name="LabelArtistAlbum" Content="using the built-in explorer" HorizontalAlignment="Left" Margin="0,25,0,-4" VerticalAlignment="Top" Foreground="{DynamicResource TextBrushGrey}" FontSize="12">
 						<Label.ToolTip>
-							<ToolTip x:Name="ToolTipTrackArtistAlbum" Content="Or use the explorer to browse tracks" Style="{DynamicResource ToolTipBordered}" Foreground="{DynamicResource DisabledBackgroundBrush}" ToolTipService.Placement="RelativePoint" VerticalOffset="2" />
+							<ToolTip x:Name="ToolTipTrackArtistAlbum" Content="using the built-in explorer" Style="{DynamicResource ToolTipBordered}" Foreground="{DynamicResource DisabledBackgroundBrush}" ToolTipService.Placement="RelativePoint" VerticalOffset="2" />
 						</Label.ToolTip>
 					</Label>
 				</Grid>
@@ -123,17 +123,6 @@
 				<Label x:Name="LabelSeekTime" Content="--:--" VerticalAlignment="Top" Margin="0,-5,0,0" Foreground="{DynamicResource TextBrushWhite}" FontWeight="Bold"/>
 			</StackPanel>
 
-			<Button x:Name="ButtonPlaySelected" Opacity="0" Style="{DynamicResource AlphaButtonStyle}" VerticalAlignment="Top" Width="30" Height="30" Margin="0,108,267,0" BorderBrush="{x:Null}" HorizontalAlignment="Right" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" Focusable="False" Click="ButtonPlaySelected_Click" IsEnabled="False">
-				<Button.OpacityMask>
-					<VisualBrush>
-						<VisualBrush.Stretch>None</VisualBrush.Stretch>
-						<VisualBrush.Visual>
-							<Path Fill="White" Data="{StaticResource PlaySelected}" />
-						</VisualBrush.Visual>
-					</VisualBrush>
-				</Button.OpacityMask>
-			</Button>
-			
 			<!-- Playlist controls -->
 			<Button x:Name="ButtonRepeat" Style="{DynamicResource AlphaButtonStyle}" VerticalAlignment="Top" Width="30" Height="30" Margin="0,108,112,0" BorderBrush="{x:Null}" HorizontalAlignment="Right" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" Click="ButtonRepeat_Click" Focusable="False" IsTabStop="False">
 				<Button.OpacityMask>
@@ -169,16 +158,39 @@
 			</Button>
 
 			<!-- Explorer -->
-			<Grid x:Name="GridExplorerMain" Margin="41,155,25,10" Background="{DynamicResource BackgroundBrush}" >
+			<Grid x:Name="GridExplorerMain" Margin="41,155,25,0" Background="{DynamicResource BackgroundBrush}" Height="433" VerticalAlignment="Top" >
 				<!-- Breadcrumb bar -->
-				<StackPanel x:Name="StackPanelBreadcrumnBar" Height="27" Orientation="Horizontal" VerticalAlignment="Top">
+				<Grid x:Name="GridBreadcrumnBar" Margin="0,0,0,406">
 					<Button x:Name="ButtonUp" Style="{DynamicResource ResourceKey=PlaylistButton}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Height="25" Margin="1,1" Focusable="False" IsTabStop="False" AllowDrop="False">
-						<Path Fill="White" Data="{StaticResource Up}" />
+						<Path Fill="White" Data="{StaticResource Up}" RenderTransformOrigin="0.5,0.5" />
 					</Button>
-					<ScrollViewer x:Name="ScrollViewerDirectory" Width="403" CanContentScroll="True">
-						<StackPanel x:Name="StackPanelDirectory" Width="396" Orientation="Horizontal"/>
+					<ScrollViewer x:Name="ScrollViewerDirectory" CanContentScroll="True" Margin="31,0,20,0">
+						<StackPanel x:Name="StackPanelDirectory" Width="406" Orientation="Horizontal" />
 					</ScrollViewer>
-				</StackPanel>
+				</Grid>
+				<!-- Select mode -->
+				<Grid x:Name="GridSelectMode" Height="27" VerticalAlignment="Top" Visibility="Collapsed" Opacity="0">
+					<Button x:Name="ButtonCancelPlaySelected" Style="{DynamicResource AlphaButtonStyle}" Width="30" Margin="1,1,0,1" BorderBrush="{x:Null}" HorizontalAlignment="Left" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" Focusable="False" Click="ButtonCancelPlaySelected_Click">
+						<Button.OpacityMask>
+							<VisualBrush>
+								<VisualBrush.Stretch>None</VisualBrush.Stretch>
+								<VisualBrush.Visual>
+									<Path Fill="White" Data="{StaticResource CancelSelected}" />
+								</VisualBrush.Visual>
+							</VisualBrush>
+						</Button.OpacityMask>
+					</Button>
+					<Button x:Name="ButtonPlaySelected" Style="{DynamicResource AlphaButtonStyle}" Width="30" Margin="31,1,396,1" BorderBrush="{x:Null}" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" Focusable="False" Click="ButtonPlaySelected_Click">
+						<Button.OpacityMask>
+							<VisualBrush>
+								<VisualBrush.Stretch>None</VisualBrush.Stretch>
+								<VisualBrush.Visual>
+									<Path Fill="White" Data="{StaticResource PlaySelected}" />
+								</VisualBrush.Visual>
+							</VisualBrush>
+						</Button.OpacityMask>
+					</Button>
+				</Grid>
 
 				<!-- Explorer view -->
 				<ScrollViewer x:Name="ScrollViewerExplorer" Margin="0,32,0,0">
