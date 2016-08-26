@@ -69,32 +69,13 @@ namespace MinimalistMusicPlayer
 		//
 		private void ButtonTrackInfo_Click(object sender, RoutedEventArgs e)
 		{
-			OpenFileDialog openDialog = new OpenFileDialog();
-			openDialog.Title = "Open media";
+			// Expand playlist
+			if (Player.IsPlaylistVisible == false)
+				ExpandCollapsePlaylistStackPanel(true);
 
-			openDialog.Multiselect = true;
-			openDialog.AddExtension = true;
-			openDialog.Filter = "Media files (*.mp3, *.wma, *.wav)|*.mp3; *.wma; *.wav";
-
-			// will only be true if files are selected
-			if ((bool)openDialog.ShowDialog())
-			{
-				// get the current directory
-				CurrentDirectory = new FileInfo(openDialog.FileName).Directory;
-				// below methods use the member CurrentDirectory for the initialization
-				PopulateBreadcrumbBar(CurrentDirectory);
-				InitializeMediaExplorer(CurrentDirectory);
-
-				Player.ClearPlaylistItems();
-				ResetPlaylistMediaItemIcons(Player.PlaylistFullNames);
-
-				// Add selected media to the playlist
-				Player.AddPlaylistItems(openDialog.FileNames);
-				SetPlaylistMediaItemIcons(openDialog.FileNames);
-
-				Player.Index = 0;
-				Player.Play(Player.Index);
-			}
+			// go to playlist directory if possible
+			if (!string.IsNullOrEmpty(Player.PlaylistDirectory))
+				DirectoryChange(new DirectoryInfo(Player.PlaylistDirectory));
 		}
 		//
 		// Button events
@@ -102,13 +83,10 @@ namespace MinimalistMusicPlayer
 		private void ButtonPlaylist_Click(object sender, RoutedEventArgs e)
 		{
 			if (Player.IsPlaylistVisible == false) 
-			{
 				ExpandCollapsePlaylistStackPanel(true);
-			}
+
 			else
-			{
 				ExpandCollapsePlaylistStackPanel(false);
-			}
 		}
 		private void ButtonPlayPause_Click(object sender, RoutedEventArgs e)
 		{
@@ -151,29 +129,6 @@ namespace MinimalistMusicPlayer
 		{
 			Player.IsShuffle = !Player.IsShuffle;
 			SetShuffleIcon(Player.IsShuffle);
-		}
-		private void ButtonPlaySelected_Click(object sender, RoutedEventArgs e)
-		{
-			// get marked media files
-			List<string> markedFiles = GetMarkedMediaFiles();
-
-			// reset everything
-			ResetPlaylistMediaItemIcons(Player.PlaylistFullNames);
-
-			// reinitialize playlist
-			Player.ClearPlaylistItems();
-			Player.AddPlaylistItems(markedFiles);
-			
-			// reset marking state
-			ResetMediaItemMarkState();
-			MediaItem.MarkedItemCount = 0;
-
-			SetPlaylistMediaItemIcons(markedFiles);
-			
-			Player.Index = 0;
-			Player.Play(Player.Index);
-
-			Anim.AnimateOpacity(ButtonPlaySelected, Const.OpacityLevel.Transparent, .2);
 		}
 		//
 		// Seek slider events
