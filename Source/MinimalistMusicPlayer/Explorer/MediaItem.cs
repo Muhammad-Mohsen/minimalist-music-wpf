@@ -82,7 +82,7 @@ namespace MinimalistMusicPlayer.Explorer
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Content = title,
 				FontSize = 12,
-				Foreground = Brushes.WhiteBrush,
+				Foreground = Brushes.LightGreyBrush,
 				Margin = new Thickness(Const.ExplorerItemIconWidth, 0, 0, 0)
 			};
 		}
@@ -155,7 +155,7 @@ namespace MinimalistMusicPlayer.Explorer
 
 		public void SetTitleLabelForeground(bool isPlaylistItem)
 		{
-			var foregroundColor = isPlaylistItem == true ? Brushes.WhiteBrush : Brushes.GreyBrush;
+			var foregroundColor = isPlaylistItem == true ? Brushes.WhiteBrush : Brushes.LightGreyBrush;
 			LabelTitle.Foreground = foregroundColor;
 		}
 		

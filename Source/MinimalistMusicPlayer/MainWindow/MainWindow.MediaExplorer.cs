@@ -69,7 +69,7 @@ namespace MinimalistMusicPlayer
 			MediaItem.Select(item); // set selection styling, deselect the old item while you're at it
 			
 			Player.Index = GetMediaItemPlaylistIndex(item.FullName);
-			// if item is already in the playlist, simply play the itme
+			// if item is already in the playlist, simply play the item
 			if (Player.Index != Const.InvalidIndex)
 				Player.Play(Player.Index);
 
@@ -77,7 +77,8 @@ namespace MinimalistMusicPlayer
 			else
 			{
 				// reset the icons
-				ResetPlaylistMediaItemIcons(Player.PlaylistFullNames);
+				SetPlaylistMediaItemStyle(Player.PlaylistFullNames, false);
+				SetMediaItemForeground(Player.PlaylistFullNames, true);
 
 				Player.ClearPlaylistItems();
 				Player.AddPlaylistItems(MediaFiles.Select(f => f.FullName));
@@ -123,9 +124,9 @@ namespace MinimalistMusicPlayer
 
 		// maps a given playlist index to an actual MediaItem object
 		// mapping isn't 1:1 because there are directories and DirectoryItems thrown in the mix!
-		public MediaItem MapIndexToMediaItem(int index)
+		public MediaItem GetMediaItem(int playlistIndex)
 		{
-			string mediaItemFullName = Player.PlaylistFullNames[index]; // get the playlist media item
+			string mediaItemFullName = Player.PlaylistFullNames[playlistIndex]; // get the playlist media item
 
 			// skip over the directory items
 			foreach (MediaItem item in StackPanelExplorer.Children.OfType<MediaItem>())
@@ -189,30 +190,26 @@ namespace MinimalistMusicPlayer
 		}
 
 		// sets the playlist icon for selected media files
-		public void SetPlaylistMediaItemIcons(IEnumerable<string> playlistItemFullNames)
+		public void SetPlaylistMediaItemStyle(IEnumerable<string> playlistItemFullNames, bool toPlaylist)
 		{
 			foreach (MediaItem item in StackPanelExplorer.Children.OfType<MediaItem>())
 			{
-				if (playlistItemFullNames.Contains(item.FullName)) // if we're in the playlist items, 
-					item.SetMediaIcon(true); // set the icon
+				if (playlistItemFullNames.Contains(item.FullName)) // if we're in the playlist items
+				{
+					item.SetMediaIcon(toPlaylist); // set the icon
+					item.SetTitleLabelForeground(toPlaylist);
+				}
 			}
 		}
-
-		// resets the playlist icons for all media
-		// should be called when changing playlists
-		public void ResetPlaylistMediaItemIcons(List<string> playlistItemFullNames)
+		public void SetMediaItemForeground(IEnumerable<string> playlistItemFullNames, bool toPlaylist)
 		{
-			for (int i = 0; i < playlistItemFullNames.Count; i++)
-			{
-				MediaItem mediaItem = MapIndexToMediaItem(i); // method will return null if it doesn't find a match (possibly due to directory change)
-				if (mediaItem != null && mediaItem.FullName == playlistItemFullNames[i])
-					mediaItem.SetMediaIcon(false);
-			}
+			foreach (MediaItem item in StackPanelExplorer.Children.OfType<MediaItem>())
+				item.SetTitleLabelForeground(toPlaylist);
 		}
 
 		private void SelectMediaItemByIndex(int index)
 		{
-			MediaItem mediaItem = MapIndexToMediaItem(index);
+			MediaItem mediaItem = GetMediaItem(index);
 			MediaItem.Select(mediaItem);
 		}
 	}

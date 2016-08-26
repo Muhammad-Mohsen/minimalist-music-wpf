@@ -60,7 +60,7 @@
 				</Button.OpacityMask>
 			</Button>
 
-			<Slider x:Name="SliderSeek" Style="{DynamicResource HorizontalSlider}" Margin="45,59,45,0" VerticalAlignment="Top" Value="0" ValueChanged="SliderSeek_ValueChanged" PreviewMouseDown="SliderSeek_PreviewMouseDown" PreviewMouseUp="SliderSeek_PreviewMouseUp" PreviewMouseMove="SliderSeek_PreviewMouseMove">
+			<Slider x:Name="SliderSeek" Style="{DynamicResource HorizontalSlider}" Margin="45,59,45,0" VerticalAlignment="Top" Value="0" ValueChanged="SliderSeek_ValueChanged" PreviewMouseDown="SliderSeek_PreviewMouseDown" PreviewMouseUp="SliderSeek_PreviewMouseUp" PreviewMouseMove="SliderSeek_PreviewMouseMove" IsTabStop="False">
 				<Slider.ToolTip>
 					<ToolTip x:Name="ToolTipSeek" ToolTipService.Placement="Top" Style="{DynamicResource ToolTipBordered}" Foreground="{DynamicResource DisabledBackgroundBrush}"></ToolTip>
 				</Slider.ToolTip>
@@ -115,7 +115,7 @@
 				</Button.OpacityMask>
 			</Button>
 
-			<Slider x:Name="SliderVolume" Style="{DynamicResource HorizontalSlider}" HorizontalAlignment="Left" Margin="115,118,0,0" VerticalAlignment="Top" Width="77" Value="50" MouseLeave="Volume_MouseLeave" MouseEnter="Volume_MouseEnter" LargeChange="20" Maximum="100" ValueChanged="SliderVolume_ValueChanged" Focusable="False" />
+			<Slider x:Name="SliderVolume" Style="{DynamicResource HorizontalSlider}" HorizontalAlignment="Left" Margin="115,118,0,0" VerticalAlignment="Top" Width="77" Value="50" MouseLeave="Volume_MouseLeave" MouseEnter="Volume_MouseEnter" LargeChange="20" Maximum="100" ValueChanged="SliderVolume_ValueChanged" Focusable="False" IsTabStop="False" />
 
 			<!-- Time elapsed/Total time -->
 			<StackPanel HorizontalAlignment="Left" Height="20" Margin="382,74,0,0" VerticalAlignment="Top" Width="100" Orientation="Horizontal" FlowDirection="RightToLeft">

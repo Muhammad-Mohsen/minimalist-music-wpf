@@ -128,7 +128,6 @@ namespace MinimalistMusicPlayer
 		{
 			BreadcrumbButton separatorButton = new BreadcrumbButton(Const.BreadcrumbButtonSeparator);
 			separatorButton.IsEnabled = false;
-			separatorButton.IsTabStop = false;
 
 			return separatorButton;
 		}
@@ -149,7 +148,7 @@ namespace MinimalistMusicPlayer
 			List<string> markedFiles = GetMarkedMediaFiles();
 
 			// reset everything
-			ResetPlaylistMediaItemIcons(Player.PlaylistFullNames);
+			SetPlaylistMediaItemStyle(Player.PlaylistFullNames, false);
 
 			// reinitialize playlist
 			Player.ClearPlaylistItems();
@@ -159,7 +158,7 @@ namespace MinimalistMusicPlayer
 			ResetMediaItemMarkState();
 			MediaItem.MarkedItemCount = 0;
 
-			SetPlaylistMediaItemIcons(markedFiles);
+			SetPlaylistMediaItemStyle(markedFiles, true);
 
 			Player.Index = 0;
 			Player.Play(Player.Index);
