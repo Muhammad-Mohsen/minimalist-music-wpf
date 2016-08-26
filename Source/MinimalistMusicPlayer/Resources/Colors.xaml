@@ -33,6 +33,7 @@
 
 	<Color x:Key="BackgroundColor">#FF2E2E2E</Color>
 	<Color x:Key="BlueColor">#FF007ACC</Color>
+	<Color x:Key="GreyColor">#AAA</Color>
 	<Color x:Key="HoverColorBlue">#FF1F9EEF</Color>
 	<Color x:Key="HoverColorGrey">#555</Color>
 	<Color x:Key="WhiteColor">#FFF</Color>
