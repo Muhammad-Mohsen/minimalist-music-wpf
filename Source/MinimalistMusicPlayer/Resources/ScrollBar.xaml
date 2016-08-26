@@ -8,7 +8,7 @@
 		<Style.Triggers>
 			<Trigger Property="Orientation" Value="Horizontal">
 				<Setter Property="Width" Value="auto"/>
-				<Setter Property="Height" Value="20" />
+				<Setter Property="Height" Value="0" />
 				<Setter Property="Template" Value="{DynamicResource HorizontalScrollBar}" />
 			</Trigger>
 			<Trigger Property="Orientation" Value="Vertical">

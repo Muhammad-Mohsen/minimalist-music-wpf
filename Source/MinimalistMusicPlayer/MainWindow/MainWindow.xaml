@@ -169,22 +169,22 @@
 			</Button>
 
 			<!-- Explorer -->
-			<StackPanel x:Name="StackPanelExplorerMain" Margin="41,155,25,10" AllowDrop="True" Background="{DynamicResource BackgroundBrush}" >
+			<Grid x:Name="GridExplorerMain" Margin="41,155,25,10" Background="{DynamicResource BackgroundBrush}" >
 				<!-- Breadcrumb bar -->
-				<StackPanel x:Name="StackPanelBreadcrumnBar" Height="27" Orientation="Horizontal">
+				<StackPanel x:Name="StackPanelBreadcrumnBar" Height="27" Orientation="Horizontal" VerticalAlignment="Top">
 					<Button x:Name="ButtonUp" Style="{DynamicResource ResourceKey=PlaylistButton}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Height="25" Margin="1,1" Focusable="False" IsTabStop="False" AllowDrop="False">
 						<Path Fill="White" Data="{StaticResource Up}" />
 					</Button>
-					<ScrollViewer x:Name="ScrollViewerDirectory" Width="403">
+					<ScrollViewer x:Name="ScrollViewerDirectory" Width="403" CanContentScroll="True">
 						<StackPanel x:Name="StackPanelDirectory" Width="396" Orientation="Horizontal"/>
 					</ScrollViewer>
 				</StackPanel>
-				
+
 				<!-- Explorer view -->
-				<ScrollViewer x:Name="ScrollViewerExplorer" Height="406">
-					<StackPanel x:Name="StackPanelExplorer"></StackPanel>
+				<ScrollViewer x:Name="ScrollViewerExplorer" Margin="0,32,0,0">
+					<StackPanel x:Name="StackPanelExplorer" />
 				</ScrollViewer>
-			</StackPanel>
+			</Grid>
 
 		</Grid>
 	</Border>
