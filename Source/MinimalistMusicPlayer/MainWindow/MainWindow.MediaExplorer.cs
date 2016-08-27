@@ -43,6 +43,10 @@ namespace MinimalistMusicPlayer
 				for (int i = 0; i < MediaFiles.Count(); i++)
 					AddMediaItem(MediaFiles[i], i);
 			}
+
+			// this is a little sad
+			if (MediaFiles.Length == Player.PlaylistFullNames.Count)
+				SetMediaItemForeground(Player.PlaylistFullNames, true);
 		}
 		
 		public void AddMediaItem(FileInfo mediaFile, int index)
