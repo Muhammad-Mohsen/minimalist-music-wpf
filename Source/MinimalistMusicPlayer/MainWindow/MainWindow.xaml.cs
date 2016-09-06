@@ -223,7 +223,7 @@ namespace MinimalistMusicPlayer
 		// minimize
 		private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
 		{
-			WindowState = System.Windows.WindowState.Minimized;
+			WindowState = WindowState.Minimized;
 		}
 		// close
 		private void ButtonClose_Click(object sender, RoutedEventArgs e)
