@@ -31,7 +31,7 @@ namespace MinimalistMusicPlayer.Explorer
 
 		// constructor
 		// using default args instead of doing multiple constructors
-		public MediaItem(FileInfo mediaFile, string duration, bool isSelected = false, bool isPlaylistMedia = false)
+		public MediaItem(FileInfo mediaFile, string duration, MediaItemStyle mediaItemStyle, bool isSelected = false)
 		{
 			IsTabStop = false;
 
@@ -46,12 +46,12 @@ namespace MinimalistMusicPlayer.Explorer
 			};
 
 			// icon
-			MediaIcon = CreateMediaIcon(isPlaylistMedia);
+			MediaIcon = CreateMediaIcon(mediaItemStyle);
 			MediaIcon.Click += MediaIconButton_Click;
 			contentGrid.Children.Add(MediaIcon);
 			
 			// title
-			LabelTitle = CreateTitleLabel(mediaFile.Name);
+			LabelTitle = CreateTitleLabel(mediaFile.Name, mediaItemStyle);
 			contentGrid.Children.Add(LabelTitle);
 
 			// duration
@@ -74,15 +74,16 @@ namespace MinimalistMusicPlayer.Explorer
 		// UI bits helpers
 		//
 		// helper that creates a fully-realized title label
-		private Label CreateTitleLabel(string title)
+		private Label CreateTitleLabel(string title, MediaItemStyle mediaItemStyle)
 		{
 			title = title.Ellipsize(Const.ExplorerItemMaxLength);
+
 			return new Label()
 			{
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Content = title,
 				FontSize = 12,
-				Foreground = Brushes.LightGreyBrush,
+				Foreground = mediaItemStyle != MediaItemStyle.Normal ? Brushes.WhiteBrush : Brushes.LightGreyBrush,
 				Margin = new Thickness(Const.ExplorerItemIconWidth, 0, 0, 0)
 			};
 		}
@@ -98,9 +99,9 @@ namespace MinimalistMusicPlayer.Explorer
 			};
 		}
 		// helper that creates a media icon
-		private Button CreateMediaIcon(bool isPlaylistItem)
+		private Button CreateMediaIcon(MediaItemStyle mediaItemStyle)
 		{
-			var icon = isPlaylistItem == true ? Icons.MediaPlaylist : Icons.Media;
+			var icon = mediaItemStyle == MediaItemStyle.IconHighlighted ? Icons.MediaPlaylist : Icons.Media;
 
 			return new Button()
 			{
@@ -185,5 +186,12 @@ namespace MinimalistMusicPlayer.Explorer
 			LabelTitle.FontWeight = FontWeights.Normal;
 			LabelDuration.FontWeight = FontWeights.Normal;
 		}
+	}
+
+	public enum MediaItemStyle
+	{
+		Normal,
+		Highlighted,
+		IconHighlighted
 	}
 }

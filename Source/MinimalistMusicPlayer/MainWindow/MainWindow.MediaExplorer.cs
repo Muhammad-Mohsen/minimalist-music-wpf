@@ -43,24 +43,19 @@ namespace MinimalistMusicPlayer
 				for (int i = 0; i < MediaFiles.Count(); i++)
 					AddMediaItem(MediaFiles[i], i);
 			}
-
-			// this is a little sad
-			if (MediaFiles.Length == Player.PlaylistFullNames.Count)
-				SetMediaItemForeground(Player.PlaylistFullNames, true);
 		}
-		
+
 		public void AddMediaItem(FileInfo mediaFile, int index)
 		{
 			IWMPMedia media = Player.Player.newMedia(mediaFile.FullName);
 
-			bool isPlaylistMediaItem = IsPlaylistMedia(mediaFile.FullName);
-			bool isSelected = isPlaylistMediaItem && Player.Index == GetMediaItemPlaylistIndex(mediaFile.FullName);
+			MediaItemStyle mediaItemStyle = GetMediaItemStyle(mediaFile.FullName);
 
-			// ignore the playlist media items if the entire directory's media files are in the playlist
-			if (MediaFiles.Length == Player.PlaylistFullNames.Count)
-				isPlaylistMediaItem = false;
+			bool isSelected = false;
+			if (CurrentDirectory != null && CurrentDirectory.FullName == Player.PlaylistDirectory)
+				isSelected = Player.Index == GetMediaItemPlaylistIndex(mediaFile.FullName);
 
-			MediaItem mediaItem = new MediaItem(mediaFile, media.durationString, isSelected, isPlaylistMediaItem);
+			MediaItem mediaItem = new MediaItem(mediaFile, media.durationString, mediaItemStyle, isSelected);
 			mediaItem.MouseDoubleClick += MediaItem_MouseDoubleClick;
 			mediaItem.MarkedItemCountChange += MediaItem_MarkedItemCountChange;
 
@@ -80,15 +75,15 @@ namespace MinimalistMusicPlayer
 			// else, repopulate the playlist with all the files in the current directory then play the item
 			else
 			{
-				// reset the icons
-				SetPlaylistMediaItemStyle(Player.PlaylistFullNames, false);
-				SetMediaItemForeground(Player.PlaylistFullNames, true);
-
 				Player.ClearPlaylistItems();
 				Player.AddPlaylistItems(MediaFiles.Select(f => f.FullName));
 
 				Player.Index = GetMediaItemPlaylistIndex(item.FullName); // update index
 				Player.Play(Player.Index); // start playing the item
+
+				// reset the icons
+				SetPlaylistMediaItemStyle(Player.PlaylistFullNames, false);
+				SetMediaItemForeground(Player.PlaylistFullNames);
 			}
 		}
 		
@@ -169,7 +164,7 @@ namespace MinimalistMusicPlayer
 
 			return markedFiles;
 		}
-		
+
 		// resets mark state for all media items
 		// called when starting to play selected media
 		public void ResetMediaItemMarkState()
@@ -180,22 +175,28 @@ namespace MinimalistMusicPlayer
 				item.MarkMediaIcon(item.MediaIcon, false);
 			}
 		}
-		
-		public bool IsPlaylistMedia(string fullName)
+
+		// returns whether the given media is contained in the currently playing playlist 
+		public MediaItemStyle GetMediaItemStyle(string fullName)
 		{
-			if (Player.PlaylistDirectory == CurrentDirectory.FullName)
+			if (CurrentDirectory != null && CurrentDirectory.FullName == Player.PlaylistDirectory)
 			{
-				foreach (string itemFullName in Player.PlaylistFullNames)
-					if (itemFullName == fullName)
-						return true;
+				if (MediaFiles.Length == Player.PlaylistFullNames.Count)
+					return MediaItemStyle.Highlighted;
+
+				else if (Player.PlaylistFullNames.Contains(fullName))
+					return MediaItemStyle.IconHighlighted;
 			}
 
-			return false;
+			return MediaItemStyle.Normal;
 		}
 
 		// sets the playlist icon for selected media files
 		public void SetPlaylistMediaItemStyle(IEnumerable<string> playlistItemFullNames, bool toPlaylist)
 		{
+			if (CurrentDirectory != null && CurrentDirectory.FullName != Player.PlaylistDirectory)
+				return;
+			
 			foreach (MediaItem item in StackPanelExplorer.Children.OfType<MediaItem>())
 			{
 				if (playlistItemFullNames.Contains(item.FullName)) // if we're in the playlist items
@@ -205,16 +206,41 @@ namespace MinimalistMusicPlayer
 				}
 			}
 		}
-		public void SetMediaItemForeground(IEnumerable<string> playlistItemFullNames, bool toPlaylist)
+		public void SetMediaItemForeground(IEnumerable<string> playlistItemFullNames)
 		{
+			if (CurrentDirectory != null && CurrentDirectory.FullName != Player.PlaylistDirectory)
+				return;
+
 			foreach (MediaItem item in StackPanelExplorer.Children.OfType<MediaItem>())
-				item.SetTitleLabelForeground(toPlaylist);
+			{
+				if (playlistItemFullNames.Contains(item.FullName))
+					item.SetTitleLabelForeground(true);
+
+				else
+					item.SetTitleLabelForeground(false);
+			}
 		}
 
 		private void SelectMediaItemByIndex(int index)
 		{
 			MediaItem mediaItem = GetMediaItem(index);
 			MediaItem.Select(mediaItem);
+		}
+
+		private MediaItem GetCurrentMediaItem()
+		{
+			if (CurrentDirectory != null && Player.PlaylistDirectory == CurrentDirectory.FullName)
+			{
+				string currentMediaFullName = Player.CurrentMedia.sourceURL;
+
+				foreach (MediaItem item in StackPanelExplorer.Children.OfType<MediaItem>())
+				{
+					if (currentMediaFullName.Equals(item.FullName))
+						return item;
+				}
+			}
+
+			return null;
 		}
 	}
 }
