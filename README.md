@@ -1,22 +1,34 @@
 # <img width="48px" src="https://raw.githubusercontent.com/Muhammad-Mohsen/Minimalist-Music-Player/master/Source/MinimalistMusicPlayer/Resources/img/AppIcon.ico"> Minimalist Music Player
 Simple WPF music player.
 
-This is a very simple music player made using WPF (although there's no MVVM involved). It's by no means a fleshed out player; There's no playlist management, no equalizer, etc. 
+Minimalist Music Player is a light weight, clean music player made in WPF (although there's no MVVM involved). It's by no means a fleshed-out player; There's no playlist management, no equalizer, etc. 
 
 ## Functionality
 + Plays **mp3**, **wma**, and **wav** files.
-+ Drag & Drop files into the player (on the playlist).
-+ Shuffle playlist
++ Intergrated explorer complete with a simple breadcrumb bar.
++ On-the-fly playlists: select some/all music files in a given directory -- play selected files
++ Shuffle.
 + Repteat.
-+ Shortcuts:
-	+ **[Space]** play or pause current file.
-	+ **[Ctrl + O]** open track dialog.
-	+ **[mouse wheel]** increase/decrease volume.
++ Stay on top.
 
-## Technical details
-- As mentioned earlier, I don't use MVVM.
-- All the icons are vectors, and are placed in a resource file. Original SVGs are included.
-- WMPLib is used to provide playback/playlist functionality.
+## Some technical details
+- No MVVM was harmed in the making of this app.
+- All the icons are vectors, and are read from a resx file -- Original SVGs are included in the repo.
+- playback/playlist functionality is provided by the WMPLib.dll
+- I tried using partial classes to try and keep everything organized.
+
+## Screenshots
+Collapsed
+
+<img src="https://raw.githubusercontent.com/Muhammad-Mohsen/Minimalist-Music-Player/master/Doc/Screenshots/MinimalistCollapsed.png">
+
+Expanded
+
+<img src="https://raw.githubusercontent.com/Muhammad-Mohsen/Minimalist-Music-Player/master/Doc/Screenshots/MinimalistExpanded.png">
+
+On-the-fly playlist 
+
+<img src="https://raw.githubusercontent.com/Muhammad-Mohsen/Minimalist-Music-Player/master/Doc/Screenshots/MinimalistSelectTracks.png">
 
 ## License and copyright
 
