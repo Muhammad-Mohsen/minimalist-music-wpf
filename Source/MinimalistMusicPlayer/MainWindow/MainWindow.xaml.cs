@@ -49,10 +49,10 @@ namespace MinimalistMusicPlayer
 			Anim.AnimateAngle(PlayingIcon, 0, 360, 2, true);
 
 			string savedDirectory = Properties.Settings.Default[Const.ExplorerDirectorySetting].ToString();
-			if (string.IsNullOrWhiteSpace(savedDirectory))
-				CurrentDirectory = new DirectoryInfo(Const.DefaultMediaDirectory);
-			else
+			if (Directory.Exists(savedDirectory))
 				CurrentDirectory = new DirectoryInfo(savedDirectory);
+			else
+				CurrentDirectory = new DirectoryInfo(Const.DefaultMediaDirectory);
 
 			InitializeBreadcrumbBar(CurrentDirectory);
 			InitializeMediaExplorer(CurrentDirectory);
