@@ -92,9 +92,12 @@ namespace MinimalistMusicPlayer
 		{
 			// more sadness 
 			if (Player.Index == Const.InvalidIndex)
+			{
 				Player.Index = 0;
+				Player.Play(Player.Index);
+			}
 
-			if (Player.CurrentMedia != null)
+			else if (Player.CurrentMedia != null)
 			{
 				if (Player.PlayState == WMPPlayState.wmppsPlaying)
 					Player.Pause();
