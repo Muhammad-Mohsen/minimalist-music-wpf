@@ -160,7 +160,7 @@
 			<!-- Explorer -->
 			<Grid x:Name="GridExplorerMain" Margin="41,155,25,0" Background="{DynamicResource BackgroundBrush}" Height="433" VerticalAlignment="Top" >
 				<!-- Breadcrumb bar -->
-				<Grid x:Name="GridBreadcrumnBar" Margin="0,0,0,406">
+				<Grid x:Name="GridBreadcrumnBar" Margin="0,0,0,406" Visibility="Visible">
 					<Button x:Name="ButtonUp" Style="{DynamicResource ResourceKey=PlaylistButton}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Height="25" Margin="1,1" Focusable="False" IsTabStop="False" AllowDrop="False">
 						<Path Fill="White" Data="{StaticResource Up}" RenderTransformOrigin="0.5,0.5" />
 					</Button>
@@ -180,10 +180,22 @@
 							</VisualBrush>
 						</Button.OpacityMask>
 					</Button>
-					<Button x:Name="ButtonPlaySelected" Style="{DynamicResource AlphaButtonStyle}" Width="30" Margin="31,1,396,1" BorderBrush="{x:Null}" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" Focusable="False" Click="ButtonPlaySelected_Click">
+					<Button x:Name="ButtonAddToSelection" Style="{DynamicResource AlphaButtonStyle}" Width="30" Margin="35,1,394,1" BorderBrush="{x:Null}" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" Focusable="False" Click="ButtonAddToSelection_Click">
 						<Button.OpacityMask>
 							<VisualBrush>
 								<VisualBrush.Stretch>None</VisualBrush.Stretch>
+								<VisualBrush.Visual>
+									<Path Fill="White" Data="{StaticResource AddToSelection}" />
+								</VisualBrush.Visual>
+							</VisualBrush>
+						</Button.OpacityMask>
+					</Button>
+					<Button x:Name="ButtonPlaySelected" Style="{DynamicResource AlphaButtonStyle}" Width="30" Margin="69,1,361,1" BorderBrush="{x:Null}" Background="{DynamicResource TextBrushWhite}" Foreground="{x:Null}" Focusable="False" Click="ButtonPlaySelected_Click">
+						<Button.OpacityMask>
+							<VisualBrush>
+								<VisualBrush.Stretch>
+									<Stretch>None</Stretch>
+								</VisualBrush.Stretch>
 								<VisualBrush.Visual>
 									<Path Fill="White" Data="{StaticResource PlaySelected}" />
 								</VisualBrush.Visual>

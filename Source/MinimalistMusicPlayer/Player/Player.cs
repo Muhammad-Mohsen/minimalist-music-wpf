@@ -218,13 +218,23 @@ namespace MinimalistMusicPlayer.Player
 		// adds a single item to both IWMPPlaylist and List<string> playlist references
 		public void AddPlaylistItem(string itemFullName)
 		{
-			Playlist.appendItem(Player.newMedia(itemFullName));
-			PlaylistFullNames.Add(itemFullName);
+			if (!PlaylistFullNames.Contains(itemFullName)) // only add the item if it doesn't already exist in the playlist
+			{
+				int itemIndex = PlaylistFullNames.AddSorted(itemFullName);
+
+				// if the item was added before the currently-playing item, increment the current index
+				if (itemIndex <= Index)
+					Index++;
+
+				Playlist.insertItem(PlaylistFullNames.IndexOf(itemFullName), Player.newMedia(itemFullName)); // insert the new item in its sorted order
+			}
 		}
 		// adds a list of items
 		public void AddPlaylistItems(IEnumerable<string> items)
 		{
 			// set playlist directory
+			// AddToSelection button is enabled iff the current directory is equal to the playlist directory.
+			// so the intergrity of this will remain intact
 			PlaylistDirectory = new FileInfo(items.First()).DirectoryName;
 
 			foreach (string item in items)

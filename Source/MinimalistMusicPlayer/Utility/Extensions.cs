@@ -28,5 +28,32 @@ namespace MinimalistMusicPlayer.Utility
 			FileInfo[] files = dir.EnumerateFiles().Where(f => Const.MediaExtensions.Contains(f.Extension) && (f.Attributes & FileAttributes.Hidden) == 0).ToArray();
 			return files;
 		}
+
+		// adds an item to a sorted list
+		// source: http://stackoverflow.com/questions/12172162/how-to-insert-item-into-list-in-order
+		public static int AddSorted<T>(this List<T> list, T item) where T : IComparable<T>
+		{
+			if (list.Count == 0)
+			{
+				list.Add(item);
+				return 0;
+			}
+			if (list[list.Count - 1].CompareTo(item) <= 0)
+			{
+				list.Add(item);
+				return list.Count - 1;
+			}
+			if (list[0].CompareTo(item) >= 0)
+			{
+				list.Insert(0, item);
+				return 0;
+			}
+
+			int index = list.BinarySearch(item);
+			if (index < 0)
+				index = ~index;
+			list.Insert(index, item);
+			return index;
+		}
 	}
 }

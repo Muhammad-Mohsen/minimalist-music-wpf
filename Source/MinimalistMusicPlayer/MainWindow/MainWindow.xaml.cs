@@ -90,15 +90,15 @@ namespace MinimalistMusicPlayer
 		}
 		private void ButtonPlayPause_Click(object sender, RoutedEventArgs e)
 		{
-			// more sadness 
-			if (Player.Index == Const.InvalidIndex)
+			if (Player.CurrentMedia != null)
 			{
-				Player.Index = 0;
-				Player.Play(Player.Index);
-			}
+				// more sadness 
+				if (Player.Index == Const.InvalidIndex)
+				{
+					Player.Index = 0;
+					Player.Play(Player.Index);
+				}
 
-			else if (Player.CurrentMedia != null)
-			{
 				if (Player.PlayState == WMPPlayState.wmppsPlaying)
 					Player.Pause();
 				else

@@ -92,6 +92,10 @@ namespace MinimalistMusicPlayer
 		{
 			bool shouldShowSelectMode = MediaItem.MarkedItemCount > 0;
 			TogglePlaylistSelectMode(shouldShowSelectMode);
+
+			// only enable AddToSelection button if we're in the same directory as the playlist, and the playlist is not empty
+			if (shouldShowSelectMode)
+				SetAddToSelectionEnableState(CurrentDirectory.FullName, Player.PlaylistDirectory, Player.Count);
 		}
 
 		// pretty much a duplicate of DirectoryItem code, but I'm alright with that

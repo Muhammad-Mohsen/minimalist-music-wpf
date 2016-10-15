@@ -142,6 +142,11 @@ namespace MinimalistMusicPlayer
 			Util.ShowHideFrameworkElement(elementToShow, true, Const.ShowHideDelay);
 		}
 
+		private void SetAddToSelectionEnableState(string currentDirectory, string playlistDirectory, int playlistCount)
+		{
+			ButtonAddToSelection.IsEnabled = currentDirectory == playlistDirectory && playlistCount > 0;
+		}
+
 		private void ButtonPlaySelected_Click(object sender, RoutedEventArgs e)
 		{
 			// get marked media files
@@ -171,6 +176,27 @@ namespace MinimalistMusicPlayer
 			// reset marking state
 			ResetMediaItemMarkState();
 			MediaItem.MarkedItemCount = 0;
+
+			TogglePlaylistSelectMode(false);
+		}
+
+		private void ButtonAddToSelection_Click(object sender, RoutedEventArgs e)
+		{
+			// get marked media files
+			List<string> markedFiles = GetMarkedMediaFiles();
+
+			// reset everything
+			SetPlaylistMediaItemStyle(Player.PlaylistFullNames, false);
+
+			// reset marking state
+			ResetMediaItemMarkState();
+			MediaItem.MarkedItemCount = 0;
+
+			// add media files to playlist
+			Player.AddPlaylistItems(markedFiles);
+			
+			// this time, set the item style for the entire playlist (as opposed to the marked files)
+			SetPlaylistMediaItemStyle(Player.PlaylistFullNames, true);
 
 			TogglePlaylistSelectMode(false);
 		}
