@@ -99,4 +99,53 @@
 		<PathGeometry Figures="m 7.1391391,511.97932 -1.6281361,0 -0.00151,-5.56786 -5.48882734,-9.2e-4 -6.86e-6,-1.47039 5.4888328,-9.1e-4 0.00151,-5.56786 1.6281528,-2e-5 0.00151,5.56788 5.4888226,9.1e-4 0,1.4704 -5.4888279,9.1e-4 z" FillRule="EvenOdd" />
 	</GeometryGroup>
 
+	<DrawingImage x:Key="ThumbnailPrevious">
+		<DrawingImage.Drawing>
+			<GeometryDrawing Brush="{StaticResource BackgroundBrush}">
+				<GeometryDrawing.Geometry>
+					<GeometryGroup>
+						<PathGeometry Figures="m 4.3800135,503.2855 1.7379608,0 -4.3449017,4.34482 4.3449017,4.34484 -1.7379608,0 -4.34490171,-4.34484 z" FillRule="EvenOdd" />
+					</GeometryGroup>
+				</GeometryDrawing.Geometry>
+			</GeometryDrawing>
+		</DrawingImage.Drawing>
+	</DrawingImage>
+
+	<DrawingImage x:Key="ThumbnailNext">
+		<DrawingImage.Drawing>
+			<GeometryDrawing Brush="{StaticResource BackgroundBrush}">
+				<GeometryDrawing.Geometry>
+					<GeometryGroup>
+						<PathGeometry Figures="m 1.7979007,511.97516 -1.73796083,0 4.34490173,-4.34482 -4.34490173,-4.34484 1.73796083,0 4.3449017,4.34484 z" FillRule="EvenOdd" />
+					</GeometryGroup>
+				</GeometryDrawing.Geometry>
+			</GeometryDrawing>
+		</DrawingImage.Drawing>
+	</DrawingImage>
+
+	<DrawingImage x:Key="ThumbnailPlay">
+		<DrawingImage.Drawing>
+			<GeometryDrawing Brush="{StaticResource BackgroundBrush}">
+				<GeometryDrawing.Geometry>
+					<GeometryGroup>
+						<PathGeometry Figures="m 9.2436333,506.74333 0,0.0501 -9.21729817,5.16169 0,-10.37605 z" FillRule="EvenOdd" />
+					</GeometryGroup>
+				</GeometryDrawing.Geometry>
+			</GeometryDrawing>
+		</DrawingImage.Drawing>
+	</DrawingImage>
+
+	<DrawingImage x:Key="ThumbnailPause">
+		<DrawingImage.Drawing>
+			<GeometryDrawing Brush="{StaticResource BackgroundBrush}">
+				<GeometryDrawing.Geometry>
+					<GeometryGroup>
+						<PathGeometry Figures="m 2.9833056,502.67438 0,9.29873 -2.95642987,0 0,-9.29873 z m 5.3215286,0 0,9.29873 -2.956398,0 0,-9.29873 z" FillRule="EvenOdd" />
+					</GeometryGroup>
+				</GeometryDrawing.Geometry>
+			</GeometryDrawing>
+		</DrawingImage.Drawing>
+	</DrawingImage>
+	
+
 </ResourceDictionary>

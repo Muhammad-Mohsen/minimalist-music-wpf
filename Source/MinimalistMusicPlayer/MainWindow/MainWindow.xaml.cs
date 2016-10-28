@@ -64,7 +64,6 @@ namespace MinimalistMusicPlayer
 			timer.Start();
 
 			// set up progress icon on the taskbar icon
-			TaskbarItemInfo = new System.Windows.Shell.TaskbarItemInfo();
 			TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
 			TaskbarItemInfo.ProgressValue = 0;
 		}
@@ -330,6 +329,48 @@ namespace MinimalistMusicPlayer
 				SliderVolume.Value += Const.VolumeIncrement;
 			else
 				SliderVolume.Value -= Const.VolumeIncrement;
+		}
+		//
+		// Thumbnail buttons
+		//
+		private void ThumbButtonInfoPrevious_Click(object sender, EventArgs e)
+		{
+			if (Player.Index > 0)
+				Player.Index--;
+
+			else
+				Player.Index = Player.Index - 1;
+
+			if (Player.Playlist.count > 0)
+				Player.Play(Player.Index);
+		}
+		private void ThumbButtonInfoPlayPause_Click(object sender, EventArgs e)
+		{
+			if (Player.CurrentMedia != null)
+			{
+				// more sadness 
+				if (Player.Index == Const.InvalidIndex)
+				{
+					Player.Index = 0;
+					Player.Play(Player.Index);
+				}
+
+				if (Player.PlayState == WMPPlayState.wmppsPlaying)
+					Player.Pause();
+				else
+					Player.Resume();
+			}
+		}
+		private void ThumbButtonInfoNext_Click(object sender, EventArgs e)
+		{
+			if (Player.Index < Player.Count - 1)
+				Player.Index++;
+
+			else
+				Player.Index = 0;
+
+			if (Player.Playlist.count > 0)
+				Player.Play(Player.Index);
 		}
 	}
 }

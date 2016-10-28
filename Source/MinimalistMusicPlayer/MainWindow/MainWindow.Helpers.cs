@@ -118,6 +118,7 @@ namespace MinimalistMusicPlayer
 			{
 				case WMPPlayState.wmppsPlaying:
 					ButtonPlayPause.OpacityMask = Icons.Pause;
+					ThumbButtonInfoPlayPause.ImageSource = Icons.ThumbnailPause;
 					Anim.AnimateOpacity(PlayingIcon, Const.OpacityLevel.Opaque, .3);
 					TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
 					break;
@@ -126,12 +127,14 @@ namespace MinimalistMusicPlayer
 				case WMPPlayState.wmppsMediaEnded:
 					SliderSeek.Value = 0;
 					ButtonPlayPause.OpacityMask = Icons.Play;
+					ThumbButtonInfoPlayPause.ImageSource = Icons.ThumbnailPlay;
 					Anim.AnimateOpacity(PlayingIcon, Const.OpacityLevel.Transparent, .3);
 					TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.None;
 					break;
 
 				case WMPPlayState.wmppsPaused:
 					ButtonPlayPause.OpacityMask = Icons.Play;
+					ThumbButtonInfoPlayPause.ImageSource = Icons.ThumbnailPlay;
 					Anim.AnimateOpacity(PlayingIcon, Const.OpacityLevel.Transparent, .3);
 					TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Paused;
 					break;

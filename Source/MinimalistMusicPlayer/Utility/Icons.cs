@@ -133,5 +133,8 @@ namespace MinimalistMusicPlayer.Utility
 			Stretch = Stretch.None,
 			RelativeTransform = new TranslateTransform(-.1, 0)
 		};
+
+		public static ImageSource ThumbnailPlay = (DrawingImage)Application.Current.Resources["ThumbnailPlay"];
+		public static ImageSource ThumbnailPause = (DrawingImage)Application.Current.Resources["ThumbnailPause"];
 	}
 }
