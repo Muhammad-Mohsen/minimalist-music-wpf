@@ -62,6 +62,11 @@ namespace MinimalistMusicPlayer
 			timer.Interval = TimeSpan.FromSeconds(.1);
 			timer.Tick += timer_Tick;
 			timer.Start();
+
+			// set up progress icon on the taskbar icon
+			TaskbarItemInfo = new System.Windows.Shell.TaskbarItemInfo();
+			TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
+			TaskbarItemInfo.ProgressValue = 0;
 		}
 
 		//

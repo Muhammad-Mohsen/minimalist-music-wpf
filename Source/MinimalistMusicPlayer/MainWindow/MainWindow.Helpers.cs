@@ -111,7 +111,7 @@ namespace MinimalistMusicPlayer
 			button.IsEnabled = enable;
 		}
 
-		// sets UI state for Play/Pause button, playing icon
+		// sets UI state for Play/Pause button, playing icon, and taskbar progress icon state
 		private void SetPlayPauseUiState(WMPPlayState state)
 		{
 			switch (state)
@@ -119,6 +119,7 @@ namespace MinimalistMusicPlayer
 				case WMPPlayState.wmppsPlaying:
 					ButtonPlayPause.OpacityMask = Icons.Pause;
 					Anim.AnimateOpacity(PlayingIcon, Const.OpacityLevel.Opaque, .3);
+					TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
 					break;
 
 				case WMPPlayState.wmppsStopped:
@@ -126,11 +127,13 @@ namespace MinimalistMusicPlayer
 					SliderSeek.Value = 0;
 					ButtonPlayPause.OpacityMask = Icons.Play;
 					Anim.AnimateOpacity(PlayingIcon, Const.OpacityLevel.Transparent, .3);
+					TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.None;
 					break;
 
 				case WMPPlayState.wmppsPaused:
 					ButtonPlayPause.OpacityMask = Icons.Play;
 					Anim.AnimateOpacity(PlayingIcon, Const.OpacityLevel.Transparent, .3);
+					TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Paused;
 					break;
 			}
 		}

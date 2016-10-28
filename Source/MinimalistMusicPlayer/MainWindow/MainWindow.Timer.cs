@@ -24,7 +24,8 @@ namespace MinimalistMusicPlayer
 			//
 			if (Player.CurrentMedia != null)
 			{
-				SliderSeek.Value = Player.Controls.currentPosition;
+				SliderSeek.Value = Player.Controls.currentPosition; // Seek bar
+				TaskbarItemInfo.ProgressValue = Player.Controls.currentPosition / SliderSeek.Maximum; // taskbar progress icon
 				LabelSeekTime.Content = Player.Controls.currentPositionString;
 			}
 			//
