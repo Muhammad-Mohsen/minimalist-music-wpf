@@ -21,6 +21,9 @@ namespace MinimalistMusicPlayer
 		public DirectoryInfo[] SubDirectories { get; set; }
 		public FileInfo[] MediaFiles { get; set; }
 
+		public StackPanel StackPanelExplorer;
+		public ScrollViewer ScrollViewerExplorer;
+
 		public void InitializeMediaExplorer(DirectoryInfo directory)
 		{
 			StackPanelExplorer.Children.Clear();
@@ -245,6 +248,15 @@ namespace MinimalistMusicPlayer
 			}
 
 			return null;
+		}
+
+		private ScrollViewer GetPagedScrollViewerExplorer()
+		{
+			return ScrollViewerExplorer == ScrollViewerExplorerPrimary ? ScrollViewerExplorerSecondary : ScrollViewerExplorerPrimary;
+		}
+		private StackPanel GetPagedStackPanelExplorer()
+		{
+			return StackPanelExplorer == StackPanelExplorerPrimary ? StackPanelExplorerSecondary : StackPanelExplorerPrimary;
 		}
 	}
 }

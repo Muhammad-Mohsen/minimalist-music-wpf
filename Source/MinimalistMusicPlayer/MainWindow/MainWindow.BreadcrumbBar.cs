@@ -111,14 +111,28 @@ namespace MinimalistMusicPlayer
 		// will be called on directory change (up button click, breadcrumb button click, directory item double click)
 		public void DirectoryChange(DirectoryInfo directory)
 		{
+			Thickness toMargin = GetExplorerAnimationMargin(CurrentDirectory, directory);
+			Thickness fromMargin = GetExplorerAnimationMargin(directory, CurrentDirectory);
+
 			CurrentDirectory = directory;
 
 			// set the setting (will be saved in OnExit event in the app class!!)
 			Properties.Settings.Default[Const.ExplorerDirectorySetting] = directory != null ? directory.FullName : null;
 
-			PopulateBreadcrumbBar(directory);
+			// get paged media explorer
+			ScrollViewerExplorer = GetPagedScrollViewerExplorer();
+			StackPanelExplorer = GetPagedStackPanelExplorer();
+			
+			// populate paged media explorer
 			InitializeMediaExplorer(directory);
 
+			// animate the media explorer current -> paged
+			Anim.AnimateMargin(GetPagedScrollViewerExplorer(), Const.ExplorerMargin.CurrentPage, toMargin, Const.ShowHideDelay);
+			// repopulate the breadcrumb bar
+			PopulateBreadcrumbBar(directory);
+			// animate the media explorer paged -> current
+			Anim.AnimateMargin(ScrollViewerExplorer, fromMargin, Const.ExplorerMargin.CurrentPage, Const.ShowHideDelay);
+			
 			// reset item markings
 			MediaItem.MarkedItemCount = 0;
 			TogglePlaylistSelectMode(false);
@@ -199,6 +213,19 @@ namespace MinimalistMusicPlayer
 			SetPlaylistMediaItemStyle(Player.PlaylistFullNames, true);
 
 			TogglePlaylistSelectMode(false);
+		}
+
+		private Thickness GetExplorerAnimationMargin(DirectoryInfo fromDirectory, DirectoryInfo currentDirectory)
+		{
+			if (currentDirectory == null)
+				return Const.ExplorerMargin.RightPage;
+			else if (fromDirectory == null)
+				return Const.ExplorerMargin.LeftPage;
+
+			else if (fromDirectory.FullName.Length <= currentDirectory.FullName.Length)
+				return Const.ExplorerMargin.LeftPage;
+			else
+				return Const.ExplorerMargin.RightPage;
 		}
 	}
 }

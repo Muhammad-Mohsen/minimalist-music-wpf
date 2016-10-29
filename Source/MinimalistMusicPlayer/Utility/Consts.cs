@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MinimalistMusicPlayer.Utility
 {
@@ -46,8 +47,14 @@ namespace MinimalistMusicPlayer.Utility
 			public const int Transparent = 0;
 		}
 
-		public const string Computer = "Computer";
+		public static class ExplorerMargin
+		{
+			public static Thickness CurrentPage = new Thickness(0, 32, 0, 0);
+			public static Thickness RightPage = new Thickness(500, 32, -500, 0);
+			public static Thickness LeftPage = new Thickness(-500, 32, 500, 0);
+		}
 
+		public const string Computer = "Computer";
 		public const string ExplorerDirectorySetting = "ExplorerDirectory";
 
 		public const double ShowHideDelay = .2;

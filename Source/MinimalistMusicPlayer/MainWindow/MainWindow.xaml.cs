@@ -54,6 +54,10 @@ namespace MinimalistMusicPlayer
 			else
 				CurrentDirectory = new DirectoryInfo(Const.DefaultMediaDirectory);
 
+			// intialize Explorer references
+			StackPanelExplorer = StackPanelExplorerPrimary;
+			ScrollViewerExplorer = ScrollViewerExplorerPrimary;
+
 			InitializeBreadcrumbBar(CurrentDirectory);
 			InitializeMediaExplorer(CurrentDirectory);
 

@@ -215,8 +215,11 @@
 				</Grid>
 
 				<!-- Explorer view -->
-				<ScrollViewer x:Name="ScrollViewerExplorer" Margin="0,32,0,0">
-					<StackPanel x:Name="StackPanelExplorer" />
+				<ScrollViewer x:Name="ScrollViewerExplorerPrimary" Margin="0,32,0,0">
+					<StackPanel x:Name="StackPanelExplorerPrimary" />
+				</ScrollViewer>
+				<ScrollViewer x:Name="ScrollViewerExplorerSecondary" Margin="-500,32,500,0">
+					<StackPanel x:Name="StackPanelExplorerSecondary" />
 				</ScrollViewer>
 			</Grid>
 
