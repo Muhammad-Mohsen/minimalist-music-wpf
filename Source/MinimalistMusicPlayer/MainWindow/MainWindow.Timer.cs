@@ -15,7 +15,6 @@ namespace MinimalistMusicPlayer
 	public partial class MainWindow : Window
 	{
 		int VolumeSliderFadeCounter = -1;
-		int CurrentTimeLabelFadeCounter = -1;
 
 		private void timer_Tick(object sender, EventArgs e)
 		{
@@ -26,7 +25,12 @@ namespace MinimalistMusicPlayer
 			{
 				SliderSeek.Value = Player.Controls.currentPosition; // Seek bar
 				TaskbarItemInfo.ProgressValue = Player.Controls.currentPosition / SliderSeek.Maximum; // taskbar progress icon
-				LabelSeekTime.Content = Player.Controls.currentPositionString;
+
+				string currentPosition = Player.Controls.currentPositionString;
+				if (string.IsNullOrWhiteSpace(currentPosition))
+					currentPosition = "00:00";
+
+				LabelSeekTime.Content = currentPosition;
 			}
 			//
 			//Volume slider fade away
