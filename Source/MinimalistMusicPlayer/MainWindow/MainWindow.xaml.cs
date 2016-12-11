@@ -68,7 +68,7 @@ namespace MinimalistMusicPlayer
 			timer.Start();
 
 			// set up progress icon on the taskbar icon
-			TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
+			TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.None;
 			TaskbarItemInfo.ProgressValue = 0;
 		}
 
@@ -115,11 +115,11 @@ namespace MinimalistMusicPlayer
 		}
 		private void ButtonPrevious_Click(object sender, RoutedEventArgs e)
 		{
-            if (Player.Index > 0)
+			if (Player.Index > 0)
 				Player.Index--;
 
 			else
-				Player.Index = Player.Index - 1;
+				Player.Index = Player.Count - 1;
 
 			if (Player.Playlist.count > 0)
 				Player.Play(Player.Index);
@@ -341,9 +341,8 @@ namespace MinimalistMusicPlayer
 		{
 			if (Player.Index > 0)
 				Player.Index--;
-
 			else
-				Player.Index = Player.Index - 1;
+				Player.Index = Player.Count - 1;
 
 			if (Player.Playlist.count > 0)
 				Player.Play(Player.Index);
