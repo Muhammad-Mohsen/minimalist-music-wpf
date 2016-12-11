@@ -111,6 +111,10 @@ namespace MinimalistMusicPlayer
 		// will be called on directory change (up button click, breadcrumb button click, directory item double click)
 		public void DirectoryChange(DirectoryInfo directory)
 		{
+			// if changing to the same directory (when clicking the track button) don't do anything
+			if (directory != null && directory.FullName == CurrentDirectory.FullName)
+				return;
+
 			Thickness toMargin = GetExplorerAnimationMargin(CurrentDirectory, directory);
 			Thickness fromMargin = GetExplorerAnimationMargin(directory, CurrentDirectory);
 
