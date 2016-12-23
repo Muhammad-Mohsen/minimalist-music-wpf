@@ -112,9 +112,12 @@ namespace MinimalistMusicPlayer
 		public void DirectoryChange(DirectoryInfo directory)
 		{
 			// if changing to the same directory (when clicking the track button) don't do anything
-			if (directory != null && directory.FullName == CurrentDirectory.FullName)
+			if (directory != null && CurrentDirectory != null && directory.FullName == CurrentDirectory.FullName)
 				return;
 
+			if (directory == null && CurrentDirectory == null)
+				return;
+			
 			Thickness toMargin = GetExplorerAnimationMargin(CurrentDirectory, directory);
 			Thickness fromMargin = GetExplorerAnimationMargin(directory, CurrentDirectory);
 
