@@ -1,4 +1,5 @@
 ﻿using MinimalistMusicPlayer.Explorer;
+using MinimalistMusicPlayer.Explorer.Cache;
 using MinimalistMusicPlayer.Player;
 using MinimalistMusicPlayer.Utility;
 using System;
@@ -28,7 +29,7 @@ namespace MinimalistMusicPlayer
 		{
 			StackPanelExplorer.Children.Clear();
 
-			if (directory == null)
+			if (directory == null) // if at the root of the HDD
 			{
 				StackPanelExplorer.Children.Clear();
 				foreach (DriveInfo drive in DriveInfo.GetDrives())
@@ -37,14 +38,15 @@ namespace MinimalistMusicPlayer
 			}
 			else
 			{
-				// ignore hidden folders
-				SubDirectories = directory.GetDirectories().Where(x => (x.Attributes & FileAttributes.Hidden) == 0).ToArray();
-				foreach (DirectoryInfo subDirectory in SubDirectories)
-					AddDirectoryItem(subDirectory.FullName);
+				List<DirectoryItem> directoryItems = GetSubDirectoryItems(directory);
+				foreach (DirectoryItem directoryItem in directoryItems)
+					StackPanelExplorer.Children.Add(directoryItem);
 
 				MediaFiles = directory.GetMediaFiles();
-				for (int i = 0; i < MediaFiles.Count(); i++)
-					AddMediaItem(MediaFiles[i], i);
+
+				var mediaItems = GetMediaItems(directory);
+				foreach (MediaItem mediaItem in mediaItems)
+					StackPanelExplorer.Children.Add(mediaItem);
 			}
 		}
 
@@ -64,43 +66,7 @@ namespace MinimalistMusicPlayer
 
 			StackPanelExplorer.Children.Add(mediaItem);
 		}
-		private void MediaItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			MediaItem item = (MediaItem)sender;
-
-			MediaItem.Select(item); // set selection styling, deselect the old item while you're at it
-			
-			Player.Index = GetMediaItemPlaylistIndex(item.FullName);
-			// if item is already in the playlist, simply play the item
-			if (Player.Index != Const.InvalidIndex)
-				Player.Play(Player.Index);
-
-			// else, repopulate the playlist with all the files in the current directory then play the item
-			else
-			{
-				Player.ClearPlaylistItems();
-				Player.AddPlaylistItems(MediaFiles.Select(f => f.FullName));
-
-				Player.Index = GetMediaItemPlaylistIndex(item.FullName); // update index
-				Player.Play(Player.Index); // start playing the item
-
-				// reset the icons
-				SetPlaylistMediaItemStyle(Player.PlaylistFullNames, false);
-				SetMediaItemForeground(Player.PlaylistFullNames);
-			}
-		}
 		
-		// controls whether the Play selected button should be shown
-		private void MediaItem_MarkedItemCountChange(object sender, RoutedEventArgs e)
-		{
-			bool shouldShowSelectMode = MediaItem.MarkedItemCount > 0;
-			TogglePlaylistSelectMode(shouldShowSelectMode);
-
-			// only enable AddToSelection button if we're in the same directory as the playlist, and the playlist is not empty
-			if (shouldShowSelectMode)
-				SetAddToSelectionEnableState(CurrentDirectory.FullName, Player.PlaylistDirectory, Player.Count);
-		}
-
 		// pretty much a duplicate of DirectoryItem code, but I'm alright with that
 		public void AddDriveItem(string root)
 		{
@@ -121,11 +87,6 @@ namespace MinimalistMusicPlayer
 			directoryItem.MouseDoubleClick += DirectoryItem_MouseDoubleClick;
 
 			StackPanelExplorer.Children.Add(directoryItem);
-		}
-		private void DirectoryItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			DirectoryItem directoryItem = (DirectoryItem)sender;
-			DirectoryChange(new DirectoryInfo(directoryItem.Directory));
 		}
 
 		// maps a given playlist index to an actual MediaItem object

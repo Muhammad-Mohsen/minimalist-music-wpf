@@ -14,7 +14,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Installer\</PublishUrl>
+    <PublishUrl>D:\Code\Minimalist-Music-Player\Installer\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -26,8 +26,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Minimalist Music Player</ProductName>
     <PublisherName>Muhammad Mohsen</PublisherName>
-    <ApplicationRevision>7</ApplicationRevision>
-    <ApplicationVersion>2.2.0.%2a</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>3.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -106,6 +106,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Explorer\Cache\DirectoryCache.cs" />
+    <Compile Include="MainWindow\MainWindow.Cache.cs" />
     <Compile Include="Explorer\DriveItem.cs" />
     <Compile Include="Explorer\ExplorerItem.cs" />
     <Compile Include="Explorer\ExplorerItemType.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="Explorer\DirectoryItem.cs" />
     <Compile Include="MainWindow\MainWindow.MediaExplorer.cs" />
     <Compile Include="Explorer\MediaItem.cs" />
+    <Compile Include="Player\MediaFile.cs" />
     <Compile Include="Player\Playlist.cs" />
     <Compile Include="Player\RepeatMode.cs" />
     <Compile Include="Utility\Brushes.cs" />
