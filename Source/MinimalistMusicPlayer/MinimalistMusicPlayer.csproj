@@ -106,16 +106,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Explorer\Cache\DirectoryCache.cs" />
-    <Compile Include="MainWindow\MainWindow.Cache.cs" />
-    <Compile Include="Explorer\DriveItem.cs" />
-    <Compile Include="Explorer\ExplorerItem.cs" />
-    <Compile Include="Explorer\ExplorerItemType.cs" />
-    <Compile Include="MainWindow\MainWindow.BreadcrumbBar.cs" />
-    <Compile Include="Explorer\BreadcrumbButton.cs" />
-    <Compile Include="Explorer\DirectoryItem.cs" />
-    <Compile Include="MainWindow\MainWindow.MediaExplorer.cs" />
-    <Compile Include="Explorer\MediaItem.cs" />
+    <Compile Include="MainWindow\Explorer\MainWindow.Cache.cs" />
+    <Compile Include="MainWindow\Explorer\DriveItem.cs" />
+    <Compile Include="MainWindow\Explorer\ExplorerItem.cs" />
+    <Compile Include="MainWindow\BreadcrumbBar\MainWindow.BreadcrumbBar.cs" />
+    <Compile Include="MainWindow\BreadcrumbBar\BreadcrumbButton.cs" />
+    <Compile Include="MainWindow\Explorer\DirectoryItem.cs" />
+    <Compile Include="MainWindow\Explorer\MainWindow.MediaExplorer.cs" />
+    <Compile Include="MainWindow\Explorer\MediaItem.cs" />
     <Compile Include="Player\MediaFile.cs" />
     <Compile Include="Player\Playlist.cs" />
     <Compile Include="Player\RepeatMode.cs" />

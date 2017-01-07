@@ -1,97 +1,44 @@
 ﻿using MinimalistMusicPlayer.Explorer;
-using MinimalistMusicPlayer.Explorer.Cache;
-using MinimalistMusicPlayer.Player;
 using MinimalistMusicPlayer.Utility;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WMPLib;
 
 namespace MinimalistMusicPlayer
 {
 	// the explorer piece of MainWindow
 	public partial class MainWindow : Window
 	{
-		public DirectoryInfo CurrentDirectory { get; set; }
-		public DirectoryInfo[] SubDirectories { get; set; }
-		public FileInfo[] MediaFiles { get; set; }
+		public FileInfo[] DirectoryMediaFiles { get; set; }
 
 		public StackPanel StackPanelExplorer;
 		public ScrollViewer ScrollViewerExplorer;
 
-		public void InitializeMediaExplorer(DirectoryInfo directory)
+		public void PopulateMediaExplorer(DirectoryInfo directory)
 		{
 			StackPanelExplorer.Children.Clear();
 
 			if (directory == null) // if at the root of the HDD
-			{
-				StackPanelExplorer.Children.Clear();
-				foreach (DriveInfo drive in DriveInfo.GetDrives())
-					if (drive.IsReady)
-						AddDriveItem(drive.RootDirectory.FullName);
-			}
+				DriveInfo.GetDrives().Where(drive => drive.IsReady).ToList().ForEach(drive => AddDriveItem(drive.RootDirectory.FullName));
+			
 			else
 			{
 				List<DirectoryItem> directoryItems = GetSubDirectoryItems(directory);
-				foreach (DirectoryItem directoryItem in directoryItems)
-					StackPanelExplorer.Children.Add(directoryItem);
+				directoryItems.ForEach(item => StackPanelExplorer.Children.Add(item));
+				
+				DirectoryMediaFiles = directory.GetMediaFiles();
 
-				MediaFiles = directory.GetMediaFiles();
-
-				var mediaItems = GetMediaItems(directory);
-				foreach (MediaItem mediaItem in mediaItems)
-					StackPanelExplorer.Children.Add(mediaItem);
+				List<MediaItem> mediaItems = GetMediaItems(directory);
+				mediaItems.ForEach(item => StackPanelExplorer.Children.Add(item));
 			}
 		}
-
-		public void AddMediaItem(FileInfo mediaFile, int index)
-		{
-			IWMPMedia media = Player.Player.newMedia(mediaFile.FullName);
-
-			MediaItemStyle mediaItemStyle = GetMediaItemStyle(mediaFile.FullName);
-
-			bool isSelected = false;
-			if (CurrentDirectory != null && CurrentDirectory.FullName == Player.PlaylistDirectory)
-				isSelected = Player.Index == GetMediaItemPlaylistIndex(mediaFile.FullName);
-
-			MediaItem mediaItem = new MediaItem(mediaFile, media.durationString, mediaItemStyle, isSelected);
-			mediaItem.MouseDoubleClick += MediaItem_MouseDoubleClick;
-			mediaItem.MarkedItemCountChange += MediaItem_MarkedItemCountChange;
-
-			StackPanelExplorer.Children.Add(mediaItem);
-		}
 		
-		// pretty much a duplicate of DirectoryItem code, but I'm alright with that
-		public void AddDriveItem(string root)
-		{
-			DriveItem driveItem = new DriveItem(root);
-			driveItem.MouseDoubleClick += DriveItem_MouseDoubleClick;
-
-			StackPanelExplorer.Children.Add(driveItem);
-		}
-		private void DriveItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			DriveItem driveItem = (DriveItem)sender;
-			DirectoryChange(new DirectoryInfo(driveItem.Directory));
-		}
-
-		public void AddDirectoryItem(string directory)
-		{
-			DirectoryItem directoryItem = new DirectoryItem(directory);
-			directoryItem.MouseDoubleClick += DirectoryItem_MouseDoubleClick;
-
-			StackPanelExplorer.Children.Add(directoryItem);
-		}
-
 		// maps a given playlist index to an actual MediaItem object
 		// mapping isn't 1:1 because there are directories and DirectoryItems thrown in the mix!
-		public MediaItem GetMediaItem(int playlistIndex)
+		public MediaItem GetMediaItemByPlaylistIndex(int playlistIndex)
 		{
 			string mediaItemFullName = Player.PlaylistFullNames[playlistIndex]; // get the playlist media item
 
@@ -120,7 +67,7 @@ namespace MinimalistMusicPlayer
 		}
 
 		// gets a list of marked MediaItems' FullNames
-		public List<string> GetMarkedMediaFiles()
+		public List<string> GetMarkedMediaFileFullNames()
 		{
 			List<string> markedFiles = new List<string>();
 
@@ -149,7 +96,7 @@ namespace MinimalistMusicPlayer
 		{
 			if (CurrentDirectory != null && CurrentDirectory.FullName == Player.PlaylistDirectory)
 			{
-				if (MediaFiles.Length == Player.PlaylistFullNames.Count)
+				if (DirectoryMediaFiles.Length == Player.PlaylistFullNames.Count)
 					return MediaItemStyle.Highlighted;
 
 				else if (Player.PlaylistFullNames.Contains(fullName))
@@ -174,6 +121,7 @@ namespace MinimalistMusicPlayer
 				}
 			}
 		}
+		// sets the title label text color
 		public void SetMediaItemForeground(IEnumerable<string> playlistItemFullNames)
 		{
 			if (CurrentDirectory != null && CurrentDirectory.FullName != Player.PlaylistDirectory)
@@ -191,26 +139,12 @@ namespace MinimalistMusicPlayer
 
 		private void SelectMediaItemByIndex(int index)
 		{
-			MediaItem mediaItem = GetMediaItem(index);
+			MediaItem mediaItem = GetMediaItemByPlaylistIndex(index);
 			MediaItem.Select(mediaItem);
 		}
-
-		private MediaItem GetCurrentMediaItem()
-		{
-			if (CurrentDirectory != null && Player.PlaylistDirectory == CurrentDirectory.FullName)
-			{
-				string currentMediaFullName = Player.CurrentMedia.sourceURL;
-
-				foreach (MediaItem item in StackPanelExplorer.Children.OfType<MediaItem>())
-				{
-					if (currentMediaFullName.Equals(item.FullName))
-						return item;
-				}
-			}
-
-			return null;
-		}
-
+		//
+		// Directory change animation helpers
+		//
 		private ScrollViewer GetPagedScrollViewerExplorer()
 		{
 			return ScrollViewerExplorer == ScrollViewerExplorerPrimary ? ScrollViewerExplorerSecondary : ScrollViewerExplorerPrimary;
@@ -218,6 +152,19 @@ namespace MinimalistMusicPlayer
 		private StackPanel GetPagedStackPanelExplorer()
 		{
 			return StackPanelExplorer == StackPanelExplorerPrimary ? StackPanelExplorerSecondary : StackPanelExplorerPrimary;
+		}
+		// returns appropriate margin (left/right) for the media explorer stackPanel animation 
+		private Thickness GetExplorerAnimationMargin(DirectoryInfo fromDirectory, DirectoryInfo currentDirectory)
+		{
+			if (currentDirectory == null)
+				return Const.ExplorerMargin.RightPage;
+			else if (fromDirectory == null)
+				return Const.ExplorerMargin.LeftPage;
+
+			else if (fromDirectory.FullName.Length <= currentDirectory.FullName.Length)
+				return Const.ExplorerMargin.LeftPage;
+			else
+				return Const.ExplorerMargin.RightPage;
 		}
 	}
 }

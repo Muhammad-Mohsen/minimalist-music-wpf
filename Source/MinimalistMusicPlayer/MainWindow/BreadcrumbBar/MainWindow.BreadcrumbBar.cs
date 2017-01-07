@@ -11,42 +11,51 @@ namespace MinimalistMusicPlayer
 {
 	public partial class MainWindow : Window
 	{
+		public DirectoryInfo CurrentDirectory { get; set; }
+
+		// will be called on directory change (up button click, breadcrumb button click, directory item double click)
+		public void DirectoryChange(DirectoryInfo directory)
+		{
+			// if changing to the same directory (when clicking the track button) don't do anything
+			if (directory != null && CurrentDirectory != null && directory.FullName == CurrentDirectory.FullName)
+				return;
+
+			if (directory == null && CurrentDirectory == null)
+				return;
+
+			Thickness toMargin = GetExplorerAnimationMargin(CurrentDirectory, directory);
+			Thickness fromMargin = GetExplorerAnimationMargin(directory, CurrentDirectory);
+
+			CurrentDirectory = directory;
+
+			// set the setting (will be saved in OnExit event in the app class!!)
+			Properties.Settings.Default[Const.ExplorerDirectorySetting] = directory != null ? directory.FullName : null;
+
+			// get paged media explorer
+			ScrollViewerExplorer = GetPagedScrollViewerExplorer();
+			StackPanelExplorer = GetPagedStackPanelExplorer();
+
+			// populate paged media explorer
+			PopulateMediaExplorer(directory);
+
+			// animate the media explorer current -> paged
+			Anim.AnimateMargin(GetPagedScrollViewerExplorer(), Const.ExplorerMargin.CurrentPage, toMargin, Const.ShowHideDelay);
+			// repopulate the breadcrumb bar
+			PopulateBreadcrumbBar(directory);
+			// animate the media explorer paged -> current
+			Anim.AnimateMargin(ScrollViewerExplorer, fromMargin, Const.ExplorerMargin.CurrentPage, Const.ShowHideDelay);
+
+			// reset item markings
+			MediaItem.MarkedItemCount = 0;
+			SetPlaylistSelectMode(false);
+		}
+
+		// attaches the Up button click event, and calls PopulateBreadcrumbBar
 		public void InitializeBreadcrumbBar(DirectoryInfo directory)
 		{
 			ButtonUp.Click += UpButton_Click;
 			PopulateBreadcrumbBar(directory);
-		}
-		//
-		// click handlers
-		//
-		private void UpButton_Click(object sender, RoutedEventArgs e)
-		{
-			// if you're at the computer root, do nothing
-			if (CurrentDirectory == null)
-				return;
-
-			DirectoryInfo parentDirectory = CurrentDirectory.Parent;
-			DirectoryChange(parentDirectory);
-		}
-		private void ComputerButton_Click(object sender, RoutedEventArgs e)
-		{
-			// set the current directory to null, and repopulate everything
-			DirectoryChange(null);
-		}
-		private void BreadcrumbButton_Click(object sender, RoutedEventArgs e)
-		{
-			BreadcrumbButton breadcrumbButton = (BreadcrumbButton)sender;
-
-			// get the current directory up to that particular bread crumb button
-			DirectoryInfo newDirectory = new DirectoryInfo(GetDirectory(breadcrumbButton));
-
-			// if you click a crumb button that points to the same directory as the current, don't do anything
-			if (newDirectory.FullName == CurrentDirectory.FullName)
-				return;
-
-			DirectoryChange(newDirectory);
-		}
-		
+		}	
 		// reinitializes the breadcrumb bar using already existing breadcrumb buttons
 		public void PopulateBreadcrumbBar(DirectoryInfo directory)
 		{
@@ -85,9 +94,17 @@ namespace MinimalistMusicPlayer
 			// remove last separator button
 			StackPanelDirectory.Children.RemoveAt(StackPanelDirectory.Children.Count - 1);
 		}
+		
+		private BreadcrumbButton CreateSeparatorButton()
+		{
+			BreadcrumbButton separatorButton = new BreadcrumbButton(Const.BreadcrumbButtonSeparator);
+			separatorButton.IsEnabled = false;
+
+			return separatorButton;
+		}
 
 		// gets the directory upto the given crumb
-		public string GetDirectory(BreadcrumbButton crumbButton)
+		private string GetDirectory(BreadcrumbButton crumbButton)
 		{
 			StringBuilder directory = new StringBuilder();
 
@@ -108,52 +125,7 @@ namespace MinimalistMusicPlayer
 			return directory.ToString();
 		}
 
-		// will be called on directory change (up button click, breadcrumb button click, directory item double click)
-		public void DirectoryChange(DirectoryInfo directory)
-		{
-			// if changing to the same directory (when clicking the track button) don't do anything
-			if (directory != null && CurrentDirectory != null && directory.FullName == CurrentDirectory.FullName)
-				return;
-
-			if (directory == null && CurrentDirectory == null)
-				return;
-			
-			Thickness toMargin = GetExplorerAnimationMargin(CurrentDirectory, directory);
-			Thickness fromMargin = GetExplorerAnimationMargin(directory, CurrentDirectory);
-
-			CurrentDirectory = directory;
-
-			// set the setting (will be saved in OnExit event in the app class!!)
-			Properties.Settings.Default[Const.ExplorerDirectorySetting] = directory != null ? directory.FullName : null;
-
-			// get paged media explorer
-			ScrollViewerExplorer = GetPagedScrollViewerExplorer();
-			StackPanelExplorer = GetPagedStackPanelExplorer();
-			
-			// populate paged media explorer
-			InitializeMediaExplorer(directory);
-
-			// animate the media explorer current -> paged
-			Anim.AnimateMargin(GetPagedScrollViewerExplorer(), Const.ExplorerMargin.CurrentPage, toMargin, Const.ShowHideDelay);
-			// repopulate the breadcrumb bar
-			PopulateBreadcrumbBar(directory);
-			// animate the media explorer paged -> current
-			Anim.AnimateMargin(ScrollViewerExplorer, fromMargin, Const.ExplorerMargin.CurrentPage, Const.ShowHideDelay);
-			
-			// reset item markings
-			MediaItem.MarkedItemCount = 0;
-			TogglePlaylistSelectMode(false);
-		}
-
-		private BreadcrumbButton CreateSeparatorButton()
-		{
-			BreadcrumbButton separatorButton = new BreadcrumbButton(Const.BreadcrumbButtonSeparator);
-			separatorButton.IsEnabled = false;
-
-			return separatorButton;
-		}
-
-		private async void TogglePlaylistSelectMode(bool shouldShow)
+		private async void SetPlaylistSelectMode(bool shouldShow)
 		{
 			FrameworkElement elementToHide = shouldShow ? GridBreadcrumnBar : GridSelectMode;
 			FrameworkElement elementToShow = shouldShow ? GridSelectMode : GridBreadcrumnBar;
@@ -167,11 +139,43 @@ namespace MinimalistMusicPlayer
 		{
 			ButtonAddToSelection.IsEnabled = currentDirectory == playlistDirectory && playlistCount > 0;
 		}
+		//
+		// click handlers
+		//
+		private void UpButton_Click(object sender, RoutedEventArgs e)
+		{
+			// if you're at the computer root, do nothing
+			if (CurrentDirectory == null)
+				return;
 
+			DirectoryInfo parentDirectory = CurrentDirectory.Parent;
+			DirectoryChange(parentDirectory);
+		}
+		private void ComputerButton_Click(object sender, RoutedEventArgs e)
+		{
+			// set the current directory to null, and repopulate everything
+			DirectoryChange(null);
+		}
+		private void BreadcrumbButton_Click(object sender, RoutedEventArgs e)
+		{
+			BreadcrumbButton breadcrumbButton = (BreadcrumbButton)sender;
+
+			// get the current directory up to that particular bread crumb button
+			DirectoryInfo newDirectory = new DirectoryInfo(GetDirectory(breadcrumbButton));
+
+			// if you click a crumb button that points to the same directory as the current, don't do anything
+			if (newDirectory.FullName == CurrentDirectory.FullName)
+				return;
+
+			DirectoryChange(newDirectory);
+		}
+		//
+		// Select mode click handlers
+		//
 		private void ButtonPlaySelected_Click(object sender, RoutedEventArgs e)
 		{
 			// get marked media files
-			List<string> markedFiles = GetMarkedMediaFiles();
+			List<string> markedFiles = GetMarkedMediaFileFullNames();
 
 			// reset everything
 			SetPlaylistMediaItemStyle(Player.PlaylistFullNames, false);
@@ -189,22 +193,20 @@ namespace MinimalistMusicPlayer
 			Player.Index = 0;
 			Player.Play(Player.Index);
 
-			TogglePlaylistSelectMode(false);
+			SetPlaylistSelectMode(false);
 		}
-
 		private void ButtonCancelPlaySelected_Click(object sender, RoutedEventArgs e)
 		{
 			// reset marking state
 			ResetMediaItemMarkState();
 			MediaItem.MarkedItemCount = 0;
 
-			TogglePlaylistSelectMode(false);
+			SetPlaylistSelectMode(false);
 		}
-
 		private void ButtonAddToSelection_Click(object sender, RoutedEventArgs e)
 		{
 			// get marked media files
-			List<string> markedFiles = GetMarkedMediaFiles();
+			List<string> markedFiles = GetMarkedMediaFileFullNames();
 
 			// reset everything
 			SetPlaylistMediaItemStyle(Player.PlaylistFullNames, false);
@@ -219,20 +221,7 @@ namespace MinimalistMusicPlayer
 			// this time, set the item style for the entire playlist (as opposed to the marked files)
 			SetPlaylistMediaItemStyle(Player.PlaylistFullNames, true);
 
-			TogglePlaylistSelectMode(false);
-		}
-
-		private Thickness GetExplorerAnimationMargin(DirectoryInfo fromDirectory, DirectoryInfo currentDirectory)
-		{
-			if (currentDirectory == null)
-				return Const.ExplorerMargin.RightPage;
-			else if (fromDirectory == null)
-				return Const.ExplorerMargin.LeftPage;
-
-			else if (fromDirectory.FullName.Length <= currentDirectory.FullName.Length)
-				return Const.ExplorerMargin.LeftPage;
-			else
-				return Const.ExplorerMargin.RightPage;
+			SetPlaylistSelectMode(false);
 		}
 	}
 }

@@ -11,4 +11,12 @@ namespace MinimalistMusicPlayer.Explorer
 	{
 		public ExplorerItemType ItemType { get; set; }
 	}
+
+	public enum ExplorerItemType
+	{
+		Invalid = 0,
+		DirectoryItem,
+		MediaItem,
+		DriveItem
+	}
 }

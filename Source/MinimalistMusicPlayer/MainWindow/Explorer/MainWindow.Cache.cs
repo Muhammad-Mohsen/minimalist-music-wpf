@@ -12,15 +12,17 @@ using WMPLib;
 
 namespace MinimalistMusicPlayer
 {
-	// the cache piece of MainWindow
+	// Contains ExplorerItem cache of previously-visited directories
 	public partial class MainWindow : Window
 	{
 		public static Dictionary<string, List<DirectoryItem>> SubDirectoryCache = new Dictionary<string, List<DirectoryItem>>();
 		public static Dictionary<string, List<MediaItem>> MediaFileCache = new Dictionary<string, List<MediaItem>>();
-
+		//
+		// API
+		//
 		public List<DirectoryItem> GetSubDirectoryItems(DirectoryInfo directory)
 		{
-			// if the directory is already cached, simply return the cache
+			// if the directory is already cached, simply return the cached info
 			if (SubDirectoryCache.ContainsKey(directory.FullName))
 				return SubDirectoryCache[directory.FullName];
 
@@ -39,7 +41,6 @@ namespace MinimalistMusicPlayer
 				return directoryItems;
 			}
 		}
-
 		public List<MediaItem> GetMediaItems(DirectoryInfo directory)
 		{
 			if (MediaFileCache.ContainsKey(directory.FullName))
@@ -59,6 +60,7 @@ namespace MinimalistMusicPlayer
 			}
 		}
 
+		// DirectoryItems
 		public DirectoryItem CreateDirectoryItem(string directory)
 		{
 			DirectoryItem directoryItem = new DirectoryItem(directory);
@@ -72,6 +74,7 @@ namespace MinimalistMusicPlayer
 			DirectoryChange(new DirectoryInfo(directoryItem.Directory));
 		}
 
+		// MediaItems
 		public MediaItem CreateMediaItem(FileInfo mediaFile, int index)
 		{
 			IWMPMedia media = Player.Player.newMedia(mediaFile.FullName);
@@ -103,7 +106,7 @@ namespace MinimalistMusicPlayer
 			else
 			{
 				Player.ClearPlaylistItems();
-				Player.AddPlaylistItems(MediaFiles.Select(f => f.FullName));
+				Player.AddPlaylistItems(DirectoryMediaFiles.Select(f => f.FullName));
 
 				Player.Index = GetMediaItemPlaylistIndex(item.FullName); // update index
 				Player.Play(Player.Index); // start playing the item
@@ -117,11 +120,26 @@ namespace MinimalistMusicPlayer
 		private void MediaItem_MarkedItemCountChange(object sender, RoutedEventArgs e)
 		{
 			bool shouldShowSelectMode = MediaItem.MarkedItemCount > 0;
-			TogglePlaylistSelectMode(shouldShowSelectMode);
+			SetPlaylistSelectMode(shouldShowSelectMode);
 
 			// only enable AddToSelection button if we're in the same directory as the playlist, and the playlist is not empty
 			if (shouldShowSelectMode)
 				SetAddToSelectionEnableState(CurrentDirectory.FullName, Player.PlaylistDirectory, Player.Count);
+		}
+
+		// currently Drive Items aren't cached!
+		// pretty much a duplicate of DirectoryItem code, but I'm alright with that
+		public void AddDriveItem(string root)
+		{
+			DriveItem driveItem = new DriveItem(root);
+			driveItem.MouseDoubleClick += DriveItem_MouseDoubleClick;
+
+			StackPanelExplorer.Children.Add(driveItem);
+		}
+		private void DriveItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			DriveItem driveItem = (DriveItem)sender;
+			DirectoryChange(new DirectoryInfo(driveItem.Directory));
 		}
 	}
 }

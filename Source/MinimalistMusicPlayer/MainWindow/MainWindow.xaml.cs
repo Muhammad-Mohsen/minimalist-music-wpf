@@ -59,7 +59,7 @@ namespace MinimalistMusicPlayer
 			ScrollViewerExplorer = ScrollViewerExplorerPrimary;
 
 			InitializeBreadcrumbBar(CurrentDirectory);
-			InitializeMediaExplorer(CurrentDirectory);
+			PopulateMediaExplorer(CurrentDirectory);
 
 			// timer to update the seek bar, volume fade, etc.
 			DispatcherTimer timer = new DispatcherTimer();
