@@ -22,6 +22,9 @@ namespace MinimalistMusicPlayer
 		//
 		public List<DirectoryItem> GetSubDirectoryItems(DirectoryInfo directory)
 		{
+			if (directory == null)
+				return null;
+
 			// if the directory is already cached, simply return the cached info
 			if (SubDirectoryCache.ContainsKey(directory.FullName))
 				return SubDirectoryCache[directory.FullName];
@@ -43,8 +46,23 @@ namespace MinimalistMusicPlayer
 		}
 		public List<MediaItem> GetMediaItems(DirectoryInfo directory)
 		{
+			if (directory == null)
+				return null;
+
 			if (MediaFileCache.ContainsKey(directory.FullName))
-				return MediaFileCache[directory.FullName];
+			{
+				List<MediaItem> cachedMediaItems = MediaFileCache[directory.FullName];
+
+				// if the directory is not the same as the playlist directory, make sure to reset the selection states
+				if (directory.FullName != Player.PlaylistDirectory)
+					cachedMediaItems.ForEach(i => { i.SetMediaIcon(false); i.SetTitleLabelForeground(false); });
+
+				// else if at the playlist directory, select the currently playing item
+				else
+					MediaItem.Select(GetCachedMediaItemByPlaylistIndex(Player.Index, cachedMediaItems));
+
+				return cachedMediaItems;
+			}
 
 			else
 			{
@@ -140,6 +158,12 @@ namespace MinimalistMusicPlayer
 		{
 			DriveItem driveItem = (DriveItem)sender;
 			DirectoryChange(new DirectoryInfo(driveItem.Directory));
+		}
+
+		private MediaItem GetCachedMediaItemByPlaylistIndex(int playlistIndex, List<MediaItem> cachedMediaItems)
+		{
+			string mediaItemFullName = Player.PlaylistFullNames[playlistIndex]; // get the playlist media item
+			return cachedMediaItems.Where(s => s.FullName == mediaItemFullName).First();
 		}
 	}
 }
