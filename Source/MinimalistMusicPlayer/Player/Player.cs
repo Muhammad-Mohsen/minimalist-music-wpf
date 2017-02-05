@@ -23,7 +23,7 @@ namespace MinimalistMusicPlayer.Player
 		
 		public IWMPControls Controls { get; private set; }
 		public IWMPSettings Settings { get; private set; }
-		// current playstate (Playing, paused, stopped, etc)
+		// current play state (Playing, paused, stopped, etc)
 		public WMPPlayState PlayState
 		{
 			get
@@ -89,8 +89,8 @@ namespace MinimalistMusicPlayer.Player
 		//
 		// constructor
 		//
-        public WmpPlayer()
-        {
+		public WmpPlayer()
+		{
 			Player = new WindowsMediaPlayer();
 			Playlist = Player.newPlaylist("Playlist", Const.PlaylistUri);
 			PlaylistFullNames = new List<string>();
@@ -234,7 +234,7 @@ namespace MinimalistMusicPlayer.Player
 		{
 			// set playlist directory
 			// AddToSelection button is enabled iff the current directory is equal to the playlist directory.
-			// so the intergrity of this will remain intact
+			// so the integrity of this will remain intact
 			PlaylistDirectory = new FileInfo(items.First()).DirectoryName;
 
 			foreach (string item in items)
