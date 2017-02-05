@@ -103,7 +103,7 @@ namespace MinimalistMusicPlayer
 			return separatorButton;
 		}
 
-		// gets the directory upto the given crumb
+		// gets the directory up to the given crumb
 		private string GetDirectory(BreadcrumbButton crumbButton)
 		{
 			StringBuilder directory = new StringBuilder();
@@ -176,6 +176,9 @@ namespace MinimalistMusicPlayer
 		{
 			// get marked media files
 			List<string> markedFiles = GetMarkedMediaFileFullNames();
+
+			if (markedFiles.Count == 0)
+				return;
 
 			// reset everything
 			SetPlaylistMediaItemStyle(Player.PlaylistFullNames, false);
