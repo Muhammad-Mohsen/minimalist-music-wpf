@@ -78,6 +78,9 @@ namespace MinimalistMusicPlayer
 
 				foreach (string crumb in breadcrumbs)
 				{
+					if (string.IsNullOrWhiteSpace(crumb)) // removes the extra crumb for drive paths
+						continue;
+
 					// add the breadcrumb button to the breadcrumb bar
 					BreadcrumbButton button = new BreadcrumbButton(crumb);
 					button.Click += BreadcrumbButton_Click;
@@ -90,9 +93,7 @@ namespace MinimalistMusicPlayer
 
 				ScrollViewerDirectory.ScrollToRightEnd();
 			}
-			
-			// remove last separator button
-			StackPanelDirectory.Children.RemoveAt(StackPanelDirectory.Children.Count - 1);
+
 		}
 		
 		private BreadcrumbButton CreateSeparatorButton()
