@@ -42,5 +42,25 @@ namespace MinimalistMusicPlayer.Utility
 				element.Visibility = Visibility.Collapsed;
 			}
 		}
+
+		public static async void SlideFrameworkElement(FrameworkElement element, bool slideIn, double delay)
+		{
+			Thickness fromMargin;
+			Thickness toMargin;
+
+			if (slideIn)
+			{
+				fromMargin = new Thickness(50, 0, -50, 0);
+				toMargin = element.Margin;
+			}
+			else
+			{
+				fromMargin = element.Margin;
+				toMargin = new Thickness(50, 0, -50, 0);
+			}
+
+			Anim.AnimateMargin(element, fromMargin, toMargin, delay);
+			await Task.Delay(TimeSpan.FromSeconds(delay));
+		}
 	}
 }

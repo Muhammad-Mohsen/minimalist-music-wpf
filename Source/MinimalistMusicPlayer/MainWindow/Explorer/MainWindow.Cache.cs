@@ -154,6 +154,13 @@ namespace MinimalistMusicPlayer
 
 			StackPanelExplorer.Children.Add(driveItem);
 		}
+		public DriveItem CreateDriveItem(string root)
+		{
+			DriveItem driveItem = new DriveItem(root);
+			driveItem.MouseDoubleClick += DriveItem_MouseDoubleClick;
+
+			return driveItem;
+		}
 		private void DriveItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			DriveItem driveItem = (DriveItem)sender;

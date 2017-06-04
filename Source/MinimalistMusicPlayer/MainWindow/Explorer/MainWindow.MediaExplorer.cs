@@ -1,8 +1,10 @@
 ﻿using MinimalistMusicPlayer.Explorer;
 using MinimalistMusicPlayer.Utility;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,25 +19,54 @@ namespace MinimalistMusicPlayer
 		public StackPanel StackPanelExplorer;
 		public ScrollViewer ScrollViewerExplorer;
 
-		public void PopulateMediaExplorer(DirectoryInfo directory)
+		public async void PopulateMediaExplorer(DirectoryInfo directory)
 		{
 			StackPanelExplorer.Children.Clear();
 
-			if (directory == null) // if at the root of the HDD
-				DriveInfo.GetDrives().Where(drive => drive.IsReady).ToList().ForEach(drive => AddDriveItem(drive.RootDirectory.FullName));
-			
+			// if at the root of the HDD
+			if (directory == null)
+				DriveInfo.GetDrives().Where(drive => drive.IsReady).ToList().ForEach(drive => AddDriveItem(drive.RootDirectory.FullName)); // added synchronously!
+
 			else
 			{
-				List<DirectoryItem> directoryItems = GetSubDirectoryItems(directory);
-				directoryItems.ForEach(item => StackPanelExplorer.Children.Add(item));
-				
-				DirectoryMediaFiles = directory.GetMediaFiles();
-
-				List<MediaItem> mediaItems = GetMediaItems(directory);
-				mediaItems.ForEach(item => StackPanelExplorer.Children.Add(item));
+				AddExplorerItemsAsync(StackPanelExplorer, directory);
+                await Task.Delay(TimeSpan.FromTicks(0)); // just to make the method async!
 			}
 		}
-		
+
+		// adds explorer items that are not Drives
+		private async void AddExplorerItemsAsync(StackPanel panel, DirectoryInfo newDirectory)
+		{
+			var subDirectories = newDirectory.GetDirectories().Where(x => (x.Attributes & FileAttributes.Hidden) == 0).ToArray();
+			DirectoryMediaFiles = newDirectory.GetMediaFiles();
+
+			foreach (DirectoryInfo dir in subDirectories)
+			{
+				AddExplorerItem(StackPanelExplorer, dir.FullName, -1);
+				await Task.Delay(TimeSpan.FromMilliseconds(Const.AsyncDelay));
+			}
+
+			for (int i = 0; i < DirectoryMediaFiles.Length; i++)
+			{
+				AddExplorerItem(StackPanelExplorer, DirectoryMediaFiles[i].FullName, i);
+				await Task.Delay(TimeSpan.FromMilliseconds(Const.AsyncDelay));
+			}
+		}
+		public async void AddExplorerItem(StackPanel panel, string itemPath, int i)
+		{
+			ExplorerItem item;
+			if (i == -1)
+				item = CreateDirectoryItem(itemPath);
+			else
+				item = CreateMediaItem(new FileInfo(itemPath), i);
+
+			item.Opacity = 0;
+			panel.Children.Add(item);
+
+			Util.ShowHideFrameworkElement(item, true, Const.ShowHideDelay);
+			await Task.Delay(TimeSpan.FromSeconds(Const.ShowHideDelay));
+		}
+
 		// maps a given playlist index to an actual MediaItem object
 		// mapping isn't 1:1 because there are directories and DirectoryItems thrown in the mix!
 		public MediaItem GetMediaItemByPlaylistIndex(int playlistIndex)

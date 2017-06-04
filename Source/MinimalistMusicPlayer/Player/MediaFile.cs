@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MinimalistMusicPlayer.Player
 {
+	// not used!!
 	public class MediaFile
 	{
 		public string FullName { get; private set; }

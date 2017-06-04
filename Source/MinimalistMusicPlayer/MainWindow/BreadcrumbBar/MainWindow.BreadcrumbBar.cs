@@ -35,7 +35,7 @@ namespace MinimalistMusicPlayer
 			ScrollViewerExplorer = GetPagedScrollViewerExplorer();
 			StackPanelExplorer = GetPagedStackPanelExplorer();
 
-			// populate paged media explorer
+			// populate paged media explorer (asynchronously)
 			PopulateMediaExplorer(directory);
 
 			// animate the media explorer current -> paged
