@@ -13,6 +13,7 @@ namespace MinimalistMusicPlayer.Explorer
 		public DirectoryItem(string directory)
 		{
 			IsTabStop = false;
+			Focusable = false;
 
 			// set item type
 			ItemType = ExplorerItemType.DirectoryItem;
@@ -63,7 +64,8 @@ namespace MinimalistMusicPlayer.Explorer
 				Width = Const.ExplorerItemIconWidth,
 				Height = Const.ExplorerItemIconHeight,
 				Margin = new Thickness(0),
-				IsTabStop = false
+				IsTabStop = false,
+				Focusable = false
 			};
 		}
 	}

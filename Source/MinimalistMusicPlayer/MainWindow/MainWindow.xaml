@@ -7,7 +7,7 @@
         Title="Minimalist" Height="150" Width="525"
         WindowStyle="None"
         ResizeMode="CanMinimize"
-		Icon="../Resources/img/AppIcon.ico" KeyUp="Window_KeyUp" MouseWheel="Window_MouseWheel">
+		Icon="../Resources/img/AppIcon.ico" MouseWheel="Window_MouseWheel" PreviewKeyUp="Window_KeyUp">
 
 	<Window.TaskbarItemInfo>
 		<TaskbarItemInfo x:Name="TaskbarItemInfo">

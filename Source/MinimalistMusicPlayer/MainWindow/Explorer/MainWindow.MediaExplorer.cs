@@ -23,6 +23,8 @@ namespace MinimalistMusicPlayer
 		{
 			StackPanelExplorer.Children.Clear();
 
+			ScrollViewerExplorer.ScrollToHome();
+
 			// if at the root of the HDD
 			if (directory == null)
 				DriveInfo.GetDrives().Where(drive => drive.IsReady).ToList().ForEach(drive => AddDriveItem(drive.RootDirectory.FullName)); // added synchronously!

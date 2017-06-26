@@ -278,7 +278,7 @@ namespace MinimalistMusicPlayer
 		// shortcut keys
 		//
 		// half ass-ing it by copying/pasting code from the above events...sadly
-		// so far we got play/pause, and open tracks dialog box shortcuts
+		// so far we got play/pause shortcuts
 		private void Window_KeyUp(object sender, KeyEventArgs e)
 		{
 			switch (e.Key)
@@ -287,41 +287,12 @@ namespace MinimalistMusicPlayer
 					if (Player.CurrentMedia != null)
 					{
 						if (Player.PlayState == WMPPlayState.wmppsPlaying)
-						{
 							Player.Pause();
-						}
+
 						else
-						{
 							Player.Resume();
-						}
 					}
-					break;
 
-				case Key.O: // open tracks dialog
-					if (Keyboard.Modifiers == ModifierKeys.Control)
-					{
-						OpenFileDialog OpenDialog = new OpenFileDialog();
-						OpenDialog.Title = "Open media";
-
-						OpenDialog.Multiselect = true;
-						OpenDialog.AddExtension = true;
-						OpenDialog.Filter = "Media files (*.mp3, *.wma, *.wav)|*.mp3; *.wma; *.wav";
-
-						// will only be true if files are selected
-						if ((bool)OpenDialog.ShowDialog())
-						{
-							//Player.ClearPlaylistItems();
-							//ClearPlaylistStackPanel();
-							//Player.PlaylistIndex = 0;
-
-							//foreach (string fileName in OpenDialog.FileNames)
-							//	if (Util.IsMediaFile(fileName))
-							//		Player.AddPlaylistItem(fileName);
-
-							//AddTracksToPlaylistStackPanel();
-							//Player.StartPlay(Player.PlaylistIndex);
-						}
-					}
 					break;
 			}
 		}
