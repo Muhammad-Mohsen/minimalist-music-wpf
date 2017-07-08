@@ -34,6 +34,7 @@ namespace MinimalistMusicPlayer.Explorer
 		public MediaItem(FileInfo mediaFile, string duration, MediaItemStyle mediaItemStyle, bool isSelected = false)
 		{
 			IsTabStop = false;
+			Focusable = false;
 
 			// set item type
 			ItemType = ExplorerItemType.MediaItem;
@@ -112,7 +113,8 @@ namespace MinimalistMusicPlayer.Explorer
 				Width = Const.ExplorerItemIconWidth,
 				Height = Const.ExplorerItemIconHeight,
 				Margin = new Thickness(0),
-				IsTabStop = false
+				IsTabStop = false,
+				Focusable = false
 			};
 		}
 		private void MediaIconButton_Click(object sender, RoutedEventArgs e)
