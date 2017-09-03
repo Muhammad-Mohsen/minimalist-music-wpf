@@ -22,7 +22,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="RepeatButton">
-					<Border SnapsToDevicePixels="True" Background="{DynamicResource BlueBrush}" Height="10"/>
+					<Border SnapsToDevicePixels="True" Background="{DynamicResource AccentBrush}" Height="10"/>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
@@ -50,7 +50,7 @@
 				<RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
 			</Grid.RowDefinitions>
 			<TickBar  x:Name="TopTick"  Fill="LightGray" VerticalAlignment="Top"   SnapsToDevicePixels="True" Grid.Row="0" Placement="Top" Height="5" Visibility="Hidden"/>
-			<Border x:Name="TrackBackground" VerticalAlignment="Center" Margin="0,0,0,0" Background="{DynamicResource TextBrushGrey}" Height="10"   Grid.Row="1"/>
+			<Border x:Name="TrackBackground" VerticalAlignment="Center" Margin="0,0,0,0" Background="{DynamicResource SecondaryTextBrush}" Height="10"   Grid.Row="1"/>
 			<Track Grid.Row="1" x:Name="PART_Track" Margin="0,0,0,0">
 				<Track.DecreaseRepeatButton>
 					<RepeatButton Style="{StaticResource SliderRepeatButtonElapsed}"  Command="Slider.DecreaseLarge" />

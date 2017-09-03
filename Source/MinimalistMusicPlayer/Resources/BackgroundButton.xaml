@@ -2,8 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<Style x:Key="BackGroundButtonStyle" TargetType="{x:Type Button}">
-		<Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
-		<Setter Property="Foreground" Value="{DynamicResource DisabledBackgroundBrush}" />
+		<Setter Property="Background" Value="{DynamicResource PrimaryBrush}" />
+		<Setter Property="Foreground" Value="{DynamicResource PrimaryTextBrush}" />
 		<Setter Property="FontSize" Value="15" />
 		<Setter Property="SnapsToDevicePixels" Value="True" />
 
@@ -18,10 +18,10 @@
 
 					<ControlTemplate.Resources>
 						<Storyboard x:Key="MouseEnterAnimation">
-							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="Background.Color" To="{StaticResource HoverColorGrey}" Duration="0:0:0.3" />
+							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="Background.Color" To="{StaticResource PrimaryHoverColor}" Duration="0:0:0.3" />
 						</Storyboard>
 						<Storyboard x:Key="MouseExitAnimation" FillBehavior="Stop">
-							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="Background.Color" To="{StaticResource BackgroundColor}" Duration="0:0:0.3" />
+							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="Background.Color" To="{StaticResource PrimaryColor}" Duration="0:0:0.3" />
 						</Storyboard>
 					</ControlTemplate.Resources>
 
@@ -35,12 +35,12 @@
 								<BeginStoryboard Storyboard="{StaticResource MouseExitAnimation}" />
 							</Trigger.ExitActions>
 							
-							<!--<Setter Property="Background" TargetName="outerBorder" Value="{DynamicResource BorderBrush2}" />
+							<!--<Setter Property="Background" TargetName="outerBorder" Value="{DynamicResource BorderBrush}" />
 							<Setter Property="Foreground" Value="White" />-->
 						</Trigger>
 
 						<Trigger Property="IsPressed" Value="True">
-							<Setter Property="Background" TargetName="outerBorder" Value="{DynamicResource BlueBrush}" />
+							<Setter Property="Background" TargetName="outerBorder" Value="{DynamicResource AccentBrush}" />
 							<Setter Property="Foreground" Value="White" />
 						</Trigger>
 					</ControlTemplate.Triggers>

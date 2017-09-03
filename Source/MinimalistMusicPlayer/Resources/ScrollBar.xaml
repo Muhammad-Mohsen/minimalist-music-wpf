@@ -39,7 +39,7 @@
 						<Path
                          HorizontalAlignment="Center"
                          VerticalAlignment="Center"
-                         Fill="{DynamicResource BlueBrush}"
+                         Fill="{DynamicResource AccentBrush}"
                          Data="{Binding Path=Content,RelativeSource={RelativeSource TemplatedParent}}" />
 					</Border>
 					<ControlTemplate.Triggers>
@@ -65,12 +65,12 @@
 				<ControlTemplate TargetType="{x:Type Thumb}">
 					<Border Name="Border"
                   CornerRadius="0"
-                  Background="{DynamicResource BlueBrush}"
+                  Background="{DynamicResource AccentBrush}"
                   BorderBrush="Transparent"
                   BorderThickness="1" />
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsDragging" Value="true">
-							<Setter TargetName="Border" Property="Background" Value="{DynamicResource BlueBrush}" />
+							<Setter TargetName="Border" Property="Background" Value="{DynamicResource AccentBrush}" />
 						</Trigger>
 					</ControlTemplate.Triggers>
 				</ControlTemplate>

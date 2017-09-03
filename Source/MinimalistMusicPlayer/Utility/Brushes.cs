@@ -11,10 +11,9 @@ namespace MinimalistMusicPlayer.Utility
 	// custom solid color brushes
 	public static class Brushes
 	{
-		public static SolidColorBrush BlueBrush = (SolidColorBrush)Application.Current.Resources["BlueBrush"];
-		public static SolidColorBrush WhiteBrush = (SolidColorBrush)Application.Current.Resources["TextBrushWhite"];
-		public static SolidColorBrush GreyBrush = (SolidColorBrush)Application.Current.Resources["ActiveButtonBackgroundBrush"];
-		public static SolidColorBrush LightGreyBrush = (SolidColorBrush)Application.Current.Resources["DisabledBorderBrush"];
-		public static SolidColorBrush BackgroundBrush = (SolidColorBrush)Application.Current.Resources["BackgroundBrush"];
+		public static SolidColorBrush PrimaryBrush = (SolidColorBrush)Application.Current.Resources["PrimaryBrush"];
+		public static SolidColorBrush AccentBrush = (SolidColorBrush)Application.Current.Resources["AccentBrush"];
+		public static SolidColorBrush PrimaryTextBrush = (SolidColorBrush)Application.Current.Resources["PrimaryTextBrush"];
+		public static SolidColorBrush SecondaryTextBrush = (SolidColorBrush)Application.Current.Resources["SecondaryTextBrush"];
 	}
 }

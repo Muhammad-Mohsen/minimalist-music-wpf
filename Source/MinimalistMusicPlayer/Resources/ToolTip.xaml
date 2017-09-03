@@ -9,8 +9,8 @@
 					<Border Name="Border"
 							Width="{TemplateBinding Width}"
                             Height="{TemplateBinding Height}"
-                            Background="{DynamicResource BackgroundBrush}"
-                            BorderBrush="{DynamicResource BorderBrush2}"
+                            Background="{DynamicResource PrimaryBrush}"
+                            BorderBrush="{DynamicResource BorderBrush}"
                             BorderThickness="1">
 						
 						<ContentPresenter Margin="4, 2"

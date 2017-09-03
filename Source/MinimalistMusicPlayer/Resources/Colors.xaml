@@ -2,40 +2,23 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!-- BRUSHES -->
-	<SolidColorBrush x:Key="BackgroundBrush">#FF2E2E2E</SolidColorBrush>
-	<SolidColorBrush x:Key="BackgroundBrush3">#33333333</SolidColorBrush>
-	<SolidColorBrush x:Key="BorderBrush">LightSteelBlue</SolidColorBrush>
-	<SolidColorBrush x:Key="BorderBrush2">#555</SolidColorBrush>
+	<SolidColorBrush x:Key="PrimaryBrush">#FFF</SolidColorBrush> <!-- light: #FFF - dark: #2E2E2E -->
+    <SolidColorBrush x:Key="BorderBrush">#555</SolidColorBrush> <!-- light: #555 - dark:  -->
+    <SolidColorBrush x:Key="AccentBrush">#0078D7</SolidColorBrush> <!-- accents: blue: #007ACC - orange: #D64D1A - red: FireBrick -->
 
-	<SolidColorBrush x:Key="TextBrushGrey">#AAA</SolidColorBrush>
-	<SolidColorBrush x:Key="TextBrushWhite">White</SolidColorBrush>
+    <SolidColorBrush x:Key="PrimaryTextBrush">#2E2E2E</SolidColorBrush> <!-- light: #2E2E2E - dark: #FFF -->
+    <SolidColorBrush x:Key="SecondaryTextBrush">#555</SolidColorBrush> <!-- light: #555 - dark: #AAA -->
 
-	<SolidColorBrush x:Key="BlueBrush">#FF007ACC</SolidColorBrush>
-	<SolidColorBrush x:Key="OrangeBrush">#FFD64D1A</SolidColorBrush>
-	<SolidColorBrush x:Key="RedBrush">FireBrick</SolidColorBrush>
+    <SolidColorBrush x:Key="PrimaryHoverBrush">#E0E0E0</SolidColorBrush> <!-- light: #E0E0E0 - dark: #555 -->
+    
+    <!-- COLORS -->
+	<Color x:Key="PrimaryColor">#FFF</Color> <!-- light: #FFF - dark: ##2E2E2E -->
+    <Color x:Key="AccentColor">#0078D7</Color> <!-- light: #0078D7 - dark: 007ACC -->
 
-	<SolidColorBrush x:Key="ActiveButtonBackgroundBrush">#444</SolidColorBrush>
+    <Color x:Key="PrimaryTextColor">#2E2E2E</Color> <!-- light: #2E2E2E - dark: #FFF -->
+	<Color x:Key="SecondaryTextColor">#555</Color> <!-- light: #555 - dark: #AAA -->
 
-	<SolidColorBrush x:Key="Foreground" Color="LightGray" />
-
-	<SolidColorBrush x:Key="PressedBrush">#EEE</SolidColorBrush>
-	<SolidColorBrush x:Key="HoverBrush">#FF1F9EEF</SolidColorBrush>
-
-	<SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
-	<SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#EEE" />
-	<SolidColorBrush x:Key="DisabledBorderBrush" Color="#AAA" />
-
-	<!-- COLORS -->
-	<Color x:Key="DisabledControlLightColor">#FFE8EDF9</Color>
-	<Color x:Key="DisabledControlDarkColor">#FFC5CBF9</Color>
-	<Color x:Key="CustomBlue">#FF007ACC</Color>
-	<Color x:Key="CustomGrey">#FF2E2E2E</Color>
-
-	<Color x:Key="BackgroundColor">#FF2E2E2E</Color>
-	<Color x:Key="BlueColor">#FF007ACC</Color>
-	<Color x:Key="GreyColor">#AAA</Color>
-	<Color x:Key="HoverColorBlue">#FF1F9EEF</Color>
-	<Color x:Key="HoverColorGrey">#555</Color>
-	<Color x:Key="WhiteColor">#FFF</Color>
+    <Color x:Key="AccentHoverColor">#0078D7</Color> <!-- light: #0078D7 - dark: #1F9EEF -->
+    <Color x:Key="PrimaryHoverColor">#E0E0E0</Color> <!-- light: #E0E0E0 - dark: #555 -->
 
 </ResourceDictionary>

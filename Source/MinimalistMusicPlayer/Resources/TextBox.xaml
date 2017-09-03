@@ -17,17 +17,17 @@
 					<!-- trigger animations -->
 					<ControlTemplate.Resources>
 						<Storyboard x:Key="MouseEnterAnimation">
-							<ColorAnimation Storyboard.TargetName="Border" Storyboard.TargetProperty="BorderBrush.Color" To="{StaticResource BlueColor}" Duration="0:0:0.2" />
+							<ColorAnimation Storyboard.TargetName="Border" Storyboard.TargetProperty="BorderBrush.Color" To="{StaticResource AccentColor}" Duration="0:0:0.2" />
 						</Storyboard>
 						<Storyboard x:Key="MouseExitAnimation" FillBehavior="Stop">
-							<ColorAnimation Storyboard.TargetName="Border" Storyboard.TargetProperty="BorderBrush.Color" To="{StaticResource GreyColor}" Duration="0:0:0.2" />
+							<ColorAnimation Storyboard.TargetName="Border" Storyboard.TargetProperty="BorderBrush.Color" To="{StaticResource SecondaryTextColor}" Duration="0:0:0.2" />
 						</Storyboard>
 					</ControlTemplate.Resources>
 					
 					<Border	Name="Border"
 							CornerRadius="0" 
 							Padding="2"
-							Background="{StaticResource BackgroundBrush}"
+							Background="{StaticResource PrimaryBrush}"
 							BorderBrush="{StaticResource BorderBrush}"
 							BorderThickness="0,0,0,1" >
 						<ScrollViewer Margin="0" x:Name="PART_ContentHost"/>

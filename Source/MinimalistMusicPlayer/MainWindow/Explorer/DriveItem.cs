@@ -52,7 +52,7 @@ namespace MinimalistMusicPlayer.Explorer
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Content = title,
 				FontSize = 12,
-				Foreground = Brushes.WhiteBrush,
+				Foreground = Brushes.PrimaryTextBrush,
 				Margin = new Thickness(Const.ExplorerItemIconWidth, 0, 0, 0)
 			};
 		}
@@ -65,7 +65,7 @@ namespace MinimalistMusicPlayer.Explorer
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Style = Styles.AlphaButtonStyle,
 				OpacityMask = Icons.Drive,
-				Background = Brushes.WhiteBrush,
+				Background = Brushes.PrimaryTextBrush,
 				Width = Const.ExplorerItemIconWidth,
 				Height = Const.ExplorerItemIconHeight,
 				Margin = new Thickness(0),

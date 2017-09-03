@@ -84,7 +84,7 @@ namespace MinimalistMusicPlayer.Explorer
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Content = title,
 				FontSize = 12,
-				Foreground = mediaItemStyle != MediaItemStyle.Normal ? Brushes.WhiteBrush : Brushes.LightGreyBrush,
+				Foreground = mediaItemStyle != MediaItemStyle.Normal ? Brushes.PrimaryTextBrush : Brushes.SecondaryTextBrush,
 				Margin = new Thickness(Const.ExplorerItemIconWidth, 0, 0, 0)
 			};
 		}
@@ -96,7 +96,7 @@ namespace MinimalistMusicPlayer.Explorer
 				HorizontalAlignment = HorizontalAlignment.Right,
 				Content = duration,
 				FontSize = 12,
-				Foreground = Brushes.LightGreyBrush
+				Foreground = Brushes.SecondaryTextBrush
 			};
 		}
 		// helper that creates a media icon
@@ -109,7 +109,7 @@ namespace MinimalistMusicPlayer.Explorer
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Style = Styles.AlphaButtonStyle,
 				OpacityMask = icon,
-				Background = Brushes.WhiteBrush,
+				Background = Brushes.PrimaryTextBrush,
 				Width = Const.ExplorerItemIconWidth,
 				Height = Const.ExplorerItemIconHeight,
 				Margin = new Thickness(0),
@@ -136,7 +136,7 @@ namespace MinimalistMusicPlayer.Explorer
 			if (isMarked)
 			{
 				mediaIcon.Style = Styles.AlphaButtonToggleStyle;
-				mediaIcon.Background = Brushes.BlueBrush;
+				mediaIcon.Background = Brushes.AccentBrush;
 			}
 
 			else
@@ -144,7 +144,7 @@ namespace MinimalistMusicPlayer.Explorer
 				mediaIcon.Style = Styles.AlphaButtonStyle;
 
 				await Task.Delay(200);
-				mediaIcon.Background = Brushes.WhiteBrush;
+				mediaIcon.Background = Brushes.PrimaryTextBrush;
 			}
 		}
 		// changes the media icon from media playlist to media and back
@@ -153,12 +153,12 @@ namespace MinimalistMusicPlayer.Explorer
 		{
 			var icon = isPlaylistItem == true ? Icons.MediaPlaylist : Icons.Media;
 			MediaIcon.OpacityMask = icon;
-			MediaIcon.Background = Brushes.WhiteBrush;
+			MediaIcon.Background = Brushes.PrimaryTextBrush;
 		}
 
 		public void SetTitleLabelForeground(bool isPlaylistItem)
 		{
-			var foregroundColor = isPlaylistItem == true ? Brushes.WhiteBrush : Brushes.LightGreyBrush;
+			var foregroundColor = isPlaylistItem == true ? Brushes.PrimaryTextBrush : Brushes.SecondaryTextBrush;
 			LabelTitle.Foreground = foregroundColor;
 		}
 		
@@ -173,7 +173,7 @@ namespace MinimalistMusicPlayer.Explorer
 			// check due to item being sometimes NULL if a directory change was made before the WindowsMediaPlayer gets a chance to play the item
 			if (item != null)
 			{
-				item.BorderBrush = Brushes.BlueBrush;
+				item.BorderBrush = Brushes.AccentBrush;
 
 				// embolden the text
 				item.LabelTitle.FontWeight = FontWeights.Bold;

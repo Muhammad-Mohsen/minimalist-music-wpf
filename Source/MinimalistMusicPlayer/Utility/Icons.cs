@@ -18,7 +18,7 @@ namespace MinimalistMusicPlayer.Utility
 			Visual = new Path() // Remember: Geometry objects can't render themselves; They need Shape objects to render them.
 			{
 				Data = (GeometryGroup)Application.Current.Resources["Play"],
-				Fill = Brushes.WhiteBrush
+				Fill = Brushes.PrimaryTextBrush
 			},
 			Stretch = Stretch.None
 		};
@@ -28,7 +28,7 @@ namespace MinimalistMusicPlayer.Utility
 			Visual = new Path()
 			{
 				Data = (GeometryGroup)Application.Current.Resources["Pause"],
-				Fill = Brushes.WhiteBrush
+				Fill = Brushes.PrimaryTextBrush
 			},
 			Stretch = Stretch.None
 		};
@@ -38,7 +38,7 @@ namespace MinimalistMusicPlayer.Utility
 			Visual = new Path()
 			{
 				Data = (GeometryGroup)Application.Current.Resources["VolumeMute"],
-				Fill = Brushes.WhiteBrush
+				Fill = Brushes.PrimaryTextBrush
 			},
 			Stretch = Stretch.None
 		};
@@ -48,7 +48,7 @@ namespace MinimalistMusicPlayer.Utility
 			Visual = new Path()
 			{
 				Data = (GeometryGroup)Application.Current.Resources["VolumeLow"],
-				Fill = Brushes.WhiteBrush
+				Fill = Brushes.PrimaryTextBrush
 			},
 			Stretch = Stretch.None
 		};
@@ -58,7 +58,7 @@ namespace MinimalistMusicPlayer.Utility
 			Visual = new Path()
 			{
 				Data = (GeometryGroup)Application.Current.Resources["VolumeHigh"],
-				Fill = Brushes.WhiteBrush
+				Fill = Brushes.PrimaryTextBrush
 			},
 			Stretch = Stretch.None
 		};
@@ -68,7 +68,7 @@ namespace MinimalistMusicPlayer.Utility
 			Visual = new Path()
 			{
 				Data = (GeometryGroup)Application.Current.Resources["RepeatOne"],
-				Fill = Brushes.WhiteBrush
+				Fill = Brushes.PrimaryTextBrush
 			},
 			Stretch = Stretch.None
 		};
@@ -78,7 +78,7 @@ namespace MinimalistMusicPlayer.Utility
 			Visual = new Path()
 			{
 				Data = (GeometryGroup)Application.Current.Resources["Repeat"],
-				Fill = Brushes.WhiteBrush
+				Fill = Brushes.PrimaryTextBrush
 			},
 			Stretch = Stretch.None
 		};
@@ -88,7 +88,7 @@ namespace MinimalistMusicPlayer.Utility
 			Visual = new Path()
 			{
 				Data = (GeometryGroup)Application.Current.Resources["Up"],
-				Fill = Brushes.WhiteBrush
+				Fill = Brushes.PrimaryTextBrush
 			},
 			Stretch = Stretch.None
 		};
@@ -98,7 +98,7 @@ namespace MinimalistMusicPlayer.Utility
 			Visual = new Path()
 			{
 				Data = (GeometryGroup)Application.Current.Resources["Directory"],
-				Fill = Brushes.WhiteBrush
+				Fill = Brushes.PrimaryTextBrush
 			},
 			Stretch = Stretch.None
 		};
@@ -108,7 +108,7 @@ namespace MinimalistMusicPlayer.Utility
 			Visual = new Path()
 			{
 				Data = (GeometryGroup)Application.Current.Resources["Drive"],
-				Fill = Brushes.WhiteBrush
+				Fill = Brushes.PrimaryTextBrush
 			},
 			Stretch = Stretch.None
 		};
@@ -118,7 +118,7 @@ namespace MinimalistMusicPlayer.Utility
 			Visual = new Path()
 			{
 				Data = (GeometryGroup)Application.Current.Resources["Media"],
-				Fill = Brushes.WhiteBrush
+				Fill = Brushes.PrimaryTextBrush
 			},
 			Stretch = Stretch.None
 		};
@@ -128,7 +128,7 @@ namespace MinimalistMusicPlayer.Utility
 			Visual = new Path()
 			{
 				Data = (GeometryGroup)Application.Current.Resources["MediaPlaylist"],
-				Fill = Brushes.WhiteBrush
+				Fill = Brushes.PrimaryTextBrush
 			},
 			Stretch = Stretch.None,
 			RelativeTransform = new TranslateTransform(-.1, 0)

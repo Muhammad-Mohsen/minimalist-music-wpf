@@ -4,7 +4,7 @@
 	<!-- Toggle-style button (background remains the same when active) -->
 	<!-- Example usage: Playlist button -->
 	<Style x:Key="AlphaButtonToggleStyle" TargetType="{x:Type Button}">
-		<Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+		<Setter Property="Background" Value="{DynamicResource PrimaryBrush}" />
 		<Setter Property="Width" Value="80" />
 		<Setter Property="Margin" Value="10" />
 		<Setter Property="Template">
@@ -28,10 +28,10 @@
 					<!-- http://stackoverflow.com/questions/2432790/animate-button-on-mouseover-and-mousedown -->
 					<ControlTemplate.Resources>
 						<Storyboard x:Key="MouseEnterAnimation">
-							<ColorAnimation Storyboard.TargetName="outerRectangle" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="{StaticResource HoverColorBlue}" Duration="0:0:0.3" />
+							<ColorAnimation Storyboard.TargetName="outerRectangle" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="{StaticResource AccentHoverColor}" Duration="0:0:0.3" />
 						</Storyboard>
 						<Storyboard x:Key="MouseExitAnimation" FillBehavior="Stop">
-							<ColorAnimation Storyboard.TargetName="outerRectangle" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="{StaticResource BlueColor}" Duration="0:0:0.3" />
+							<ColorAnimation Storyboard.TargetName="outerRectangle" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="{StaticResource AccentColor}" Duration="0:0:0.3" />
 						</Storyboard>
 					</ControlTemplate.Resources>
 
@@ -53,10 +53,10 @@
 						</Trigger>
 
 						<Trigger Property="IsPressed" Value="True">
-							<Setter Property="Rectangle.Fill" TargetName="outerRectangle" Value="{DynamicResource BlueBrush}" />
+							<Setter Property="Rectangle.Fill" TargetName="outerRectangle" Value="{DynamicResource AccentBrush}" />
 						</Trigger>
 						<Trigger Property="IsEnabled" Value="False">
-							<Setter Property="Rectangle.Fill" TargetName="outerRectangle" Value="{DynamicResource DisabledForegroundBrush}" />
+							<Setter Property="Rectangle.Fill" TargetName="outerRectangle" Value="{DynamicResource PrimaryHoverBrush}" />
 						</Trigger>
 					</ControlTemplate.Triggers>
 

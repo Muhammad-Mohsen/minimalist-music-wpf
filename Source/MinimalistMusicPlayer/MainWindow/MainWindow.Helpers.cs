@@ -22,7 +22,7 @@ namespace MinimalistMusicPlayer
 			if (toExpanded)
 			{
 				ButtonPlaylist.Style = Styles.AlphaButtonToggleStyle; // style with blue background in its rest state
-				ButtonPlaylist.Background = Brushes.BlueBrush;
+				ButtonPlaylist.Background = Brushes.AccentBrush;
 				// animate the grid
 				Anim.AnimateHeight(this, Const.ExpandedWindowHeight, .2);
 				Player.IsPlaylistVisible = true;
@@ -35,14 +35,14 @@ namespace MinimalistMusicPlayer
 
 				// await the animation (defined in AlphaButtonStyle control tempalte) to complete before setting the background to white.
 				await Task.Delay(200);
-				ButtonPlaylist.Background = Brushes.WhiteBrush;
+				ButtonPlaylist.Background = Brushes.PrimaryTextBrush;
 			}
 		}
 
 		private void SetPinToTopIcon(bool isTopMost)
 		{
 			ButtonPinToTop.Style = isTopMost ? Styles.BackgroundButtonToggleStyle : Styles.BackgroundButtonStyle;
-			ButtonPinToTop.Background = isTopMost ? Brushes.BlueBrush : Brushes.BackgroundBrush;
+			ButtonPinToTop.Background = isTopMost ? Brushes.AccentBrush : Brushes.PrimaryBrush;
 		}
 
 		//
@@ -69,20 +69,20 @@ namespace MinimalistMusicPlayer
 				case RepeatMode.NoRepeat:
 					ButtonRepeat.OpacityMask = Icons.Repeat;
 					ButtonRepeat.Style = Styles.AlphaButtonToggleStyle;
-					ButtonRepeat.Background = Brushes.BlueBrush;
+					ButtonRepeat.Background = Brushes.AccentBrush;
 					break;
 
 				case RepeatMode.Repeat:
 					ButtonRepeat.OpacityMask = Icons.RepeatOne;
 					ButtonRepeat.Style = Styles.AlphaButtonToggleStyle;
-					ButtonRepeat.Background = Brushes.BlueBrush;
+					ButtonRepeat.Background = Brushes.AccentBrush;
 					break;
 
 				case RepeatMode.RepeatOne:
 					ButtonRepeat.OpacityMask = Icons.Repeat;
 					ButtonRepeat.Style = Styles.AlphaButtonStyle;
 					await Task.Delay(200);
-					ButtonRepeat.Background = Brushes.WhiteBrush;
+					ButtonRepeat.Background = Brushes.PrimaryTextBrush;
 					break;
 			}
 		}
@@ -92,7 +92,7 @@ namespace MinimalistMusicPlayer
 			if (isShuffle)
 			{
 				ButtonShuffle.Style = Styles.AlphaButtonToggleStyle;
-				ButtonShuffle.Background = Brushes.BlueBrush;
+				ButtonShuffle.Background = Brushes.AccentBrush;
 			}
 
 			else
@@ -100,7 +100,7 @@ namespace MinimalistMusicPlayer
 				ButtonShuffle.Style = Styles.AlphaButtonStyle;
 
 				await Task.Delay(200);
-				ButtonShuffle.Background = Brushes.WhiteBrush;
+				ButtonShuffle.Background = Brushes.PrimaryTextBrush;
 			}
 		}
 
