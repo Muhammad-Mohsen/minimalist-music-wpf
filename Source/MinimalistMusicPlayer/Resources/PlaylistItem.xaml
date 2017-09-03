@@ -42,7 +42,7 @@
 
 						<Trigger Property="IsPressed" Value="True">
 							<Setter Property="BorderBrush" TargetName="outerBorder" Value="{DynamicResource AccentBrush}" />
-							<Setter Property="Foreground" Value="White" />
+							<Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
 						</Trigger>
 
 					</ControlTemplate.Triggers>

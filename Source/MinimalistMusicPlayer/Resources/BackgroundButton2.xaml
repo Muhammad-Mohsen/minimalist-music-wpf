@@ -34,13 +34,13 @@
 							<Trigger.ExitActions>
 								<BeginStoryboard Storyboard="{StaticResource MouseExitAnimation}" />
 							</Trigger.ExitActions>
-							
+
 							<!--<Setter Property="Background" TargetName="outerBorder" Value="{DynamicResource BorderBrush}" />
 							<Setter Property="Foreground" Value="White" />-->
 						</Trigger>
 
 						<Trigger Property="IsPressed" Value="True">
-							<Setter Property="Background" TargetName="outerBorder" Value="{DynamicResource BorderBrush}" />
+							<Setter Property="Background" TargetName="outerBorder" Value="{DynamicResource PrimaryBrush}" />
 							<Setter Property="Foreground" Value="White" />
 						</Trigger>
 					</ControlTemplate.Triggers>

@@ -29,7 +29,7 @@ namespace MinimalistMusicPlayer
 			CurrentDirectory = directory;
 
 			// set the setting (will be saved in OnExit event in the app class!!)
-			Properties.Settings.Default[Const.ExplorerDirectorySetting] = directory != null ? directory.FullName : null;
+			Properties.Settings.Default[Const.ExplorerDirectorySetting] = directory?.FullName;
 
 			// get paged media explorer
 			ScrollViewerExplorer = GetPagedScrollViewerExplorer();
