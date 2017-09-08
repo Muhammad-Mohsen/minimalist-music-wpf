@@ -346,5 +346,15 @@ namespace MinimalistMusicPlayer
 			if (Player.Playlist.count > 0)
 				Player.Play(Player.Index);
 		}
+
+		private void Window_Deactivated(object sender, EventArgs e)
+		{
+			BorderMain.BorderBrush = Brushes.SecondaryTextBrush;
+		}
+
+		private void Window_Activated(object sender, EventArgs e)
+		{
+			BorderMain.BorderBrush = Brushes.AccentBrush;
+		}
 	}
 }
