@@ -277,22 +277,13 @@ namespace MinimalistMusicPlayer
 		//
 		// shortcut keys
 		//
-		// half ass-ing it by copying/pasting code from the above events...sadly
-		// so far we got play/pause shortcuts
+		// so far we got play/pause shortcut
 		private void Window_KeyUp(object sender, KeyEventArgs e)
 		{
 			switch (e.Key)
 			{
 				case Key.Space: // play/pause
-					if (Player.CurrentMedia != null)
-					{
-						if (Player.PlayState == WMPPlayState.wmppsPlaying)
-							Player.Pause();
-
-						else
-							Player.Resume();
-					}
-
+					ButtonPlayPause_Click(null, null);
 					break;
 			}
 		}
@@ -351,7 +342,6 @@ namespace MinimalistMusicPlayer
 		{
 			BorderMain.BorderBrush = Brushes.SecondaryTextBrush;
 		}
-
 		private void Window_Activated(object sender, EventArgs e)
 		{
 			BorderMain.BorderBrush = Brushes.AccentBrush;
