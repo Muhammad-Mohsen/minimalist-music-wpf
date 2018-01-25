@@ -9,6 +9,7 @@ using WMPLib;
 
 namespace MinimalistMusicPlayer.Player
 {
+	// not used currently
 	public class Playlist
 	{
 		private IWMPPlaylist P;

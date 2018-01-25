@@ -129,9 +129,16 @@ namespace MinimalistMusicPlayer
 				Player.Index = GetMediaItemPlaylistIndex(item.FullName); // update index
 				Player.Play(Player.Index); // start playing the item
 
-				// reset the icons
+				// reset the icons for this particular item
 				SetPlaylistMediaItemStyle(Player.PlaylistFullNames, false);
 				SetMediaItemForeground(Player.PlaylistFullNames);
+
+				// reset marking states for all items
+				ResetMediaItemMarkState();
+				MediaItem.MarkedItemCount = 0;
+
+				// hide the select mode if applicable
+				SetPlaylistSelectMode(false);
 			}
 		}
 		// controls whether the Play selected button should be shown
