@@ -38,7 +38,7 @@
 			</Button>
 
 			<Grid x:Name="PlayingIcon" HorizontalAlignment="Left" Margin="17,14,0,0" VerticalAlignment="Top" Height="15" Width="15">
-				<Ellipse Stroke="White" StrokeThickness="2" />
+				<Ellipse Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="2" />
 				<Rectangle Height="3" Fill="{DynamicResource PrimaryBrush}" StrokeThickness="2" Width="17" Margin="-1,6" />
 			</Grid>
 
