@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
-        Title="Minimalist" Height="150" Width="525"
+        Title="Minimalist" Height="155" Width="525"
         WindowStyle="None"
         ResizeMode="CanMinimize"
 		Icon="../Resources/img/AppIcon.ico" MouseWheel="Window_MouseWheel" PreviewKeyUp="Window_KeyUp" Deactivated="Window_Deactivated" Activated="Window_Activated">
@@ -23,18 +23,18 @@
 		<Grid x:Name="GridMain" Background="{DynamicResource PrimaryBrush}" Margin="0,0,0,0" MouseMove="GridMain_MouseMove" MouseDown="GridMain_MouseDown" MouseUp="GridMain_MouseUp">
 
 			<!-- Window controls -->
-			<Button x:Name="ButtonClose" Style="{DynamicResource ResourceKey=BackGroundButtonStyle}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="35" Height="25" Click="ButtonClose_Click" Focusable="False" IsTabStop="False" >
+			<Button x:Name="ButtonClose" Style="{DynamicResource BackGroundButtonStyle}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="35" Height="25" Click="ButtonClose_Click" Focusable="False" IsTabStop="False" >
 				<!--<Image Source="img\close.png" Height="25" Width="35" />-->
-				<Path Fill="{StaticResource PrimaryTextBrush}" Data="{StaticResource Close}" />
+				<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Close}" />
 
 			</Button>
-			<Button x:Name="ButtonMinimize" Style="{DynamicResource ResourceKey=BackGroundButtonStyle}" Margin="0,0,35,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="35" Height="25" Click="ButtonMinimize_Click" Focusable="False" IsTabStop="False">
+			<Button x:Name="ButtonMinimize" Style="{DynamicResource BackGroundButtonStyle}" Margin="0,0,35,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="35" Height="25" Click="ButtonMinimize_Click" Focusable="False" IsTabStop="False">
 				<!--<Image Source="img\minimize.png" Height="25" Width="35" />-->
-                <Path Fill="{StaticResource PrimaryTextBrush}" Data="{StaticResource Minimize}" />
-			</Button>
-			<Button x:Name="ButtonPinToTop" Style="{DynamicResource ResourceKey=BackGroundButtonStyle}" Margin="0,0,99,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="34" Height="25" Click="ButtonPinToTop_Click" Focusable="False" IsTabStop="False">
-				<!--<Image Source="img\pin.png" Height="25" Width="35" />-->
-                <Path Fill="{StaticResource PrimaryTextBrush}" Data="{StaticResource Pin}" />
+				<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Minimize}" RenderTransformOrigin="0.5,0.5" >
+					<Path.RenderTransform>
+						<ScaleTransform ScaleX="0.8"/>
+					</Path.RenderTransform>
+				</Path>
 			</Button>
 
 			<Grid x:Name="PlayingIcon" HorizontalAlignment="Left" Margin="17,14,0,0" VerticalAlignment="Top" Height="15" Width="15">
@@ -64,13 +64,13 @@
 					<VisualBrush>
 						<VisualBrush.Stretch>None</VisualBrush.Stretch>
 						<VisualBrush.Visual>
-                            <Path Fill="{StaticResource PrimaryTextBrush}" Data="{StaticResource Previous}" />
+							<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Previous}" />
 						</VisualBrush.Visual>
 					</VisualBrush>
 				</Button.OpacityMask>
 			</Button>
 
-			<Slider x:Name="SliderSeek" Style="{DynamicResource HorizontalSlider}" Margin="45,59,45,0" VerticalAlignment="Top" Value="0" ValueChanged="SliderSeek_ValueChanged" PreviewMouseDown="SliderSeek_PreviewMouseDown" PreviewMouseUp="SliderSeek_PreviewMouseUp" PreviewMouseMove="SliderSeek_PreviewMouseMove" Focusable="False" IsTabStop="False">
+			<Slider x:Name="SliderSeek" Style="{DynamicResource HorizontalSlider}" Margin="45,55,45,0" VerticalAlignment="Top" Value="0" ValueChanged="SliderSeek_ValueChanged" PreviewMouseDown="SliderSeek_PreviewMouseDown" PreviewMouseUp="SliderSeek_PreviewMouseUp" PreviewMouseMove="SliderSeek_PreviewMouseMove" Focusable="False" IsTabStop="False">
 				<Slider.ToolTip>
 					<ToolTip x:Name="ToolTipSeek" ToolTipService.Placement="Top" Style="{DynamicResource ToolTipBordered}" Foreground="{DynamicResource PrimaryTextBrush}"></ToolTip>
 				</Slider.ToolTip>
@@ -85,7 +85,7 @@
 					<VisualBrush>
 						<VisualBrush.Stretch>None</VisualBrush.Stretch>
 						<VisualBrush.Visual>
-                            <Path Fill="{StaticResource PrimaryTextBrush}" Data="{StaticResource Previous}" />
+							<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Previous}" />
 						</VisualBrush.Visual>
 					</VisualBrush>
 
@@ -103,30 +103,29 @@
 				</Button.OpacityMask>
 			</Button>-->
 
-			<Button x:Name="ButtonPlayPause" Style="{DynamicResource AlphaButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="41,108,0,0" BorderBrush="{x:Null}" Background="{DynamicResource PrimaryTextBrush}" Click="ButtonPlayPause_Click" Focusable="False" IsTabStop="False">
+			<Button x:Name="ButtonPlayPause" Style="{DynamicResource AlphaButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="41,91,0,0" BorderBrush="{x:Null}" Background="{DynamicResource PrimaryTextBrush}" Click="ButtonPlayPause_Click" Focusable="False" IsTabStop="False">
 				<Button.OpacityMask>
 					<VisualBrush>
 						<VisualBrush.Stretch>None</VisualBrush.Stretch>
 						<VisualBrush.Visual>
-                            <Path Fill="{StaticResource PrimaryTextBrush}" Data="{StaticResource Play}" />
+							<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Play}" />
 						</VisualBrush.Visual>
 					</VisualBrush>
 				</Button.OpacityMask>
 			</Button>
 
-			<Button x:Name="ButtonVolume" Style="{DynamicResource AlphaButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="76,108,0,0" BorderBrush="{x:Null}" Background="{DynamicResource PrimaryTextBrush}" Foreground="{x:Null}" Click="ButtonVolume_Click" MouseEnter="Volume_MouseEnter" MouseLeave="Volume_MouseLeave" Focusable="False" IsTabStop="False">
+			<Button x:Name="ButtonVolume" Style="{DynamicResource AlphaButtonStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="171,91,0,0" BorderBrush="{x:Null}" Background="{DynamicResource PrimaryTextBrush}" Foreground="{x:Null}" Click="ButtonVolume_Click" MouseEnter="Volume_MouseEnter" MouseLeave="Volume_MouseLeave" Focusable="False" IsTabStop="False">
 				<Button.OpacityMask>
 					<VisualBrush>
 						<VisualBrush.Stretch>None</VisualBrush.Stretch>
 						<VisualBrush.Visual>
-                            <Path Fill="{StaticResource PrimaryTextBrush}" Data="{StaticResource VolumeHigh}" />
+							<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource VolumeHigh}" />
 						</VisualBrush.Visual>
 					</VisualBrush>
 				</Button.OpacityMask>
 			</Button>
 
-			<Slider x:Name="SliderVolume" Style="{DynamicResource HorizontalSlider}" HorizontalAlignment="Left" Margin="115,118,0,0" VerticalAlignment="Top" Width="77" Value="50" MouseLeave="Volume_MouseLeave" MouseEnter="Volume_MouseEnter" LargeChange="20" Maximum="100" ValueChanged="SliderVolume_ValueChanged" Focusable="False" IsTabStop="False" />
-
+			<Slider x:Name="SliderVolume" Style="{DynamicResource HorizontalSlider}" HorizontalAlignment="Left" Margin="210,97,0,0" VerticalAlignment="Top" Width="77" Value="50" MouseLeave="Volume_MouseLeave" MouseEnter="Volume_MouseEnter" LargeChange="20" Maximum="100" ValueChanged="SliderVolume_ValueChanged" Focusable="False" IsTabStop="False" />
 			<!-- Time elapsed/Total time -->
 			<StackPanel HorizontalAlignment="Left" Height="20" Margin="382,74,0,0" VerticalAlignment="Top" Width="100" Orientation="Horizontal" FlowDirection="RightToLeft">
 				<Label x:Name="LabelTotalTime" Content="--:--" VerticalAlignment="Top" Margin="0,-5,0,0" Foreground="{DynamicResource SecondaryTextBrush}"/>
@@ -134,37 +133,30 @@
 			</StackPanel>
 
 			<!-- Playlist controls -->
-			<Button x:Name="ButtonRepeat" Style="{DynamicResource AlphaButtonStyle}" VerticalAlignment="Top" Width="30" Height="30" Margin="0,108,112,0" BorderBrush="{x:Null}" HorizontalAlignment="Right" Background="{DynamicResource PrimaryTextBrush}" Foreground="{x:Null}" Click="ButtonRepeat_Click" Focusable="False" IsTabStop="False">
+			<Button x:Name="ButtonRepeat" Style="{DynamicResource AlphaButtonStyle}" VerticalAlignment="Top" Width="30" Height="30" Margin="0,91,409,0" BorderBrush="{x:Null}" HorizontalAlignment="Right" Background="{DynamicResource PrimaryTextBrush}" Foreground="{x:Null}" Click="ButtonRepeat_Click" Focusable="False" IsTabStop="False">
 				<Button.OpacityMask>
 					<VisualBrush>
 						<VisualBrush.Stretch>None</VisualBrush.Stretch>
 						<VisualBrush.Visual>
-                            <Path Fill="{StaticResource PrimaryTextBrush}" Data="{StaticResource Repeat}" />
+							<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Repeat}" />
 						</VisualBrush.Visual>
 					</VisualBrush>
 				</Button.OpacityMask>
 			</Button>
 
-			<Button x:Name="ButtonShuffle" Style="{DynamicResource AlphaButtonStyle}" VerticalAlignment="Top" Width="30" Height="30" Margin="0,108,77,0" BorderBrush="{x:Null}" HorizontalAlignment="Right" Foreground="{x:Null}" Background="{DynamicResource PrimaryTextBrush}" Click="ButtonShuffle_Click" Focusable="False" IsTabStop="False">
+			<Button x:Name="ButtonShuffle" Style="{DynamicResource AlphaButtonStyle}" VerticalAlignment="Top" Width="30" Height="30" Margin="0,91,364,0" BorderBrush="{x:Null}" HorizontalAlignment="Right" Foreground="{x:Null}" Background="{DynamicResource PrimaryTextBrush}" Click="ButtonShuffle_Click" Focusable="False" IsTabStop="False">
 				<Button.OpacityMask>
 					<VisualBrush>
 						<VisualBrush.Stretch>None</VisualBrush.Stretch>
 						<VisualBrush.Visual>
-                            <Path Fill="{StaticResource PrimaryTextBrush}" Data="{StaticResource Shuffle}" />
+							<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Shuffle}" />
 						</VisualBrush.Visual>
 					</VisualBrush>
 				</Button.OpacityMask>
 			</Button>
 
-			<Button x:Name="ButtonPlaylist" Style="{DynamicResource AlphaButtonStyle}" VerticalAlignment="Top" Width="30" Height="30" Margin="0,108,42,0" BorderBrush="{x:Null}" HorizontalAlignment="Right" Background="{DynamicResource PrimaryTextBrush}" Foreground="{x:Null}" Click="ButtonPlaylist_Click" Focusable="False" IsTabStop="False">
-				<Button.OpacityMask>
-					<VisualBrush>
-						<VisualBrush.Stretch>None</VisualBrush.Stretch>
-						<VisualBrush.Visual>
-                            <Path Fill="{StaticResource PrimaryTextBrush}" Data="{StaticResource Playlist}" />
-						</VisualBrush.Visual>
-					</VisualBrush>
-				</Button.OpacityMask>
+			<Button x:Name="ButtonPlaylist" Style="{DynamicResource BackGroundButtonStyle2}" VerticalAlignment="Bottom" Width="Auto" Height="20" Margin="0,0" RenderTransformOrigin="0.5,0.5" Click="ButtonPlaylist_Click" Focusable="False" IsTabStop="False">
+				<Path x:Name="ButtonPlaylistIcon" Stroke="{StaticResource PrimaryTextBrush}" Data="{StaticResource ExpandCollapse}" Height="15" Stretch="Uniform" Width="15" />
 			</Button>
 
 			<!-- Explorer -->
@@ -172,7 +164,7 @@
 				<!-- Breadcrumb bar -->
 				<Grid x:Name="GridBreadcrumnBar" Margin="0,0,0,406" Visibility="Visible">
 					<Button x:Name="ButtonUp" Style="{DynamicResource ResourceKey=PlaylistButton}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Height="25" Margin="1,1" Focusable="False" IsTabStop="False" AllowDrop="False">
-                        <Path Fill="{StaticResource PrimaryTextBrush}" Data="{StaticResource Up}" RenderTransformOrigin="0.5,0.5" />
+						<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Up}" RenderTransformOrigin="0.5,0.5" />
 					</Button>
 					<ScrollViewer x:Name="ScrollViewerDirectory" CanContentScroll="True" Margin="31,0,20,0" Focusable="False">
 						<StackPanel x:Name="StackPanelDirectory" Width="406" Orientation="Horizontal" Focusable="False" />
@@ -185,7 +177,7 @@
 							<VisualBrush>
 								<VisualBrush.Stretch>None</VisualBrush.Stretch>
 								<VisualBrush.Visual>
-                                    <Path Fill="{StaticResource PrimaryTextBrush}" Data="{StaticResource CancelSelected}" />
+									<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource CancelSelected}" />
 								</VisualBrush.Visual>
 							</VisualBrush>
 						</Button.OpacityMask>
@@ -195,7 +187,11 @@
 							<VisualBrush>
 								<VisualBrush.Stretch>None</VisualBrush.Stretch>
 								<VisualBrush.Visual>
-                                    <Path Fill="{StaticResource PrimaryTextBrush}" Data="{StaticResource AddToSelection}" />
+									<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource AddToSelection}" RenderTransformOrigin="0.5,0.5" >
+										<Path.RenderTransform>
+											<RotateTransform Angle="45"/>
+										</Path.RenderTransform>
+									</Path>
 								</VisualBrush.Visual>
 							</VisualBrush>
 						</Button.OpacityMask>
@@ -207,7 +203,7 @@
 									<Stretch>None</Stretch>
 								</VisualBrush.Stretch>
 								<VisualBrush.Visual>
-                                    <Path Fill="{StaticResource PrimaryTextBrush}" Data="{StaticResource PlaySelected}" />
+									<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource PlaySelected}" />
 								</VisualBrush.Visual>
 							</VisualBrush>
 						</Button.OpacityMask>

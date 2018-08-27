@@ -1,11 +1,8 @@
-﻿using MinimalistMusicPlayer.Explorer;
-using MinimalistMusicPlayer.Player;
+﻿using MinimalistMusicPlayer.Player;
 using MinimalistMusicPlayer.Utility;
-using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using WMPLib;
 
 namespace MinimalistMusicPlayer
@@ -17,34 +14,30 @@ namespace MinimalistMusicPlayer
 	public partial class MainWindow : Window
     {
 		// expands/collapses Playlist section
-		private async void ExpandCollapsePlaylistStackPanel(bool toExpanded)
+		private void ExpandCollapsePlaylistStackPanel(bool toExpanded)
 		{
 			if (toExpanded)
 			{
-				ButtonPlaylist.Style = Styles.AlphaButtonToggleStyle; // style with blue background in its rest state
-				ButtonPlaylist.Background = Brushes.AccentBrush;
 				// animate the grid
 				Anim.AnimateHeight(this, Const.ExpandedWindowHeight, .2);
 				Player.IsPlaylistVisible = true;
+
+				Anim.AnimateAngle(ButtonPlaylistIcon, 0, 180, .3, false);
 			}
 			else
 			{
-				ButtonPlaylist.Style = Styles.AlphaButtonStyle; // style with white background in its rest state
 				Anim.AnimateHeight(this, Const.CollapsedWindowHeight, .2);
 				Player.IsPlaylistVisible = false;
 
-				// await the animation (defined in AlphaButtonStyle control tempalte) to complete before setting the background to white.
-				await Task.Delay(200);
-				ButtonPlaylist.Background = Brushes.PrimaryTextBrush;
+				Anim.AnimateAngle(ButtonPlaylistIcon, 180, 0, .3, false);
 			}
 		}
 
 		private void SetPinToTopIcon(bool isTopMost)
 		{
-			ButtonPinToTop.Style = isTopMost ? Styles.BackgroundButtonToggleStyle : Styles.BackgroundButtonStyle;
-			ButtonPinToTop.Background = isTopMost ? Brushes.AccentBrush : Brushes.PrimaryBrush;
+			// ButtonPinToTop.Style = isTopMost ? Styles.BackgroundButtonToggleStyle : Styles.BackgroundButtonStyle;
+			// ButtonPinToTop.Background = isTopMost ? Brushes.AccentBrush : Brushes.PrimaryBrush;
 		}
-
 		//
 		// Volume icon
 		//

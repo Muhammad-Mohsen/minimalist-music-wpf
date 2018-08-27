@@ -11,7 +11,7 @@ namespace MinimalistMusicPlayer.Utility
 	{
 		// window heights when the playlist is collapsed/expanded
 		public const int CollapsedWindowHeight = 155;
-		public const int ExpandedWindowHeight = 600;
+		public const int ExpandedWindowHeight = 615;
 
 		public const int ExplorerItemWidth = 430;
 		public const int ExplorerItemIconWidth = 25;
