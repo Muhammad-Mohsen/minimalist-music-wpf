@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MinimalistMusicPlayer.Utility;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace MinimalistMusicPlayer.Explorer
@@ -10,6 +7,17 @@ namespace MinimalistMusicPlayer.Explorer
 	public class ExplorerItem : Button
 	{
 		public ExplorerItemType ItemType { get; set; }
+
+		public ExplorerItem()
+		{
+			IsTabStop = false;
+			Focusable = false;
+
+			// styles, margins...
+			Style = Styles.PlaylistButtonStyle;
+			Margin = new Thickness(0, 3, 0, 0);
+			BorderBrush = Brushes.PrimaryBrush;
+		}
 	}
 
 	public enum ExplorerItemType

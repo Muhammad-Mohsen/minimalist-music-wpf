@@ -17,15 +17,25 @@
 					</Border>
 
 					<ControlTemplate.Resources>
+						
 						<Storyboard x:Key="MouseEnterAnimation">
 							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="Background.Color" To="{StaticResource PrimaryHoverColor}" Duration="0:0:0.3" />
 						</Storyboard>
 						<Storyboard x:Key="MouseExitAnimation" FillBehavior="Stop">
 							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="Background.Color" To="{StaticResource PrimaryColor}" Duration="0:0:0.3" />
 						</Storyboard>
+
+						<Storyboard x:Key="PressedEnterAnimation">
+							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource AccentColor}" Duration="0:0:0.3" />
+						</Storyboard>
+						<Storyboard x:Key="PressedExitAnimation" FillBehavior="Stop">
+							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource PrimaryColor}" Duration="0:0:0.3" />
+						</Storyboard>
+
 					</ControlTemplate.Resources>
 
 					<ControlTemplate.Triggers>
+						
 						<Trigger Property="IsMouseOver" Value="True">
 							<Trigger.EnterActions>
 								<BeginStoryboard Storyboard="{StaticResource MouseEnterAnimation}" />
@@ -33,16 +43,15 @@
 							<Trigger.ExitActions>
 								<BeginStoryboard Storyboard="{StaticResource MouseExitAnimation}" />
 							</Trigger.ExitActions>
-
-							<!-- Can't figure out how to animate the borders!! -->
-							<!--<Setter Property="BorderBrush" TargetName="outerBorder" Value="{DynamicResource BorderBrush}" />
-							<Setter Property="Foreground" Value="White" />-->
-
 						</Trigger>
 
 						<Trigger Property="IsPressed" Value="True">
-							<Setter Property="BorderBrush" TargetName="outerBorder" Value="{DynamicResource AccentBrush}" />
-							<Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+							<Trigger.EnterActions>
+								<BeginStoryboard Storyboard="{StaticResource PressedEnterAnimation}" />
+							</Trigger.EnterActions>
+							<Trigger.ExitActions>
+								<BeginStoryboard Storyboard="{StaticResource PressedExitAnimation}" />
+							</Trigger.ExitActions>
 						</Trigger>
 
 					</ControlTemplate.Triggers>

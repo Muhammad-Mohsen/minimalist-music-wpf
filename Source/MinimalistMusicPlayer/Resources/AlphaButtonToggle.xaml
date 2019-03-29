@@ -27,12 +27,14 @@
 
 					<!-- http://stackoverflow.com/questions/2432790/animate-button-on-mouseover-and-mousedown -->
 					<ControlTemplate.Resources>
+
 						<Storyboard x:Key="MouseEnterAnimation">
 							<ColorAnimation Storyboard.TargetName="outerRectangle" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="{StaticResource AccentHoverColor}" Duration="0:0:0.3" />
 						</Storyboard>
 						<Storyboard x:Key="MouseExitAnimation" FillBehavior="Stop">
 							<ColorAnimation Storyboard.TargetName="outerRectangle" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="{StaticResource AccentColor}" Duration="0:0:0.3" />
 						</Storyboard>
+
 					</ControlTemplate.Resources>
 
 					<ControlTemplate.Triggers>
@@ -55,9 +57,11 @@
 						<Trigger Property="IsPressed" Value="True">
 							<Setter Property="Rectangle.Fill" TargetName="outerRectangle" Value="{DynamicResource AccentBrush}" />
 						</Trigger>
+
 						<Trigger Property="IsEnabled" Value="False">
 							<Setter Property="Rectangle.Fill" TargetName="outerRectangle" Value="{DynamicResource PrimaryHoverBrush}" />
 						</Trigger>
+
 					</ControlTemplate.Triggers>
 
 				</ControlTemplate>

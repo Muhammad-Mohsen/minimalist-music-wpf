@@ -33,8 +33,6 @@ namespace MinimalistMusicPlayer.Explorer
 		// using default args instead of doing multiple constructors
 		public MediaItem(FileInfo mediaFile, string duration, MediaItemStyle mediaItemStyle, bool isSelected = false)
 		{
-			IsTabStop = false;
-			Focusable = false;
 
 			// set item type
 			ItemType = ExplorerItemType.MediaItem;
@@ -58,11 +56,6 @@ namespace MinimalistMusicPlayer.Explorer
 			// duration
 			LabelDuration = CreateDurationLabel(duration);
 			contentGrid.Children.Add(LabelDuration);
-
-			// styles, margins...
-			Style = Styles.PlaylistButtonStyle;
-			Margin = new Thickness(0, 3, 0, 0);
-			BorderBrush = null;
 
 			Content = contentGrid;
 

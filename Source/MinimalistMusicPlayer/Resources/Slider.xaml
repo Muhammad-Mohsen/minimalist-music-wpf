@@ -34,12 +34,43 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Thumb">
-					<!--<Path Data="M 0 0 L 8 0 L 4 6 Z"  Stroke="SteelBlue" Margin="-2,0,0,0" StrokeThickness="2" Fill="SteelBlue"></Path>-->
-					<Grid>
-						<Ellipse Fill="{StaticResource PrimaryBrush}" StrokeThickness="2" Height="18" Width="18" />
-						<Ellipse x:Name="ThumbBorder" Stroke="{DynamicResource SecondaryTextBrush}" StrokeThickness="2" Height="14" Width="14" />
-						<Ellipse Fill="{StaticResource PrimaryBrush}" StrokeThickness="2" Height="10" Width="10" />
-					</Grid>
+					<Ellipse x:Name="ThumbBorder" Stroke="{DynamicResource SecondaryTextBrush}" StrokeThickness="2" Height="16" Width="16" Fill="{StaticResource PrimaryBrush}" />
+
+					<ControlTemplate.Resources>
+						<Storyboard x:Key="MouseEnterAnimation">
+							<ColorAnimation Storyboard.TargetName="ThumbBorder" Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)" To="{StaticResource AccentColor}" Duration="0:0:0.3" />
+						</Storyboard>
+						<Storyboard x:Key="MouseExitAnimation" FillBehavior="Stop">
+							<ColorAnimation Storyboard.TargetName="ThumbBorder" Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)" To="{StaticResource SecondaryTextColor}" Duration="0:0:0.3" />
+						</Storyboard>
+
+						<Storyboard x:Key="PressedEnterAnimation">
+							<ColorAnimation Storyboard.TargetName="ThumbBorder" Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)" To="{StaticResource AccentColor}" Duration="0:0:0.3" />
+						</Storyboard>
+						<Storyboard x:Key="PressedExitAnimation" FillBehavior="Stop">
+							<ColorAnimation Storyboard.TargetName="ThumbBorder" Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)" To="{StaticResource PrimaryColor}" Duration="0:0:0.3" />
+						</Storyboard>
+					</ControlTemplate.Resources>
+
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsMouseOver" Value="True">
+							<Trigger.EnterActions>
+								<BeginStoryboard Storyboard="{StaticResource MouseEnterAnimation}" />
+							</Trigger.EnterActions>
+							<Trigger.ExitActions>
+								<BeginStoryboard Storyboard="{StaticResource MouseExitAnimation}" />
+							</Trigger.ExitActions>
+						</Trigger>
+
+						<!--<Trigger Property="IsPressed" Value="True">
+							<Trigger.EnterActions>
+								<BeginStoryboard Storyboard="{StaticResource PressedEnterAnimation}" />
+							</Trigger.EnterActions>
+							<Trigger.ExitActions>
+								<BeginStoryboard Storyboard="{StaticResource PressedExitAnimation}" />
+							</Trigger.ExitActions>
+						</Trigger>-->
+					</ControlTemplate.Triggers>
 
 				</ControlTemplate>
 			</Setter.Value>
@@ -66,15 +97,6 @@
 			</Track>
 			<TickBar x:Name="BottomTick" Fill="LightGray" SnapsToDevicePixels="True" Grid.Row="2" Placement="Bottom" Height="4" Visibility="Collapsed" />
 		</Grid>
-
-		<ControlTemplate.Resources>
-			<Storyboard x:Key="MouseEnterAnimation">
-				<ColorAnimation Storyboard.TargetName="ThumbBorder" Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)" To="{StaticResource PrimaryHoverColor}" Duration="0:0:0.3" />
-			</Storyboard>
-			<Storyboard x:Key="MouseExitAnimation" FillBehavior="Stop">
-				<ColorAnimation Storyboard.TargetName="ThumbBorder" Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)" To="{StaticResource SecondaryTextColor}" Duration="0:0:0.3" />
-			</Storyboard>
-		</ControlTemplate.Resources>
 
 		<ControlTemplate.Triggers>
 			<Trigger Property="TickPlacement"  Value="TopLeft">

@@ -1,9 +1,4 @@
 ﻿using MinimalistMusicPlayer.Utility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -15,9 +10,6 @@ namespace MinimalistMusicPlayer.Explorer
 		// Drive item constructor
 		public DriveItem(string driveName)
 		{
-			IsTabStop = false;
-			Focusable = false;
-
 			ItemType = ExplorerItemType.DriveItem;
 
 			Directory = driveName;
@@ -33,11 +25,7 @@ namespace MinimalistMusicPlayer.Explorer
 
 			Label labelTitle = CreateTitleLabel(driveName);
 			contentGrid.Children.Add(labelTitle);
-
-			Style = Styles.PlaylistButtonStyle;
-			Margin = new Thickness(0, 3, 0, 0);
-			BorderBrush = null;
-
+			
 			Content = contentGrid;
 		}
 

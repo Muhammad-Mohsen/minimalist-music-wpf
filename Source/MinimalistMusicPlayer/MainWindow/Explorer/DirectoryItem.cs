@@ -12,9 +12,6 @@ namespace MinimalistMusicPlayer.Explorer
 		// Directory item constructor
 		public DirectoryItem(string directory)
 		{
-			IsTabStop = false;
-			Focusable = false;
-
 			// set item type
 			ItemType = ExplorerItemType.DirectoryItem;
 
@@ -30,10 +27,6 @@ namespace MinimalistMusicPlayer.Explorer
 
 			Label labelTitle = CreateTitleLabel(directory.Split(Const.DirectorySeparators).Last());
 			contentGrid.Children.Add(labelTitle);
-
-			Style = Styles.PlaylistButtonStyle;
-			Margin = new Thickness(0, 3, 0, 0);
-			BorderBrush = null;
 
 			Content = contentGrid;
 		}
