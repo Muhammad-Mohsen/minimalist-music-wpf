@@ -45,14 +45,16 @@
 							</Trigger.ExitActions>
 						</Trigger>
 
-						<Trigger Property="IsPressed" Value="True">
+						<!--This caused an exception to be thrown when rapid-clicking an explorer item-->
+						<!--the exception is: System.InvalidOperationException: ''BorderBrush' property does not point to a DependencyObject in path '(0).(1)'.'-->
+						<!--<Trigger Property="IsPressed" Value="True">
 							<Trigger.EnterActions>
 								<BeginStoryboard Storyboard="{StaticResource PressedEnterAnimation}" />
 							</Trigger.EnterActions>
 							<Trigger.ExitActions>
 								<BeginStoryboard Storyboard="{StaticResource PressedExitAnimation}" />
 							</Trigger.ExitActions>
-						</Trigger>
+						</Trigger>-->
 
 					</ControlTemplate.Triggers>
 
