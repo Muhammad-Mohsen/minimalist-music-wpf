@@ -1,14 +1,14 @@
 ﻿<Window x:Name="Window" x:Class="MinimalistMusicPlayer.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        mc:Ignorable="d"
-        Title="Minimalist" Height="155" Width="525"
-        WindowStyle="None"
-        ResizeMode="CanMinimize"
-		Icon="../Resources/img/AppIcon.ico" 
-        MouseWheel="Window_MouseWheel" PreviewKeyUp="Window_KeyUp" Deactivated="Window_Deactivated" Activated="Window_Activated">
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		mc:Ignorable="d"
+		Title="Minimalist" Height="155" Width="525"
+		WindowStyle="None"
+		ResizeMode="CanMinimize"
+		Icon="../Resources/img/AppIcon.ico"
+		MouseWheel="Window_MouseWheel" PreviewKeyUp="Window_KeyUp" Deactivated="Window_Deactivated" Activated="Window_Activated">
 
 	<Window.TaskbarItemInfo>
 		<TaskbarItemInfo x:Name="TaskbarItemInfo">
@@ -210,13 +210,8 @@
 					</Button>
 				</Grid>
 
-				<!-- Explorer view -->
-				<ScrollViewer x:Name="ScrollViewerExplorerPrimary" Margin="0,32,0,0" Focusable="False" IsTabStop="False">
-					<StackPanel x:Name="StackPanelExplorerPrimary" Focusable="False"/>
-				</ScrollViewer>
-				<ScrollViewer x:Name="ScrollViewerExplorerSecondary" Margin="-500,32,500,0" Focusable="False" IsTabStop="False">
-					<StackPanel x:Name="StackPanelExplorerSecondary" Focusable="False"/>
-				</ScrollViewer>
+				<!-- Explorer view added programmatically here!!-->
+
 			</Grid>
 
 		</Grid>

@@ -20,14 +20,16 @@ namespace MinimalistMusicPlayer
 		//
 		public ScrollViewer GetExplorer(DirectoryInfo directory)
 		{
-			if (directory == null) return null;
-			if (ExplorerCache.ContainsKey(directory.FullName)) return ExplorerCache[directory.FullName]; // try the cache first
+			var key = directory == null ? Const.Root : directory.FullName; // directory is null at the root
+			if (ExplorerCache.ContainsKey(key)) return ExplorerCache[key]; // try the cache first
 
-			// otherwise, get everything
-			var container = CreateExplorerContainer();
-			var stack = container.Content as StackPanel;
+			var container = CreateExplorerContainer(); // otherwise, create the explorer 'window'
+			ExplorerCache.Add(key, container); // add it to the cache
+			PopulateMediaExplorer(container.Content as StackPanel, directory); // populate it
 
-			return container;
+			GridExplorerMain.Children.Add(container); // don't forget to add it to the UI dummy!!
+
+			return container; // hand it over to whoever is interested
 		}
 
 		private ScrollViewer CreateExplorerContainer()
@@ -36,6 +38,7 @@ namespace MinimalistMusicPlayer
 			{
 				IsTabStop = false,
 				Focusable = false,
+				Margin = Const.ExplorerMargin.CurrentPage,
 				Content = new StackPanel()
 				{
 					Focusable = false,

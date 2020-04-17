@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using WMPLib;
 
@@ -43,12 +44,12 @@ namespace MinimalistMusicPlayer
 			if (Directory.Exists(savedDirectory)) CurrentDirectory = new DirectoryInfo(savedDirectory);
 			else CurrentDirectory = new DirectoryInfo(Const.DefaultMediaDirectory);
 
-			// intialize Explorer references
-			StackPanelExplorer = StackPanelExplorerPrimary;
-			ScrollViewerExplorer = ScrollViewerExplorerPrimary;
+			// intialize the explorer
+			ScrollViewerExplorer = GetExplorer(CurrentDirectory);
+			StackPanelExplorer = ScrollViewerExplorer.Content as StackPanel;
 
+			// initialize the breadcrumb bar
 			InitializeBreadcrumbBar(CurrentDirectory);
-			PopulateMediaExplorer(CurrentDirectory);
 
 			InitializeTimer(); // timer to update the seek bar, volume fade, etc.
 

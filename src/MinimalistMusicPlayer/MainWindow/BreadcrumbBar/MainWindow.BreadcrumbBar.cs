@@ -6,6 +6,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MinimalistMusicPlayer
 {
@@ -17,11 +18,9 @@ namespace MinimalistMusicPlayer
 		public void DirectoryChange(DirectoryInfo directory)
 		{
 			// if changing to the same directory (when clicking the track button) don't do anything
-			if (directory != null && CurrentDirectory != null && directory.FullName == CurrentDirectory.FullName)
-				return;
+			if (directory != null && CurrentDirectory != null && directory.FullName == CurrentDirectory.FullName) return;
 
-			if (directory == null && CurrentDirectory == null)
-				return;
+			if (directory == null && CurrentDirectory == null) return;
 
 			Thickness toMargin = GetExplorerAnimationMargin(CurrentDirectory, directory);
 			Thickness fromMargin = GetExplorerAnimationMargin(directory, CurrentDirectory);
@@ -31,15 +30,14 @@ namespace MinimalistMusicPlayer
 			// set the setting (will be saved in OnExit event in the app class!!)
 			Properties.Settings.Default[Const.ExplorerDirectorySetting] = directory?.FullName;
 
-			// get paged media explorer
-			ScrollViewerExplorer = GetPagedScrollViewerExplorer();
-			StackPanelExplorer = GetPagedStackPanelExplorer();
+			var explorerToHide = ScrollViewerExplorer;
 
-			// populate paged media explorer (asynchronously)
-			PopulateMediaExplorer(directory);
+			// get paged media explorer
+			ScrollViewerExplorer = GetExplorer(directory);
+			StackPanelExplorer = ScrollViewerExplorer.Content as StackPanel;
 
 			// animate the media explorer current -> paged
-			Anim.AnimateMargin(GetPagedScrollViewerExplorer(), Const.ExplorerMargin.CurrentPage, toMargin, Const.ShowHideDelay);
+			Anim.AnimateMargin(explorerToHide, Const.ExplorerMargin.CurrentPage, toMargin, Const.ShowHideDelay);
 			// repopulate the breadcrumb bar
 			PopulateBreadcrumbBar(directory);
 			// animate the media explorer paged -> current

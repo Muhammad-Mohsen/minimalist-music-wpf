@@ -20,12 +20,9 @@ namespace MinimalistMusicPlayer
 		public StackPanel StackPanelExplorer;
 		public ScrollViewer ScrollViewerExplorer;
 
-		public async void PopulateMediaExplorer(DirectoryInfo directory)
+		public async void PopulateMediaExplorer(StackPanel explorer, DirectoryInfo directory)
 		{
-			StackPanelExplorer.Children.Clear();
-			ScrollViewerExplorer.ScrollToHome();
-
-			AddExplorerItemsAsync(StackPanelExplorer, directory);
+			AddExplorerItemsAsync(explorer, directory);
 			await Task.Delay(TimeSpan.FromTicks(0)); // just to make the method async!
 		}
 
@@ -35,7 +32,14 @@ namespace MinimalistMusicPlayer
 			// if at the root of the HDD
 			if (newDirectory == null)
 			{
-				DriveInfo.GetDrives().Where(drive => drive.IsReady).ToList().ForEach(drive => AddDriveItem(drive.RootDirectory.FullName)); // added synchronously!
+				// added synchronously!
+				DriveInfo.GetDrives().Where(drive => drive.IsReady).ToList().ForEach(drive =>
+				{
+					DriveItem driveItem = new DriveItem(drive.RootDirectory.FullName);
+					driveItem.MouseDoubleClick += DriveItem_MouseDoubleClick;
+					panel.Children.Add(driveItem);
+				});
+
 				return;
 			}
 
@@ -44,13 +48,13 @@ namespace MinimalistMusicPlayer
 
 			foreach (DirectoryInfo dir in subDirectories)
 			{
-				AddExplorerItem(StackPanelExplorer, dir.FullName, -1);
+				AddExplorerItem(panel, dir.FullName, -1);
 				await Task.Delay(TimeSpan.FromMilliseconds(Const.AsyncDelay));
 			}
 
 			for (int i = 0; i < DirectoryMediaFiles.Length; i++)
 			{
-				AddExplorerItem(StackPanelExplorer, DirectoryMediaFiles[i].FullName, i);
+				AddExplorerItem(panel, DirectoryMediaFiles[i].FullName, i);
 				await Task.Delay(TimeSpan.FromMilliseconds(Const.AsyncDelay));
 			}
 		}
@@ -66,14 +70,6 @@ namespace MinimalistMusicPlayer
 
 			Anim.ShowHideFrameworkElement(item, true, Const.ShowHideDelay);
 			await Task.Delay(TimeSpan.FromSeconds(Const.ShowHideDelay));
-		}
-		// pretty much a duplicate of DirectoryItem code, but I'm alright with that
-		public void AddDriveItem(string root)
-		{
-			DriveItem driveItem = new DriveItem(root);
-			driveItem.MouseDoubleClick += DriveItem_MouseDoubleClick;
-
-			StackPanelExplorer.Children.Add(driveItem);
 		}
 
 		// Directory Items
@@ -261,26 +257,13 @@ namespace MinimalistMusicPlayer
 			MediaItem mediaItem = GetMediaItemByPlaylistIndex(index);
 			MediaItem.Select(mediaItem);
 		}
-		//
-		// Directory change animation helpers
-		//
-		private ScrollViewer GetPagedScrollViewerExplorer()
-		{
-			return ScrollViewerExplorer == ScrollViewerExplorerPrimary ? ScrollViewerExplorerSecondary : ScrollViewerExplorerPrimary;
-		}
-		private StackPanel GetPagedStackPanelExplorer()
-		{
-			return StackPanelExplorer == StackPanelExplorerPrimary ? StackPanelExplorerSecondary : StackPanelExplorerPrimary;
-		}
+
 		// returns appropriate margin (left/right) for the media explorer stackPanel animation
 		private Thickness GetExplorerAnimationMargin(DirectoryInfo fromDirectory, DirectoryInfo currentDirectory)
 		{
 			if (currentDirectory == null) return Const.ExplorerMargin.RightPage;
-
 			else if (fromDirectory == null) return Const.ExplorerMargin.LeftPage;
-
 			else if (fromDirectory.FullName.Length <= currentDirectory.FullName.Length) return Const.ExplorerMargin.LeftPage;
-
 			else return Const.ExplorerMargin.RightPage;
 		}
 	}
