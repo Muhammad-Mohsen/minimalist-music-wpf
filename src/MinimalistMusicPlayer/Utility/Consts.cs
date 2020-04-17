@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace MinimalistMusicPlayer.Utility
@@ -38,7 +34,7 @@ namespace MinimalistMusicPlayer.Utility
 		public const string BreadcrumbButtonSeparator = "/";
 
 		public static char[] DirectorySeparators = { '/', '\\' };
-		
+
 		public const int InvalidIndex = -1;
 
 		public static class OpacityLevel
@@ -54,7 +50,7 @@ namespace MinimalistMusicPlayer.Utility
 			public static Thickness LeftPage = new Thickness(-500, 32, 500, 0);
 		}
 
-		public const string Computer = "Computer";
+		public const string Root = "Computer";
 		public const string ExplorerDirectorySetting = "ExplorerDirectory";
 
 		public const double ShowHideDelay = .2; // in seconds

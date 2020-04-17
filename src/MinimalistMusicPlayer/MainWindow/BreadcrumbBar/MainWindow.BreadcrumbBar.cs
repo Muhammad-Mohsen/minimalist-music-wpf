@@ -55,7 +55,7 @@ namespace MinimalistMusicPlayer
 		{
 			ButtonUp.Click += UpButton_Click;
 			PopulateBreadcrumbBar(directory);
-		}	
+		}
 		// reinitializes the breadcrumb bar using already existing breadcrumb buttons
 		public void PopulateBreadcrumbBar(DirectoryInfo directory)
 		{
@@ -63,11 +63,11 @@ namespace MinimalistMusicPlayer
 			StackPanelDirectory.Children.Clear();
 
 			// Add the computer button
-			BreadcrumbButton computerButton = new BreadcrumbButton(Const.Computer);
-			computerButton.Click += ComputerButton_Click;
-			StackPanelDirectory.Children.Add(computerButton);
+			BreadcrumbButton rootButton = new BreadcrumbButton(Const.Root);
+			rootButton.Click += ComputerButton_Click;
+			StackPanelDirectory.Children.Add(rootButton);
 
-			BreadcrumbButton computerSeparatorButton = CreateSeparatorButton();
+			BreadcrumbButton computerSeparatorButton = BreadcrumbButton.CreateSeparator();
 			StackPanelDirectory.Children.Add(computerSeparatorButton);
 
 			// will be null at the root
@@ -78,52 +78,12 @@ namespace MinimalistMusicPlayer
 
 				foreach (string crumb in breadcrumbs)
 				{
-					if (string.IsNullOrWhiteSpace(crumb)) // removes the extra crumb for drive paths
-						continue;
-
-					// add the breadcrumb button to the breadcrumb bar
-					BreadcrumbButton button = new BreadcrumbButton(crumb);
-					button.Click += BreadcrumbButton_Click;
-					StackPanelDirectory.Children.Add(button);
-
-					// click handler isn't wired up to the event
-					BreadcrumbButton separatorButton = CreateSeparatorButton();
-					StackPanelDirectory.Children.Add(separatorButton);
+					if (string.IsNullOrWhiteSpace(crumb)) continue; // removes the extra crumb for drive paths
+					BreadcrumbButton.AddCrumb(StackPanelDirectory, crumb, BreadcrumbButton_Click);
 				}
 
 				ScrollViewerDirectory.ScrollToRightEnd();
 			}
-
-		}
-		
-		private BreadcrumbButton CreateSeparatorButton()
-		{
-			return new BreadcrumbButton(Const.BreadcrumbButtonSeparator)
-			{
-				IsEnabled = false
-			};
-		}
-
-		// gets the directory up to the given crumb
-		private string GetDirectory(BreadcrumbButton crumbButton)
-		{
-			StringBuilder directory = new StringBuilder();
-
-			foreach (BreadcrumbButton button in StackPanelDirectory.Children)
-			{
-				directory.Append(button.Content.ToString());
-				if (button.Equals(crumbButton)) // if you get to where you want, break
-					break;
-			}
-
-			// remove the "Computer/"
-			directory.Replace("Computer/", "");
-
-			// if you get to the root, append a '/'
-			if (directory.Length == 2)
-				directory.Append(Const.BreadcrumbButtonSeparator);
-
-			return directory.ToString();
 		}
 
 		private async void SetPlaylistSelectMode(bool shouldShow)
@@ -170,6 +130,27 @@ namespace MinimalistMusicPlayer
 
 			DirectoryChange(newDirectory);
 		}
+
+		// gets the directory up to the given crumb
+		private string GetDirectory(BreadcrumbButton crumbButton)
+		{
+			StringBuilder directory = new StringBuilder();
+
+			foreach (BreadcrumbButton button in StackPanelDirectory.Children)
+			{
+				directory.Append(button.Content.ToString());
+				if (button.Equals(crumbButton)) break; // if you get to where you want, break
+			}
+
+			// remove the "Computer/"
+			directory.Replace("Computer/", "");
+
+			// if you get to the root, append a '/'
+			if (directory.Length == 2)
+				directory.Append(Const.BreadcrumbButtonSeparator);
+
+			return directory.ToString();
+		}
 		//
 		// Select mode click handlers
 		//
@@ -178,15 +159,14 @@ namespace MinimalistMusicPlayer
 			// get marked media files
 			List<string> markedFiles = GetMarkedMediaFileFullNames();
 
-			if (markedFiles.Count == 0)
-				return;
+			if (markedFiles.Count == 0) return;
 
 			// reset everything
-			SetPlaylistMediaItemStyle(Player.PlaylistFullNames, false);
+			SetPlaylistMediaItemStyle(Playlist.PlaylistFullNames, false);
 
 			// reinitialize playlist
-			Player.ClearPlaylistItems();
-			Player.AddPlaylistItems(markedFiles);
+			Playlist.ClearPlaylistItems();
+			Playlist.AddPlaylistItems(markedFiles);
 
 			// reset marking state
 			ResetMediaItemMarkState();
@@ -194,8 +174,8 @@ namespace MinimalistMusicPlayer
 
 			SetPlaylistMediaItemStyle(markedFiles, true);
 
-			Player.Index = 0;
-			Player.Play(Player.Index);
+			Playlist.Index = 0;
+			Player.Play(Playlist.GetItem(Playlist.Index));
 
 			SetPlaylistSelectMode(false);
 		}
@@ -213,17 +193,17 @@ namespace MinimalistMusicPlayer
 			List<string> markedFiles = GetMarkedMediaFileFullNames();
 
 			// reset everything
-			SetPlaylistMediaItemStyle(Player.PlaylistFullNames, false);
+			SetPlaylistMediaItemStyle(Playlist.PlaylistFullNames, false);
 
 			// reset marking state
 			ResetMediaItemMarkState();
 			MediaItem.MarkedItemCount = 0;
 
 			// add media files to playlist
-			Player.AddPlaylistItems(markedFiles);
-			
+			Playlist.AddPlaylistItems(markedFiles);
+
 			// this time, set the item style for the entire playlist (as opposed to the marked files)
-			SetPlaylistMediaItemStyle(Player.PlaylistFullNames, true);
+			SetPlaylistMediaItemStyle(Playlist.PlaylistFullNames, true);
 
 			SetPlaylistSelectMode(false);
 		}

@@ -196,7 +196,6 @@
     <Compile Include="Utility\Icons.cs" />
     <Compile Include="Utility\Styles.cs" />
     <Compile Include="MainWindow\MainWindow.Helpers.cs" />
-    <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

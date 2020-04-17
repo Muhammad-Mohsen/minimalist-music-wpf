@@ -13,12 +13,11 @@ namespace MinimalistMusicPlayer
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
 	public partial class MainWindow : Window
-    {
+	{
 		// needs to be defined before InitializeComponent, believe it or not!!
-		// see ValueChanged events
-		// Player.Position is accessed during InitializeComponent.
+		// Player.Position is accessed during InitializeComponent (see ValueChanged events)
 		public static readonly PlayerWrapper Player = new PlayerWrapper();
-		public static PlaylistWrapper Playlist; // not used yet!
+		public static PlaylistWrapper Playlist = new PlaylistWrapper();
 
 		bool IsSeeking = false; // indicates whether the seek slider value is being manually changed
 
@@ -26,8 +25,8 @@ namespace MinimalistMusicPlayer
 		Point InitialPosition;
 		bool CanMoveWindow;
 
-        public MainWindow()
-        {	
+		public MainWindow()
+		{
 			// hook up a handler for PlayState change event
 			Player.InternalPlayer.PlayStateChange += Player_PlayStateChange;
 			Player.InternalPlayer.MediaChange += Player_MediaChange;
@@ -66,7 +65,7 @@ namespace MinimalistMusicPlayer
 			if (Player.IsPlaylistVisible == false) ExpandCollapsePlaylistStackPanel(true);
 
 			// go to playlist directory if possible
-			if (!string.IsNullOrEmpty(Player.PlaylistDirectory)) DirectoryChange(new DirectoryInfo(Player.PlaylistDirectory));
+			if (!string.IsNullOrEmpty(Playlist.PlaylistDirectory)) DirectoryChange(new DirectoryInfo(Playlist.PlaylistDirectory));
 		}
 		//
 		// Button events
@@ -79,11 +78,11 @@ namespace MinimalistMusicPlayer
 		{
 			if (Player.CurrentMedia != null)
 			{
-				// more sadness 
-				if (Player.Index == Const.InvalidIndex)
+				// more sadness
+				if (Playlist.Index == Const.InvalidIndex)
 				{
-					Player.Index = 0;
-					Player.Play(Player.Index);
+					Playlist.Index = 0;
+					Player.Play(Playlist.GetItem(Playlist.Index));
 				}
 
 				if (Player.PlayState == WMPPlayState.wmppsPlaying)
@@ -94,35 +93,35 @@ namespace MinimalistMusicPlayer
 		}
 		private void ButtonPrevious_Click(object sender, RoutedEventArgs e)
 		{
-			if (Player.Index > 0)
-				Player.Index--;
+			if (Playlist.Index > 0)
+				Playlist.Index--;
 
 			else
-				Player.Index = Player.Count - 1;
+				Playlist.Index = Playlist.Count - 1;
 
-			if (Player.Playlist.count > 0)
-				Player.Play(Player.Index);
+			if (Playlist.Count > 0)
+				Player.Play(Playlist.GetItem(Playlist.Index));
 		}
 		private void ButtonNext_Click(object sender, RoutedEventArgs e)
 		{
-			if (Player.Index < Player.Count - 1)
-				Player.Index++;
+			if (Playlist.Index < Playlist.Count - 1)
+				Playlist.Index++;
 
 			else
-				Player.Index = 0;
+				Playlist.Index = 0;
 
-			if (Player.Playlist.count > 0)
-				Player.Play(Player.Index);
+			if (Playlist.Count > 0)
+				Player.Play(Playlist.GetItem(Playlist.Index));
 		}
 		private void ButtonRepeat_Click(object sender, RoutedEventArgs e)
 		{
-			SetRepeatIcon(Player.RepeatMode);
-			Player.AdvanceRepeatMode(Player.RepeatMode); // method takes the old repeat mode, and sets the new repeat mode.
+			SetRepeatIcon(Playlist.RepeatMode);
+			Playlist.CycleRepeat(); // method takes the old repeat mode, and sets the new repeat mode.
 		}
 		private void ButtonShuffle_Click(object sender, RoutedEventArgs e)
 		{
-			Player.IsShuffle = !Player.IsShuffle;
-			SetShuffleIcon(Player.IsShuffle);
+			Playlist.IsShuffle = !Playlist.IsShuffle;
+			SetShuffleIcon(Playlist.IsShuffle);
 		}
 		//
 		// Seek slider events
@@ -157,13 +156,13 @@ namespace MinimalistMusicPlayer
 			SetDurationValues((IWMPMedia)item);
 			SetTrackInfo((IWMPMedia)item);
 
-			SelectMediaItemByIndex(Player.Index);
+			SelectMediaItemByIndex(Playlist.Index);
 
 			// play the next track if the current one reaches its end
 			if (Player.PlayState == WMPPlayState.wmppsMediaEnded)
 			{
 				await Task.Delay(100); // work around to ensure that the player actually plays the media. Looks like everything in WPF suffers from racing issues.
-				Player.PlayNextTrack(Player.Index);
+				Player.Play(Playlist.GetNextItem());
 			}
 		}
 		//
@@ -176,13 +175,13 @@ namespace MinimalistMusicPlayer
 				SliderVolume.Value = 0;
 			else
 				SliderVolume.Value = Player.Volume;
-			
+
 			SetVolumeIcon(SliderVolume.Value, Player.IsMuted);
 		}
 		private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
 		{
 			// only set the player volume if it was changed through the slider
- 			// not the mute button
+			// not the mute button
 			if (!Player.IsMuted)
 				Player.Volume = (int)SliderVolume.Value;
 
@@ -223,7 +222,7 @@ namespace MinimalistMusicPlayer
 		//
 		// move window
 		//
-		// had to be done this way so that if the mouse is pressed from outside the grid, 
+		// had to be done this way so that if the mouse is pressed from outside the grid,
 		// and then it moves within it, it wouldn't fire the event
 		private void GridMain_MouseDown(object sender, MouseButtonEventArgs e)
 		{
@@ -260,8 +259,7 @@ namespace MinimalistMusicPlayer
 					break;
 			}
 		}
-		// if the mouse wheel gives a positive delta, increment the volume, else decrement it.
-		// pretty straight forward really.
+		// if the mouse wheel gives a positive delta, increment the volume, else decrement it. pretty straight forward really.
 		private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
 		{
 			if (e.Delta > 0)
@@ -274,23 +272,23 @@ namespace MinimalistMusicPlayer
 		//
 		private void ThumbButtonInfoPrevious_Click(object sender, EventArgs e)
 		{
-			if (Player.Index > 0)
-				Player.Index--;
+			if (Playlist.Index > 0)
+				Playlist.Index--;
 			else
-				Player.Index = Player.Count - 1;
+				Playlist.Index = Playlist.Count - 1;
 
-			if (Player.Playlist.count > 0)
-				Player.Play(Player.Index);
+			if (Playlist.Count > 0)
+				Player.Play(Playlist.GetItem(Playlist.Index));
 		}
 		private void ThumbButtonInfoPlayPause_Click(object sender, EventArgs e)
 		{
 			if (Player.CurrentMedia != null)
 			{
-				// more sadness 
-				if (Player.Index == Const.InvalidIndex)
+				// more sadness
+				if (Playlist.Index == Const.InvalidIndex)
 				{
-					Player.Index = 0;
-					Player.Play(Player.Index);
+					Playlist.Index = 0;
+					Player.Play(Playlist.GetItem(Playlist.Index));
 				}
 
 				if (Player.PlayState == WMPPlayState.wmppsPlaying)
@@ -301,14 +299,10 @@ namespace MinimalistMusicPlayer
 		}
 		private void ThumbButtonInfoNext_Click(object sender, EventArgs e)
 		{
-			if (Player.Index < Player.Count - 1)
-				Player.Index++;
+			if (Playlist.Index < Playlist.Count - 1) Playlist.Index++;
+			else Playlist.Index = 0;
 
-			else
-				Player.Index = 0;
-
-			if (Player.Playlist.count > 0)
-				Player.Play(Player.Index);
+			if (Playlist.Count > 0) Player.Play(Playlist.GetItem(Playlist.Index));
 		}
 
 		private void Window_Deactivated(object sender, EventArgs e)

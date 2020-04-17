@@ -43,7 +43,7 @@ namespace MinimalistMusicPlayer.Explorer
 			MediaIcon = CreateIcon(mediaItemStyle == MediaItemStyle.IconHighlighted ? Icons.MediaPlaylist : Icons.Media);
 			MediaIcon.Click += MediaIconButton_Click;
 			contentGrid.Children.Add(MediaIcon);
-			
+
 			// title
 			LabelTitle = CreateTitleLabel(mediaFile.Name, mediaItemStyle != MediaItemStyle.Normal ? Brushes.PrimaryTextBrush : Brushes.SecondaryTextBrush);
 			contentGrid.Children.Add(LabelTitle);
@@ -57,8 +57,16 @@ namespace MinimalistMusicPlayer.Explorer
 			if (isSelected) Select(this);
 			IsMarked = false;
 		}
+
+		private void MediaIconButton_Click(object sender, RoutedEventArgs e)
+		{
+			IsMarked = !IsMarked;
+			MarkMediaIcon((Button)sender, IsMarked);
+			MarkedItemCount = IsMarked ? MarkedItemCount + 1 : MarkedItemCount - 1;
+			MarkedItemCountChange(this, new RoutedEventArgs()); // raise the MarkedItemCountChange event (to show/hide the PlaySelected button)
+		}
 		//
-		// UI bits helpers
+		// UI helpers
 		//
 		// helper that creates a fully-realized duration label
 		private Label CreateDurationLabel(string duration)
@@ -70,14 +78,6 @@ namespace MinimalistMusicPlayer.Explorer
 				FontSize = 12,
 				Foreground = Brushes.SecondaryTextBrush
 			};
-		}
-				
-		private void MediaIconButton_Click(object sender, RoutedEventArgs e)
-		{
-			IsMarked = !IsMarked;
-			MarkMediaIcon((Button)sender, IsMarked);
-			MarkedItemCount = IsMarked ? MarkedItemCount + 1 : MarkedItemCount - 1;
-			MarkedItemCountChange(this, new RoutedEventArgs()); // raise the MarkedItemCountChange event (to show/hide the PlaySelected button)
 		}
 
 		// marks the media icon
@@ -110,7 +110,7 @@ namespace MinimalistMusicPlayer.Explorer
 			var foregroundColor = isPlaylistItem == true ? Brushes.PrimaryTextBrush : Brushes.SecondaryTextBrush;
 			LabelTitle.Foreground = foregroundColor;
 		}
-		
+
 		public static void Select(MediaItem item)
 		{
 			OldSelected?.ToggleSelectionUi(false); // deselect the old item, if applicable

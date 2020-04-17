@@ -3,7 +3,6 @@ using MinimalistMusicPlayer.Utility;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using WMPLib;
 
 namespace MinimalistMusicPlayer
@@ -13,7 +12,7 @@ namespace MinimalistMusicPlayer
 	/// This is basically the UI API
 	/// </summary>
 	public partial class MainWindow : Window
-    {
+	{
 		// expands/collapses Playlist section
 		private void ExpandCollapsePlaylistStackPanel(bool toExpanded)
 		{
@@ -46,19 +45,14 @@ namespace MinimalistMusicPlayer
 		// sets the icon of the volume button depending on current volume level, and whether the player is muted.
 		private void SetVolumeIcon(double volume, bool isMute)
 		{
-			if (volume == 0 || isMute)
-				ButtonVolume.OpacityMask = Icons.VolumeMute;
-
-			else if (volume < Const.VolumeMid)
-				ButtonVolume.OpacityMask = Icons.VolumeLow;
-
-			else if (volume >= Const.VolumeMid)
-				ButtonVolume.OpacityMask = Icons.VolumeHigh;
+			if (volume == 0 || isMute) ButtonVolume.OpacityMask = Icons.VolumeMute;
+			else if (volume < Const.VolumeMid) ButtonVolume.OpacityMask = Icons.VolumeLow;
+			else if (volume >= Const.VolumeMid) ButtonVolume.OpacityMask = Icons.VolumeHigh;
 		}
 
 		private async void SetRepeatIcon(RepeatMode repeatMode)
 		{
-			switch (Player.RepeatMode)
+			switch (repeatMode)
 			{
 				case RepeatMode.NoRepeat:
 					ButtonRepeat.OpacityMask = Icons.Repeat;
@@ -88,11 +82,9 @@ namespace MinimalistMusicPlayer
 				ButtonShuffle.Style = Styles.AlphaButtonToggleStyle;
 				ButtonShuffle.Background = Brushes.AccentBrush;
 			}
-
 			else
 			{
 				ButtonShuffle.Style = Styles.AlphaButtonStyle;
-
 				await Task.Delay(200);
 				ButtonShuffle.Background = Brushes.PrimaryTextBrush;
 			}
@@ -134,7 +126,7 @@ namespace MinimalistMusicPlayer
 			SliderSeek.Maximum = track.duration;
 			LabelTotalTime.Content = track.durationString;
 		}
-		
+
 		// sets the track name, album, and artist labels, as well as the application title
 		private void SetTrackInfo(IWMPMedia track)
 		{
@@ -145,13 +137,10 @@ namespace MinimalistMusicPlayer
 
 			LabelArtistAlbum.Content = string.Concat(author, " (", album, ")").Ellipsize(Const.TrackInfoMaxLength);
 
-			// set the window title (in the taskbar)
-			this.Title = string.Concat(track.name, " - Minimalist");
+			Title = string.Concat(track.name, " - Minimalist"); // set the window title (in the taskbar)
 
-			// set track title label tooltip
-			ToolTipTrackTitle.Content = track.name;
-			// set track artist/album label tooltip
-			ToolTipTrackArtistAlbum.Content = string.Concat(author, " (", album, ")");
+			ToolTipTrackTitle.Content = track.name; // set track title label tooltip
+			ToolTipTrackArtistAlbum.Content = string.Concat(author, " (", album, ")"); // set track artist/album label tooltip
 		}
 
 		private void SetSeekTooltip(double position, double maxValue, double width)
