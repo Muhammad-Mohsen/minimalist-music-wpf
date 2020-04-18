@@ -8,10 +8,10 @@ namespace MinimalistMusicPlayer.Utility
 {
 	class Anim
 	{
-        public static void AnimateHeight(FrameworkElement element, double newValue, double duration)
-        {
+		public static void AnimateHeight(FrameworkElement element, double newValue, double duration)
+		{
 			AnimateDoubleBasedProperty(element, newValue, duration, FrameworkElement.HeightProperty, true);
-        }
+		}
 
 		public static void AnimateOpacity(FrameworkElement element, double toValue, double duration)
 		{
@@ -22,7 +22,7 @@ namespace MinimalistMusicPlayer.Utility
 		{
 			AnimateThicknessBasedProperty(element, fromValue, toValue, duration, FrameworkElement.MarginProperty, true);
 		}
-		
+
 		public static void AnimateAngle(FrameworkElement element, double oldValue, double newValue, double duration, bool isRepeated)
 		{
 			DoubleAnimation animation = new DoubleAnimation(oldValue, newValue, new Duration(TimeSpan.FromSeconds(duration)));

@@ -6,7 +6,7 @@ namespace MinimalistMusicPlayer.Explorer
 	public class DriveItem : ExplorerItem
 	{
 		public string Directory { get; set; }
-		
+
 		// Drive item constructor
 		public DriveItem(string driveName)
 		{
@@ -25,7 +25,7 @@ namespace MinimalistMusicPlayer.Explorer
 
 			Label labelTitle = CreateTitleLabel(driveName.Replace('\\', '/'));
 			contentGrid.Children.Add(labelTitle);
-			
+
 			Content = contentGrid;
 		}
 	}
