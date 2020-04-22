@@ -1,8 +1,7 @@
 ﻿using MinimalistMusicPlayer.Player;
 using MinimalistMusicPlayer.Utility;
 using System;
-using System.Threading.Tasks;
-using System.Windows;
+using System.Windows.Shapes;
 using WMPLib;
 
 namespace MinimalistMusicPlayer
@@ -11,7 +10,7 @@ namespace MinimalistMusicPlayer
 	/// Contains helper methods that have direct access to UI elements
 	/// This is basically the UI API
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class MainWindow
 	{
 		// expands/collapses Playlist section
 		private void ExpandCollapsePlaylistStackPanel(bool toExpanded)
@@ -45,49 +44,20 @@ namespace MinimalistMusicPlayer
 		// sets the icon of the volume button depending on current volume level, and whether the player is muted.
 		private void SetVolumeIcon(double volume, bool isMute)
 		{
-			if (volume == 0 || isMute) ButtonVolume.OpacityMask = Icons.VolumeMute;
-			else if (volume < Const.VolumeMid) ButtonVolume.OpacityMask = Icons.VolumeLow;
-			else if (volume >= Const.VolumeMid) ButtonVolume.OpacityMask = Icons.VolumeHigh;
+			if (volume == 0 || isMute) ButtonVolume.Content = Icons.VolumeMute;
+			else if (volume < Const.VolumeMid) ButtonVolume.Content = Icons.VolumeLow;
+			else if (volume >= Const.VolumeMid) ButtonVolume.Content = Icons.VolumeHigh;
 		}
 
-		private async void SetRepeatIcon(RepeatMode repeatMode)
+		private void SetRepeatIcon(RepeatMode oldRepeatMode)
 		{
-			switch (repeatMode)
-			{
-				case RepeatMode.NoRepeat:
-					ButtonRepeat.OpacityMask = Icons.Repeat;
-					ButtonRepeat.Style = Styles.AlphaButtonToggleStyle;
-					ButtonRepeat.Background = Brushes.AccentBrush;
-					break;
-
-				case RepeatMode.Repeat:
-					ButtonRepeat.OpacityMask = Icons.RepeatOne;
-					ButtonRepeat.Style = Styles.AlphaButtonToggleStyle;
-					ButtonRepeat.Background = Brushes.AccentBrush;
-					break;
-
-				case RepeatMode.RepeatOne:
-					ButtonRepeat.OpacityMask = Icons.Repeat;
-					ButtonRepeat.Style = Styles.AlphaButtonStyle;
-					await Task.Delay(200);
-					ButtonRepeat.Background = Brushes.PrimaryTextBrush;
-					break;
-			}
+			ButtonRepeat.Content = oldRepeatMode == RepeatMode.Repeat ? Icons.RepeatOne : Icons.Repeat;
+			(ButtonRepeat.Content as Path).Stroke = oldRepeatMode == RepeatMode.RepeatOne ? Brushes.AccentBrush : Brushes.PrimaryTextBrush;
 		}
 
-		private async void SetShuffleIcon(bool isShuffle)
+		private void SetShuffleIcon(bool isShuffle)
 		{
-			if (isShuffle)
-			{
-				ButtonShuffle.Style = Styles.AlphaButtonToggleStyle;
-				ButtonShuffle.Background = Brushes.AccentBrush;
-			}
-			else
-			{
-				ButtonShuffle.Style = Styles.AlphaButtonStyle;
-				await Task.Delay(200);
-				ButtonShuffle.Background = Brushes.PrimaryTextBrush;
-			}
+			(ButtonShuffle.Content as Path).Stroke = isShuffle ? Brushes.PrimaryTextBrush: Brushes.AccentBrush;
 		}
 
 		// sets UI state for Play/Pause button, playing icon, and taskbar progress icon state
@@ -96,7 +66,7 @@ namespace MinimalistMusicPlayer
 			switch (state)
 			{
 				case WMPPlayState.wmppsPlaying:
-					ButtonPlayPause.OpacityMask = Icons.Pause;
+					ButtonPlayPause.Content = Icons.Pause;
 					ThumbButtonInfoPlayPause.ImageSource = Icons.ThumbnailPause;
 					Anim.AnimateOpacity(PlayingIcon, Const.OpacityLevel.Opaque, .3);
 					TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
@@ -105,14 +75,14 @@ namespace MinimalistMusicPlayer
 				case WMPPlayState.wmppsStopped:
 				case WMPPlayState.wmppsMediaEnded:
 					SliderSeek.Value = 0;
-					ButtonPlayPause.OpacityMask = Icons.Play;
+					ButtonPlayPause.Content = Icons.Play;
 					ThumbButtonInfoPlayPause.ImageSource = Icons.ThumbnailPlay;
 					Anim.AnimateOpacity(PlayingIcon, Const.OpacityLevel.Transparent, .3);
 					TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.None;
 					break;
 
 				case WMPPlayState.wmppsPaused:
-					ButtonPlayPause.OpacityMask = Icons.Play;
+					ButtonPlayPause.Content = Icons.Play;
 					ThumbButtonInfoPlayPause.ImageSource = Icons.ThumbnailPlay;
 					Anim.AnimateOpacity(PlayingIcon, Const.OpacityLevel.Transparent, .3);
 					TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Paused;

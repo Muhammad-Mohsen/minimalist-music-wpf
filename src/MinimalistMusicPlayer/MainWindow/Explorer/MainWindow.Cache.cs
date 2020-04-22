@@ -9,7 +9,7 @@ using System.Windows.Controls;
 namespace MinimalistMusicPlayer
 {
 	// Contains ExplorerItem cache of previously-visited directories
-	public partial class MainWindow : Window
+	public partial class MainWindow
 	{
 		public static Dictionary<string, ScrollViewer> ExplorerCache = new Dictionary<string, ScrollViewer>();
 		//

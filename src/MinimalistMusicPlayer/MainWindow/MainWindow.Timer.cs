@@ -8,7 +8,7 @@ namespace MinimalistMusicPlayer
 	/// <summary>
 	/// Updates the UI with every tick (elapsed time, seek, fadeout of volume, etc)
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class MainWindow
 	{
 		int VolumeSliderFadeCounter = -1;
 

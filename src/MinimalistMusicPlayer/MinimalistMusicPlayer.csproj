@@ -14,7 +14,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>D:\Code\Minimalist-Music-Player\Installer\</PublishUrl>
+    <PublishUrl>D:\Code\minimalist-music-player\dist\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -26,8 +26,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ProductName>Minimalist Music Player</ProductName>
     <PublisherName>Muhammad Mohsen</PublisherName>
-    <ApplicationRevision>26</ApplicationRevision>
-    <ApplicationVersion>3.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>4.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -78,6 +78,9 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentWPF, Version=0.8.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentWPF.0.8.0\lib\net45\FluentWPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -116,7 +119,6 @@
     <Compile Include="MainWindow\Explorer\MediaItem.cs" />
     <Compile Include="Player\MediaFile.cs" />
     <Compile Include="Player\Playlist.cs" />
-    <Compile Include="Utility\Brushes.cs" />
     <Compile Include="Utility\Consts.cs" />
     <Compile Include="Utility\Extensions.cs" />
     <Compile Include="MainWindow\MainWindow.Timer.cs" />
@@ -193,9 +195,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Utility\Icons.cs" />
-    <Compile Include="Utility\Styles.cs" />
+    <Compile Include="Utility\ProgrammaticXamlRes.cs" />
     <Compile Include="MainWindow\MainWindow.Helpers.cs" />
+    <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

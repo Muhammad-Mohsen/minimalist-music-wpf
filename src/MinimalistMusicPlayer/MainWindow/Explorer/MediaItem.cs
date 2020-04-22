@@ -81,20 +81,9 @@ namespace MinimalistMusicPlayer.Explorer
 		}
 
 		// marks the media icon
-		public async void MarkMediaIcon(Button mediaIcon, bool isMarked)
+		public void MarkMediaIcon(Button mediaIcon, bool isMarked)
 		{
-			if (isMarked)
-			{
-				mediaIcon.Style = Styles.AlphaButtonToggleStyle;
-				mediaIcon.Background = Brushes.AccentBrush;
-			}
-			else
-			{
-				mediaIcon.Style = Styles.AlphaButtonStyle;
-
-				await Task.Delay(200); // why is that here?
-				mediaIcon.Background = Brushes.PrimaryTextBrush;
-			}
+			mediaIcon.Background = isMarked ? Brushes.PrimaryTextBrush : Brushes.AccentBrush;
 		}
 
 		// changes the media icon from media playlist to media and back - used when changing the actual playlist
@@ -125,6 +114,7 @@ namespace MinimalistMusicPlayer.Explorer
 			BorderBrush = select ? Brushes.AccentBrush : null;
 			LabelTitle.FontWeight = select ? FontWeights.Bold : FontWeights.Normal;
 			LabelDuration.FontWeight = select ? FontWeights.Bold : FontWeights.Normal;
+			// Background = select ? Brushes.HighlightBrush : Brushes.TransparentBrush;
 		}
 	}
 

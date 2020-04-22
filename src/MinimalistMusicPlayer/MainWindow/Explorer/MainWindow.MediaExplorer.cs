@@ -13,7 +13,7 @@ using WMPLib;
 namespace MinimalistMusicPlayer
 {
 	// the explorer piece of MainWindow
-	public partial class MainWindow : Window
+	public partial class MainWindow
 	{
 		public FileInfo[] DirectoryMediaFiles { get; set; }
 

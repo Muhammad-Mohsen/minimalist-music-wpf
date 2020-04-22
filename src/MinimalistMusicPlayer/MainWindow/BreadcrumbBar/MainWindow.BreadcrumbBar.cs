@@ -10,7 +10,7 @@ using System.Windows.Controls;
 
 namespace MinimalistMusicPlayer
 {
-	public partial class MainWindow : Window
+	public partial class MainWindow
 	{
 		public DirectoryInfo CurrentDirectory { get; set; }
 

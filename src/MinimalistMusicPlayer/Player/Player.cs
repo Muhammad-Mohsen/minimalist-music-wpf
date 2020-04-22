@@ -90,6 +90,8 @@ namespace MinimalistMusicPlayer.Player
 		// play selected music track
 		public void Play(IWMPMedia media)
 		{
+			if (media == null) return; // at the end of the playlist
+
 			InternalPlayer.currentMedia = media;
 			Controls.play();
 		}

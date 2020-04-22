@@ -14,7 +14,8 @@ namespace MinimalistMusicPlayer.Explorer
 			Focusable = false;
 
 			// styles, margins...
-			Style = Styles.PlaylistButtonStyle;
+			Style = Styles.ButtonRevealStyle;
+			Background = Brushes.TransparentBrush;
 			Margin = new Thickness(0, 3, 0, 0);
 			BorderBrush = Brushes.PrimaryBrush;
 		}
@@ -40,7 +41,7 @@ namespace MinimalistMusicPlayer.Explorer
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Style = Styles.AlphaButtonStyle,
 				OpacityMask = icon,
-				Background = Brushes.PrimaryTextBrush,
+				Background = Brushes.AccentBrush,
 				Width = Const.ExplorerItemIconWidth,
 				Height = Const.ExplorerItemIconHeight,
 				Margin = new Thickness(0),

@@ -2,7 +2,7 @@
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectView>ProjectFiles</ProjectView>
-    <PublishUrlHistory>D:\Code\Minimalist-Music-Player\Installer\|D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Installer\|D:\iTi\otherProjects\</PublishUrlHistory>
+    <PublishUrlHistory>D:\Code\minimalist-music-player\dist\|D:\Code\Minimalist-Music-Player\Installer\|D:\Books + Notes\PROJECTS\Minimalist-Music-Player\Installer\|D:\iTi\otherProjects\</PublishUrlHistory>
     <InstallUrlHistory />
     <SupportUrlHistory />
     <UpdateUrlHistory />

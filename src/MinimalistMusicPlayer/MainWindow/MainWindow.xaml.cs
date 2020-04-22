@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Shapes;
 using WMPLib;
 
 namespace MinimalistMusicPlayer
@@ -13,7 +14,7 @@ namespace MinimalistMusicPlayer
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class MainWindow
 	{
 		// needs to be defined before InitializeComponent, believe it or not!!
 		// Player.Position is accessed during InitializeComponent (see ValueChanged events)
@@ -225,15 +226,15 @@ namespace MinimalistMusicPlayer
 		//
 		// had to be done this way so that if the mouse is pressed from outside the grid,
 		// and then it moves within it, it wouldn't fire the event
-		private void GridMain_MouseDown(object sender, MouseButtonEventArgs e)
+		private void Window_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			if (e.OriginalSource.Equals(GridMain))
+			if (e.OriginalSource.GetType() == typeof (Rectangle) && (e.OriginalSource as Rectangle).Name == "noiseLayer")
 			{
 				InitialPosition = e.GetPosition(null);
 				CanMoveWindow = true;
 			}
 		}
-		private void GridMain_MouseMove(object sender, MouseEventArgs e)
+		private void Window_MouseMove(object sender, MouseEventArgs e)
 		{
 			if (CanMoveWindow)
 			{
@@ -243,7 +244,7 @@ namespace MinimalistMusicPlayer
 				Top = Top + currentPosition.Y - InitialPosition.Y;
 			}
 		}
-		private void GridMain_MouseUp(object sender, MouseButtonEventArgs e)
+		private void Window_MouseUp(object sender, MouseButtonEventArgs e)
 		{
 			CanMoveWindow = false;
 		}
@@ -304,15 +305,6 @@ namespace MinimalistMusicPlayer
 			else Playlist.Index = 0;
 
 			if (Playlist.Count > 0) Player.Play(Playlist.GetItem(Playlist.Index));
-		}
-
-		private void Window_Deactivated(object sender, EventArgs e)
-		{
-			BorderMain.BorderBrush = Brushes.SecondaryTextBrush;
-		}
-		private void Window_Activated(object sender, EventArgs e)
-		{
-			BorderMain.BorderBrush = Brushes.AccentBrush;
 		}
 	}
 }
