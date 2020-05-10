@@ -17,7 +17,6 @@ namespace MinimalistMusicPlayer.Explorer
 			Style = Styles.ButtonRevealStyle;
 			Background = Brushes.TransparentBrush;
 			Margin = new Thickness(0, 3, 0, 0);
-			BorderBrush = Brushes.PrimaryBrush;
 		}
 
 		protected Label CreateTitleLabel(string title, System.Windows.Media.Brush foregroundBursh = null)

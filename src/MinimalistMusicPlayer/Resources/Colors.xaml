@@ -6,7 +6,7 @@
 	<!--BRUSHES-->
 	<SolidColorBrush x:Key="PrimaryBrush">#FFF</SolidColorBrush> <!-- light: #FFF - dark: #2E2E2E -->
 	<SolidColorBrush x:Key="BorderBrush">#555</SolidColorBrush> <!-- light: #555 - dark:  -->
-	<SolidColorBrush x:Key="AccentBrush">#555</SolidColorBrush> <!-- accents: blue: #007ACC - orange: #D64D1A - red: FireBrick -->
+	<SolidColorBrush x:Key="AccentBrush">#AAA</SolidColorBrush> <!-- accents: blue: #007ACC - orange: #D64D1A - red: FireBrick -->
 
 	<SolidColorBrush x:Key="PrimaryTextBrush">#2E2E2E</SolidColorBrush> <!-- light: #2E2E2E - dark: #FFF -->
 	<SolidColorBrush x:Key="SecondaryTextBrush">#555</SolidColorBrush> <!-- light: #555 - dark: #AAA -->

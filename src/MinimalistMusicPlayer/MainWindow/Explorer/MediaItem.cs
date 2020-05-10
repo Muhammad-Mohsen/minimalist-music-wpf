@@ -1,6 +1,5 @@
 ﻿using MinimalistMusicPlayer.Utility;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -111,9 +110,9 @@ namespace MinimalistMusicPlayer.Explorer
 		}
 		protected void ToggleSelectionUi(bool select)
 		{
-			BorderBrush = select ? Brushes.AccentBrush : null;
 			LabelTitle.FontWeight = select ? FontWeights.Bold : FontWeights.Normal;
 			LabelDuration.FontWeight = select ? FontWeights.Bold : FontWeights.Normal;
+			// BorderBrush = select ? Brushes.AccentBrush : null;
 			// Background = select ? Brushes.HighlightBrush : Brushes.TransparentBrush;
 		}
 	}

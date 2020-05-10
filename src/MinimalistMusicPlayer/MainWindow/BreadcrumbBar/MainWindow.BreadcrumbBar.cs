@@ -25,6 +25,9 @@ namespace MinimalistMusicPlayer
 			Thickness toMargin = GetExplorerAnimationMargin(CurrentDirectory, directory);
 			Thickness fromMargin = GetExplorerAnimationMargin(directory, CurrentDirectory);
 
+			var toScale = GetExplorerAnimationScale(CurrentDirectory, directory);
+			var fromScale = GetExplorerAnimationScale(directory, CurrentDirectory);
+
 			CurrentDirectory = directory;
 
 			// set the setting (will be saved in OnExit event in the app class!!)
@@ -37,11 +40,16 @@ namespace MinimalistMusicPlayer
 			StackPanelExplorer = ScrollViewerExplorer.Content as StackPanel;
 
 			// animate the media explorer current -> paged
-			Anim.AnimateMargin(explorerToHide, Const.ExplorerMargin.CurrentPage, toMargin, Const.ShowHideDelay);
+			// Anim.AnimateMargin(explorerToHide, Const.ExplorerMargin.CurrentPage, toMargin, Const.ShowHideDelay);
+			explorerToHide.AnimateScale(Const.DrillScale.Normal, toScale, Const.DrillAnimDuration);
+			explorerToHide.AnimateOpacity(Const.OpacityLevel.Transparent, Const.DrillAnimDuration, (object sender, EventArgs args) => explorerToHide.Visibility = Visibility.Collapsed);
 			// repopulate the breadcrumb bar
 			PopulateBreadcrumbBar(directory);
 			// animate the media explorer paged -> current
-			Anim.AnimateMargin(ScrollViewerExplorer, fromMargin, Const.ExplorerMargin.CurrentPage, Const.ShowHideDelay);
+			// Anim.AnimateMargin(ScrollViewerExplorer, fromMargin, Const.ExplorerMargin.CurrentPage, Const.ShowHideDelay);
+			ScrollViewerExplorer.AnimateScale(fromScale, Const.DrillScale.Normal, Const.DrillAnimDuration);
+			ScrollViewerExplorer.Visibility = Visibility.Visible;
+			ScrollViewerExplorer.AnimateOpacity(Const.OpacityLevel.Opaque, Const.DrillAnimDuration);
 
 			// reset item markings
 			MediaItem.MarkedItemCount = 0;

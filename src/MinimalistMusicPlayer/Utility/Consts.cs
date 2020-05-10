@@ -43,6 +43,13 @@ namespace MinimalistMusicPlayer.Utility
 			public const int Transparent = 0;
 		}
 
+		public static class DrillScale
+		{
+			public const double In = .85;
+			public const double Normal = 1;
+			public const double Out = 1.15;
+		}
+
 		public static class ExplorerMargin
 		{
 			public static Thickness CurrentPage = new Thickness(0, 32, 0, 0);
@@ -55,5 +62,6 @@ namespace MinimalistMusicPlayer.Utility
 
 		public const double ShowHideDelay = .2; // in seconds
 		public const double AsyncDelay = 5; // in millis
+		public const double DrillAnimDuration = .2; // in seconds
 	}
 }

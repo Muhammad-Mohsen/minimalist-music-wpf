@@ -15,7 +15,6 @@ namespace MinimalistMusicPlayer
 			Background = Brushes.TransparentBrush;
 			Margin = new Thickness(2, 0, 0, 0);
 			Padding = new Thickness(3, 0, 3, 0);
-			BorderBrush = Brushes.PrimaryBrush;
 			IsTabStop = false;
 
 			Content = directory;

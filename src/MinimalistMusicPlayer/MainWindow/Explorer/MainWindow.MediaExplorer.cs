@@ -266,5 +266,12 @@ namespace MinimalistMusicPlayer
 			else if (fromDirectory.FullName.Length <= currentDirectory.FullName.Length) return Const.ExplorerMargin.LeftPage;
 			else return Const.ExplorerMargin.RightPage;
 		}
+		private double GetExplorerAnimationScale(DirectoryInfo fromDirectory, DirectoryInfo currentDirectory)
+		{
+			if (currentDirectory == null) return Const.DrillScale.In;
+			else if (fromDirectory == null) return Const.DrillScale.Out;
+			else if (fromDirectory.FullName.Length <= currentDirectory.FullName.Length) return Const.DrillScale.Out;
+			else return Const.DrillScale.In;
+		}
 	}
 }

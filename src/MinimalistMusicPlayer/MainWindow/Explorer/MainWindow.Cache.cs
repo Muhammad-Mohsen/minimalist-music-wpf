@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace MinimalistMusicPlayer
 {
@@ -60,6 +61,11 @@ namespace MinimalistMusicPlayer
 				Content = new StackPanel()
 				{
 					Focusable = false,
+				},
+				RenderTransform = new ScaleTransform()
+				{
+					CenterX = 220,
+					CenterY = 200
 				}
 			};
 		}
