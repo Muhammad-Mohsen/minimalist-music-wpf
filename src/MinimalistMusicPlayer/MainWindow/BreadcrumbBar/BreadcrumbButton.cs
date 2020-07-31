@@ -5,14 +5,14 @@ using System.Windows.Controls;
 
 namespace MinimalistMusicPlayer
 {
-	public class BreadcrumbButton : Button
+	public class BreadcrumbButton : ExtendedButton
 	{
 		public DirectoryInfo Dir;
 
 		public BreadcrumbButton(string directory)
 		{
-			Style = Styles.ButtonRevealStyle;
-			Background = Brushes.TransparentBrush;
+			Style = Styles.ExtendedButtonStyle;
+			BorderBrush = Brushes.PrimaryBrush;
 			Margin = new Thickness(2, 0, 0, 0);
 			Padding = new Thickness(3, 0, 3, 0);
 			IsTabStop = false;

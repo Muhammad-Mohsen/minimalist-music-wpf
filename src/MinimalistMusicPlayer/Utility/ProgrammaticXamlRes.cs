@@ -8,16 +8,10 @@ namespace MinimalistMusicPlayer.Utility
 	// used to set styles programmatically for toggle buttons (e.g. playlist, stay-on-top buttons)
 	public static class Styles
 	{
-		public static Style BackgroundButtonToggleStyle = (Style)Application.Current.Resources["BackGroundButtonToggleStyle"];
 		public static Style BackgroundButtonStyle = (Style)Application.Current.Resources["BackgroundButtonStyle"];
-
-		public static Style ButtonRevealStyle = (Style)Application.Current.Resources["ButtonRevealStyle"];
-		public static Style ButtonAccentRevealStyle = (Style)Application.Current.Resources["ButtonAccentRevealStyle"];
-
-		public static Style AlphaButtonToggleStyle = (Style)Application.Current.Resources["AlphaButtonToggleStyle"];
 		public static Style AlphaButtonStyle = (Style)Application.Current.Resources["AlphaButtonStyle"];
-
-		public static Style PlaylistButtonStyle = (Style)Application.Current.Resources["PlaylistButton"];
+		public static Style ExtendedButtonStyle = (Style)Application.Current.Resources["ExtendedButtonStyle"];
+		public static Style ExtendedButtonMaskStyle = (Style)Application.Current.Resources["ExtendedButtonMaskStyle"];
 	}
 
 	public static class Brushes
@@ -41,7 +35,7 @@ namespace MinimalistMusicPlayer.Utility
 			Data = (GeometryGroup)Application.Current.Resources["Play"],
 			Stroke = Brushes.PrimaryTextBrush,
 			StrokeThickness = 1.5,
-			Margin = new Thickness(5),
+			Margin = new Thickness(4),
 			Stretch = Stretch.Uniform
 		};
 		public static Path Pause = new Path()
@@ -49,7 +43,7 @@ namespace MinimalistMusicPlayer.Utility
 			Data = (GeometryGroup)Application.Current.Resources["Pause"],
 			Stroke = Brushes.PrimaryTextBrush,
 			StrokeThickness = 1.5,
-			Margin = new Thickness(8, 5, 8, 5),
+			Margin = new Thickness(7, 5, 7, 5),
 			Stretch = Stretch.Uniform
 		};
 
@@ -58,7 +52,7 @@ namespace MinimalistMusicPlayer.Utility
 			Data = (GeometryGroup)Application.Current.Resources["VolumeMute"],
 			Stroke = Brushes.PrimaryTextBrush,
 			StrokeThickness = 1.5,
-			Margin = new Thickness(3),
+			Margin = new Thickness(2),
 			Stretch = Stretch.Uniform
 
 		};
@@ -68,7 +62,7 @@ namespace MinimalistMusicPlayer.Utility
 			Data = (GeometryGroup)Application.Current.Resources["VolumeLow"],
 			Stroke = Brushes.PrimaryTextBrush,
 			StrokeThickness = 1.5,
-			Margin = new Thickness(3),
+			Margin = new Thickness(2),
 			Stretch = Stretch.Uniform
 		};
 
@@ -77,7 +71,7 @@ namespace MinimalistMusicPlayer.Utility
 			Data = (GeometryGroup)Application.Current.Resources["VolumeHigh"],
 			Stroke = Brushes.PrimaryTextBrush,
 			StrokeThickness = 1.5,
-			Margin = new Thickness(3),
+			Margin = new Thickness(2),
 			Stretch = Stretch.Uniform
 		};
 
@@ -86,7 +80,7 @@ namespace MinimalistMusicPlayer.Utility
 			Data = (GeometryGroup)Application.Current.Resources["RepeatOne"],
 			Stroke = Brushes.PrimaryTextBrush,
 			StrokeThickness = 1.5,
-			Margin = new Thickness(2),
+			Margin = new Thickness(1),
 			Stretch = Stretch.Uniform
 		};
 
@@ -95,7 +89,7 @@ namespace MinimalistMusicPlayer.Utility
 			Data = (GeometryGroup)Application.Current.Resources["Repeat"],
 			Stroke = Brushes.PrimaryTextBrush,
 			StrokeThickness = 1.5,
-			Margin = new Thickness(2),
+			Margin = new Thickness(1),
 			Stretch = Stretch.Uniform
 		};
 

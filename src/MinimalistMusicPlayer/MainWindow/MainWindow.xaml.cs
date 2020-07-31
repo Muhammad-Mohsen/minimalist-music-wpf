@@ -228,7 +228,7 @@ namespace MinimalistMusicPlayer
 		// and then it moves within it, it wouldn't fire the event
 		private void Window_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			if (e.OriginalSource.GetType() == typeof (Rectangle) && (e.OriginalSource as Rectangle).Name == "noiseLayer")
+			if (e.OriginalSource.GetType() == typeof (Border))
 			{
 				InitialPosition = e.GetPosition(null);
 				CanMoveWindow = true;
@@ -258,6 +258,21 @@ namespace MinimalistMusicPlayer
 			{
 				case Key.Space: // play/pause
 					ButtonPlayPause_Click(null, null);
+					break;
+				case Key.Left: // seek left
+					IsSeeking = true;
+					SliderSeek.Value = Math.Max(0, SliderSeek.Value - SliderSeek.Maximum / 25);
+					IsSeeking = false;
+					break;
+				case Key.Right: // seek right
+					IsSeeking = true;
+					SliderSeek.Value = Math.Min(SliderSeek.Maximum, SliderSeek.Value + SliderSeek.Maximum / 25);
+					IsSeeking = false;
+					break;
+				case Key.NumPad0: // seek right
+					IsSeeking = true;
+					SliderSeek.Value = 0;
+					IsSeeking = false;
 					break;
 			}
 		}
@@ -305,6 +320,15 @@ namespace MinimalistMusicPlayer
 			else Playlist.Index = 0;
 
 			if (Playlist.Count > 0) Player.Play(Playlist.GetItem(Playlist.Index));
+		}
+
+		private void Window_Deactivated(object sender, EventArgs e)
+		{
+			WindowBorder.BorderBrush = Brushes.SecondaryTextBrush;
+		}
+		private void Window_Activated(object sender, EventArgs e)
+		{
+			WindowBorder.BorderBrush = Brushes.AccentBrush;
 		}
 	}
 }

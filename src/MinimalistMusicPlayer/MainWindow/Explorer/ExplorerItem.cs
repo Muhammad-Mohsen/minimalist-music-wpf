@@ -4,7 +4,7 @@ using System.Windows.Controls;
 
 namespace MinimalistMusicPlayer.Explorer
 {
-	public class ExplorerItem : Button
+	public class ExplorerItem : ExtendedButton
 	{
 		public ExplorerItemType ItemType { get; set; }
 
@@ -14,7 +14,8 @@ namespace MinimalistMusicPlayer.Explorer
 			Focusable = false;
 
 			// styles, margins...
-			Style = Styles.ButtonRevealStyle;
+			Style = Styles.ExtendedButtonStyle;
+			BorderBrush = Brushes.PrimaryBrush;
 			Background = Brushes.TransparentBrush;
 			Margin = new Thickness(0, 3, 0, 0);
 		}
@@ -33,12 +34,12 @@ namespace MinimalistMusicPlayer.Explorer
 				Margin = new Thickness(Const.ExplorerItemIconWidth, 0, 0, 0)
 			};
 		}
-		protected Button CreateIcon(System.Windows.Media.VisualBrush icon)
+		protected ExtendedButton CreateIcon(System.Windows.Media.VisualBrush icon)
 		{
-			return new Button()
+			return new ExtendedButton()
 			{
 				HorizontalAlignment = HorizontalAlignment.Left,
-				Style = Styles.AlphaButtonStyle,
+				Style = Styles.ExtendedButtonMaskStyle,
 				OpacityMask = icon,
 				Background = Brushes.AccentBrush,
 				Width = Const.ExplorerItemIconWidth,

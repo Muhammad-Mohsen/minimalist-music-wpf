@@ -18,7 +18,7 @@
 
 	<!--COLORS-->
 	<Color x:Key="PrimaryColor">#FFF</Color> <!-- light: #FFF - dark: ##2E2E2E -->
-	<Color x:Key="AccentColor">#555</Color> <!-- light: #0078D7 - dark: 007ACC -->
+	<Color x:Key="AccentColor">#AAA</Color> <!-- light: #0078D7 - dark: 007ACC -->
 
 	<Color x:Key="PrimaryTextColor">#2E2E2E</Color> <!-- light: #2E2E2E - dark: #FFF -->
 	<Color x:Key="SecondaryTextColor">#555</Color> <!-- light: #555 - dark: #AAA -->

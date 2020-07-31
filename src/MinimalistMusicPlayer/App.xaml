@@ -13,9 +13,7 @@
 				<ResourceDictionary Source="Resources/AlphaButton.xaml" />
 				<ResourceDictionary Source="Resources/AlphaButtonToggle.xaml" />
 				<ResourceDictionary Source="Resources/BackgroundButton.xaml" />
-				<ResourceDictionary Source="Resources/BackgroundButton2.xaml" />
-				<ResourceDictionary Source="Resources/BackgroundButtonToggle.xaml" />
-				<ResourceDictionary Source="Resources/PlaylistItem.xaml" />
+				<ResourceDictionary Source="Resources/ExtendedButton.xaml" />
 				<ResourceDictionary Source="Resources/TextBox.xaml" />
 				<ResourceDictionary Source="Resources/ToolTip.xaml" />
 				<ResourceDictionary Source="Resources/Vectors.xaml" />

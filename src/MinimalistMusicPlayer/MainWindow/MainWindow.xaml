@@ -1,9 +1,9 @@
-﻿<fw:AcrylicWindow
+﻿<Window
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+	xmlns:m="clr-namespace:MinimalistMusicPlayer"
 	x:Name="Window"
 	x:Class="MinimalistMusicPlayer.MainWindow"
 	mc:Ignorable="d"
@@ -11,13 +11,13 @@
 	WindowStyle="None"
 	ResizeMode="CanMinimize"
 	Icon="../Resources/img/AppIcon.ico"
-	fw:PointerTracker.Enabled="True"
-	AcrylicWindowStyle="None"
 	MouseWheel="Window_MouseWheel"
-	PreviewKeyUp="Window_KeyUp"
+	PreviewKeyDown="Window_KeyUp"
 	MouseMove="Window_MouseMove"
 	MouseDown="Window_MouseDown"
-	MouseUp="Window_MouseUp">
+	MouseUp="Window_MouseUp"
+	Deactivated="Window_Deactivated"
+	Activated="Window_Activated">
 
 	<Window.TaskbarItemInfo>
 		<TaskbarItemInfo x:Name="TaskbarItemInfo">
@@ -33,16 +33,16 @@
 		<Grid x:Name="GridMain" Margin="0">
 
 			<!-- Window controls -->
-			<Button x:Name="ButtonClose" Style="{StaticResource ButtonRevealStyle}" Background="Transparent" VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" Height="30" Click="ButtonClose_Click" Focusable="False" IsTabStop="False" >
+			<m:ExtendedButton x:Name="ButtonClose" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" Height="30" Click="ButtonClose_Click" Focusable="False" IsTabStop="False" >
 				<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Close}" />
-			</Button>
-			<Button x:Name="ButtonMinimize" Style="{StaticResource ButtonRevealStyle}" Background="Transparent" Margin="0,0,38,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" Height="30" Click="ButtonMinimize_Click" Focusable="False" IsTabStop="False">
+			</m:ExtendedButton>
+			<m:ExtendedButton x:Name="ButtonMinimize" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" Margin="0,0,40,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" Height="30" Click="ButtonMinimize_Click" Focusable="False" IsTabStop="False">
 				<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Minimize}" RenderTransformOrigin="0.5,0.5" >
 					<Path.RenderTransform>
 						<ScaleTransform ScaleX="0.8"/>
 					</Path.RenderTransform>
 				</Path>
-			</Button>
+			</m:ExtendedButton>
 
 			<Rectangle x:Name="PlayingIcon" Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="2" HorizontalAlignment="Left" Margin="17,15,0,0" VerticalAlignment="Top" Height="15" Width="15">
 				<Rectangle.OpacityMask>
@@ -56,7 +56,7 @@
 			</Rectangle>
 
 			<!-- Track information/open -->
-			<Button x:Name="ButtonTrackInfo" VerticalAlignment="Top" HorizontalAlignment="Left" Height="46" Width="280" Margin="40,6,0,0" Padding="0" Style="{StaticResource ButtonRevealStyle}" Background="Transparent" Click="ButtonTrackInfo_Click" IsTabStop="False" Focusable="False">
+			<m:ExtendedButton x:Name="ButtonTrackInfo" VerticalAlignment="Top" HorizontalAlignment="Left" Height="46" Width="280" Margin="40,6,0,0" Padding="0" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" Click="ButtonTrackInfo_Click" IsTabStop="False" Focusable="False">
 				<Grid Height="46" Width="280">
 					<Label x:Name="LabelSongTitle" Content="Browse Tracks" HorizontalAlignment="Left" Margin="0,-7,0,0" VerticalAlignment="Top" Foreground="{StaticResource PrimaryTextBrush}" FontSize="22">
 						<Label.ToolTip>
@@ -69,12 +69,12 @@
 						</Label.ToolTip>
 					</Label>
 				</Grid>
-			</Button>
+			</m:ExtendedButton>
 
 			<!-- Seek controls -->
-			<Button x:Name="ButtonPrev" Style="{StaticResource ButtonRoundRevealStyle}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="9,56,0,0" Background="Transparent" Click="ButtonPrevious_Click" IsTabStop="False" Focusable="False">
+			<m:ExtendedButton x:Name="ButtonPrev" Style="{StaticResource ExtendedButtonStyle}" CornerRadius="50" BorderBrush="{StaticResource PrimaryBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="9,56,0,0" Click="ButtonPrevious_Click" IsTabStop="False" Focusable="False">
 				<Path Margin="0,0,1,0" Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Previous}" />
-			</Button>
+			</m:ExtendedButton>
 
 			<Slider x:Name="SliderSeek" Style="{StaticResource HorizontalSlider}" Margin="45,63,45,0" VerticalAlignment="Top" Value="0" ValueChanged="SliderSeek_ValueChanged" PreviewMouseDown="SliderSeek_PreviewMouseDown" PreviewMouseUp="SliderSeek_PreviewMouseUp" PreviewMouseMove="SliderSeek_PreviewMouseMove" Focusable="False" IsTabStop="False">
 				<Slider.ToolTip>
@@ -82,29 +82,29 @@
 				</Slider.ToolTip>
 			</Slider>
 
-			<Button x:Name="ButtonNext" Style="{StaticResource ButtonRoundRevealStyle}" VerticalAlignment="Top" Height="30" Margin="0,56,9,0" HorizontalAlignment="Right" Width="30" Background="Transparent" RenderTransformOrigin="0.5,0.5" Click="ButtonNext_Click" IsTabStop="False" Focusable="False">
-				<Button.RenderTransform>
+			<m:ExtendedButton x:Name="ButtonNext" Style="{StaticResource ExtendedButtonStyle}" CornerRadius="50" BorderBrush="{StaticResource PrimaryBrush}" VerticalAlignment="Top" Height="30" Margin="0,56,9,0" HorizontalAlignment="Right" Width="30" RenderTransformOrigin="0.5,0.5" Click="ButtonNext_Click" IsTabStop="False" Focusable="False">
+				<m:ExtendedButton.RenderTransform>
 					<RotateTransform Angle="180"/>
-				</Button.RenderTransform>
+				</m:ExtendedButton.RenderTransform>
 				<Path Margin="0,0,1,0" Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Previous}" />
-			</Button>
+			</m:ExtendedButton>
 
 			<!-- Play controls -->
-			<Button x:Name="ButtonPlayPause" Style="{StaticResource ButtonRevealStyle}" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Top" Width="{StaticResource MainButtonSize}" Height="{StaticResource MainButtonSize}" Margin="41,91,0,0" Click="ButtonPlayPause_Click" Focusable="False" IsTabStop="False">
-				<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Play}" Margin="5" Stretch="Uniform"/>
-			</Button>
+			<m:ExtendedButton x:Name="ButtonPlayPause" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="{StaticResource MainButtonSize}" Height="{StaticResource MainButtonSize}" Margin="41,91,0,0" Click="ButtonPlayPause_Click" Focusable="False" IsTabStop="False">
+				<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Play}" Margin="4" Stretch="Uniform"/>
+			</m:ExtendedButton>
 
-			<Button x:Name="ButtonRepeat" Style="{StaticResource ButtonRevealStyle}" Background="Transparent" VerticalAlignment="Top" Width="{StaticResource MainButtonSize}" Height="{StaticResource MainButtonSize}"  Margin="0,91,408,0" HorizontalAlignment="Right" Click="ButtonRepeat_Click" Focusable="False" IsTabStop="False">
-				<Path Stroke="{StaticResource AccentBrush}" StrokeThickness="1.5" Data="{StaticResource Repeat}" Margin="2" Stretch="Uniform"/>
-			</Button>
+			<m:ExtendedButton x:Name="ButtonRepeat" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" VerticalAlignment="Top" Width="{StaticResource MainButtonSize}" Height="{StaticResource MainButtonSize}"  Margin="0,91,408,0" HorizontalAlignment="Right" Click="ButtonRepeat_Click" Focusable="False" IsTabStop="False">
+				<Path Stroke="{StaticResource AccentBrush}" StrokeThickness="1.5" Data="{StaticResource Repeat}" Margin="1" Stretch="Uniform"/>
+			</m:ExtendedButton>
 
-			<Button x:Name="ButtonShuffle" Style="{StaticResource ButtonRevealStyle}" Background="Transparent" VerticalAlignment="Top" Width="{StaticResource MainButtonSize}" Height="{StaticResource MainButtonSize}"  Margin="0,91,366,0" HorizontalAlignment="Right" Click="ButtonShuffle_Click" Focusable="False" IsTabStop="False">
-				<Path Stroke="{StaticResource AccentBrush}" StrokeThickness="1.5" Data="{StaticResource Shuffle}" Margin="6" Stretch="Uniform"/>
-			</Button>
+			<m:ExtendedButton x:Name="ButtonShuffle" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" VerticalAlignment="Top" Width="{StaticResource MainButtonSize}" Height="{StaticResource MainButtonSize}"  Margin="0,91,366,0" HorizontalAlignment="Right" Click="ButtonShuffle_Click" Focusable="False" IsTabStop="False">
+				<Path Stroke="{StaticResource AccentBrush}" StrokeThickness="1.5" Data="{StaticResource Shuffle}" Margin="5" Stretch="Uniform"/>
+			</m:ExtendedButton>
 
-			<Button x:Name="ButtonVolume" Style="{StaticResource ButtonRevealStyle}" Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Top" Width="{StaticResource MainButtonSize}" Height="{StaticResource MainButtonSize}"  Margin="167,91,0,0" Click="ButtonVolume_Click" MouseEnter="Volume_MouseEnter" MouseLeave="Volume_MouseLeave" Focusable="False" IsTabStop="False">
-				<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource VolumeHigh}" Margin="3" Stretch="Uniform"/>
-			</Button>
+			<m:ExtendedButton x:Name="ButtonVolume" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="{StaticResource MainButtonSize}" Height="{StaticResource MainButtonSize}"  Margin="167,91,0,0" Click="ButtonVolume_Click" MouseEnter="Volume_MouseEnter" MouseLeave="Volume_MouseLeave" Focusable="False" IsTabStop="False">
+				<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource VolumeHigh}" Margin="2" Stretch="Uniform"/>
+			</m:ExtendedButton>
 
 			<Slider x:Name="SliderVolume" Style="{StaticResource HorizontalSlider}" HorizontalAlignment="Left" Margin="206,98,0,0" VerticalAlignment="Top" Width="77" Value="50" MouseLeave="Volume_MouseLeave" MouseEnter="Volume_MouseEnter" LargeChange="20" Maximum="100" ValueChanged="SliderVolume_ValueChanged" Focusable="False" IsTabStop="False" />
 
@@ -114,39 +114,39 @@
 				<Label x:Name="LabelSeekTime" Content="--:--" VerticalAlignment="Top" Margin="0,-4,0,-1" Foreground="{StaticResource PrimaryTextBrush}" FontWeight="Bold"/>
 			</StackPanel>
 
-			<Button x:Name="ButtonPlaylist" Style="{StaticResource ButtonRevealStyle}" Background="Transparent" VerticalAlignment="Bottom" Width="Auto" Height="20" Margin="0,0" RenderTransformOrigin="0.5,0.5" Click="ButtonPlaylist_Click" Focusable="False" IsTabStop="False">
+			<m:ExtendedButton x:Name="ButtonPlaylist" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" VerticalAlignment="Bottom" Width="Auto" Height="20" Margin="0,0" RenderTransformOrigin="0.5,0.5" Click="ButtonPlaylist_Click" Focusable="False" IsTabStop="False">
 				<Path x:Name="ButtonPlaylistIcon" Stroke="{StaticResource PrimaryTextBrush}" Data="{StaticResource ExpandCollapse}" Height="15" Stretch="Uniform" Width="15" />
-			</Button>
+			</m:ExtendedButton>
 
 			<!-- Explorer -->
 			<Grid x:Name="GridExplorerMain" Margin="41,155,25,0" Background="Transparent" Height="433" VerticalAlignment="Top" >
 				<!-- Breadcrumb bar -->
 				<Grid x:Name="GridBreadcrumnBar" Margin="0,0,0,406" Visibility="Visible">
-					<!--Up button-->
-					<Button x:Name="ButtonUp" Style="{StaticResource ButtonRevealStyle}" Background="Transparent" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Height="27" Focusable="False" IsTabStop="False" AllowDrop="False">
+					<!--Up m:ExtendedButton-->
+					<m:ExtendedButton x:Name="ButtonUp" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Height="27" Focusable="False" IsTabStop="False" AllowDrop="False">
 						<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Up}" RenderTransformOrigin="0.5,0.5" />
-					</Button>
+					</m:ExtendedButton>
 					<ScrollViewer x:Name="ScrollViewerDirectory" CanContentScroll="True" Margin="30,0,20,0" Focusable="False" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
 						<StackPanel x:Name="StackPanelDirectory" Width="406" Orientation="Horizontal" Focusable="False" />
 					</ScrollViewer>
 				</Grid>
 				<!-- Select mode -->
 				<Grid x:Name="GridSelectMode" Height="27" VerticalAlignment="Top" Visibility="Collapsed" Opacity="0">
-					<Button x:Name="ButtonCancelPlaySelected" Style="{StaticResource ButtonRevealStyle}" Background="Transparent" Width="34" Margin="1,0" HorizontalAlignment="Left" Focusable="False" Click="ButtonCancelPlaySelected_Click">
+					<m:ExtendedButton x:Name="ButtonCancelPlaySelected" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" Width="35" Margin="1,0" HorizontalAlignment="Left" Focusable="False" Click="ButtonCancelPlaySelected_Click">
 						<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource CancelSelected}" />
-					</Button>
+					</m:ExtendedButton>
 
-					<Button x:Name="ButtonAddToSelection" Style="{StaticResource ButtonRevealStyle}" Background="Transparent" Width="34" Margin="39,0,0,0" HorizontalAlignment="Left" Focusable="False" Click="ButtonCancelPlaySelected_Click">
+					<m:ExtendedButton x:Name="ButtonAddToSelection" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" Width="35" Margin="40,0,0,0" HorizontalAlignment="Left" Focusable="False" Click="ButtonCancelPlaySelected_Click">
 						<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource AddToSelection}" RenderTransformOrigin="0.5,0.5" >
 							<Path.RenderTransform>
 								<RotateTransform Angle="45"/>
 							</Path.RenderTransform>
 						</Path>
-					</Button>
+					</m:ExtendedButton>
 
-					<Button x:Name="ButtonPlaySelected" Style="{StaticResource ButtonRevealStyle}" Background="Transparent" Width="34" Margin="77,0,0,0" HorizontalAlignment="Left" Focusable="False" Click="ButtonPlaySelected_Click">
+					<m:ExtendedButton x:Name="ButtonPlaySelected" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" Width="35" Margin="79,0,0,0" HorizontalAlignment="Left" Focusable="False" Click="ButtonPlaySelected_Click">
 						<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource PlaySelected}" Margin="2" Stretch="Uniform" />
-					</Button>
+					</m:ExtendedButton>
 				</Grid>
 
 				<!-- Explorer view added programmatically here!!-->
@@ -156,4 +156,4 @@
 		</Grid>
 	</Border>
 
-</fw:AcrylicWindow>
+</Window>
