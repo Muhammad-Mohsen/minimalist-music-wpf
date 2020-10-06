@@ -28,8 +28,10 @@ namespace MinimalistMusicPlayer.Utility
 		// volume increment
 		public const double VolumeIncrement = 5;
 
+		public const int SeekDivisor = 25;
+
 		// array that contains a list supported music extensions
-		public static string[] MediaExtensions = { "mp3", ".mp3", "wma", ".wma", "wav", ".wav" };
+		public static string[] MediaExtensions = { ".mp3", ".wma", ".wav", ".m4b" };
 
 		public const string BreadcrumbButtonSeparator = "/";
 

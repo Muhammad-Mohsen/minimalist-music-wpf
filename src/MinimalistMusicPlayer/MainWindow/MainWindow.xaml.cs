@@ -261,12 +261,12 @@ namespace MinimalistMusicPlayer
 					break;
 				case Key.Left: // seek left
 					IsSeeking = true;
-					SliderSeek.Value = Math.Max(0, SliderSeek.Value - SliderSeek.Maximum / 25);
+					SliderSeek.Value = Math.Max(0, SliderSeek.Value - SliderSeek.Maximum / Const.SeekDivisor);
 					IsSeeking = false;
 					break;
 				case Key.Right: // seek right
 					IsSeeking = true;
-					SliderSeek.Value = Math.Min(SliderSeek.Maximum, SliderSeek.Value + SliderSeek.Maximum / 25);
+					SliderSeek.Value = Math.Min(SliderSeek.Maximum, SliderSeek.Value + SliderSeek.Maximum / Const.SeekDivisor);
 					IsSeeking = false;
 					break;
 				case Key.NumPad0: // seek right

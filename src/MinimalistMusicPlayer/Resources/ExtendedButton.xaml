@@ -36,14 +36,14 @@
 
 						<Storyboard x:Key="PressedEnterAnimation">
 							<!--<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="Background.Color" To="{StaticResource AccentColor}" Duration="0:0:0.3" />-->
-							<DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleX" To="0.99" Duration="0:0:0.1" />
-							<DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleY" To="0.99" Duration="0:0:0.1" />
+							<!--<DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleX" To="0.99" Duration="0:0:0.1" />
+							<DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleY" To="0.99" Duration="0:0:0.1" />-->
 
 						</Storyboard>
 						<Storyboard x:Key="PressedExitAnimation" FillBehavior="Stop">
 							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="Background.Color" To="{StaticResource PrimaryHoverColor}" Duration="0:0:0.3" />
-							<DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.1" />
-							<DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.1" />
+							<!--<DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.1" />
+							<DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.1" />-->
 						</Storyboard>
 
 					</ControlTemplate.Resources>
