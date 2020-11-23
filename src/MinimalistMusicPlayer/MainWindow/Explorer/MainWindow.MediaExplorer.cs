@@ -1,4 +1,5 @@
 ﻿using MinimalistMusicPlayer.Explorer;
+using MinimalistMusicPlayer.Media;
 using MinimalistMusicPlayer.Utility;
 using System;
 using System.Collections.Generic;
@@ -8,17 +9,19 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using WMPLib;
 
 namespace MinimalistMusicPlayer
 {
 	// the explorer piece of MainWindow
 	public partial class MainWindow
 	{
-		public FileInfo[] DirectoryMediaFiles { get; set; }
+		public MediaFile[] DirectoryMediaFiles { get; set; }
 
 		public StackPanel StackPanelExplorer;
 		public ScrollViewer ScrollViewerExplorer;
+
+		// whether the playlist is visible
+		public bool IsPlaylistVisible { get; set; }
 
 		public async void PopulateMediaExplorer(StackPanel explorer, DirectoryInfo directory)
 		{
@@ -89,15 +92,13 @@ namespace MinimalistMusicPlayer
 		// Media Items
 		public MediaItem CreateMediaItem(FileInfo mediaFile)
 		{
-			IWMPMedia media = Player.InternalPlayer.newMedia(mediaFile.FullName);
-
 			MediaItemStyle mediaItemStyle = GetMediaItemStyle(mediaFile.FullName);
 
 			bool isSelected = false;
 			if (CurrentDirectory != null && CurrentDirectory.FullName == Playlist.PlaylistDirectory)
-				isSelected = Playlist.Index == GetMediaItemPlaylistIndex(mediaFile.FullName);
+				isSelected = Playlist.CurrentIndex == Playlist.IndexOf(mediaFile.FullName, CurrentDirectory);
 
-			MediaItem mediaItem = new MediaItem(mediaFile, media.durationString, mediaItemStyle, isSelected);
+			MediaItem mediaItem = new MediaItem(mediaFile, MediaFile.GetDurationString(mediaFile), mediaItemStyle, isSelected);
 			mediaItem.MouseDoubleClick += MediaItem_MouseDoubleClick;
 			mediaItem.MarkedItemCountChange += MediaItem_MarkedItemCountChange;
 
@@ -106,25 +107,20 @@ namespace MinimalistMusicPlayer
 		private void MediaItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			MediaItem item = (MediaItem)sender;
-
 			MediaItem.Select(item); // set selection styling, deselect the old item while you're at it
 
-			Playlist.Index = GetMediaItemPlaylistIndex(item.FullName);
-			// if item is already in the playlist, simply play the item
-			if (Playlist.Index != Const.InvalidIndex) Player.Play(Playlist.GetItem(Playlist.Index));
+			Playlist.CurrentIndex = Playlist.IndexOf(item.FullName, CurrentDirectory);
 
-			// else, repopulate the playlist with all the files in the current directory then play the item
-			else
+			// if the item is not in the current playlist, repopulate the playlist with all the files in the current directory then play the item
+			if (Playlist.CurrentIndex == Const.InvalidIndex)
 			{
-				Playlist.ClearPlaylistItems();
-				Playlist.AddPlaylistItems(DirectoryMediaFiles.Select(f => f.FullName));
-
-				Playlist.Index = GetMediaItemPlaylistIndex(item.FullName); // update index
-				Player.Play(Playlist.GetItem(Playlist.Index)); // start playing the item
+				Playlist.Clear();
+				Playlist.AddTracks(DirectoryMediaFiles);
+				Playlist.CurrentIndex = Playlist.IndexOf(item.FullName, CurrentDirectory); // update index
 
 				// reset the icons for this particular item
-				SetPlaylistMediaItemStyle(Playlist.PlaylistFullNames, false);
-				SetMediaItemForeground(Playlist.PlaylistFullNames);
+				SetPlaylistMediaItemStyle(Playlist.Tracks, false);
+				SetMediaItemForeground(Playlist.Tracks);
 
 				// reset marking states for all items
 				ResetMediaItemMarkState();
@@ -133,6 +129,12 @@ namespace MinimalistMusicPlayer
 				// hide the select mode if applicable
 				SetPlaylistSelectMode(false);
 			}
+
+			var track = Playlist.GetTrack(Playlist.CurrentIndex);
+			Player.PlayTrack(track);
+			SetPlayPauseUiState(PlaybackState.Playing);
+			SetDurationValues(track);
+			SetTrackInfo(track);
 		}
 		// controls whether the Play selected button should be shown
 		private void MediaItem_MarkedItemCountChange(object sender, RoutedEventArgs e)
@@ -163,7 +165,7 @@ namespace MinimalistMusicPlayer
 		// mapping isn't 1:1 because there are directories and DirectoryItems thrown in the mix!
 		public MediaItem GetMediaItemByPlaylistIndex(int playlistIndex)
 		{
-			string mediaItemFullName = Playlist.PlaylistFullNames[playlistIndex]; // get the playlist media item
+			string mediaItemFullName = Playlist.Tracks[playlistIndex].FullName; // get the playlist media item
 
 			// skip over the directory items
 			foreach (MediaItem item in StackPanelExplorer.Children.OfType<MediaItem>())
@@ -173,28 +175,14 @@ namespace MinimalistMusicPlayer
 			return null;
 		}
 
-		public int GetMediaItemPlaylistIndex(string fullName)
-		{
-			if (Playlist.PlaylistDirectory == CurrentDirectory.FullName)
-			{
-				int index;
-				for (index = 0; index < Playlist.PlaylistFullNames.Count; index++)
-				{
-					if (Playlist.PlaylistFullNames[index] == fullName) return index;
-				}
-			}
-			// return -1 if the MediaItem is not in the current playlist
-			return Const.InvalidIndex;
-		}
-
 		// gets a list of marked MediaItems' FullNames
-		public List<string> GetMarkedMediaFileFullNames()
+		public List<MediaFile> GetMarkedMediaFiles()
 		{
-			List<string> markedFiles = new List<string>();
+			List<MediaFile> markedFiles = new List<MediaFile>();
 
 			foreach (MediaItem item in StackPanelExplorer.Children.OfType<MediaItem>())
 			{
-				if (item.IsMarked) markedFiles.Add(item.FullName);
+				if (item.IsMarked) markedFiles.Add(new MediaFile(item.FullName));
 			}
 
 			return markedFiles;
@@ -216,24 +204,21 @@ namespace MinimalistMusicPlayer
 		{
 			if (CurrentDirectory != null && CurrentDirectory.FullName == Playlist.PlaylistDirectory)
 			{
-				if (DirectoryMediaFiles.Length == Playlist.PlaylistFullNames.Count)
-					return MediaItemStyle.Highlighted;
-
-				else if (Playlist.PlaylistFullNames.Contains(fullName))
-					return MediaItemStyle.IconHighlighted;
+				if (DirectoryMediaFiles.Length == Playlist.Tracks.Count) return MediaItemStyle.Highlighted;
+				else if (Playlist.Contains(fullName)) return MediaItemStyle.IconHighlighted;
 			}
 
 			return MediaItemStyle.Normal;
 		}
 
 		// sets the playlist icon for selected media files
-		public void SetPlaylistMediaItemStyle(IEnumerable<string> playlistItemFullNames, bool toPlaylist)
+		public void SetPlaylistMediaItemStyle(List<MediaFile> tracks, bool toPlaylist)
 		{
 			if (CurrentDirectory != null && CurrentDirectory.FullName != Playlist.PlaylistDirectory) return;
 
 			foreach (MediaItem item in StackPanelExplorer.Children.OfType<MediaItem>())
 			{
-				if (playlistItemFullNames.Contains(item.FullName)) // if we're in the playlist items
+				if (tracks.Exists(track => track.FullName == item.FullName)) // if we're in the playlist items
 				{
 					item.SetMediaIcon(toPlaylist); // set the icon
 					item.SetTitleLabelForeground(toPlaylist);
@@ -241,13 +226,13 @@ namespace MinimalistMusicPlayer
 			}
 		}
 		// sets the title label text color
-		public void SetMediaItemForeground(IEnumerable<string> playlistItemFullNames)
+		public void SetMediaItemForeground(List<MediaFile> tracks)
 		{
 			if (CurrentDirectory != null && CurrentDirectory.FullName != Playlist.PlaylistDirectory) return;
 
 			foreach (MediaItem item in StackPanelExplorer.Children.OfType<MediaItem>())
 			{
-				if (playlistItemFullNames.Contains(item.FullName)) item.SetTitleLabelForeground(true);
+				if (tracks.Exists(track => track.FullName == item.FullName)) item.SetTitleLabelForeground(true);
 				else item.SetTitleLabelForeground(false);
 			}
 		}

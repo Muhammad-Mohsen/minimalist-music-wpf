@@ -17,7 +17,7 @@
 	MouseDown="Window_MouseDown"
 	MouseUp="Window_MouseUp"
 	Deactivated="Window_Deactivated"
-	Activated="Window_Activated">
+	Activated="Window_Activated" Closed="Window_Closed">
 
 	<Window.TaskbarItemInfo>
 		<TaskbarItemInfo x:Name="TaskbarItemInfo">
@@ -72,7 +72,7 @@
 			</m:ExtendedButton>
 
 			<!-- Seek controls -->
-			<m:ExtendedButton x:Name="ButtonPrev" Style="{StaticResource ExtendedButtonStyle}" CornerRadius="50" BorderBrush="{StaticResource PrimaryBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="9,56,0,0" Click="ButtonPrevious_Click" IsTabStop="False" Focusable="False">
+			<m:ExtendedButton x:Name="ButtonPrev" Style="{StaticResource ExtendedButtonStyle}" CornerRadius="50" BorderBrush="{StaticResource PrimaryBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="9,56,0,0" Click="ButtonNextPrevious_Click" IsTabStop="False" Focusable="False">
 				<Path Margin="0,0,1,0" Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Previous}" />
 			</m:ExtendedButton>
 
@@ -82,7 +82,7 @@
 				</Slider.ToolTip>
 			</Slider>
 
-			<m:ExtendedButton x:Name="ButtonNext" Style="{StaticResource ExtendedButtonStyle}" CornerRadius="50" BorderBrush="{StaticResource PrimaryBrush}" VerticalAlignment="Top" Height="30" Margin="0,56,9,0" HorizontalAlignment="Right" Width="30" RenderTransformOrigin="0.5,0.5" Click="ButtonNext_Click" IsTabStop="False" Focusable="False">
+			<m:ExtendedButton x:Name="ButtonNext" Style="{StaticResource ExtendedButtonStyle}" CornerRadius="50" BorderBrush="{StaticResource PrimaryBrush}" VerticalAlignment="Top" Height="30" Margin="0,56,9,0" HorizontalAlignment="Right" Width="30" RenderTransformOrigin="0.5,0.5" Click="ButtonNextPrevious_Click" IsTabStop="False" Focusable="False">
 				<m:ExtendedButton.RenderTransform>
 					<RotateTransform Angle="180"/>
 				</m:ExtendedButton.RenderTransform>
@@ -106,7 +106,7 @@
 				<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource VolumeHigh}" Margin="2" Stretch="Uniform"/>
 			</m:ExtendedButton>
 
-			<Slider x:Name="SliderVolume" Style="{StaticResource HorizontalSlider}" HorizontalAlignment="Left" Margin="206,98,0,0" VerticalAlignment="Top" Width="77" Value="50" MouseLeave="Volume_MouseLeave" MouseEnter="Volume_MouseEnter" LargeChange="20" Maximum="100" ValueChanged="SliderVolume_ValueChanged" Focusable="False" IsTabStop="False" />
+			<Slider x:Name="SliderVolume" Style="{StaticResource HorizontalSlider}" HorizontalAlignment="Left" Margin="206,98,0,0" VerticalAlignment="Top" Width="77" Value="0.5" LargeChange="0.2" Maximum="1" MouseLeave="Volume_MouseLeave" MouseEnter="Volume_MouseEnter" ValueChanged="SliderVolume_ValueChanged" Focusable="False" IsTabStop="False" />
 
 			<!-- Time elapsed/Total time -->
 			<StackPanel HorizontalAlignment="Left" Height="20" Margin="382,83,0,0" VerticalAlignment="Top" Width="100" Orientation="Horizontal" FlowDirection="RightToLeft">

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MinimalistMusicPlayer.Media;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,11 +21,13 @@ namespace MinimalistMusicPlayer.Utility
 		}
 
 		// returns a list of media files for a given DirectoryInfo, media files extensions defined in Const class
-		public static FileInfo[] GetMediaFiles(this DirectoryInfo dir)
+		public static MediaFile[] GetMediaFiles(this DirectoryInfo dir)
 		{
 			// get files by extension, ignoring hidden files
-			FileInfo[] files = dir.EnumerateFiles().Where(f => Const.MediaExtensions.Contains(f.Extension) && (f.Attributes & FileAttributes.Hidden) == 0).ToArray();
-			return files;
+			return dir.EnumerateFiles()
+					.Where(f => Const.MediaExtensions.Contains(f.Extension) && (f.Attributes & FileAttributes.Hidden) == 0)
+					.Select(f => new MediaFile(f))
+					.ToArray();
 		}
 
 		// adds an item to a sorted list
@@ -48,17 +51,9 @@ namespace MinimalistMusicPlayer.Utility
 			}
 
 			int index = list.BinarySearch(item);
-			if (index < 0)
-				index = ~index;
+			if (index < 0) index = ~index;
 			list.Insert(index, item);
 			return index;
-		}
-
-		// returns a friendly time string from a timespan
-		public static string GetTimeStringFromTimeSpan(this TimeSpan t)
-		{
-			string s = t.ToString();
-			return s.Substring(3, 5);
 		}
 	}
 }

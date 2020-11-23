@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.0": {
+      "ATL/3.14": {
+        "runtime": {
+          "ATL.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ATL/3.14": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

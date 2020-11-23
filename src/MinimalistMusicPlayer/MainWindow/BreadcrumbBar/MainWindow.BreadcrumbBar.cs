@@ -163,16 +163,16 @@ namespace MinimalistMusicPlayer
 		private void ButtonPlaySelected_Click(object sender, RoutedEventArgs e)
 		{
 			// get marked media files
-			List<string> markedFiles = GetMarkedMediaFileFullNames();
+			var markedFiles = GetMarkedMediaFiles();
 
 			if (markedFiles.Count == 0) return;
 
 			// reset everything
-			SetPlaylistMediaItemStyle(Playlist.PlaylistFullNames, false);
+			SetPlaylistMediaItemStyle(Playlist.Tracks, false);
 
 			// reinitialize playlist
-			Playlist.ClearPlaylistItems();
-			Playlist.AddPlaylistItems(markedFiles);
+			Playlist.Clear();
+			Playlist.AddTracks(markedFiles);
 
 			// reset marking state
 			ResetMediaItemMarkState();
@@ -180,8 +180,8 @@ namespace MinimalistMusicPlayer
 
 			SetPlaylistMediaItemStyle(markedFiles, true);
 
-			Playlist.Index = 0;
-			Player.Play(Playlist.GetItem(Playlist.Index));
+			Playlist.CurrentIndex = 0;
+			Player.PlayTrack(Playlist.GetTrack(Playlist.CurrentIndex));
 
 			SetPlaylistSelectMode(false);
 		}
@@ -196,20 +196,20 @@ namespace MinimalistMusicPlayer
 		private void ButtonAddToSelection_Click(object sender, RoutedEventArgs e)
 		{
 			// get marked media files
-			List<string> markedFiles = GetMarkedMediaFileFullNames();
+			var markedFiles = GetMarkedMediaFiles();
 
 			// reset everything
-			SetPlaylistMediaItemStyle(Playlist.PlaylistFullNames, false);
+			SetPlaylistMediaItemStyle(Playlist.Tracks, false);
 
 			// reset marking state
 			ResetMediaItemMarkState();
 			MediaItem.MarkedItemCount = 0;
 
 			// add media files to playlist
-			Playlist.AddPlaylistItems(markedFiles);
+			Playlist.AddTracks(markedFiles);
 
 			// this time, set the item style for the entire playlist (as opposed to the marked files)
-			SetPlaylistMediaItemStyle(Playlist.PlaylistFullNames, true);
+			SetPlaylistMediaItemStyle(Playlist.Tracks, true);
 
 			SetPlaylistSelectMode(false);
 		}

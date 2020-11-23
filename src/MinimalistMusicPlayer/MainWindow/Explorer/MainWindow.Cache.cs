@@ -33,7 +33,7 @@ namespace MinimalistMusicPlayer
 						item.SetTitleLabelForeground(false);
 						item.SetMediaIcon(false);
 					}
-					else if (Playlist.Index == GetMediaItemPlaylistIndex(item.FullName)) // if @ the playlist directory
+					else if (Playlist.CurrentIndex == Playlist.IndexOf(item.FullName, CurrentDirectory)) // if @ the playlist directory
 					{
 						MediaItem.Select(item);
 					}

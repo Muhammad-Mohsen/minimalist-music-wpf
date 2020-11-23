@@ -1,8 +1,7 @@
-﻿using MinimalistMusicPlayer.Player;
+﻿using MinimalistMusicPlayer.Media;
 using MinimalistMusicPlayer.Utility;
 using System;
 using System.Windows.Shapes;
-using WMPLib;
 
 namespace MinimalistMusicPlayer
 {
@@ -19,23 +18,17 @@ namespace MinimalistMusicPlayer
 			{
 				// animate the grid
 				Anim.AnimateHeight(this, Const.ExpandedWindowHeight, .2);
-				Player.IsPlaylistVisible = true;
+				IsPlaylistVisible = true;
 
 				Anim.AnimateAngle(ButtonPlaylistIcon, 0, 180, .3, false);
 			}
 			else
 			{
 				Anim.AnimateHeight(this, Const.CollapsedWindowHeight, .2);
-				Player.IsPlaylistVisible = false;
+				IsPlaylistVisible = false;
 
 				Anim.AnimateAngle(ButtonPlaylistIcon, 180, 0, .3, false);
 			}
-		}
-
-		private void SetPinToTopIcon(bool isTopMost)
-		{
-			// ButtonPinToTop.Style = isTopMost ? Styles.BackgroundButtonToggleStyle : Styles.BackgroundButtonStyle;
-			// ButtonPinToTop.Background = isTopMost ? Brushes.AccentBrush : Brushes.PrimaryBrush;
 		}
 		//
 		// Volume icon
@@ -61,19 +54,19 @@ namespace MinimalistMusicPlayer
 		}
 
 		// sets UI state for Play/Pause button, playing icon, and taskbar progress icon state
-		private void SetPlayPauseUiState(WMPPlayState state)
+		private void SetPlayPauseUiState(PlaybackState state)
 		{
 			switch (state)
 			{
-				case WMPPlayState.wmppsPlaying:
+				case PlaybackState.Playing:
 					ButtonPlayPause.Content = Icons.Pause;
 					ThumbButtonInfoPlayPause.ImageSource = Icons.ThumbnailPause;
 					Anim.AnimateOpacity(PlayingIcon, Const.OpacityLevel.Opaque, .3);
 					TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
 					break;
 
-				case WMPPlayState.wmppsStopped:
-				case WMPPlayState.wmppsMediaEnded:
+				case PlaybackState.Stopped:
+				case PlaybackState.Done:
 					SliderSeek.Value = 0;
 					ButtonPlayPause.Content = Icons.Play;
 					ThumbButtonInfoPlayPause.ImageSource = Icons.ThumbnailPlay;
@@ -81,7 +74,7 @@ namespace MinimalistMusicPlayer
 					TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.None;
 					break;
 
-				case WMPPlayState.wmppsPaused:
+				case PlaybackState.Paused:
 					ButtonPlayPause.Content = Icons.Play;
 					ThumbButtonInfoPlayPause.ImageSource = Icons.ThumbnailPlay;
 					Anim.AnimateOpacity(PlayingIcon, Const.OpacityLevel.Transparent, .3);
@@ -91,25 +84,24 @@ namespace MinimalistMusicPlayer
 		}
 
 		// sets the max duration for the seek slider, and the track duration label
-		private void SetDurationValues(IWMPMedia track)
+		private void SetDurationValues(MediaFile track)
 		{
-			SliderSeek.Maximum = track.duration;
-			LabelTotalTime.Content = track.durationString;
+			SliderSeek.Maximum = track.Duration.TotalSeconds;
+			LabelTotalTime.Content = track.DurationString;
 		}
 
 		// sets the track name, album, and artist labels, as well as the application title
-		private void SetTrackInfo(IWMPMedia track)
+		private void SetTrackInfo(MediaFile track)
 		{
-			LabelSongTitle.Content = track.name.Ellipsize(Const.TrackNameMaxLength);
+			LabelSongTitle.Content = track.File.Name.Ellipsize(Const.TrackNameMaxLength);
 
-			string author = !string.IsNullOrEmpty(track.getItemInfo("Author")) ? track.getItemInfo("Author") : "Unknown Artist";
-			string album = !string.IsNullOrEmpty(track.getItemInfo("AlbumID")) ? track.getItemInfo("AlbumID") : "Unknown Album";
-
+			string author = track.Artist;
+			string album = track.Album;
 			LabelArtistAlbum.Content = string.Concat(author, " (", album, ")").Ellipsize(Const.TrackInfoMaxLength);
 
-			Title = string.Concat(track.name, " - Minimalist"); // set the window title (in the taskbar)
+			Title = string.Concat(track.File.Name, " - Minimalist"); // set the window title (in the taskbar)
 
-			ToolTipTrackTitle.Content = track.name; // set track title label tooltip
+			ToolTipTrackTitle.Content = track.File.Name; // set track title label tooltip
 			ToolTipTrackArtistAlbum.Content = string.Concat(author, " (", album, ")"); // set track artist/album label tooltip
 		}
 

@@ -5,28 +5,17 @@ namespace MinimalistMusicPlayer.Utility
 {
 	public class Const
 	{
-		// window heights when the playlist is collapsed/expanded
-		public const int CollapsedWindowHeight = 155;
-		public const int ExpandedWindowHeight = 615;
-
-		public const int ExplorerItemWidth = 430;
-		public const int ExplorerItemIconWidth = 25;
-		public const int ExplorerItemIconHeight = 25;
-
-		// Uri where the IWMPPlaylist will be created each time the app starts
-		public const string PlaylistUri = @"";
 		public static string DefaultMediaDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+		public const string Root = "Computer";
+		public const string ExplorerDirectorySetting = "ExplorerDirectory";
 
 		// track info max lengths (for ellipsizing purposes)
 		public const int TrackNameMaxLength = 20;
 		public const int TrackInfoMaxLength = 40;
-
 		public const int ExplorerItemMaxLength = 60;
 
-		// volume levels
-		public const double VolumeMid = 50;
-		// volume increment
-		public const double VolumeIncrement = 5;
+		public const double VolumeMid = 0.5; // volume levels
+		public const double VolumeIncrement = 0.1; // volume increment
 
 		public const int SeekDivisor = 25;
 
@@ -37,13 +26,26 @@ namespace MinimalistMusicPlayer.Utility
 
 		public static char[] DirectorySeparators = { '/', '\\' };
 
+		public const string ShortFormat = @"mm\:ss";
+		public const string LongFormat = @"h\:mm\:ss";
+
 		public const int InvalidIndex = -1;
+
+		public static readonly TimeSpan PrecisionError = TimeSpan.FromMilliseconds(200);
 
 		public static class OpacityLevel
 		{
 			public const int Opaque = 1;
 			public const int Transparent = 0;
 		}
+
+		// window heights when the playlist is collapsed/expanded
+		public const int CollapsedWindowHeight = 155;
+		public const int ExpandedWindowHeight = 615;
+
+		public const int ExplorerItemWidth = 430;
+		public const int ExplorerItemIconWidth = 25;
+		public const int ExplorerItemIconHeight = 25;
 
 		public static class DrillScale
 		{
@@ -58,9 +60,6 @@ namespace MinimalistMusicPlayer.Utility
 			public static Thickness RightPage = new Thickness(500, 32, -500, 0);
 			public static Thickness LeftPage = new Thickness(-500, 32, 500, 0);
 		}
-
-		public const string Root = "Computer";
-		public const string ExplorerDirectorySetting = "ExplorerDirectory";
 
 		public const double ShowHideDelay = .2; // in seconds
 		public const double AsyncDelay = 5; // in millis
