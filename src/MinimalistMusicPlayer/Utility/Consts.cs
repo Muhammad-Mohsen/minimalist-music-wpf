@@ -10,7 +10,7 @@ namespace MinimalistMusicPlayer.Utility
 		public const string ExplorerDirectorySetting = "ExplorerDirectory";
 
 		// track info max lengths (for ellipsizing purposes)
-		public const int TrackNameMaxLength = 20;
+		public const int TrackNameMaxLength = 25;
 		public const int TrackInfoMaxLength = 40;
 		public const int ExplorerItemMaxLength = 60;
 
@@ -31,7 +31,8 @@ namespace MinimalistMusicPlayer.Utility
 
 		public const int InvalidIndex = -1;
 
-		public static readonly TimeSpan PrecisionError = TimeSpan.FromMilliseconds(200);
+		public static readonly TimeSpan SmallTolerance = TimeSpan.FromMilliseconds(200);
+		public static readonly TimeSpan LargeTolerance = TimeSpan.FromSeconds(5);
 
 		public static class OpacityLevel
 		{
@@ -46,6 +47,8 @@ namespace MinimalistMusicPlayer.Utility
 		public const int ExplorerItemWidth = 430;
 		public const int ExplorerItemIconWidth = 25;
 		public const int ExplorerItemIconHeight = 25;
+
+		public const int SliderThumbWidth = 16;
 
 		public static class DrillScale
 		{

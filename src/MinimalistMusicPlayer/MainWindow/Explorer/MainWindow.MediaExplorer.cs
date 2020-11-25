@@ -132,9 +132,7 @@ namespace MinimalistMusicPlayer
 
 			var track = Playlist.GetTrack(Playlist.CurrentIndex);
 			Player.PlayTrack(track);
-			SetPlayPauseUiState(PlaybackState.Playing);
-			SetDurationValues(track);
-			SetTrackInfo(track);
+			UpdateUi();
 		}
 		// controls whether the Play selected button should be shown
 		private void MediaItem_MarkedItemCountChange(object sender, RoutedEventArgs e)

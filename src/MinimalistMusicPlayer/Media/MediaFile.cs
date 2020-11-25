@@ -1,6 +1,7 @@
 ﻿using ATL;
 using MinimalistMusicPlayer.Utility;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -12,10 +13,13 @@ namespace MinimalistMusicPlayer.Media
 		public string FullName { get; private set; }
 		public string Name { get; private set; }
 		public string Extension { get; private set; }
+
 		public string Artist { get; private set; }
 		public string Album { get; private set; }
 		public TimeSpan Duration { get; private set; }
 		public string DurationString { get; private set; }
+
+		public List<Chapter> Chapters { get; private set; }
 
 		public MediaFile(FileInfo file)
 		{
@@ -31,8 +35,29 @@ namespace MinimalistMusicPlayer.Media
 
 			var format = (Duration.TotalHours >= 1d) ? Const.LongFormat : Const.ShortFormat; // Total hours returns something like 0.006, so we have to compare against 1
 			DurationString = Duration.ToString(format);
+
+			Chapters = metadata.Chapters.Select(c => new Chapter
+			{
+				Title = c.Title,
+				StartTime = TimeSpan.FromMilliseconds(c.StartTime)
+
+			}).ToList();
 		}
 		public MediaFile(string fullName) : this(new FileInfo(fullName)) {}
+
+		public bool HasChapters()
+		{
+			return Chapters.Count > 1;
+		}
+
+		public double GetNextChapterStartPosition(double currentPosition)
+		{
+			return Chapters.Where(c => c.StartPosition >= currentPosition).FirstOrDefault()?.StartPosition ?? Const.InvalidIndex;
+		}
+		public double GetPreviousChapterStartPosition(double currentPosition)
+		{
+			return Chapters.Where(c => c.StartPosition <= (currentPosition - Const.LargeTolerance.TotalSeconds)).LastOrDefault()?.StartPosition ?? Const.InvalidIndex;
+		}
 
 		public int CompareTo(MediaFile other)
 		{
@@ -56,5 +81,12 @@ namespace MinimalistMusicPlayer.Media
 			var format = (duration.TotalHours >= 1d) ? Const.LongFormat : Const.ShortFormat;
 			return duration.ToString(format);
 		}
+	}
+
+	public class Chapter
+	{
+		public string Title { get; set; }
+		public TimeSpan StartTime { get; set; }
+		public double StartPosition { get { return StartTime.TotalSeconds; } }
 	}
 }

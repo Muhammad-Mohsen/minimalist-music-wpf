@@ -77,7 +77,7 @@ namespace MinimalistMusicPlayer
 		{
 			if (Player.CurrentTrack == null) return;
 
-			// more sadness - check if the playlist is done, and if it is, go back to the start
+			// more sadness - check if the playlist is done, and if it is, go back to the start...sadness no more guys!!
 			if (Playlist.CurrentIndex == Const.InvalidIndex)
 			{
 				Playlist.CurrentIndex = 0;
@@ -93,6 +93,17 @@ namespace MinimalistMusicPlayer
 		}
 		private void ButtonNextPrevious_Click(object sender, RoutedEventArgs e)
 		{
+			// check to see if file has chapters or not and try to increment those first
+			if (Player.CurrentTrack.HasChapters())
+			{
+				var chapterPosition = (((Button)sender).Name == "ButtonPrev") ? Player.DecrementChapter() : Player.IncrementChapter();
+				if (chapterPosition != Const.InvalidIndex)
+				{
+					Player.CurrentPosition = TimeSpan.FromSeconds(chapterPosition);
+					return;
+				}
+			}
+
 			if (((Button)sender).Name == "ButtonPrev") Playlist.DecrementIndex();
 			else Playlist.IncrementIndex();
 
@@ -275,35 +286,15 @@ namespace MinimalistMusicPlayer
 		//
 		private void ThumbButtonInfoPrevious_Click(object sender, EventArgs e)
 		{
-			if (Playlist.CurrentIndex > 0)
-				Playlist.CurrentIndex--;
-			else
-				Playlist.CurrentIndex = Playlist.Count - 1;
-
-			if (Playlist.Count > 0)
-				Player.PlayTrack(Playlist.GetTrack(Playlist.CurrentIndex));
+			ButtonNextPrevious_Click(new Button { Name = "ButtonPrev" }, null);
 		}
 		private void ThumbButtonInfoPlayPause_Click(object sender, EventArgs e)
 		{
-			if (Player.CurrentTrack != null)
-			{
-				// more sadness
-				if (Playlist.CurrentIndex == Const.InvalidIndex)
-				{
-					Playlist.CurrentIndex = 0;
-					Player.PlayTrack(Playlist.GetTrack(Playlist.CurrentIndex));
-				}
-
-				if (Player.State == PlaybackState.Playing) Player.Pause();
-				else Player.Resume();
-			}
+			ButtonPlayPause_Click(null, null);
 		}
 		private void ThumbButtonInfoNext_Click(object sender, EventArgs e)
 		{
-			if (Playlist.CurrentIndex < Playlist.Count - 1) Playlist.CurrentIndex++;
-			else Playlist.CurrentIndex = 0;
-
-			if (Playlist.Count > 0) Player.PlayTrack(Playlist.GetTrack(Playlist.CurrentIndex));
+			ButtonNextPrevious_Click(new Button { Name = "ButtonNext" }, null);
 		}
 
 		private void Window_Deactivated(object sender, EventArgs e)

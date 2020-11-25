@@ -120,6 +120,15 @@ namespace MinimalistMusicPlayer.Media
 			Play();
 		}
 
+		public double IncrementChapter()
+		{
+			return CurrentTrack.GetNextChapterStartPosition(CurrentPosition.TotalSeconds);
+		}
+		public double DecrementChapter()
+		{
+			return CurrentTrack.GetPreviousChapterStartPosition(CurrentPosition.TotalSeconds);
+		}
+
 		public void Dispose()
 		{
 			SoundOut?.Dispose();
@@ -133,7 +142,7 @@ namespace MinimalistMusicPlayer.Media
 		//
 		private void SoundOut_Stopped(object sender, PlaybackStoppedEventArgs e)
 		{
-			if (CurrentTrack.Duration - CurrentPosition < Const.PrecisionError) OnPlayerStateChange.Invoke(this, new PlaybackStateChangeEventArgs(PlaybackState.Done));
+			if (CurrentTrack.Duration - CurrentPosition < Const.SmallTolerance) OnPlayerStateChange.Invoke(this, new PlaybackStateChangeEventArgs(PlaybackState.Done));
 		}
 	}
 	//

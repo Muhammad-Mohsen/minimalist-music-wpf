@@ -56,8 +56,8 @@
 			</Rectangle>
 
 			<!-- Track information/open -->
-			<m:ExtendedButton x:Name="ButtonTrackInfo" VerticalAlignment="Top" HorizontalAlignment="Left" Height="46" Width="280" Margin="40,6,0,0" Padding="0" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" Click="ButtonTrackInfo_Click" IsTabStop="False" Focusable="False">
-				<Grid Height="46" Width="280">
+			<m:ExtendedButton x:Name="ButtonTrackInfo" VerticalAlignment="Top" HorizontalAlignment="Left" Height="46" Width="260" Margin="40,6,0,0" Padding="0" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" Click="ButtonTrackInfo_Click" IsTabStop="False" Focusable="False">
+				<Grid Height="46" Width="260">
 					<Label x:Name="LabelSongTitle" Content="Browse Tracks" HorizontalAlignment="Left" Margin="0,-7,0,0" VerticalAlignment="Top" Foreground="{StaticResource PrimaryTextBrush}" FontSize="22">
 						<Label.ToolTip>
 							<ToolTip x:Name="ToolTipTrackTitle" Content="Browse Tracks" Style="{StaticResource ToolTipBordered}" ToolTipService.Placement="RelativePoint" VerticalOffset="2" Margin="20,20" Foreground="{StaticResource PrimaryTextBrush}" />
@@ -75,6 +75,8 @@
 			<m:ExtendedButton x:Name="ButtonPrev" Style="{StaticResource ExtendedButtonStyle}" CornerRadius="50" BorderBrush="{StaticResource PrimaryBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="9,56,0,0" Click="ButtonNextPrevious_Click" IsTabStop="False" Focusable="False">
 				<Path Margin="0,0,1,0" Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Previous}" />
 			</m:ExtendedButton>
+
+			<Grid x:Name="GridChapters" Height="5" Margin="45,74,45,0" Focusable="False" VerticalAlignment="Top" />
 
 			<Slider x:Name="SliderSeek" Style="{StaticResource HorizontalSlider}" Margin="45,63,45,0" VerticalAlignment="Top" Value="0" ValueChanged="SliderSeek_ValueChanged" PreviewMouseDown="SliderSeek_PreviewMouseDown" PreviewMouseUp="SliderSeek_PreviewMouseUp" PreviewMouseMove="SliderSeek_PreviewMouseMove" Focusable="False" IsTabStop="False">
 				<Slider.ToolTip>

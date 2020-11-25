@@ -1,6 +1,7 @@
 ﻿using MinimalistMusicPlayer.Media;
 using MinimalistMusicPlayer.Utility;
 using System;
+using System.Windows;
 using System.Windows.Shapes;
 
 namespace MinimalistMusicPlayer
@@ -110,6 +111,45 @@ namespace MinimalistMusicPlayer
 			ToolTipSeek.HorizontalOffset = position;
 			double seconds = position * maxValue / width;
 			ToolTipSeek.Content = TimeSpan.FromSeconds(seconds).ToString().Substring(3, 5);
+		}
+
+		private void SetChapterMarkers(MediaFile track)
+		{
+			GridChapters.Children.Clear();
+			if (!track.HasChapters()) return;
+
+			var totalWidthSeconds = track.Duration.TotalSeconds;
+			var totalWidthPixels = GridChapters.ActualWidth;
+
+			foreach (var chapter in track.Chapters)
+			{
+				var ratio = chapter.StartPosition / totalWidthSeconds;
+				var marker = CreateChapterMarker(totalWidthPixels * ratio - Const.SliderThumbWidth * ratio); // account for the width of the slider thumb (the slider itself does!!)
+				GridChapters.Children.Add(marker);
+			}
+		}
+		private Rectangle CreateChapterMarker(double position)
+		{
+			return new Rectangle
+			{
+				Width = 1,
+				Margin = new Thickness(position, 0, 0, 0),
+				HorizontalAlignment = HorizontalAlignment.Left,
+				Fill = Brushes.PrimaryHoverBrush,
+			};
+		}
+
+		// updates everything wholesale
+		private void UpdateUi()
+		{
+			var track = Player.CurrentTrack;
+
+			SelectMediaItemByIndex(Playlist.CurrentIndex);
+
+			SetPlayPauseUiState(Player.State);
+			SetDurationValues(track);
+			SetTrackInfo(track);
+			SetChapterMarkers(track);
 		}
 	}
 }
