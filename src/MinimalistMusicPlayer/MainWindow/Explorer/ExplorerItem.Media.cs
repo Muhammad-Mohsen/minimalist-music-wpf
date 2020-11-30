@@ -1,4 +1,5 @@
-﻿using MinimalistMusicPlayer.Utility;
+﻿using MinimalistMusicPlayer.Media;
+using MinimalistMusicPlayer.Utility;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,7 +28,7 @@ namespace MinimalistMusicPlayer.Explorer
 
 		// constructor
 		// using default args instead of doing multiple constructors
-		public MediaItem(FileInfo mediaFile, string duration, MediaItemStyle mediaItemStyle, bool isSelected = false)
+		public MediaItem(MediaFile mediaFile, MediaItemStyle mediaItemStyle, bool isSelected = false)
 		{
 			// set item type
 			ItemType = ExplorerItemType.MediaItem;
@@ -49,7 +50,7 @@ namespace MinimalistMusicPlayer.Explorer
 			contentGrid.Children.Add(LabelTitle);
 
 			// duration
-			LabelDuration = CreateDurationLabel(duration);
+			LabelDuration = CreateDurationLabel(mediaFile);
 			contentGrid.Children.Add(LabelDuration);
 
 			Content = contentGrid;
@@ -69,12 +70,12 @@ namespace MinimalistMusicPlayer.Explorer
 		// UI helpers
 		//
 		// helper that creates a fully-realized duration label
-		private Label CreateDurationLabel(string duration)
+		private Label CreateDurationLabel(MediaFile mediaFile)
 		{
 			return new Label()
 			{
 				HorizontalAlignment = HorizontalAlignment.Right,
-				Content = duration,
+				Content = mediaFile.DurationString,
 				FontSize = 12,
 				Foreground = Brushes.SecondaryTextBrush
 			};

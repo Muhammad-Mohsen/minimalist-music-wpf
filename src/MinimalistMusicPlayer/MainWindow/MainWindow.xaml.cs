@@ -167,11 +167,7 @@ namespace MinimalistMusicPlayer
 			}
 
 			Player.PlayTrack(track);
-
-			SetPlayPauseUiState(args.State);
-			SetDurationValues(track);
-			SetTrackInfo(track);
-			SelectMediaItemByIndex(Playlist.CurrentIndex);
+			UpdateUi();
 		}
 		//
 		// Volume slider/button events

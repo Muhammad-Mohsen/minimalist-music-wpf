@@ -76,7 +76,7 @@ namespace MinimalistMusicPlayer.Media
 		}
 		public double GetPreviousChapterStartPosition(double currentPosition)
 		{
-			return Chapters.Where(c => c.StartPosition <= (currentPosition - Constant.LargeTolerance.TotalSeconds)).LastOrDefault()?.StartPosition ?? Constant.InvalidIndex;
+			return Chapters.Where(c => c.StartPosition <= (currentPosition - Constant.LargeThreshold.TotalSeconds)).LastOrDefault()?.StartPosition ?? Constant.InvalidIndex;
 		}
 
 		public int CompareTo(MediaFile other)

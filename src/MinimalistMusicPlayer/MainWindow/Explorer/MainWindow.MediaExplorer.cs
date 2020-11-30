@@ -66,9 +66,9 @@ namespace MinimalistMusicPlayer
 		{
 			ExplorerItem item;
 			if (i == -1) item = CreateDirectoryItem(itemPath);
-			else item = CreateMediaItem(new FileInfo(itemPath));
+			else item = CreateMediaItem(new MediaFile(itemPath));
 
-			item.Opacity = 0;
+			item.Opacity = Constant.OpacityLevel.Transparent;
 			panel.Children.Add(item);
 
 			Anim.ShowHideFrameworkElement(item, true, Constant.ShowHideDelay);
@@ -90,7 +90,7 @@ namespace MinimalistMusicPlayer
 		}
 
 		// Media Items
-		public MediaItem CreateMediaItem(FileInfo mediaFile)
+		public MediaItem CreateMediaItem(MediaFile mediaFile)
 		{
 			MediaItemStyle mediaItemStyle = GetMediaItemStyle(mediaFile.FullName);
 
@@ -98,7 +98,7 @@ namespace MinimalistMusicPlayer
 			if (CurrentDirectory != null && CurrentDirectory.FullName == Playlist.PlaylistDirectory)
 				isSelected = Playlist.CurrentIndex == Playlist.IndexOf(mediaFile.FullName, CurrentDirectory);
 
-			MediaItem mediaItem = new MediaItem(mediaFile, MediaFile.GetDurationString(mediaFile), mediaItemStyle, isSelected);
+			MediaItem mediaItem = new MediaItem(mediaFile, mediaItemStyle, isSelected);
 			mediaItem.MouseDoubleClick += MediaItem_MouseDoubleClick;
 			mediaItem.MarkedItemCountChange += MediaItem_MarkedItemCountChange;
 
