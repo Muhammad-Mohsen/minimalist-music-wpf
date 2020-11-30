@@ -64,12 +64,12 @@ namespace MinimalistMusicPlayer.Utility
 			if (shouldShow)
 			{
 				element.Visibility = Visibility.Visible; // element still transparent at this point
-				AnimateOpacity(element, Const.OpacityLevel.Opaque, delay); // now it's opaque
+				AnimateOpacity(element, Constant.OpacityLevel.Opaque, delay); // now it's opaque
 			}
 			else
 			{
-				AnimateOpacity(element, Const.OpacityLevel.Transparent, delay); // fade out first
-				await Task.Delay(TimeSpan.FromSeconds(delay)); // make sure that the animation completes
+				AnimateOpacity(element, Constant.OpacityLevel.Transparent, delay); // fade out first
+				await Task.Delay(TimeSpan.FromSeconds(delay)).ConfigureAwait(true); // make sure that the animation completes
 				element.Visibility = Visibility.Collapsed;
 			}
 		}
@@ -90,8 +90,8 @@ namespace MinimalistMusicPlayer.Utility
 				toMargin = new Thickness(50, 0, -50, 0);
 			}
 
-			Anim.AnimateMargin(element, fromMargin, toMargin, delay);
-			await Task.Delay(TimeSpan.FromSeconds(delay));
+			AnimateMargin(element, fromMargin, toMargin, delay);
+			await Task.Delay(TimeSpan.FromSeconds(delay)).ConfigureAwait(false);
 		}
 
 		// generic double animation method

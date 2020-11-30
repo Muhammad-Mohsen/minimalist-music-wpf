@@ -18,14 +18,14 @@ namespace MinimalistMusicPlayer
 			if (toExpanded)
 			{
 				// animate the grid
-				Anim.AnimateHeight(this, Const.ExpandedWindowHeight, .2);
+				Anim.AnimateHeight(this, Constant.ExpandedWindowHeight, .2);
 				IsPlaylistVisible = true;
 
 				Anim.AnimateAngle(ButtonPlaylistIcon, 0, 180, .3, false);
 			}
 			else
 			{
-				Anim.AnimateHeight(this, Const.CollapsedWindowHeight, .2);
+				Anim.AnimateHeight(this, Constant.CollapsedWindowHeight, .2);
 				IsPlaylistVisible = false;
 
 				Anim.AnimateAngle(ButtonPlaylistIcon, 180, 0, .3, false);
@@ -39,8 +39,8 @@ namespace MinimalistMusicPlayer
 		private void SetVolumeIcon(double volume, bool isMute)
 		{
 			if (volume == 0 || isMute) ButtonVolume.Content = Icons.VolumeMute;
-			else if (volume < Const.VolumeMid) ButtonVolume.Content = Icons.VolumeLow;
-			else if (volume >= Const.VolumeMid) ButtonVolume.Content = Icons.VolumeHigh;
+			else if (volume < Constant.VolumeMid) ButtonVolume.Content = Icons.VolumeLow;
+			else if (volume >= Constant.VolumeMid) ButtonVolume.Content = Icons.VolumeHigh;
 		}
 
 		private void SetRepeatIcon(RepeatMode oldRepeatMode)
@@ -51,7 +51,7 @@ namespace MinimalistMusicPlayer
 
 		private void SetShuffleIcon(bool isShuffle)
 		{
-			(ButtonShuffle.Content as Path).Stroke = isShuffle ? Brushes.PrimaryTextBrush: Brushes.AccentBrush;
+			(ButtonShuffle.Content as Path).Stroke = isShuffle ? Brushes.PrimaryTextBrush : Brushes.AccentBrush;
 		}
 
 		// sets UI state for Play/Pause button, playing icon, and taskbar progress icon state
@@ -62,7 +62,7 @@ namespace MinimalistMusicPlayer
 				case PlaybackState.Playing:
 					ButtonPlayPause.Content = Icons.Pause;
 					ThumbButtonInfoPlayPause.ImageSource = Icons.ThumbnailPause;
-					Anim.AnimateOpacity(PlayingIcon, Const.OpacityLevel.Opaque, .3);
+					Anim.AnimateOpacity(PlayingIcon, Constant.OpacityLevel.Opaque, .3);
 					TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;
 					break;
 
@@ -71,14 +71,14 @@ namespace MinimalistMusicPlayer
 					SliderSeek.Value = 0;
 					ButtonPlayPause.Content = Icons.Play;
 					ThumbButtonInfoPlayPause.ImageSource = Icons.ThumbnailPlay;
-					Anim.AnimateOpacity(PlayingIcon, Const.OpacityLevel.Transparent, .3);
+					Anim.AnimateOpacity(PlayingIcon, Constant.OpacityLevel.Transparent, .3);
 					TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.None;
 					break;
 
 				case PlaybackState.Paused:
 					ButtonPlayPause.Content = Icons.Play;
 					ThumbButtonInfoPlayPause.ImageSource = Icons.ThumbnailPlay;
-					Anim.AnimateOpacity(PlayingIcon, Const.OpacityLevel.Transparent, .3);
+					Anim.AnimateOpacity(PlayingIcon, Constant.OpacityLevel.Transparent, .3);
 					TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Paused;
 					break;
 			}
@@ -94,11 +94,11 @@ namespace MinimalistMusicPlayer
 		// sets the track name, album, and artist labels, as well as the application title
 		private void SetTrackInfo(MediaFile track)
 		{
-			LabelSongTitle.Content = track.File.Name.Ellipsize(Const.TrackNameMaxLength);
+			LabelSongTitle.Content = track.File.Name.Ellipsize(Constant.TrackNameMaxLength);
 
 			string author = track.Artist;
 			string album = track.Album;
-			LabelArtistAlbum.Content = string.Concat(author, " (", album, ")").Ellipsize(Const.TrackInfoMaxLength);
+			LabelArtistAlbum.Content = string.Concat(author, " (", album, ")").Ellipsize(Constant.TrackInfoMaxLength);
 
 			Title = string.Concat(track.File.Name, " - Minimalist"); // set the window title (in the taskbar)
 
@@ -124,11 +124,11 @@ namespace MinimalistMusicPlayer
 			foreach (var chapter in track.Chapters)
 			{
 				var ratio = chapter.StartPosition / totalWidthSeconds;
-				var marker = CreateChapterMarker(totalWidthPixels * ratio - Const.SliderThumbWidth * ratio); // account for the width of the slider thumb (the slider itself does!!)
+				var marker = CreateChapterMarker(totalWidthPixels * ratio - Constant.SliderThumbWidth * ratio); // account for the width of the slider thumb (the slider itself does!!)
 				GridChapters.Children.Add(marker);
 			}
 		}
-		private Rectangle CreateChapterMarker(double position)
+		private static Rectangle CreateChapterMarker(double position)
 		{
 			return new Rectangle
 			{

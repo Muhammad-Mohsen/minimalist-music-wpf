@@ -9,13 +9,13 @@ namespace MinimalistMusicPlayer.Media
 	/// <summary>
 	/// Hides the actual player so that it's easily interchangeable
 	/// </summary>
-	public class Player
+	public sealed class Player : IDisposable
 	{
 		private ISoundOut SoundOut;
 		private IWaveSource Source;
 
-		public delegate void OnPlayerStateChangeDelegate(object sender, PlaybackStateChangeEventArgs e);
-		public event OnPlayerStateChangeDelegate OnPlayerStateChange;
+		public delegate void OnPlayerStateChangeEventHandler(object sender, PlaybackStateChangeEventArgs e);
+		public event OnPlayerStateChangeEventHandler OnPlayerStateChange;
 
 		// Playback State
 		public PlaybackState State
@@ -83,7 +83,7 @@ namespace MinimalistMusicPlayer.Media
 		{
 			get
 			{
-				var format = (Source.GetPosition().TotalHours >= 1) ? Const.LongFormat : Const.ShortFormat;
+				var format = (Source.GetPosition().TotalHours >= 1) ? Constant.LongFormat : Constant.ShortFormat;
 				return Source.GetPosition().ToString(format);
 			}
 		}
@@ -142,7 +142,7 @@ namespace MinimalistMusicPlayer.Media
 		//
 		private void SoundOut_Stopped(object sender, PlaybackStoppedEventArgs e)
 		{
-			if (CurrentTrack.Duration - CurrentPosition < Const.SmallTolerance) OnPlayerStateChange.Invoke(this, new PlaybackStateChangeEventArgs(PlaybackState.Done));
+			if (CurrentTrack.Duration - CurrentPosition < Constant.SmallTolerance) OnPlayerStateChange.Invoke(this, new PlaybackStateChangeEventArgs(PlaybackState.Done));
 		}
 	}
 	//
@@ -161,7 +161,7 @@ namespace MinimalistMusicPlayer.Media
 	//
 	public class PlaybackStateChangeEventArgs : EventArgs
 	{
-		public PlaybackState State;
+		public PlaybackState State { get; set; }
 		public PlaybackStateChangeEventArgs(PlaybackState s)
 		{
 			State = s;

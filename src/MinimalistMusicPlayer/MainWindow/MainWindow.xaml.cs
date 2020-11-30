@@ -2,7 +2,6 @@
 using MinimalistMusicPlayer.Utility;
 using System;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,8 +15,8 @@ namespace MinimalistMusicPlayer
 	{
 		// needs to be defined before InitializeComponent, believe it or not!!
 		// Player.Position is accessed during InitializeComponent (see ValueChanged events)
-		public static readonly Player Player = new Player();
-		public static Playlist Playlist = new Playlist();
+		private static readonly Player Player = new Player();
+		private static readonly Playlist Playlist = new Playlist();
 
 		bool IsSeeking = false; // indicates whether the seek slider value is being manually changed
 		float TempVolume;
@@ -38,9 +37,9 @@ namespace MinimalistMusicPlayer
 			PlayingIcon.Opacity = 0; // initialize playing icon visibility to hidden
 			Anim.AnimateAngle(PlayingIcon, 0, 360, 2, true); // start a continuous rotation animation for the playing icon
 
-			string savedDirectory = Properties.Settings.Default[Const.ExplorerDirectorySetting].ToString();
+			string savedDirectory = Properties.Settings.Default[Constant.ExplorerDirectorySetting].ToString();
 			if (Directory.Exists(savedDirectory)) CurrentDirectory = new DirectoryInfo(savedDirectory);
-			else CurrentDirectory = new DirectoryInfo(Const.DefaultMediaDirectory);
+			else CurrentDirectory = new DirectoryInfo(Constant.DefaultMediaDirectory);
 
 			// intialize the explorer
 			ScrollViewerExplorer = GetExplorer(CurrentDirectory);
@@ -78,7 +77,7 @@ namespace MinimalistMusicPlayer
 			if (Player.CurrentTrack == null) return;
 
 			// more sadness - check if the playlist is done, and if it is, go back to the start...sadness no more guys!!
-			if (Playlist.CurrentIndex == Const.InvalidIndex)
+			if (Playlist.CurrentIndex == Constant.InvalidIndex)
 			{
 				Playlist.CurrentIndex = 0;
 				Player.PlayTrack(Playlist.GetTrack(Playlist.CurrentIndex));
@@ -97,7 +96,7 @@ namespace MinimalistMusicPlayer
 			if (Player.CurrentTrack.HasChapters())
 			{
 				var chapterPosition = (((Button)sender).Name == "ButtonPrev") ? Player.DecrementChapter() : Player.IncrementChapter();
-				if (chapterPosition != Const.InvalidIndex)
+				if (chapterPosition != Constant.InvalidIndex)
 				{
 					Player.CurrentPosition = TimeSpan.FromSeconds(chapterPosition);
 					return;
@@ -199,7 +198,7 @@ namespace MinimalistMusicPlayer
 		{
 			VolumeSliderFadeCounter = -1;
 			if (SliderVolume.Opacity == 0 && sender.Equals(ButtonVolume)) // only display the volume slider when the mouse enters the button, not the slider itself
-				Anim.AnimateOpacity(SliderVolume, Const.OpacityLevel.Opaque, .1);
+				Anim.AnimateOpacity(SliderVolume, Constant.OpacityLevel.Opaque, .1);
 		}
 		private void Volume_MouseLeave(object sender, MouseEventArgs e)
 		{
@@ -225,7 +224,7 @@ namespace MinimalistMusicPlayer
 		// and then it moves within it, it wouldn't fire the event
 		private void Window_MouseDown(object sender, MouseButtonEventArgs e)
 		{
-			if (e.OriginalSource.GetType() == typeof (Border))
+			if (e.OriginalSource.GetType() == typeof(Border))
 			{
 				InitialPosition = e.GetPosition(null);
 				CanMoveWindow = true;
@@ -258,12 +257,12 @@ namespace MinimalistMusicPlayer
 					break;
 				case Key.Left: // seek left
 					IsSeeking = true;
-					SliderSeek.Value = Math.Max(0, SliderSeek.Value - SliderSeek.Maximum / Const.SeekDivisor);
+					SliderSeek.Value = Math.Max(0, SliderSeek.Value - SliderSeek.Maximum / Constant.SeekDivisor);
 					IsSeeking = false;
 					break;
 				case Key.Right: // seek right
 					IsSeeking = true;
-					SliderSeek.Value = Math.Min(SliderSeek.Maximum, SliderSeek.Value + SliderSeek.Maximum / Const.SeekDivisor);
+					SliderSeek.Value = Math.Min(SliderSeek.Maximum, SliderSeek.Value + SliderSeek.Maximum / Constant.SeekDivisor);
 					IsSeeking = false;
 					break;
 				case Key.NumPad0: // seek right
@@ -277,9 +276,9 @@ namespace MinimalistMusicPlayer
 		private void Window_MouseWheel(object sender, MouseWheelEventArgs e)
 		{
 			if (e.Delta > 0)
-				SliderVolume.Value += Const.VolumeIncrement;
+				SliderVolume.Value += Constant.VolumeIncrement;
 			else
-				SliderVolume.Value -= Const.VolumeIncrement;
+				SliderVolume.Value -= Constant.VolumeIncrement;
 		}
 		//
 		// Thumbnail buttons

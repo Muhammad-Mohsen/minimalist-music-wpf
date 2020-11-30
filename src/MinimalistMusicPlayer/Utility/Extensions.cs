@@ -25,7 +25,7 @@ namespace MinimalistMusicPlayer.Utility
 		{
 			// get files by extension, ignoring hidden files
 			return dir.EnumerateFiles()
-					.Where(f => Const.MediaExtensions.Contains(f.Extension) && (f.Attributes & FileAttributes.Hidden) == 0)
+					.Where(f => Constant.MediaExtensions.Contains(f.Extension) && (f.Attributes & FileAttributes.Hidden) == 0)
 					.Select(f => new MediaFile(f))
 					.ToArray();
 		}

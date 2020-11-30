@@ -38,7 +38,7 @@ namespace MinimalistMusicPlayer
 			if (VolumeSliderFadeCounter >= 0) VolumeSliderFadeCounter++;
 
 			// animate to transparent if counter reaches 10
-			if (VolumeSliderFadeCounter >= 10 && SliderVolume.Opacity == 1) SliderVolume.AnimateOpacity(Const.OpacityLevel.Transparent, .3);
+			if (VolumeSliderFadeCounter >= 10 && SliderVolume.Opacity == 1) SliderVolume.AnimateOpacity(Constant.OpacityLevel.Transparent, .3);
 		}
 	}
 }

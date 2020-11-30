@@ -17,7 +17,7 @@ namespace MinimalistMusicPlayer.Explorer
 
 			Grid contentGrid = new Grid()
 			{
-				Width = Const.ExplorerItemWidth
+				Width = Constant.ExplorerItemWidth
 			};
 
 			Button buttonIcon = CreateIcon(Icons.Drive);

@@ -36,7 +36,7 @@ namespace MinimalistMusicPlayer.Media
 				{
 					case RepeatMode.NoRepeat:
 						if (CurrentIndex < Count - 1) return CurrentIndex + 1;
-						else return Const.InvalidIndex;
+						else return Constant.InvalidIndex;
 
 					case RepeatMode.Repeat:
 						if (CurrentIndex < Count - 1) return CurrentIndex + 1;
@@ -53,7 +53,7 @@ namespace MinimalistMusicPlayer.Media
 		{
 			get
 			{
-				if (CurrentIndex == Const.InvalidIndex || Tracks.Count == 0) return null;
+				if (CurrentIndex == Constant.InvalidIndex || Tracks.Count == 0) return null;
 				else return Tracks[CurrentIndex];
 			}
 		}
@@ -66,7 +66,7 @@ namespace MinimalistMusicPlayer.Media
 			if (items == null) items = new List<MediaFile>();
 			Tracks = items;
 
-			CurrentIndex = StartIndex = Const.InvalidIndex;
+			CurrentIndex = StartIndex = Constant.InvalidIndex;
 			IsShuffle = false;
 			RepeatMode = RepeatMode.NoRepeat;
 		}
@@ -112,7 +112,7 @@ namespace MinimalistMusicPlayer.Media
 
 		public int IndexOf(string trackName, DirectoryInfo currentDirectory)
 		{
-			if (PlaylistDirectory != currentDirectory.FullName) return Const.InvalidIndex; // if the directories don't match up
+			if (PlaylistDirectory != currentDirectory.FullName) return Constant.InvalidIndex; // if the directories don't match up
 			else return Tracks.FindIndex(f => f.FullName == trackName);
 		}
 

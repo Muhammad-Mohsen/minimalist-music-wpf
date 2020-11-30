@@ -7,7 +7,7 @@ namespace MinimalistMusicPlayer
 {
 	public class BreadcrumbButton : ExtendedButton
 	{
-		public DirectoryInfo Dir;
+		public DirectoryInfo Dir { get; set; }
 
 		public BreadcrumbButton(string directory)
 		{
@@ -35,7 +35,7 @@ namespace MinimalistMusicPlayer
 
 		public static BreadcrumbButton CreateSeparator()
 		{
-			return new BreadcrumbButton(Const.BreadcrumbButtonSeparator)
+			return new BreadcrumbButton(Constant.BreadcrumbButtonSeparator)
 			{
 				IsEnabled = false
 			};

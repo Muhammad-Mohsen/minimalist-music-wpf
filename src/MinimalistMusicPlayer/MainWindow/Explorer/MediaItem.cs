@@ -9,7 +9,7 @@ namespace MinimalistMusicPlayer.Explorer
 	public class MediaItem : ExplorerItem
 	{
 		// specifies the count of marked MediaItems
-		public static int MarkedItemCount = 0;
+		public static int MarkedItemCount { get; set; } = 0;
 
 		public bool IsMarked { get; set; } // specifies whether this item will be added to the custom playlist
 		public string FullName { get; set; } // specifies item full path
@@ -22,8 +22,8 @@ namespace MinimalistMusicPlayer.Explorer
 
 		// custom event that will be raised whenever MarkedItemCount is changed
 		// handler will be attached after constructing the MediaItem (in MediaExplorer)
-		public delegate void MarkedItemCountChangeDelegate(object sender, RoutedEventArgs e);
-		public event MarkedItemCountChangeDelegate MarkedItemCountChange;
+		public delegate void MarkedItemCountChangeEventHandler(object sender, RoutedEventArgs e);
+		public event MarkedItemCountChangeEventHandler MarkedItemCountChange;
 
 		// constructor
 		// using default args instead of doing multiple constructors
@@ -36,7 +36,7 @@ namespace MinimalistMusicPlayer.Explorer
 
 			Grid contentGrid = new Grid()
 			{
-				Width = Const.ExplorerItemWidth
+				Width = Constant.ExplorerItemWidth
 			};
 
 			// icon
@@ -81,7 +81,7 @@ namespace MinimalistMusicPlayer.Explorer
 		}
 
 		// marks the media icon
-		public async void MarkMediaIcon(ExtendedButton mediaIcon, bool isMarked)
+		public static async void MarkMediaIcon(ExtendedButton mediaIcon, bool isMarked)
 		{
 			mediaIcon.IsSelected = isMarked;
 			if (isMarked)
@@ -90,7 +90,7 @@ namespace MinimalistMusicPlayer.Explorer
 			}
 			else
 			{
-				await Task.Delay(200);
+				await Task.Delay(200).ConfigureAwait(true);
 				mediaIcon.Background = Brushes.AccentBrush;
 			}
 		}

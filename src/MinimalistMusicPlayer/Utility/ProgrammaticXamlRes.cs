@@ -8,29 +8,29 @@ namespace MinimalistMusicPlayer.Utility
 	// used to set styles programmatically for toggle buttons (e.g. playlist, stay-on-top buttons)
 	public static class Styles
 	{
-		public static Style BackgroundButtonStyle = (Style)Application.Current.Resources["BackgroundButtonStyle"];
-		public static Style AlphaButtonStyle = (Style)Application.Current.Resources["AlphaButtonStyle"];
-		public static Style ExtendedButtonStyle = (Style)Application.Current.Resources["ExtendedButtonStyle"];
-		public static Style ExtendedButtonMaskStyle = (Style)Application.Current.Resources["ExtendedButtonMaskStyle"];
+		public static readonly Style BackgroundButtonStyle = (Style)Application.Current.Resources["BackgroundButtonStyle"];
+		public static readonly Style AlphaButtonStyle = (Style)Application.Current.Resources["AlphaButtonStyle"];
+		public static readonly Style ExtendedButtonStyle = (Style)Application.Current.Resources["ExtendedButtonStyle"];
+		public static readonly Style ExtendedButtonMaskStyle = (Style)Application.Current.Resources["ExtendedButtonMaskStyle"];
 	}
 
 	public static class Brushes
 	{
-		public static SolidColorBrush PrimaryBrush = (SolidColorBrush)Application.Current.Resources["PrimaryBrush"];
-		public static SolidColorBrush AccentBrush = (SolidColorBrush)Application.Current.Resources["AccentBrush"];
-		public static SolidColorBrush PrimaryTextBrush = (SolidColorBrush)Application.Current.Resources["PrimaryTextBrush"];
-		public static SolidColorBrush SecondaryTextBrush = (SolidColorBrush)Application.Current.Resources["SecondaryTextBrush"];
-		public static SolidColorBrush PrimaryHoverBrush = (SolidColorBrush)Application.Current.Resources["PrimaryHoverBrush"];
-		public static SolidColorBrush HighlightBrush = (SolidColorBrush)Application.Current.Resources["HighlightBrush"];
+		public static readonly SolidColorBrush PrimaryBrush = (SolidColorBrush)Application.Current.Resources["PrimaryBrush"];
+		public static readonly SolidColorBrush AccentBrush = (SolidColorBrush)Application.Current.Resources["AccentBrush"];
+		public static readonly SolidColorBrush PrimaryTextBrush = (SolidColorBrush)Application.Current.Resources["PrimaryTextBrush"];
+		public static readonly SolidColorBrush SecondaryTextBrush = (SolidColorBrush)Application.Current.Resources["SecondaryTextBrush"];
+		public static readonly SolidColorBrush PrimaryHoverBrush = (SolidColorBrush)Application.Current.Resources["PrimaryHoverBrush"];
+		public static readonly SolidColorBrush HighlightBrush = (SolidColorBrush)Application.Current.Resources["HighlightBrush"];
 
-		public static SolidColorBrush TransparentBrush = (SolidColorBrush)Application.Current.Resources["TransparentBrush"];
+		public static readonly SolidColorBrush TransparentBrush = (SolidColorBrush)Application.Current.Resources["TransparentBrush"];
 	}
 
 	// programmatically-assigned icons are newed-up here
 	// sorry about that initializer syntax.
 	public static class Icons
 	{
-		public static Path Play = new Path()
+		public static readonly Path Play = new Path()
 		{
 			Data = (GeometryGroup)Application.Current.Resources["Play"],
 			Stroke = Brushes.PrimaryTextBrush,
@@ -38,7 +38,7 @@ namespace MinimalistMusicPlayer.Utility
 			Margin = new Thickness(4),
 			Stretch = Stretch.Uniform
 		};
-		public static Path Pause = new Path()
+		public static readonly Path Pause = new Path()
 		{
 			Data = (GeometryGroup)Application.Current.Resources["Pause"],
 			Stroke = Brushes.PrimaryTextBrush,
@@ -47,7 +47,7 @@ namespace MinimalistMusicPlayer.Utility
 			Stretch = Stretch.Uniform
 		};
 
-		public static Path VolumeMute = new Path()
+		public static readonly Path VolumeMute = new Path()
 		{
 			Data = (GeometryGroup)Application.Current.Resources["VolumeMute"],
 			Stroke = Brushes.PrimaryTextBrush,
@@ -57,7 +57,7 @@ namespace MinimalistMusicPlayer.Utility
 
 		};
 
-		public static Path VolumeLow = new Path()
+		public static readonly Path VolumeLow = new Path()
 		{
 			Data = (GeometryGroup)Application.Current.Resources["VolumeLow"],
 			Stroke = Brushes.PrimaryTextBrush,
@@ -66,7 +66,7 @@ namespace MinimalistMusicPlayer.Utility
 			Stretch = Stretch.Uniform
 		};
 
-		public static Path VolumeHigh = new Path()
+		public static readonly Path VolumeHigh = new Path()
 		{
 			Data = (GeometryGroup)Application.Current.Resources["VolumeHigh"],
 			Stroke = Brushes.PrimaryTextBrush,
@@ -75,7 +75,7 @@ namespace MinimalistMusicPlayer.Utility
 			Stretch = Stretch.Uniform
 		};
 
-		public static Path RepeatOne = new Path()
+		public static readonly Path RepeatOne = new Path()
 		{
 			Data = (GeometryGroup)Application.Current.Resources["RepeatOne"],
 			Stroke = Brushes.PrimaryTextBrush,
@@ -84,7 +84,7 @@ namespace MinimalistMusicPlayer.Utility
 			Stretch = Stretch.Uniform
 		};
 
-		public static Path Repeat = new Path()
+		public static readonly Path Repeat = new Path()
 		{
 			Data = (GeometryGroup)Application.Current.Resources["Repeat"],
 			Stroke = Brushes.PrimaryTextBrush,
@@ -93,7 +93,7 @@ namespace MinimalistMusicPlayer.Utility
 			Stretch = Stretch.Uniform
 		};
 
-		public static VisualBrush Directory = new VisualBrush()
+		public static readonly VisualBrush Directory = new VisualBrush()
 		{
 			Visual = new Path()
 			{
@@ -103,7 +103,7 @@ namespace MinimalistMusicPlayer.Utility
 			},
 			Stretch = Stretch.None
 		};
-		public static VisualBrush Drive = new VisualBrush()
+		public static readonly VisualBrush Drive = new VisualBrush()
 		{
 			Visual = new Path()
 			{
@@ -113,7 +113,7 @@ namespace MinimalistMusicPlayer.Utility
 			},
 			Stretch = Stretch.None
 		};
-		public static VisualBrush Media = new VisualBrush()
+		public static readonly VisualBrush Media = new VisualBrush()
 		{
 			Visual = new Path()
 			{
@@ -123,7 +123,7 @@ namespace MinimalistMusicPlayer.Utility
 			},
 			Stretch = Stretch.None
 		};
-		public static VisualBrush MediaPlaylist = new VisualBrush()
+		public static readonly VisualBrush MediaPlaylist = new VisualBrush()
 		{
 			Visual = new Path()
 			{
@@ -135,7 +135,7 @@ namespace MinimalistMusicPlayer.Utility
 			RelativeTransform = new TranslateTransform(-.1, 0)
 		};
 
-		public static ImageSource ThumbnailPlay = (DrawingImage)Application.Current.Resources["ThumbnailPlay"];
-		public static ImageSource ThumbnailPause = (DrawingImage)Application.Current.Resources["ThumbnailPause"];
+		public static readonly ImageSource ThumbnailPlay = (DrawingImage)Application.Current.Resources["ThumbnailPlay"];
+		public static readonly ImageSource ThumbnailPause = (DrawingImage)Application.Current.Resources["ThumbnailPause"];
 	}
 }

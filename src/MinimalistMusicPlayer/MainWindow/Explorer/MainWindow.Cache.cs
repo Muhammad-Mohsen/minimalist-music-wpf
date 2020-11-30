@@ -11,13 +11,13 @@ namespace MinimalistMusicPlayer
 	// Contains ExplorerItem cache of previously-visited directories
 	public partial class MainWindow
 	{
-		public static Dictionary<string, ScrollViewer> ExplorerCache = new Dictionary<string, ScrollViewer>();
+		private static readonly Dictionary<string, ScrollViewer> ExplorerCache = new Dictionary<string, ScrollViewer>();
 		//
 		// API
 		//
 		public ScrollViewer GetExplorer(DirectoryInfo directory)
 		{
-			var key = directory == null ? Const.Root : directory.FullName; // directory is null at the root
+			var key = directory == null ? Constant.Root : directory.FullName; // directory is null at the root
 			if (ExplorerCache.ContainsKey(key))
 			{
 				var explorer = ExplorerCache[key];
@@ -50,13 +50,13 @@ namespace MinimalistMusicPlayer
 			return container; // hand it over to whoever is interested
 		}
 
-		private ScrollViewer CreateExplorerContainer()
+		private static ScrollViewer CreateExplorerContainer()
 		{
 			return new ScrollViewer()
 			{
 				IsTabStop = false,
 				Focusable = false,
-				Margin = Const.ExplorerMargin.CurrentPage,
+				Margin = Constant.ExplorerMargin.CurrentPage,
 				Content = new StackPanel()
 				{
 					Focusable = false,

@@ -1,7 +1,6 @@
 ﻿using MinimalistMusicPlayer.Explorer;
 using MinimalistMusicPlayer.Utility;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +30,7 @@ namespace MinimalistMusicPlayer
 			CurrentDirectory = directory;
 
 			// set the setting (will be saved in OnExit event in the app class!!)
-			Properties.Settings.Default[Const.ExplorerDirectorySetting] = directory?.FullName;
+			Properties.Settings.Default[Constant.ExplorerDirectorySetting] = directory?.FullName;
 
 			var explorerToHide = ScrollViewerExplorer;
 
@@ -41,15 +40,15 @@ namespace MinimalistMusicPlayer
 
 			// animate the media explorer current -> paged
 			// Anim.AnimateMargin(explorerToHide, Const.ExplorerMargin.CurrentPage, toMargin, Const.ShowHideDelay);
-			explorerToHide.AnimateScale(Const.DrillScale.Normal, toScale, Const.DrillAnimDuration);
-			explorerToHide.AnimateOpacity(Const.OpacityLevel.Transparent, Const.DrillAnimDuration, (object sender, EventArgs args) => explorerToHide.Visibility = Visibility.Collapsed);
+			explorerToHide.AnimateScale(Constant.DrillScale.Normal, toScale, Constant.DrillAnimDuration);
+			explorerToHide.AnimateOpacity(Constant.OpacityLevel.Transparent, Constant.DrillAnimDuration, (object sender, EventArgs args) => explorerToHide.Visibility = Visibility.Collapsed);
 			// repopulate the breadcrumb bar
 			PopulateBreadcrumbBar(directory);
 			// animate the media explorer paged -> current
 			// Anim.AnimateMargin(ScrollViewerExplorer, fromMargin, Const.ExplorerMargin.CurrentPage, Const.ShowHideDelay);
-			ScrollViewerExplorer.AnimateScale(fromScale, Const.DrillScale.Normal, Const.DrillAnimDuration);
+			ScrollViewerExplorer.AnimateScale(fromScale, Constant.DrillScale.Normal, Constant.DrillAnimDuration);
 			ScrollViewerExplorer.Visibility = Visibility.Visible;
-			ScrollViewerExplorer.AnimateOpacity(Const.OpacityLevel.Opaque, Const.DrillAnimDuration);
+			ScrollViewerExplorer.AnimateOpacity(Constant.OpacityLevel.Opaque, Constant.DrillAnimDuration);
 
 			// reset item markings
 			MediaItem.MarkedItemCount = 0;
@@ -69,7 +68,7 @@ namespace MinimalistMusicPlayer
 			StackPanelDirectory.Children.Clear();
 
 			// Add the computer button
-			BreadcrumbButton rootButton = new BreadcrumbButton(Const.Root);
+			BreadcrumbButton rootButton = new BreadcrumbButton(Constant.Root);
 			rootButton.Click += ComputerButton_Click;
 			StackPanelDirectory.Children.Add(rootButton);
 
@@ -80,7 +79,7 @@ namespace MinimalistMusicPlayer
 			if (directory != null)
 			{
 				// break up the full path
-				string[] breadcrumbs = directory.FullName.Split(Const.DirectorySeparators);
+				string[] breadcrumbs = directory.FullName.Split(Constant.DirectorySeparators);
 
 				foreach (string crumb in breadcrumbs)
 				{
@@ -97,9 +96,9 @@ namespace MinimalistMusicPlayer
 			FrameworkElement elementToHide = shouldShow ? GridBreadcrumnBar : GridSelectMode;
 			FrameworkElement elementToShow = shouldShow ? GridSelectMode : GridBreadcrumnBar;
 
-			Anim.ShowHideFrameworkElement(elementToHide, false, Const.ShowHideDelay);
-			await Task.Delay(TimeSpan.FromSeconds(Const.ShowHideDelay));
-			Anim.ShowHideFrameworkElement(elementToShow, true, Const.ShowHideDelay);
+			Anim.ShowHideFrameworkElement(elementToHide, false, Constant.ShowHideDelay);
+			await Task.Delay(TimeSpan.FromSeconds(Constant.ShowHideDelay)).ConfigureAwait(true);
+			Anim.ShowHideFrameworkElement(elementToShow, true, Constant.ShowHideDelay);
 		}
 
 		private void SetAddToSelectionEnableState(string currentDirectory, string playlistDirectory, int playlistCount)
@@ -153,7 +152,7 @@ namespace MinimalistMusicPlayer
 
 			// if you get to the root, append a '/'
 			if (directory.Length == 2)
-				directory.Append(Const.BreadcrumbButtonSeparator);
+				directory.Append(Constant.BreadcrumbButtonSeparator);
 
 			return directory.ToString();
 		}

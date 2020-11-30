@@ -3,9 +3,9 @@ using System.Windows;
 
 namespace MinimalistMusicPlayer.Utility
 {
-	public class Const
+	public static class Constant
 	{
-		public static string DefaultMediaDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
+		public static readonly string DefaultMediaDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
 		public const string Root = "Computer";
 		public const string ExplorerDirectorySetting = "ExplorerDirectory";
 
@@ -20,11 +20,11 @@ namespace MinimalistMusicPlayer.Utility
 		public const int SeekDivisor = 25;
 
 		// array that contains a list supported music extensions
-		public static string[] MediaExtensions = { ".mp3", ".wma", ".wav", ".m4b" };
+		public static readonly string[] MediaExtensions = { ".mp3", ".wma", ".wav", ".m4b" };
 
 		public const string BreadcrumbButtonSeparator = "/";
 
-		public static char[] DirectorySeparators = { '/', '\\' };
+		public static readonly char[] DirectorySeparators = { '/', '\\' };
 
 		public const string ShortFormat = @"mm\:ss";
 		public const string LongFormat = @"h\:mm\:ss";
@@ -59,9 +59,9 @@ namespace MinimalistMusicPlayer.Utility
 
 		public static class ExplorerMargin
 		{
-			public static Thickness CurrentPage = new Thickness(0, 32, 0, 0);
-			public static Thickness RightPage = new Thickness(500, 32, -500, 0);
-			public static Thickness LeftPage = new Thickness(-500, 32, 500, 0);
+			public static readonly Thickness CurrentPage = new Thickness(0, 32, 0, 0);
+			public static readonly Thickness RightPage = new Thickness(500, 32, -500, 0);
+			public static readonly Thickness LeftPage = new Thickness(-500, 32, 500, 0);
 		}
 
 		public const double ShowHideDelay = .2; // in seconds

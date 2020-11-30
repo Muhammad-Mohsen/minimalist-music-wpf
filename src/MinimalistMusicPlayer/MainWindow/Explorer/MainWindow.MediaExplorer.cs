@@ -17,8 +17,8 @@ namespace MinimalistMusicPlayer
 	{
 		public MediaFile[] DirectoryMediaFiles { get; set; }
 
-		public StackPanel StackPanelExplorer;
-		public ScrollViewer ScrollViewerExplorer;
+		public StackPanel StackPanelExplorer { get; set; }
+		public ScrollViewer ScrollViewerExplorer { get; set; }
 
 		// whether the playlist is visible
 		public bool IsPlaylistVisible { get; set; }
@@ -26,7 +26,7 @@ namespace MinimalistMusicPlayer
 		public async void PopulateMediaExplorer(StackPanel explorer, DirectoryInfo directory)
 		{
 			AddExplorerItemsAsync(explorer, directory);
-			await Task.Delay(TimeSpan.FromTicks(0)); // just to make the method async!
+			await Task.Delay(TimeSpan.FromTicks(0)).ConfigureAwait(false); // just to make the method async!
 		}
 
 		// adds explorer items that are not Drives
@@ -52,13 +52,13 @@ namespace MinimalistMusicPlayer
 			foreach (DirectoryInfo dir in subDirectories)
 			{
 				AddExplorerItem(panel, dir.FullName, -1);
-				await Task.Delay(TimeSpan.FromMilliseconds(Const.AsyncDelay));
+				await Task.Delay(TimeSpan.FromMilliseconds(Constant.AsyncDelay)).ConfigureAwait(true);
 			}
 
 			for (int i = 0; i < DirectoryMediaFiles.Length; i++)
 			{
 				AddExplorerItem(panel, DirectoryMediaFiles[i].FullName, i);
-				await Task.Delay(TimeSpan.FromMilliseconds(Const.AsyncDelay));
+				await Task.Delay(TimeSpan.FromMilliseconds(Constant.AsyncDelay)).ConfigureAwait(true);
 			}
 		}
 
@@ -71,8 +71,8 @@ namespace MinimalistMusicPlayer
 			item.Opacity = 0;
 			panel.Children.Add(item);
 
-			Anim.ShowHideFrameworkElement(item, true, Const.ShowHideDelay);
-			await Task.Delay(TimeSpan.FromSeconds(Const.ShowHideDelay));
+			Anim.ShowHideFrameworkElement(item, true, Constant.ShowHideDelay);
+			await Task.Delay(TimeSpan.FromSeconds(Constant.ShowHideDelay)).ConfigureAwait(false);
 		}
 
 		// Directory Items
@@ -112,7 +112,7 @@ namespace MinimalistMusicPlayer
 			Playlist.CurrentIndex = Playlist.IndexOf(item.FullName, CurrentDirectory);
 
 			// if the item is not in the current playlist, repopulate the playlist with all the files in the current directory then play the item
-			if (Playlist.CurrentIndex == Const.InvalidIndex)
+			if (Playlist.CurrentIndex == Constant.InvalidIndex)
 			{
 				Playlist.Clear();
 				Playlist.AddTracks(DirectoryMediaFiles);
@@ -193,7 +193,7 @@ namespace MinimalistMusicPlayer
 			foreach (MediaItem item in StackPanelExplorer.Children.OfType<MediaItem>())
 			{
 				item.IsMarked = false;
-				item.MarkMediaIcon(item.MediaIcon, false);
+				MediaItem.MarkMediaIcon(item.MediaIcon, false);
 			}
 		}
 
@@ -242,19 +242,19 @@ namespace MinimalistMusicPlayer
 		}
 
 		// returns appropriate margin (left/right) for the media explorer stackPanel animation
-		private Thickness GetExplorerAnimationMargin(DirectoryInfo fromDirectory, DirectoryInfo currentDirectory)
+		private static Thickness GetExplorerAnimationMargin(DirectoryInfo fromDirectory, DirectoryInfo currentDirectory)
 		{
-			if (currentDirectory == null) return Const.ExplorerMargin.RightPage;
-			else if (fromDirectory == null) return Const.ExplorerMargin.LeftPage;
-			else if (fromDirectory.FullName.Length <= currentDirectory.FullName.Length) return Const.ExplorerMargin.LeftPage;
-			else return Const.ExplorerMargin.RightPage;
+			if (currentDirectory == null) return Constant.ExplorerMargin.RightPage;
+			else if (fromDirectory == null) return Constant.ExplorerMargin.LeftPage;
+			else if (fromDirectory.FullName.Length <= currentDirectory.FullName.Length) return Constant.ExplorerMargin.LeftPage;
+			else return Constant.ExplorerMargin.RightPage;
 		}
-		private double GetExplorerAnimationScale(DirectoryInfo fromDirectory, DirectoryInfo currentDirectory)
+		private static double GetExplorerAnimationScale(DirectoryInfo fromDirectory, DirectoryInfo currentDirectory)
 		{
-			if (currentDirectory == null) return Const.DrillScale.In;
-			else if (fromDirectory == null) return Const.DrillScale.Out;
-			else if (fromDirectory.FullName.Length <= currentDirectory.FullName.Length) return Const.DrillScale.Out;
-			else return Const.DrillScale.In;
+			if (currentDirectory == null) return Constant.DrillScale.In;
+			else if (fromDirectory == null) return Constant.DrillScale.Out;
+			else if (fromDirectory.FullName.Length <= currentDirectory.FullName.Length) return Constant.DrillScale.Out;
+			else return Constant.DrillScale.In;
 		}
 	}
 }

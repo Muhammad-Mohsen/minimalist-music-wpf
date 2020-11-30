@@ -14,12 +14,46 @@ namespace MinimalistMusicPlayer.Media
 		public string Name { get; private set; }
 		public string Extension { get; private set; }
 
-		public string Artist { get; private set; }
-		public string Album { get; private set; }
-		public TimeSpan Duration { get; private set; }
-		public string DurationString { get; private set; }
+		public string Artist { get { return string.IsNullOrWhiteSpace(Metadata.Artist) ? "Unknown Artist" : Metadata.Artist; } }
+		public string Album { get { return string.IsNullOrWhiteSpace(Metadata.Album) ? "Unknown Album" : Metadata.Album; } }
+		public TimeSpan Duration { get { return TimeSpan.FromSeconds(Metadata.Duration); } }
+		public string DurationString
+		{
+			get
+			{
+				var format = (Duration.TotalHours >= 1d) ? Constant.LongFormat : Constant.ShortFormat; // Total hours returns something like 0.006, so we have to compare against 1
+				return Duration.ToString(format);
+			}
+		}
 
-		public List<Chapter> Chapters { get; private set; }
+		private List<Chapter> _Chapters;
+		public List<Chapter> Chapters
+		{
+			get
+			{
+				if (_Chapters == null)
+				{
+					_Chapters = Metadata.Chapters.Select(c => new Chapter
+					{
+						Title = c.Title,
+						StartTime = TimeSpan.FromMilliseconds(c.StartTime)
+
+					}).ToList();
+				}
+
+				return _Chapters;
+			}
+		}
+
+		private Track _Metadata;
+		private Track Metadata
+		{
+			get
+			{
+				if (_Metadata == null) _Metadata = new Track(File.FullName);
+				return _Metadata;
+			}
+		}
 
 		public MediaFile(FileInfo file)
 		{
@@ -27,23 +61,9 @@ namespace MinimalistMusicPlayer.Media
 			FullName = file.FullName;
 			Name = file.Name;
 			Extension = file.Extension;
-
-			var metadata = new Track(file.FullName);
-			Artist = string.IsNullOrWhiteSpace(metadata.Artist) ? "Unknown Artist" : metadata.Artist;
-			Album = string.IsNullOrWhiteSpace(metadata.Album) ? "Unknown Artist" : metadata.Album;
-			Duration = TimeSpan.FromSeconds(metadata.Duration);
-
-			var format = (Duration.TotalHours >= 1d) ? Const.LongFormat : Const.ShortFormat; // Total hours returns something like 0.006, so we have to compare against 1
-			DurationString = Duration.ToString(format);
-
-			Chapters = metadata.Chapters.Select(c => new Chapter
-			{
-				Title = c.Title,
-				StartTime = TimeSpan.FromMilliseconds(c.StartTime)
-
-			}).ToList();
 		}
-		public MediaFile(string fullName) : this(new FileInfo(fullName)) {}
+
+		public MediaFile(string fullName) : this(new FileInfo(fullName)) { }
 
 		public bool HasChapters()
 		{
@@ -52,21 +72,21 @@ namespace MinimalistMusicPlayer.Media
 
 		public double GetNextChapterStartPosition(double currentPosition)
 		{
-			return Chapters.Where(c => c.StartPosition >= currentPosition).FirstOrDefault()?.StartPosition ?? Const.InvalidIndex;
+			return Chapters.Where(c => c.StartPosition >= currentPosition).FirstOrDefault()?.StartPosition ?? Constant.InvalidIndex;
 		}
 		public double GetPreviousChapterStartPosition(double currentPosition)
 		{
-			return Chapters.Where(c => c.StartPosition <= (currentPosition - Const.LargeTolerance.TotalSeconds)).LastOrDefault()?.StartPosition ?? Const.InvalidIndex;
+			return Chapters.Where(c => c.StartPosition <= (currentPosition - Constant.LargeTolerance.TotalSeconds)).LastOrDefault()?.StartPosition ?? Constant.InvalidIndex;
 		}
 
 		public int CompareTo(MediaFile other)
 		{
-			return string.Compare(FullName, other.FullName);
+			return string.Compare(FullName, other.FullName, StringComparison.Ordinal);
 		}
 
 		public static bool IsMediaFile(FileInfo file)
 		{
-			return Const.MediaExtensions.Contains(file.Extension);
+			return Constant.MediaExtensions.Contains(file.Extension);
 		}
 
 		public static TimeSpan GetDuration(FileInfo file)
@@ -78,7 +98,7 @@ namespace MinimalistMusicPlayer.Media
 		{
 			var duration = GetDuration(file);
 
-			var format = (duration.TotalHours >= 1d) ? Const.LongFormat : Const.ShortFormat;
+			var format = (duration.TotalHours >= 1d) ? Constant.LongFormat : Constant.ShortFormat;
 			return duration.ToString(format);
 		}
 	}

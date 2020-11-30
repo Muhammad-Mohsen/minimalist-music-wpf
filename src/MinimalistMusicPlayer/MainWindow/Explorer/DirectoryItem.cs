@@ -18,13 +18,13 @@ namespace MinimalistMusicPlayer.Explorer
 
 			Grid contentGrid = new Grid()
 			{
-				Width = Const.ExplorerItemWidth
+				Width = Constant.ExplorerItemWidth
 			};
 
 			Button buttonIcon = CreateIcon(Icons.Directory);
 			contentGrid.Children.Add(buttonIcon);
 
-			Label labelTitle = CreateTitleLabel(directory.Split(Const.DirectorySeparators).Last());
+			Label labelTitle = CreateTitleLabel(directory.Split(Constant.DirectorySeparators).Last());
 			contentGrid.Children.Add(labelTitle);
 
 			Content = contentGrid;

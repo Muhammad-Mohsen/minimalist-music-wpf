@@ -20,21 +20,21 @@ namespace MinimalistMusicPlayer.Explorer
 			Margin = new Thickness(0, 3, 0, 0);
 		}
 
-		protected Label CreateTitleLabel(string title, System.Windows.Media.Brush foregroundBursh = null)
+		protected static Label CreateTitleLabel(string title, System.Windows.Media.Brush foregroundBursh = null)
 		{
 			if (foregroundBursh == null) foregroundBursh = Brushes.PrimaryTextBrush;
 
-			title = title.Ellipsize(Const.ExplorerItemMaxLength);
+			title = title.Ellipsize(Constant.ExplorerItemMaxLength);
 			return new Label()
 			{
 				HorizontalAlignment = HorizontalAlignment.Left,
 				Content = title,
 				FontSize = 12,
 				Foreground = foregroundBursh,
-				Margin = new Thickness(Const.ExplorerItemIconWidth, 0, 0, 0)
+				Margin = new Thickness(Constant.ExplorerItemIconWidth, 0, 0, 0)
 			};
 		}
-		protected ExtendedButton CreateIcon(System.Windows.Media.VisualBrush icon)
+		protected static ExtendedButton CreateIcon(System.Windows.Media.VisualBrush icon)
 		{
 			return new ExtendedButton()
 			{
@@ -42,8 +42,8 @@ namespace MinimalistMusicPlayer.Explorer
 				Style = Styles.ExtendedButtonMaskStyle,
 				OpacityMask = icon,
 				Background = Brushes.AccentBrush,
-				Width = Const.ExplorerItemIconWidth,
-				Height = Const.ExplorerItemIconHeight,
+				Width = Constant.ExplorerItemIconWidth,
+				Height = Constant.ExplorerItemIconHeight,
 				Margin = new Thickness(0),
 				IsTabStop = false,
 				Focusable = false
