@@ -81,7 +81,7 @@ namespace MinimalistMusicPlayer.Media
 
 		public int CompareTo(MediaFile other)
 		{
-			return string.Compare(FullName, other.FullName, StringComparison.Ordinal);
+			return string.Compare(FullName, other.FullName, StringComparison.OrdinalIgnoreCase);
 		}
 
 		public static bool IsMediaFile(FileInfo file)

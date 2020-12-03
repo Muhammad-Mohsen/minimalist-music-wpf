@@ -142,7 +142,7 @@ namespace MinimalistMusicPlayer.Media
 		//
 		private void SoundOut_Stopped(object sender, PlaybackStoppedEventArgs e)
 		{
-			if (Source.Position == Source.Length) OnPlayerStateChange.Invoke(this, new PlaybackStateChangeEventArgs(PlaybackState.Done));
+			if (CurrentTrack.Duration - CurrentPosition <= Constant.SmallThreshold) OnPlayerStateChange.Invoke(this, new PlaybackStateChangeEventArgs(PlaybackState.Done));
 		}
 	}
 	//

@@ -31,6 +31,7 @@ namespace MinimalistMusicPlayer.Utility
 
 		public const int InvalidIndex = -1;
 
+		public static readonly TimeSpan SmallThreshold = TimeSpan.FromMilliseconds(1000);
 		public static readonly TimeSpan LargeThreshold = TimeSpan.FromSeconds(5);
 
 		public static class OpacityLevel
