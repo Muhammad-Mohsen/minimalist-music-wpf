@@ -138,7 +138,7 @@
 						<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource CancelSelected}" />
 					</m:ExtendedButton>
 
-					<m:ExtendedButton x:Name="ButtonAddToSelection" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" Width="35" Margin="40,0,0,0" HorizontalAlignment="Left" Focusable="False" Click="ButtonCancelPlaySelected_Click">
+					<m:ExtendedButton x:Name="ButtonAddToSelection" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" Width="35" Margin="40,0,0,0" HorizontalAlignment="Left" Focusable="False" Click="ButtonAddToSelection_Click">
 						<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource AddToSelection}" RenderTransformOrigin="0.5,0.5" >
 							<Path.RenderTransform>
 								<RotateTransform Angle="45"/>

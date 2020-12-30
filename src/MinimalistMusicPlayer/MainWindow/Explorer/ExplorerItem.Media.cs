@@ -1,6 +1,5 @@
 ﻿using MinimalistMusicPlayer.Media;
 using MinimalistMusicPlayer.Utility;
-using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -87,6 +86,7 @@ namespace MinimalistMusicPlayer.Explorer
 			mediaIcon.IsSelected = isMarked;
 			if (isMarked)
 			{
+				await Task.Delay(200).ConfigureAwait(true);
 				mediaIcon.Background = Brushes.SecondaryTextBrush;
 			}
 			else
@@ -97,11 +97,21 @@ namespace MinimalistMusicPlayer.Explorer
 		}
 
 		// changes the media icon from media playlist to media and back - used when changing the actual playlist
-		public void SetMediaIcon(bool isPlaylistItem)
+		public async void SetMediaIcon(bool isPlaylistItem)
 		{
 			var icon = isPlaylistItem == true ? Icons.MediaPlaylist : Icons.Media;
 			MediaIcon.OpacityMask = icon;
-			MediaIcon.Background = Brushes.SecondaryTextBrush;
+			MediaIcon.IsSelected = isPlaylistItem;
+			if (isPlaylistItem)
+			{
+				await Task.Delay(200).ConfigureAwait(true);
+				MediaIcon.Background = Brushes.SecondaryTextBrush;
+			}
+			else
+			{
+				await Task.Delay(200).ConfigureAwait(true);
+				MediaIcon.Background = Brushes.AccentBrush;
+			}
 		}
 
 		public void SetTitleLabelForeground(bool isPlaylistItem)

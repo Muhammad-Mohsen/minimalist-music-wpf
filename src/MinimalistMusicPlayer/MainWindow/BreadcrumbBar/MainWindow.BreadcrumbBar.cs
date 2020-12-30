@@ -183,6 +183,7 @@ namespace MinimalistMusicPlayer
 			Player.PlayTrack(Playlist.GetTrack(Playlist.CurrentIndex));
 
 			SetPlaylistSelectMode(false);
+			UpdateUi();
 		}
 		private void ButtonCancelPlaySelected_Click(object sender, RoutedEventArgs e)
 		{
