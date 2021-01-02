@@ -7,7 +7,9 @@ namespace MinimalistMusicPlayer.Utility
 	{
 		public static readonly string DefaultMediaDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
 		public const string Root = "Computer";
+
 		public const string ExplorerDirectorySetting = "ExplorerDirectory";
+		public const string VolumeSetting = "Volume";
 
 		// track info max lengths (for ellipsizing purposes)
 		public const int TrackNameMaxLength = 25;

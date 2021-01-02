@@ -1,6 +1,7 @@
 ﻿using CSCore;
 using CSCore.Codecs;
 using CSCore.SoundOut;
+using MinimalistMusicPlayer.Properties;
 using MinimalistMusicPlayer.Utility;
 using System;
 
@@ -53,20 +54,17 @@ namespace MinimalistMusicPlayer.Media
 				else
 				{
 					if (State == PlaybackState.Invalid) return;
-					SoundOut.Volume = _Volume;
+					SoundOut.Volume = Volume;
 				}
 			}
 		}
 
 		// player volume level
-		private float _Volume;
 		public float Volume
 		{
-			get { return _Volume; }
+			get { return float.Parse(Settings.Default[Constant.VolumeSetting].ToString()); } // settings value is directly bound to the slider in MainWindow.xaml
 			set
 			{
-				_Volume = value;
-
 				if (State == PlaybackState.Invalid) return;
 				SoundOut.Volume = value;
 			}
@@ -91,7 +89,7 @@ namespace MinimalistMusicPlayer.Media
 		// ctor
 		public Player()
 		{
-			SoundOut = new WasapiOut() { Latency = 100 };
+			SoundOut = new WasapiOut() { Latency = 10 };
 			SoundOut.Stopped += SoundOut_Stopped;
 		}
 
@@ -115,7 +113,7 @@ namespace MinimalistMusicPlayer.Media
 					.ToWaveSource();
 
 			SoundOut.Initialize(Source);
-			SoundOut.Volume = IsMuted ? 0 : _Volume;
+			SoundOut.Volume = IsMuted ? 0 : Volume;
 
 			Play();
 		}

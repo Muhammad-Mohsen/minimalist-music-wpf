@@ -104,6 +104,7 @@ namespace MinimalistMusicPlayer
 		private void SetAddToSelectionEnableState(string currentDirectory, string playlistDirectory, int playlistCount)
 		{
 			ButtonAddToSelection.IsEnabled = currentDirectory == playlistDirectory && playlistCount > 0;
+			(ButtonAddToSelection.Content as System.Windows.Shapes.Path).Stroke = ButtonAddToSelection.IsEnabled ? Brushes.PrimaryTextBrush : Brushes.AccentBrush;
 		}
 		//
 		// click handlers

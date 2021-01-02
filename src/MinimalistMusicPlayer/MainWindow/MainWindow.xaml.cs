@@ -1,4 +1,5 @@
 ﻿using MinimalistMusicPlayer.Media;
+using MinimalistMusicPlayer.Properties;
 using MinimalistMusicPlayer.Utility;
 using System;
 using System.IO;
@@ -37,7 +38,7 @@ namespace MinimalistMusicPlayer
 			PlayingIcon.Opacity = 0; // initialize playing icon visibility to hidden
 			Anim.AnimateAngle(PlayingIcon, 0, 360, 2, true); // start a continuous rotation animation for the playing icon
 
-			string savedDirectory = Properties.Settings.Default[Constant.ExplorerDirectorySetting].ToString();
+			string savedDirectory = Settings.Default[Constant.ExplorerDirectorySetting].ToString();
 			if (Directory.Exists(savedDirectory)) CurrentDirectory = new DirectoryInfo(savedDirectory);
 			else CurrentDirectory = new DirectoryInfo(Constant.DefaultMediaDirectory);
 
@@ -93,7 +94,7 @@ namespace MinimalistMusicPlayer
 		private void ButtonNextPrevious_Click(object sender, RoutedEventArgs e)
 		{
 			// check to see if file has chapters or not and try to increment those first
-			if (Player.CurrentTrack.HasChapters())
+			if (Player.CurrentTrack?.HasChapters() ?? false)
 			{
 				var chapterPosition = (((Button)sender).Name == "ButtonPrev") ? Player.DecrementChapter() : Player.IncrementChapter();
 				if (chapterPosition != Constant.InvalidIndex)
@@ -182,8 +183,7 @@ namespace MinimalistMusicPlayer
 		}
 		private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
 		{
-			// only set the player volume if it was changed through the slider
-			// not the mute button
+			// only set the player volume if it was changed through the slider, not the mute button
 			if (!Player.IsMuted) Player.Volume = (float)SliderVolume.Value;
 			SetVolumeIcon(SliderVolume.Value, Player.IsMuted);
 		}

@@ -4,6 +4,7 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:m="clr-namespace:MinimalistMusicPlayer"
+	xmlns:properties="clr-namespace:MinimalistMusicPlayer.Properties"
 	x:Name="Window"
 	x:Class="MinimalistMusicPlayer.MainWindow"
 	mc:Ignorable="d"
@@ -108,7 +109,7 @@
 				<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource VolumeHigh}" Margin="2" Stretch="Uniform"/>
 			</m:ExtendedButton>
 
-			<Slider x:Name="SliderVolume" Style="{StaticResource HorizontalSlider}" HorizontalAlignment="Left" Margin="206,98,0,0" VerticalAlignment="Top" Width="77" Value="0.5" LargeChange="0.2" Maximum="1" MouseLeave="Volume_MouseLeave" MouseEnter="Volume_MouseEnter" ValueChanged="SliderVolume_ValueChanged" Focusable="False" IsTabStop="False" />
+			<Slider x:Name="SliderVolume" Style="{StaticResource HorizontalSlider}" HorizontalAlignment="Left" Margin="206,98,0,0" VerticalAlignment="Top" Width="77" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Volume}" LargeChange="0.2" Maximum="1" MouseLeave="Volume_MouseLeave" MouseEnter="Volume_MouseEnter" ValueChanged="SliderVolume_ValueChanged" Focusable="False" IsTabStop="False" />
 
 			<!-- Time elapsed/Total time -->
 			<StackPanel HorizontalAlignment="Left" Height="20" Margin="382,83,0,0" VerticalAlignment="Top" Width="100" Orientation="Horizontal" FlowDirection="RightToLeft">
