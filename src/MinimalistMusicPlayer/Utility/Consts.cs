@@ -49,6 +49,8 @@ namespace MinimalistMusicPlayer.Utility
 		public const int ExplorerItemWidth = 430;
 		public const int ExplorerItemIconWidth = 25;
 		public const int ExplorerItemIconHeight = 25;
+		public const int ExplorerItemTextWidth = 340;
+		public const int ExplorerItemTextSpacing = 4;
 
 		public const int SliderThumbWidth = 16;
 

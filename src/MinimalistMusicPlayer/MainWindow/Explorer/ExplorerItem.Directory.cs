@@ -24,7 +24,7 @@ namespace MinimalistMusicPlayer.Explorer
 			Button buttonIcon = CreateIcon(Icons.Directory);
 			contentGrid.Children.Add(buttonIcon);
 
-			Label labelTitle = CreateTitleLabel(directory.Split(Constant.DirectorySeparators).Last());
+			TextBlock labelTitle = CreateTitleLabel(directory.Split(Constant.DirectorySeparators).Last());
 			contentGrid.Children.Add(labelTitle);
 
 			Content = contentGrid;

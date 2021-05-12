@@ -20,18 +20,20 @@ namespace MinimalistMusicPlayer.Explorer
 			Margin = new Thickness(0, 3, 0, 0);
 		}
 
-		protected static Label CreateTitleLabel(string title, System.Windows.Media.Brush foregroundBursh = null)
+		protected static TextBlock CreateTitleLabel(string title, System.Windows.Media.Brush foregroundBursh = null)
 		{
 			if (foregroundBursh == null) foregroundBursh = Brushes.PrimaryTextBrush;
 
-			title = title.Ellipsize(Constant.ExplorerItemMaxLength);
-			return new Label()
+			return new TextBlock()
 			{
 				HorizontalAlignment = HorizontalAlignment.Left,
-				Content = title,
+				Text = title,
+				TextTrimming = TextTrimming.CharacterEllipsis,
+
 				FontSize = 12,
 				Foreground = foregroundBursh,
-				Margin = new Thickness(Constant.ExplorerItemIconWidth, 0, 0, 0)
+				Margin = new Thickness(Constant.ExplorerItemIconWidth + Constant.ExplorerItemTextSpacing, Constant.ExplorerItemTextSpacing, 0, Constant.ExplorerItemTextSpacing),
+				Width = Constant.ExplorerItemTextWidth
 			};
 		}
 		protected static ExtendedButton CreateIcon(System.Windows.Media.VisualBrush icon)

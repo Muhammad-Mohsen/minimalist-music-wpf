@@ -23,7 +23,7 @@ namespace MinimalistMusicPlayer.Explorer
 			Button buttonIcon = CreateIcon(Icons.Drive);
 			contentGrid.Children.Add(buttonIcon);
 
-			Label labelTitle = CreateTitleLabel(driveName.Replace('\\', '/'));
+			TextBlock labelTitle = CreateTitleLabel(driveName.Replace('\\', '/'));
 			contentGrid.Children.Add(labelTitle);
 
 			Content = contentGrid;

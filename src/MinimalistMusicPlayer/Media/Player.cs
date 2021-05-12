@@ -104,7 +104,7 @@ namespace MinimalistMusicPlayer.Media
 			CurrentTrack = item;
 
 			// a bit of cleanup
-			if (State == PlaybackState.Paused) Stop();
+			Stop();
 			Source?.Dispose();
 
 			Source = CodecFactory.Instance

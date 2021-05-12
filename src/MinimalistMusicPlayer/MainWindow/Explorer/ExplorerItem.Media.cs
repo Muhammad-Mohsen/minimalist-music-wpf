@@ -15,8 +15,8 @@ namespace MinimalistMusicPlayer.Explorer
 		public string FullName { get; set; } // specifies item full path
 
 		public ExtendedButton MediaIcon { get; set; }
-		public Label LabelTitle { get; set; }
-		public Label LabelDuration { get; set; }
+		public TextBlock LabelTitle { get; set; }
+		public TextBlock LabelDuration { get; set; }
 
 		protected static MediaItem OldSelected { get; set; } // holds a reference to the previously-selected item if any.
 
@@ -69,14 +69,15 @@ namespace MinimalistMusicPlayer.Explorer
 		// UI helpers
 		//
 		// helper that creates a fully-realized duration label
-		private Label CreateDurationLabel(MediaFile mediaFile)
+		private TextBlock CreateDurationLabel(MediaFile mediaFile)
 		{
-			return new Label()
+			return new TextBlock()
 			{
 				HorizontalAlignment = HorizontalAlignment.Right,
-				Content = mediaFile.DurationString,
+				Text = mediaFile.DurationString,
 				FontSize = 12,
-				Foreground = Brushes.SecondaryTextBrush
+				Foreground = Brushes.SecondaryTextBrush,
+				Margin = new Thickness(0, Constant.ExplorerItemTextSpacing, Constant.ExplorerItemTextSpacing, 0)
 			};
 		}
 

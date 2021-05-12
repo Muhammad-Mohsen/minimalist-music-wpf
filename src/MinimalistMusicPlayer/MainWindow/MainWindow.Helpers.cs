@@ -94,11 +94,11 @@ namespace MinimalistMusicPlayer
 		// sets the track name, album, and artist labels, as well as the application title
 		private void SetTrackInfo(MediaFile track)
 		{
-			LabelSongTitle.Content = track.File.Name.Ellipsize(Constant.TrackNameMaxLength);
+			LabelSongTitle.Text = track.File.Name;
 
 			string author = track.Artist;
 			string album = track.Album;
-			LabelArtistAlbum.Content = string.Concat(author, " (", album, ")").Ellipsize(Constant.TrackInfoMaxLength);
+			LabelArtistAlbum.Text = string.Concat(author, " (", album, ")");
 
 			Title = string.Concat(track.File.Name, " - Minimalist"); // set the window title (in the taskbar)
 

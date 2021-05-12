@@ -13,11 +13,11 @@
 	</GeometryGroup>
 
 	<GeometryGroup x:Key="Close" >
-		<PathGeometry Figures="M 12.332488,5.8608211e-4 1.0008004,11.335561 m 0,-11.33497491789 L 12.332488,11.335561" FillRule="EvenOdd" />
+		<PathGeometry Figures="M 0,0 10,10 M 0,10 10,0 " FillRule="EvenOdd" />
 	</GeometryGroup>
 
 	<GeometryGroup x:Key="Minimize" >
-		<PathGeometry Figures="m 8,10 H 10 z" FillRule="Nonzero" />
+		<PathGeometry Figures="M 0,0 H 10" FillRule="Nonzero" />
 	</GeometryGroup>
 
 	<GeometryGroup x:Key="Pin" >

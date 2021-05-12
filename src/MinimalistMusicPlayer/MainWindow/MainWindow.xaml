@@ -23,9 +23,9 @@
 	<Window.TaskbarItemInfo>
 		<TaskbarItemInfo x:Name="TaskbarItemInfo">
 			<TaskbarItemInfo.ThumbButtonInfos>
-				<ThumbButtonInfo x:Name="ThumbButtonInfoPrevious" ImageSource="{StaticResource ThumbnailPrevious}" Description="Previous" IsBackgroundVisible="False" Click="ThumbButtonInfoPrevious_Click"/>
-				<ThumbButtonInfo x:Name="ThumbButtonInfoPlayPause" ImageSource="{StaticResource ThumbnailPlay}" Description="Play" IsBackgroundVisible="False" Click="ThumbButtonInfoPlayPause_Click"/>
-				<ThumbButtonInfo x:Name="ThumbButtonInfoNext" ImageSource="{StaticResource ThumbnailNext}" Description="Next" IsBackgroundVisible="False" Click="ThumbButtonInfoNext_Click"/>
+				<ThumbButtonInfo x:Name="ThumbButtonInfoPrevious" ImageSource="{StaticResource ThumbnailPrevious}" Description="Previous" Click="ThumbButtonInfoPrevious_Click"/>
+				<ThumbButtonInfo x:Name="ThumbButtonInfoPlayPause" ImageSource="{StaticResource ThumbnailPlay}" Description="Play" Click="ThumbButtonInfoPlayPause_Click"/>
+				<ThumbButtonInfo x:Name="ThumbButtonInfoNext" ImageSource="{StaticResource ThumbnailNext}" Description="Next" Click="ThumbButtonInfoNext_Click"/>
 			</TaskbarItemInfo.ThumbButtonInfos>
 		</TaskbarItemInfo>
 	</Window.TaskbarItemInfo>
@@ -35,14 +35,10 @@
 
 			<!-- Window controls -->
 			<m:ExtendedButton x:Name="ButtonClose" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" Height="30" Click="ButtonClose_Click" Focusable="False" IsTabStop="False" >
-				<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Close}" />
+				<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.2" Data="{StaticResource Close}" />
 			</m:ExtendedButton>
 			<m:ExtendedButton x:Name="ButtonMinimize" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" Margin="0,0,40,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" Height="30" Click="ButtonMinimize_Click" Focusable="False" IsTabStop="False">
-				<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Minimize}" RenderTransformOrigin="0.5,0.5" >
-					<Path.RenderTransform>
-						<ScaleTransform ScaleX="0.8"/>
-					</Path.RenderTransform>
-				</Path>
+				<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.99" Data="{StaticResource Minimize}" RenderTransformOrigin="0.5,0.5" />
 			</m:ExtendedButton>
 
 			<Rectangle x:Name="PlayingIcon" Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="2" HorizontalAlignment="Left" Margin="17,15,0,0" VerticalAlignment="Top" Height="15" Width="15">
@@ -59,16 +55,16 @@
 			<!-- Track information/open -->
 			<m:ExtendedButton x:Name="ButtonTrackInfo" VerticalAlignment="Top" HorizontalAlignment="Left" Height="46" Width="260" Margin="40,6,0,0" Padding="0" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" Click="ButtonTrackInfo_Click" IsTabStop="False" Focusable="False">
 				<Grid Height="46" Width="260">
-					<Label x:Name="LabelSongTitle" Content="Browse Tracks" HorizontalAlignment="Left" Margin="0,-7,0,0" VerticalAlignment="Top" Foreground="{StaticResource PrimaryTextBrush}" FontSize="22">
-						<Label.ToolTip>
-							<ToolTip x:Name="ToolTipTrackTitle" Content="Browse Tracks" Style="{StaticResource ToolTipBordered}" ToolTipService.Placement="RelativePoint" VerticalOffset="2" Margin="20,20" Foreground="{StaticResource PrimaryTextBrush}" />
-						</Label.ToolTip>
-					</Label>
-					<Label x:Name="LabelArtistAlbum" Content="using the built-in explorer" HorizontalAlignment="Left" Margin="0,22,0,-2" VerticalAlignment="Top" Foreground="{StaticResource SecondaryTextBrush}" FontSize="12">
-						<Label.ToolTip>
-							<ToolTip x:Name="ToolTipTrackArtistAlbum" Content="using the built-in explorer" Style="{StaticResource ToolTipBordered}" Foreground="{StaticResource PrimaryTextBrush}" ToolTipService.Placement="RelativePoint" VerticalOffset="2" />
-						</Label.ToolTip>
-					</Label>
+					<TextBlock x:Name="LabelSongTitle" Margin="4,-4,0,0" VerticalAlignment="Top" Foreground="{StaticResource PrimaryTextBrush}" Text="Browse Tracks" TextTrimming="CharacterEllipsis" FontSize="22" MaxWidth="250" HorizontalAlignment="Left">
+						<TextBlock.ToolTip>
+							<ToolTip x:Name="ToolTipTrackTitle" Content="Browse Tracks" Style="{StaticResource ToolTipBordered}" ToolTipService.Placement="RelativePoint" VerticalOffset="-3" HorizontalOffset="-5" Margin="20,20" Foreground="{StaticResource PrimaryTextBrush}" />
+						</TextBlock.ToolTip>
+					</TextBlock>
+					<TextBlock x:Name="LabelArtistAlbum" Text="using the built-in explorer" Margin="6,26,0,0" VerticalAlignment="Top" Foreground="{StaticResource SecondaryTextBrush}" TextTrimming="CharacterEllipsis" FontSize="12" HorizontalAlignment="Left" MaxWidth="250">
+						<TextBlock.ToolTip>
+							<ToolTip x:Name="ToolTipTrackArtistAlbum" Content="using the built-in explorer" Style="{StaticResource ToolTipBordered}" Foreground="{StaticResource PrimaryTextBrush}" ToolTipService.Placement="RelativePoint" VerticalOffset="-3" HorizontalOffset="-5" />
+						</TextBlock.ToolTip>
+					</TextBlock>
 				</Grid>
 			</m:ExtendedButton>
 
