@@ -55,9 +55,10 @@ namespace MinimalistMusicPlayer
 				await Task.Delay(TimeSpan.FromMilliseconds(Constant.AsyncDelay)).ConfigureAwait(true);
 			}
 
-			for (int i = 0; i < DirectoryMediaFiles.Length; i++)
+			var files = newDirectory.GetMediaFiles();
+			for (int i = 0; i < files.Length; i++)
 			{
-				AddExplorerItem(panel, DirectoryMediaFiles[i].FullName, i);
+				AddExplorerItem(panel, files[i].FullName, i);
 				await Task.Delay(TimeSpan.FromMilliseconds(Constant.AsyncDelay)).ConfigureAwait(true);
 			}
 		}
