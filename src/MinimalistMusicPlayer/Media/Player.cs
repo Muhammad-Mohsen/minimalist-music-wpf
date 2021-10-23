@@ -1,7 +1,6 @@
 ﻿using CSCore;
 using CSCore.Codecs;
 using CSCore.SoundOut;
-using MinimalistMusicPlayer.Properties;
 using MinimalistMusicPlayer.Utility;
 using System;
 
@@ -62,7 +61,7 @@ namespace MinimalistMusicPlayer.Media
 		// player volume level
 		public float Volume
 		{
-			get { return float.Parse(Settings.Default[Constant.VolumeSetting].ToString()); } // settings value is directly bound to the slider in MainWindow.xaml
+			get { return ApplicationSettings.Instance.Volume; }
 			set
 			{
 				if (State == PlaybackState.Invalid) return;
@@ -96,7 +95,7 @@ namespace MinimalistMusicPlayer.Media
 		public void Play() { SoundOut?.Play(); }
 		public void Pause() { SoundOut?.Pause(); }
 		public void Resume() { SoundOut?.Play(); }
-		public void Stop() { SoundOut?.Stop(); }
+		public void Stop() { SoundOut?.Stop(); SoundOut?.WaitForStopped(); }
 
 		public void PlayTrack(MediaFile item)
 		{
@@ -108,9 +107,7 @@ namespace MinimalistMusicPlayer.Media
 			Source?.Dispose();
 
 			Source = CodecFactory.Instance
-					.GetCodec(item.FullName)
-					.ToSampleSource()
-					.ToWaveSource();
+					.GetCodec(item.FullName);
 
 			SoundOut.Initialize(Source);
 			SoundOut.Volume = IsMuted ? 0 : Volume;

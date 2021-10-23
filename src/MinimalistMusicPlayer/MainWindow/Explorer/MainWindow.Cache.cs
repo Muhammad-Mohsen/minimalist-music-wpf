@@ -18,7 +18,7 @@ namespace MinimalistMusicPlayer
 		public ScrollViewer GetExplorer(DirectoryInfo directory)
 		{
 			var key = directory == null ? Constant.Root : directory.FullName; // directory is null at the root
-			if (ExplorerCache.ContainsKey(key))
+			if (ExplorerCache.ContainsKey(key)) // try the cache first
 			{
 				var explorer = ExplorerCache[key];
 				var list = explorer.Content as StackPanel;
@@ -39,7 +39,7 @@ namespace MinimalistMusicPlayer
 					}
 				}
 
-				return explorer; // try the cache first
+				return explorer;
 			}
 			var container = CreateExplorerContainer(); // otherwise, create the explorer 'window'
 			ExplorerCache.Add(key, container); // add it to the cache

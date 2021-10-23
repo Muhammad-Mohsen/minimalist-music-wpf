@@ -8,9 +8,6 @@ namespace MinimalistMusicPlayer.Utility
 		public static readonly string DefaultMediaDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic);
 		public const string Root = "Computer";
 
-		public const string ExplorerDirectorySetting = "ExplorerDirectory";
-		public const string VolumeSetting = "Volume";
-
 		// track info max lengths (for ellipsizing purposes)
 		public const int TrackNameMaxLength = 25;
 		public const int TrackInfoMaxLength = 40;
@@ -61,6 +58,12 @@ namespace MinimalistMusicPlayer.Utility
 			public const double Out = 1.15;
 		}
 
+		public static class UpButtonAngle
+		{
+			public const double Up = 0;
+			public const double Back = 270;
+		}
+
 		public static class ExplorerMargin
 		{
 			public static readonly Thickness CurrentPage = new Thickness(0, 32, 0, 0);
@@ -71,5 +74,6 @@ namespace MinimalistMusicPlayer.Utility
 		public const double ShowHideDelay = .2; // in seconds
 		public const double AsyncDelay = 5; // in millis
 		public const double DrillAnimDuration = .2; // in seconds
+		public const double ScaleAnimDuration = .1; // in seconds
 	}
 }

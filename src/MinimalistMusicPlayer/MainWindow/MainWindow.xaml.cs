@@ -1,11 +1,11 @@
 ﻿using MinimalistMusicPlayer.Media;
-using MinimalistMusicPlayer.Properties;
 using MinimalistMusicPlayer.Utility;
 using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Windows.Devices.Enumeration;
 
 namespace MinimalistMusicPlayer
 {
@@ -34,17 +34,18 @@ namespace MinimalistMusicPlayer
 			InitializeComponent();
 
 			SliderVolume.Opacity = 0;
+			SliderVolume.Value = ApplicationSettings.Instance.Volume;
 
 			PlayingIcon.Opacity = 0; // initialize playing icon visibility to hidden
 			Anim.AnimateAngle(PlayingIcon, 0, 360, 2, true); // start a continuous rotation animation for the playing icon
 
-			string savedDirectory = Settings.Default[Constant.ExplorerDirectorySetting].ToString();
-			if (Directory.Exists(savedDirectory)) CurrentDirectory = new DirectoryInfo(savedDirectory);
-			else CurrentDirectory = new DirectoryInfo(Constant.DefaultMediaDirectory);
+			CurrentDirectory = GetLaunchDirectory(); // returns the dir from the command line args, saved directory, or the default media directory
 
 			// intialize the explorer
 			ScrollViewerExplorer = GetExplorer(CurrentDirectory);
 			StackPanelExplorer = ScrollViewerExplorer.Content as StackPanel;
+
+			PlayLaunchFile(); // if the app was launched from double-clicking a music file for example
 
 			// initialize the breadcrumb bar
 			InitializeBreadcrumbBar(CurrentDirectory);
@@ -54,6 +55,8 @@ namespace MinimalistMusicPlayer
 			// set up progress icon on the taskbar icon
 			TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.None;
 			TaskbarItemInfo.ProgressValue = 0;
+
+			var watcher = DeviceInformation.CreateWatcher();
 		}
 		//
 		// Track info grid Events - Cutting corners! Too sleepy to do anything decent.
@@ -185,6 +188,7 @@ namespace MinimalistMusicPlayer
 		{
 			// only set the player volume if it was changed through the slider, not the mute button
 			if (!Player.IsMuted) Player.Volume = (float)SliderVolume.Value;
+			ApplicationSettings.Instance.Volume = (float)SliderVolume.Value;
 			SetVolumeIcon(SliderVolume.Value, Player.IsMuted);
 		}
 		//
@@ -246,6 +250,8 @@ namespace MinimalistMusicPlayer
 		// so far we got play/pause shortcut
 		private void Window_KeyUp(object sender, KeyEventArgs e)
 		{
+			if (e.OriginalSource == TextBoxSearch) return; // ignore key-ups coming from the textbox
+
 			switch (e.Key)
 			{
 				case Key.Space: // play/pause
@@ -261,10 +267,13 @@ namespace MinimalistMusicPlayer
 					SliderSeek.Value = Math.Min(SliderSeek.Maximum, SliderSeek.Value + SliderSeek.Maximum / Constant.SeekDivisor);
 					IsSeeking = false;
 					break;
-				case Key.NumPad0: // seek right
+				case Key.NumPad0: // seek to start
 					IsSeeking = true;
 					SliderSeek.Value = 0;
 					IsSeeking = false;
+					break;
+				case Key.S: // search
+					// SetToolbarMode(ToolbarMode.Search);
 					break;
 			}
 		}

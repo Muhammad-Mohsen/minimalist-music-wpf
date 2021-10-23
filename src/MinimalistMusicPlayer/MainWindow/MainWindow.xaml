@@ -4,7 +4,6 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:m="clr-namespace:MinimalistMusicPlayer"
-	xmlns:properties="clr-namespace:MinimalistMusicPlayer.Properties"
 	x:Name="Window"
 	x:Class="MinimalistMusicPlayer.MainWindow"
 	mc:Ignorable="d"
@@ -33,8 +32,8 @@
 	<Border x:Name="WindowBorder" BorderBrush="Black" BorderThickness="1" >
 		<Grid x:Name="GridMain" Margin="0">
 
-			<!-- Window controls -->
-			<m:ExtendedButton x:Name="ButtonClose" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" Height="30" Click="ButtonClose_Click" Focusable="False" IsTabStop="False" >
+			<!-- window controls -->
+			<m:ExtendedButton x:Name="ButtonClose" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" Height="30" Click="ButtonClose_Click" Focusable="False" IsTabStop="False">
 				<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.2" Data="{StaticResource Close}" />
 			</m:ExtendedButton>
 			<m:ExtendedButton x:Name="ButtonMinimize" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" Margin="0,0,40,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" Height="30" Click="ButtonMinimize_Click" Focusable="False" IsTabStop="False">
@@ -52,7 +51,7 @@
 				</Rectangle.OpacityMask>
 			</Rectangle>
 
-			<!-- Track information/open -->
+			<!-- rrack information/open -->
 			<m:ExtendedButton x:Name="ButtonTrackInfo" VerticalAlignment="Top" HorizontalAlignment="Left" Height="46" Width="260" Margin="40,6,0,0" Padding="0" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" Click="ButtonTrackInfo_Click" IsTabStop="False" Focusable="False">
 				<Grid Height="46" Width="260">
 					<TextBlock x:Name="LabelSongTitle" Margin="4,-4,0,0" VerticalAlignment="Top" Foreground="{StaticResource PrimaryTextBrush}" Text="Browse Tracks" TextTrimming="CharacterEllipsis" FontSize="22" MaxWidth="250" HorizontalAlignment="Left">
@@ -68,7 +67,7 @@
 				</Grid>
 			</m:ExtendedButton>
 
-			<!-- Seek controls -->
+			<!-- seek controls -->
 			<m:ExtendedButton x:Name="ButtonPrev" Style="{StaticResource ExtendedButtonStyle}" CornerRadius="50" BorderBrush="{StaticResource PrimaryBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="30" Height="30" Margin="9,56,0,0" Click="ButtonNextPrevious_Click" IsTabStop="False" Focusable="False">
 				<Path Margin="0,0,1,0" Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Previous}" />
 			</m:ExtendedButton>
@@ -88,7 +87,7 @@
 				<Path Margin="0,0,1,0" Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Previous}" />
 			</m:ExtendedButton>
 
-			<!-- Play controls -->
+			<!-- play controls -->
 			<m:ExtendedButton x:Name="ButtonPlayPause" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="{StaticResource MainButtonSize}" Height="{StaticResource MainButtonSize}" Margin="41,91,0,0" Click="ButtonPlayPause_Click" Focusable="False" IsTabStop="False">
 				<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Play}" Margin="4" Stretch="Uniform"/>
 			</m:ExtendedButton>
@@ -105,9 +104,11 @@
 				<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource VolumeHigh}" Margin="2" Stretch="Uniform"/>
 			</m:ExtendedButton>
 
-			<Slider x:Name="SliderVolume" Style="{StaticResource HorizontalSlider}" HorizontalAlignment="Left" Margin="206,98,0,0" VerticalAlignment="Top" Width="77" Value="{Binding Source={x:Static properties:Settings.Default}, Path=Volume}" LargeChange="0.2" Maximum="1" MouseLeave="Volume_MouseLeave" MouseEnter="Volume_MouseEnter" ValueChanged="SliderVolume_ValueChanged" Focusable="False" IsTabStop="False" />
+			<!-- for some reason, setting the max value here to 1, moving the slider to max, playing a track, then scrolling down on the wheel to lower the volume crashes the app!! -->
+			<!-- debugging the crash (Player.cs L: 69) I found that SoundOut.Volume = 1.1 (out of range) while the value = 0.9!!!! -->
+			<Slider x:Name="SliderVolume" Style="{StaticResource HorizontalSlider}" HorizontalAlignment="Left" Margin="216,98,0,0" VerticalAlignment="Top" Width="77" LargeChange="0.2" Maximum="0.9" MouseLeave="Volume_MouseLeave" MouseEnter="Volume_MouseEnter" ValueChanged="SliderVolume_ValueChanged" Focusable="False" IsTabStop="False" />
 
-			<!-- Time elapsed/Total time -->
+			<!-- elapsed/total -->
 			<StackPanel HorizontalAlignment="Left" Height="20" Margin="382,83,0,0" VerticalAlignment="Top" Width="100" Orientation="Horizontal" FlowDirection="RightToLeft">
 				<Label x:Name="LabelTotalTime" Content="--:--" VerticalAlignment="Top" Margin="0,-4,0,-1" Foreground="{StaticResource SecondaryTextBrush}"/>
 				<Label x:Name="LabelSeekTime" Content="--:--" VerticalAlignment="Top" Margin="0,-4,0,-1" Foreground="{StaticResource PrimaryTextBrush}" FontWeight="Bold"/>
@@ -117,19 +118,27 @@
 				<Path x:Name="ButtonPlaylistIcon" Stroke="{StaticResource PrimaryTextBrush}" Data="{StaticResource ExpandCollapse}" Height="15" Stretch="Uniform" Width="15" />
 			</m:ExtendedButton>
 
-			<!-- Explorer -->
+			<!-- explorer -->
 			<Grid x:Name="GridExplorerMain" Margin="41,155,25,0" Background="Transparent" Height="433" VerticalAlignment="Top" >
-				<!-- Breadcrumb bar -->
+
+				<!-- breadcrumb bar -->
 				<Grid x:Name="GridBreadcrumnBar" Margin="0,0,0,406" Visibility="Visible">
-					<!--Up m:ExtendedButton-->
+					<!-- up -->
 					<m:ExtendedButton x:Name="ButtonUp" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Height="27" Focusable="False" IsTabStop="False" AllowDrop="False">
 						<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Up}" RenderTransformOrigin="0.5,0.5" />
 					</m:ExtendedButton>
-					<ScrollViewer x:Name="ScrollViewerDirectory" CanContentScroll="True" Margin="30,0,20,0" Focusable="False" VerticalScrollBarVisibility="Hidden" HorizontalScrollBarVisibility="Hidden">
-						<StackPanel x:Name="StackPanelDirectory" Width="406" Orientation="Horizontal" Focusable="False" />
+
+					<!-- search -->
+					<m:ExtendedButton x:Name="ButtonSearch" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Height="27" Focusable="False" IsTabStop="False" AllowDrop="False" Margin="32,0,0,0">
+						<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource Search}" RenderTransformOrigin="0.5,0.5" />
+					</m:ExtendedButton>
+
+					<!-- actual crumbs -->
+					<ScrollViewer x:Name="ScrollViewerDirectory" CanContentScroll="False" Margin="64,0,0,0" Focusable="False" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden">
+						<StackPanel x:Name="StackPanelDirectory" Orientation="Horizontal" Focusable="False" />
 					</ScrollViewer>
 				</Grid>
-				<!-- Select mode -->
+				<!-- select mode -->
 				<Grid x:Name="GridSelectMode" Height="27" VerticalAlignment="Top" Visibility="Collapsed" Opacity="0">
 					<m:ExtendedButton x:Name="ButtonCancelPlaySelected" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource PrimaryBrush}" Width="35" Margin="1,0" HorizontalAlignment="Left" Focusable="False" Click="ButtonCancelPlaySelected_Click">
 						<Path Stroke="{StaticResource PrimaryTextBrush}" StrokeThickness="1.5" Data="{StaticResource CancelSelected}" />
@@ -148,7 +157,10 @@
 					</m:ExtendedButton>
 				</Grid>
 
-				<!-- Explorer view added programmatically here!!-->
+				<!-- search mode -->
+				<TextBox x:Name="TextBoxSearch" Height="27" VerticalAlignment="Top" Margin="30,0,20,0" Visibility="Collapsed" Opacity="0"></TextBox>
+
+				<!-- explorer view added programmatically here!!-->
 
 			</Grid>
 

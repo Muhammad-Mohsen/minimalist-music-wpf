@@ -72,7 +72,7 @@ namespace MinimalistMusicPlayer
 			item.Opacity = Constant.OpacityLevel.Transparent;
 			panel.Children.Add(item);
 
-			Anim.ShowHideFrameworkElement(item, true, Constant.ShowHideDelay);
+			Anim.Toggle(item, true, Constant.ShowHideDelay);
 			await Task.Delay(TimeSpan.FromSeconds(Constant.ShowHideDelay)).ConfigureAwait(false);
 		}
 
@@ -108,7 +108,6 @@ namespace MinimalistMusicPlayer
 		private void MediaItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			MediaItem item = (MediaItem)sender;
-			MediaItem.Select(item); // set selection styling, deselect the old item while you're at it
 
 			Playlist.CurrentIndex = Playlist.IndexOf(item.FullName, CurrentDirectory);
 
@@ -128,7 +127,7 @@ namespace MinimalistMusicPlayer
 				MediaItem.MarkedItemCount = 0;
 
 				// hide the select mode if applicable
-				SetPlaylistSelectMode(false);
+				SetToolbarMode(ToolbarMode.Breadcrumb);
 			}
 
 			var track = Playlist.GetTrack(Playlist.CurrentIndex);
@@ -139,7 +138,7 @@ namespace MinimalistMusicPlayer
 		private void MediaItem_MarkedItemCountChange(object sender, RoutedEventArgs e)
 		{
 			bool shouldShowSelectMode = MediaItem.MarkedItemCount > 0;
-			SetPlaylistSelectMode(shouldShowSelectMode);
+			SetToolbarMode(shouldShowSelectMode ? ToolbarMode.Selection : ToolbarMode.Breadcrumb);
 
 			// only enable AddToSelection button if we're in the same directory as the playlist, and the playlist is not empty
 			if (shouldShowSelectMode)
@@ -256,6 +255,20 @@ namespace MinimalistMusicPlayer
 			else if (fromDirectory == null) return Constant.DrillScale.Out;
 			else if (fromDirectory.FullName.Length <= currentDirectory.FullName.Length) return Constant.DrillScale.Out;
 			else return Constant.DrillScale.In;
+		}
+
+		private void FilterMediaExplorer(string filter)
+		{
+			var explorer = ExplorerCache[CurrentDirectory.FullName];
+			var items = (explorer.Content as StackPanel).Children.OfType<MediaItem>();
+
+			if (filter.Length == 0)
+			{
+				items.ToList().ForEach(i => i.Toggle(true));
+				return;
+			}
+
+			items.ToList().ForEach(i => i.Toggle(i.File.Name.FuzzyMatch(filter)));
 		}
 	}
 }

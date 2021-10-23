@@ -8,7 +8,7 @@ namespace MinimalistMusicPlayer.Utility
 {
 	public static class Anim
 	{
-		public static void AnimateScale(this FrameworkElement element, double oldValue, double newValue, double duration)
+		public static void AnimateRenderScale(this FrameworkElement element, double oldValue, double newValue, double duration)
 		{
 			var anim = new DoubleAnimation()
 			{
@@ -22,19 +22,35 @@ namespace MinimalistMusicPlayer.Utility
 			element.RenderTransform.BeginAnimation(ScaleTransform.ScaleYProperty, anim);
 		}
 
+		public static void AnimateLayoutScaleY(this FrameworkElement element, double newValue, double duration)
+		{
+			var anim = new DoubleAnimation()
+			{
+				To = newValue,
+				Duration = new Duration(TimeSpan.FromSeconds(duration)),
+				EasingFunction = new PowerEase() { EasingMode = EasingMode.EaseInOut }
+			};
+
+			element.LayoutTransform.BeginAnimation(ScaleTransform.ScaleYProperty, anim);
+		}
+
 		public static void AnimateHeight(this FrameworkElement element, double newValue, double duration, EventHandler complete = null)
 		{
-			element.AnimateDoubleBasedProperty(newValue, duration, FrameworkElement.HeightProperty, true, complete);
+			element.AnimateDoubleProperty(newValue, duration, FrameworkElement.HeightProperty, true, complete);
+		}
+		public static void AnimateHeight(this FrameworkElement element, double oldValue, double newValue, double duration, EventHandler complete = null)
+		{
+			element.AnimateDoubleProperty(oldValue, newValue, duration, FrameworkElement.HeightProperty, true, complete);
 		}
 
 		public static void AnimateOpacity(this FrameworkElement element, double toValue, double duration, EventHandler complete = null)
 		{
-			AnimateDoubleBasedProperty(element, toValue, duration, UIElement.OpacityProperty, true, complete);
+			AnimateDoubleProperty(element, toValue, duration, UIElement.OpacityProperty, true, complete);
 		}
 
 		public static void AnimateMargin(this FrameworkElement element, Thickness fromValue, Thickness toValue, double duration)
 		{
-			AnimateThicknessBasedProperty(element, fromValue, toValue, duration, FrameworkElement.MarginProperty, true);
+			AnimateThicknessProperty(element, fromValue, toValue, duration, FrameworkElement.MarginProperty, true);
 		}
 
 		public static void AnimateAngle(this FrameworkElement element, double oldValue, double newValue, double duration, bool isRepeated)
@@ -49,6 +65,21 @@ namespace MinimalistMusicPlayer.Utility
 
 			element.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, animation);
 		}
+		public static void AnimateAngle(this FrameworkElement element, double newValue, double duration, bool isRepeated)
+		{
+			DoubleAnimation animation = new DoubleAnimation(newValue, new Duration(TimeSpan.FromSeconds(duration)));
+
+			if (isRepeated) animation.RepeatBehavior = RepeatBehavior.Forever;
+
+			if (element.RenderTransform.IsFrozen)
+			{
+				element.RenderTransform = new RotateTransform();
+				element.RenderTransformOrigin = new Point(.5, .5);
+			}
+
+			element.RenderTransform.BeginAnimation(RotateTransform.AngleProperty, animation);
+		}
+
 
 		public static void StopRotationAnimation(this FrameworkElement element)
 		{
@@ -57,7 +88,7 @@ namespace MinimalistMusicPlayer.Utility
 		}
 
 		// fades in/out a given framework element
-		public static async void ShowHideFrameworkElement(this FrameworkElement element, bool shouldShow, double delay)
+		public static async void Toggle(this FrameworkElement element, bool shouldShow, double delay)
 		{
 			// note the difference between showing/hiding
 			// the animatable property is Opacity. The element has to be visible (even if it's transparent) for the animation to show
@@ -74,7 +105,7 @@ namespace MinimalistMusicPlayer.Utility
 			}
 		}
 
-		public static async void SlideFrameworkElement(this FrameworkElement element, bool slideIn, double delay)
+		public static async void Slide(this FrameworkElement element, bool slideIn, double delay)
 		{
 			Thickness fromMargin;
 			Thickness toMargin;
@@ -95,7 +126,7 @@ namespace MinimalistMusicPlayer.Utility
 		}
 
 		// generic double animation method
-		private static void AnimateDoubleBasedProperty(this FrameworkElement element, double newVal, double duration, DependencyProperty property, bool ease, EventHandler complete)
+		public static void AnimateDoubleProperty(this FrameworkElement element, double newVal, double duration, DependencyProperty property, bool ease, EventHandler complete)
 		{
 			DoubleAnimation anim = new DoubleAnimation(newVal, new Duration(TimeSpan.FromSeconds(duration)));
 			if (ease) anim.EasingFunction = new PowerEase() { EasingMode = EasingMode.EaseInOut };
@@ -103,14 +134,20 @@ namespace MinimalistMusicPlayer.Utility
 
 			element.BeginAnimation(property, anim);
 		}
+		public static void AnimateDoubleProperty(this FrameworkElement element, double oldVal, double newVal, double duration, DependencyProperty property, bool ease, EventHandler complete)
+		{
+			DoubleAnimation anim = new DoubleAnimation(oldVal, newVal, new Duration(TimeSpan.FromSeconds(duration)));
+			if (ease) anim.EasingFunction = new PowerEase() { EasingMode = EasingMode.EaseInOut };
+			if (complete != null) anim.Completed += complete;
+
+			element.BeginAnimation(property, anim);
+		}
 
 		// generic Thickness animation method
-		private static void AnimateThicknessBasedProperty(this FrameworkElement element, Thickness oldVal, Thickness newVal, double duration, DependencyProperty property, bool ease)
+		private static void AnimateThicknessProperty(this FrameworkElement element, Thickness oldVal, Thickness newVal, double duration, DependencyProperty property, bool ease)
 		{
 			ThicknessAnimation anim = new ThicknessAnimation(oldVal, newVal, new Duration(TimeSpan.FromSeconds(duration)));
-
-			if (ease)
-				anim.EasingFunction = new PowerEase() { EasingMode = EasingMode.EaseInOut };
+			if (ease) anim.EasingFunction = new PowerEase() { EasingMode = EasingMode.EaseInOut };
 
 			element.BeginAnimation(property, anim);
 		}

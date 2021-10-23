@@ -8,17 +8,16 @@ namespace MinimalistMusicPlayer.Explorer
 {
 	public class MediaItem : ExplorerItem
 	{
-		// specifies the count of marked MediaItems
-		public static int MarkedItemCount { get; set; } = 0;
+		public static int MarkedItemCount { get; set; } = 0; // specifies the count of marked MediaItems
+		protected static MediaItem OldSelected { get; set; } // holds a reference to the previously-selected item if any.
 
 		public bool IsMarked { get; set; } // specifies whether this item will be added to the custom playlist
-		public string FullName { get; set; } // specifies item full path
-
 		public ExtendedButton MediaIcon { get; set; }
 		public TextBlock LabelTitle { get; set; }
 		public TextBlock LabelDuration { get; set; }
 
-		protected static MediaItem OldSelected { get; set; } // holds a reference to the previously-selected item if any.
+		public string FullName { get; set; } // specifies item full path
+		public MediaFile File { get; set; }
 
 		// custom event that will be raised whenever MarkedItemCount is changed
 		// handler will be attached after constructing the MediaItem (in MediaExplorer)
@@ -32,6 +31,7 @@ namespace MinimalistMusicPlayer.Explorer
 			// set item type
 			ItemType = ExplorerItemType.MediaItem;
 
+			File = mediaFile;
 			FullName = mediaFile.FullName;
 
 			Grid contentGrid = new Grid()
@@ -56,6 +56,8 @@ namespace MinimalistMusicPlayer.Explorer
 
 			if (isSelected) Select(this);
 			IsMarked = false;
+
+			LayoutTransform = new System.Windows.Media.ScaleTransform(); // used for filter animations
 		}
 
 		private void MediaIconButton_Click(object sender, RoutedEventArgs e)
@@ -137,6 +139,17 @@ namespace MinimalistMusicPlayer.Explorer
 			LabelTitle.FontWeight = select ? FontWeights.Bold : FontWeights.Normal;
 			LabelDuration.FontWeight = select ? FontWeights.Bold : FontWeights.Normal;
 			BorderBrush = select ? Brushes.AccentBrush : Brushes.PrimaryBrush;
+		}
+
+		public void Toggle(bool show)
+		{
+			// Visibility = show ? Visibility.Visible : Visibility.Collapsed;
+			//this.AnimateLayoutScaleY(show ? 1 : 0, Constant.DrillAnimDuration);
+			if (show) Visibility = Visibility.Visible;
+			this.AnimateOpacity(show ? Constant.OpacityLevel.Opaque : Constant.OpacityLevel.Transparent, Constant.DrillAnimDuration, (sender, args) =>
+			{
+				if (!show) Visibility = Visibility.Collapsed;
+			});
 		}
 	}
 

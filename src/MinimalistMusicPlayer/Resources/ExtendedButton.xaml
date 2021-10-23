@@ -13,11 +13,11 @@
 				<ControlTemplate TargetType="{x:Type m:ExtendedButton}">
 					<Border x:Name="outerBorder" Background="{TemplateBinding Background}" RenderTransformOrigin=".5,.5" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="{TemplateBinding CornerRadius}"  BorderThickness="2" Padding="{TemplateBinding Padding}">
 						<Grid>
-							<ContentPresenter x:Name="MyContentPresenter" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
+							<ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" />
 						</Grid>
-						<Border.RenderTransform>
-							<ScaleTransform x:Name="scaleTransform" ScaleX="1" ScaleY="1" CenterX="20" CenterY="20"/>
-						</Border.RenderTransform>
+						<!--<Border.RenderTransform>
+							<ScaleTransform x:Name="scaleTransform" ScaleX="1" ScaleY="1" />
+						</Border.RenderTransform>-->
 					</Border>
 
 					<ControlTemplate.Resources>

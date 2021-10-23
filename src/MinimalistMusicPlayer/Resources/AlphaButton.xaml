@@ -21,8 +21,8 @@
 							Fill="{TemplateBinding Background}" />
 
 						<!-- Present Content of the button. -->
-						<DockPanel Name="myContentPresenterDockPanel">
-							<ContentPresenter x:Name="myContentPresenter" Margin="0" Content="{TemplateBinding Content}" />
+						<DockPanel>
+							<ContentPresenter Margin="0" Content="{TemplateBinding Content}" />
 						</DockPanel>
 					</Grid>
 

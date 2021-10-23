@@ -22,28 +22,5 @@ namespace MinimalistMusicPlayer.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ExplorerDirectory {
-            get {
-                return ((string)(this["ExplorerDirectory"]));
-            }
-            set {
-                this["ExplorerDirectory"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public float Volume {
-            get {
-                return ((float)(this["Volume"]));
-            }
-            set {
-                this["Volume"] = value;
-            }
-        }
     }
 }

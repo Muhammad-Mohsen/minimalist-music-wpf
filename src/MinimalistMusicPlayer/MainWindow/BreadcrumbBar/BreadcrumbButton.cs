@@ -21,10 +21,15 @@ namespace MinimalistMusicPlayer
 		}
 
 		// adds a crumb button and a separator to the given container
-		public static void AddCrumb(StackPanel container, string dir, RoutedEventHandler handler = null)
+		public static void AddCrumb(StackPanel container, string dir, RoutedEventHandler handler, bool isActive = false)
 		{
 			// add the breadcrumb button to the breadcrumb bar
-			BreadcrumbButton button = new BreadcrumbButton(dir);
+			BreadcrumbButton button = new BreadcrumbButton(dir)
+			{
+				FontWeight = isActive ? FontWeights.Bold : FontWeights.Normal,
+				Foreground = isActive ? Brushes.PrimaryTextBrush : Brushes.AccentBrush
+			};
+
 			if (handler != null) button.Click += handler;
 			container.Children.Add(button);
 
@@ -37,7 +42,8 @@ namespace MinimalistMusicPlayer
 		{
 			return new BreadcrumbButton(Constant.BreadcrumbButtonSeparator)
 			{
-				IsEnabled = false
+				IsEnabled = false,
+				Foreground = Brushes.AccentBrush
 			};
 		}
 	}

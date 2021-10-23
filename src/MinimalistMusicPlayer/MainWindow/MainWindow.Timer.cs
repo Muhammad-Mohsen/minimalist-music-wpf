@@ -9,16 +9,17 @@ namespace MinimalistMusicPlayer
 	/// </summary>
 	public partial class MainWindow
 	{
+		DispatcherTimer Timer;
 		int VolumeSliderFadeCounter = -1;
 
 		private void InitializeTimer()
 		{
-			DispatcherTimer timer = new DispatcherTimer
+			Timer = new DispatcherTimer
 			{
 				Interval = TimeSpan.FromSeconds(.1)
 			};
-			timer.Tick += TimerTick;
-			timer.Start();
+			Timer.Tick += TimerTick;
+			ToggleTimer(true);
 		}
 
 		private void TimerTick(object sender, EventArgs e)
@@ -39,6 +40,12 @@ namespace MinimalistMusicPlayer
 
 			// animate to transparent if counter reaches 10
 			if (VolumeSliderFadeCounter >= 10 && SliderVolume.Opacity == 1) SliderVolume.AnimateOpacity(Constant.OpacityLevel.Transparent, .3);
+		}
+
+		private void ToggleTimer(bool start)
+		{
+			if (start) Timer.Start();
+			else Timer.Stop();
 		}
 	}
 }

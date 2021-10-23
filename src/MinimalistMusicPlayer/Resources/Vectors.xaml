@@ -74,6 +74,11 @@
 		<PathGeometry Figures="M 0.05093767,6.051255 5.8937896,-0.13656367 11.736665,6.051255 M 5.894,-0.13656367 l 0,13.36147167" FillRule="EvenOdd" />
 	</GeometryGroup>
 
+	<GeometryGroup x:Key="Search">
+        <EllipseGeometry RadiusX="6" RadiusY="6" Center="5,5"></EllipseGeometry>
+        <LineGeometry StartPoint="9,9" EndPoint="12.5,12.5"></LineGeometry>
+	</GeometryGroup>
+
 	<GeometryGroup x:Key="Directory">
 		<PathGeometry Figures="m 0,0 0,9.1448 13.00349,0 0,-8.11386 -7.42941,-0.003 0,-1.02701 z" FillRule="EvenOdd" />
 	</GeometryGroup>

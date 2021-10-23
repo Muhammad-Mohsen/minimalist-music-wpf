@@ -1,8 +1,11 @@
 ﻿using MinimalistMusicPlayer.Media;
 using MinimalistMusicPlayer.Utility;
 using System;
+using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Shapes;
+using Path = System.Windows.Shapes.Path; // nice
 
 namespace MinimalistMusicPlayer
 {
@@ -150,6 +153,39 @@ namespace MinimalistMusicPlayer
 			SetDurationValues(track);
 			SetTrackInfo(track);
 			SetChapterMarkers(track);
+		}
+
+		private DirectoryInfo GetLaunchDirectory()
+		{
+			string dir = ApplicationSettings.Instance.ExplorerDirectory;
+			if (!Directory.Exists(dir)) dir = Constant.DefaultMediaDirectory;
+
+			var launchFile = Environment.GetCommandLineArgs().ElementAtOrDefault(1);
+			if (launchFile != null) dir = new FileInfo(launchFile).DirectoryName;
+
+			ApplicationSettings.Instance.ExplorerDirectory = dir;
+
+			return new DirectoryInfo(dir);
+		}
+		private void PlayLaunchFile()
+		{
+			var args = Environment.GetCommandLineArgs();
+			if (args.Length <= 1) return;
+
+			var file = new FileInfo(args[1]);
+			if (!file.IsMediaFile()) return;
+
+			DirectoryMediaFiles = file.Directory.GetMediaFiles();
+			Playlist.AddTracks(DirectoryMediaFiles);
+			Playlist.CurrentIndex = Playlist.IndexOf(args[1], CurrentDirectory); // update index
+
+			// reset the icons for this particular item
+			SetPlaylistMediaItemStyle(Playlist.Tracks, false);
+			SetMediaItemForeground(Playlist.Tracks);
+
+			var track = Playlist.GetTrack(Playlist.CurrentIndex);
+			Player.PlayTrack(track);
+			UpdateUi();
 		}
 	}
 }
