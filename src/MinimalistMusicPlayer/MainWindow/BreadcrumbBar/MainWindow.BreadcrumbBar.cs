@@ -28,6 +28,8 @@ namespace MinimalistMusicPlayer
 			var toScale = GetExplorerAnimationScale(CurrentDirectory, directory);
 			var fromScale = GetExplorerAnimationScale(directory, CurrentDirectory);
 
+			TextBoxSearch.Text = string.Empty; // clear out the filter when moving directories
+
 			CurrentDirectory = directory;
 
 			// set the setting (will be saved in OnExit event in the app class!!)
@@ -131,7 +133,7 @@ namespace MinimalistMusicPlayer
 		private void SetAddToSelectionEnableState(string currentDirectory, string playlistDirectory, int playlistCount)
 		{
 			ButtonAddToSelection.IsEnabled = currentDirectory == playlistDirectory && playlistCount > 0;
-			(ButtonAddToSelection.Content as System.Windows.Shapes.Path).Stroke = ButtonAddToSelection.IsEnabled ? Brushes.PrimaryTextBrush : Brushes.AccentBrush;
+			(ButtonAddToSelection.Content as System.Windows.Shapes.Path).Stroke = ButtonAddToSelection.IsEnabled ? Brushes.PrimaryBrush : Brushes.SecondaryBrush;
 		}
 		//
 		// click handlers

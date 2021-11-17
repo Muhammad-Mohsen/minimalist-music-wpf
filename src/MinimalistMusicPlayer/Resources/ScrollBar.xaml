@@ -33,7 +33,7 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type RepeatButton}">
 					<Border Name="Border" CornerRadius="20" Background="{DynamicResource Background}" BorderBrush="{DynamicResource BorderBrush}" BorderThickness="2">
-						<Path HorizontalAlignment="Center" VerticalAlignment="Center" Fill="{DynamicResource AccentBrush}" Data="{Binding Path=Content,RelativeSource={RelativeSource TemplatedParent}}" />
+						<Path HorizontalAlignment="Center" VerticalAlignment="Center" Fill="{DynamicResource SecondaryBrush}" Data="{Binding Path=Content,RelativeSource={RelativeSource TemplatedParent}}" />
 					</Border>
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsPressed" Value="true">
@@ -67,19 +67,18 @@
 						</Storyboard>
 
 						<Storyboard x:Key="PressedEnterAnimation">
-							<ColorAnimation Storyboard.TargetName="Border" Storyboard.TargetProperty="Background.Color" To="{StaticResource PrimaryTextColor}" Duration="0:0:0.2" />
+							<ColorAnimation Storyboard.TargetName="Border" Storyboard.TargetProperty="Background.Color" To="{StaticResource PrimaryColor}" Duration="0:0:0.2" />
 						</Storyboard>
 						<Storyboard x:Key="PressedExitAnimation" FillBehavior="Stop">
-							<ColorAnimation Storyboard.TargetName="Border" Storyboard.TargetProperty="Background.Color" To="{StaticResource AccentColor}" Duration="0:0:0.2" />
+							<ColorAnimation Storyboard.TargetName="Border" Storyboard.TargetProperty="Background.Color" To="{StaticResource SecondaryColor}" Duration="0:0:0.2" />
 						</Storyboard>
 					</ControlTemplate.Resources>
 
-					<Border Name="Border" CornerRadius="0" Background="{DynamicResource AccentBrush}" BorderBrush="Transparent" BorderThickness="4,0" />
+					<Border Name="Border" CornerRadius="0" Background="{DynamicResource SecondaryBrush}" BorderBrush="Transparent" BorderThickness="4,0" />
 
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsDragging" Value="true">
 							<Trigger.EnterActions>
-								<!--<Setter TargetName="Border" Property="Background" Value="{DynamicResource AccentBrush}" />-->
 								<BeginStoryboard Storyboard="{StaticResource PressedEnterAnimation}" />
 							</Trigger.EnterActions>
 							<Trigger.ExitActions>
@@ -89,7 +88,6 @@
 
 						<Trigger Property="IsMouseOver" Value="True">
 							<Trigger.EnterActions>
-								<!--<Setter TargetName="Border" Property="Background" Value="{DynamicResource AccentBrush}" />-->
 								<BeginStoryboard Storyboard="{StaticResource MouseEnterAnimation}" />
 							</Trigger.EnterActions>
 							<Trigger.ExitActions>

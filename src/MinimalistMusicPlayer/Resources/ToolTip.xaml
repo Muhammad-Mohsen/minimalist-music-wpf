@@ -10,8 +10,8 @@
 						Name="Border"
 						Width="{TemplateBinding Width}"
 						Height="{TemplateBinding Height}"
-						Background="{DynamicResource PrimaryBrush}"
-						BorderBrush="{DynamicResource BorderBrush}"
+						Background="{StaticResource BackgroundBrush}"
+						BorderBrush="{StaticResource AccentBrush}"
 						BorderThickness="1">
 
 						<ContentPresenter

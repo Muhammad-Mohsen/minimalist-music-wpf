@@ -2,8 +2,8 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<Style x:Key="BackgroundButtonStyle" TargetType="{x:Type Button}">
-		<Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
-		<Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+		<Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
 		<Setter Property="FontSize" Value="15" />
 		<Setter Property="SnapsToDevicePixels" Value="True" />
 
@@ -22,7 +22,7 @@
 							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="Background.Color" To="{StaticResource PrimaryHoverColor}" Duration="0:0:0.3" />
 						</Storyboard>
 						<Storyboard x:Key="MouseExitAnimation" FillBehavior="Stop">
-							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="Background.Color" To="{StaticResource PrimaryColor}" Duration="0:0:0.3" />
+							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="Background.Color" To="{StaticResource BackgroundColor}" Duration="0:0:0.3" />
 						</Storyboard>
 
 						<Storyboard x:Key="PressedEnterAnimation">

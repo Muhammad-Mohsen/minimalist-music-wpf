@@ -12,7 +12,7 @@ namespace MinimalistMusicPlayer
 		public BreadcrumbButton(string directory)
 		{
 			Style = Styles.ExtendedButtonStyle;
-			BorderBrush = Brushes.PrimaryBrush;
+			BorderBrush = Brushes.BackgroundBrush;
 			Margin = new Thickness(2, 0, 0, 0);
 			Padding = new Thickness(3, 0, 3, 0);
 			IsTabStop = false;
@@ -27,15 +27,14 @@ namespace MinimalistMusicPlayer
 			BreadcrumbButton button = new BreadcrumbButton(dir)
 			{
 				FontWeight = isActive ? FontWeights.Bold : FontWeights.Normal,
-				Foreground = isActive ? Brushes.PrimaryTextBrush : Brushes.AccentBrush
+				// Foreground = isActive ? Brushes.PrimaryBrush : Brushes.SecondaryBrush
 			};
 
 			if (handler != null) button.Click += handler;
 			container.Children.Add(button);
 
 			// separator
-			BreadcrumbButton separatorButton = CreateSeparator();
-			container.Children.Add(separatorButton);
+			if (!isActive) container.Children.Add(CreateSeparator());
 		}
 
 		public static BreadcrumbButton CreateSeparator()
@@ -43,7 +42,7 @@ namespace MinimalistMusicPlayer
 			return new BreadcrumbButton(Constant.BreadcrumbButtonSeparator)
 			{
 				IsEnabled = false,
-				Foreground = Brushes.AccentBrush
+				Foreground = Brushes.SecondaryBrush
 			};
 		}
 	}

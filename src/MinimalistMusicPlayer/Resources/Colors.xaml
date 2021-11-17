@@ -4,27 +4,24 @@
 	xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
 	<!--BRUSHES-->
-	<SolidColorBrush x:Key="PrimaryBrush">#FFF</SolidColorBrush> <!-- light: #FFF - dark: #2E2E2E -->
-	<SolidColorBrush x:Key="BorderBrush">#555</SolidColorBrush> <!-- light: #555 - dark:  -->
-	<SolidColorBrush x:Key="AccentBrush">#AAA</SolidColorBrush> <!-- accents: blue: #007ACC - orange: #D64D1A - red: FireBrick -->
+	<SolidColorBrush x:Key="BackgroundBrush">#FFF</SolidColorBrush> <!-- light: #FFF - dark: #2E2E2E -->
+	<SolidColorBrush x:Key="AccentBrush">#454B56</SolidColorBrush> <!-- accents: blue: #007ACC - orange: #D64D1A - red: FireBrick -->
 
-	<SolidColorBrush x:Key="PrimaryTextBrush">#2E2E2E</SolidColorBrush> <!-- light: #2E2E2E - dark: #FFF -->
-	<SolidColorBrush x:Key="SecondaryTextBrush">#555</SolidColorBrush> <!-- light: #555 - dark: #AAA -->
-	<SolidColorBrush x:Key="HighlightBrush">#999</SolidColorBrush> <!-- light: #555 - dark: #AAA -->
+	<SolidColorBrush x:Key="PrimaryBrush">#000</SolidColorBrush> <!-- light: #2E2E2E - dark: #FFF -->
+	<SolidColorBrush x:Key="SecondaryBrush">#777</SolidColorBrush> <!-- light: #555 - dark: #AAA -->
+	<SolidColorBrush x:Key="PrimaryHoverBrush">#DDD</SolidColorBrush> <!-- light: #E0E0E0 - dark: #555 -->
 
-	<SolidColorBrush x:Key="PrimaryHoverBrush">#E0E0E0</SolidColorBrush> <!-- light: #E0E0E0 - dark: #555 -->
-
-	<SolidColorBrush x:Key="TransparentBrush">#0000</SolidColorBrush>
-
+	<SolidColorBrush x:Key="TransparentBrush">#0FFF</SolidColorBrush>
+    
 	<!--COLORS-->
-	<Color x:Key="PrimaryColor">#FFF</Color> <!-- light: #FFF - dark: ##2E2E2E -->
-	<Color x:Key="AccentColor">#AAA</Color> <!-- light: #0078D7 - dark: 007ACC -->
+	<Color x:Key="BackgroundColor">#FFF</Color> <!-- light: #FFF - dark: ##2E2E2E -->
+	<Color x:Key="AccentColor">#454B56</Color> <!-- light: #0078D7 - dark: 007ACC -->
 
-	<Color x:Key="PrimaryTextColor">#2E2E2E</Color> <!-- light: #2E2E2E - dark: #FFF -->
-	<Color x:Key="SecondaryTextColor">#555</Color> <!-- light: #555 - dark: #AAA -->
+	<Color x:Key="PrimaryColor">#000</Color> <!-- light: #2E2E2E - dark: #FFF -->
+	<Color x:Key="SecondaryColor">#777</Color> <!-- light: #555 - dark: #AAA -->
+	<Color x:Key="PrimaryHoverColor">#DDD</Color> <!-- light: #E0E0E0 - dark: #555 -->
 
-	<Color x:Key="AccentHoverColor">#E0E0E0</Color> <!-- light: #0078D7 - dark: #1F9EEF -->
-	<Color x:Key="PrimaryHoverColor">#E0E0E0</Color> <!-- light: #E0E0E0 - dark: #555 -->
+	<Color x:Key="TransparentColor">#0FFF</Color>
 
 	<!--CONSTANTS-->
 	<sys:Double x:Key="MainButtonSize">32</sys:Double>

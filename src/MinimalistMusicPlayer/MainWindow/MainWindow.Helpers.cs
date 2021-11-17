@@ -49,12 +49,12 @@ namespace MinimalistMusicPlayer
 		private void SetRepeatIcon(RepeatMode oldRepeatMode)
 		{
 			ButtonRepeat.Content = oldRepeatMode == RepeatMode.Repeat ? Icons.RepeatOne : Icons.Repeat;
-			(ButtonRepeat.Content as Path).Stroke = oldRepeatMode == RepeatMode.RepeatOne ? Brushes.AccentBrush : Brushes.PrimaryTextBrush;
+			(ButtonRepeat.Content as Path).Stroke = oldRepeatMode == RepeatMode.RepeatOne ? Brushes.SecondaryBrush : Brushes.PrimaryBrush;
 		}
 
 		private void SetShuffleIcon(bool isShuffle)
 		{
-			(ButtonShuffle.Content as Path).Stroke = isShuffle ? Brushes.PrimaryTextBrush : Brushes.AccentBrush;
+			(ButtonShuffle.Content as Path).Stroke = isShuffle ? Brushes.PrimaryBrush : Brushes.SecondaryBrush;
 		}
 
 		// sets UI state for Play/Pause button, playing icon, and taskbar progress icon state

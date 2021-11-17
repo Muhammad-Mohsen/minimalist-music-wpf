@@ -193,7 +193,7 @@ namespace MinimalistMusicPlayer
 			foreach (MediaItem item in StackPanelExplorer.Children.OfType<MediaItem>())
 			{
 				item.IsMarked = false;
-				MediaItem.MarkMediaIcon(item.MediaIcon, false);
+				item.MarkMediaIcon(false);
 			}
 		}
 
@@ -238,7 +238,7 @@ namespace MinimalistMusicPlayer
 		private void SelectMediaItemByIndex(int index)
 		{
 			MediaItem mediaItem = GetMediaItemByPlaylistIndex(index);
-			MediaItem.Select(mediaItem);
+			mediaItem?.Select();
 		}
 
 		// returns appropriate margin (left/right) for the media explorer stackPanel animation

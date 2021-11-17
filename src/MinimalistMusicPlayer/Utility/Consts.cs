@@ -13,7 +13,7 @@ namespace MinimalistMusicPlayer.Utility
 		public const int TrackInfoMaxLength = 40;
 		public const int ExplorerItemMaxLength = 60;
 
-		public const double VolumeMid = 0.5; // volume levels
+		public const double VolumeMid = 0.4; // volume levels
 		public const double VolumeIncrement = 0.1; // volume increment
 
 		public const int SeekDivisor = 25;
@@ -44,8 +44,7 @@ namespace MinimalistMusicPlayer.Utility
 		public const int ExpandedWindowHeight = 615;
 
 		public const int ExplorerItemWidth = 430;
-		public const int ExplorerItemIconWidth = 25;
-		public const int ExplorerItemIconHeight = 25;
+		public const int ExplorerItemIconSize = 25;
 		public const int ExplorerItemTextWidth = 340;
 		public const int ExplorerItemTextSpacing = 4;
 

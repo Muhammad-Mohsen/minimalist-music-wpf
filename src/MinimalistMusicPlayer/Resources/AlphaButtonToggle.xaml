@@ -4,7 +4,7 @@
 	<!-- Toggle-style button (background remains the same when active) -->
 	<!-- Example usage: Playlist button -->
 	<Style x:Key="AlphaButtonToggleStyle" TargetType="{x:Type Button}">
-		<Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
+		<Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
 		<Setter Property="Width" Value="80" />
 		<Setter Property="Margin" Value="10" />
 		<Setter Property="Template">
@@ -29,7 +29,7 @@
 					<ControlTemplate.Resources>
 
 						<Storyboard x:Key="MouseEnterAnimation">
-							<ColorAnimation Storyboard.TargetName="outerRectangle" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="{StaticResource SecondaryTextColor}" Duration="0:0:0.3" />
+							<ColorAnimation Storyboard.TargetName="outerRectangle" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="{StaticResource SecondaryColor}" Duration="0:0:0.3" />
 						</Storyboard>
 						<Storyboard x:Key="MouseExitAnimation" FillBehavior="Stop">
 							<ColorAnimation Storyboard.TargetName="outerRectangle" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)" To="{StaticResource AccentColor}" Duration="0:0:0.3" />

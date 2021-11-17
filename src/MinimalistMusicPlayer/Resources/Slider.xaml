@@ -34,21 +34,21 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Thumb">
-					<Ellipse x:Name="ThumbBorder" Stroke="{DynamicResource SecondaryTextBrush}" StrokeThickness="2" Height="16" Width="16" Fill="{StaticResource PrimaryBrush}" />
+					<Ellipse x:Name="ThumbBorder" Stroke="{DynamicResource SecondaryBrush}" StrokeThickness="2" Height="16" Width="16" Fill="{StaticResource BackgroundBrush}" />
 
 					<ControlTemplate.Resources>
 						<Storyboard x:Key="MouseEnterAnimation">
 							<ColorAnimation Storyboard.TargetName="ThumbBorder" Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)" To="{StaticResource AccentColor}" Duration="0:0:0.3" />
 						</Storyboard>
 						<Storyboard x:Key="MouseExitAnimation" FillBehavior="Stop">
-							<ColorAnimation Storyboard.TargetName="ThumbBorder" Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)" To="{StaticResource SecondaryTextColor}" Duration="0:0:0.3" />
+							<ColorAnimation Storyboard.TargetName="ThumbBorder" Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)" To="{StaticResource SecondaryColor}" Duration="0:0:0.3" />
 						</Storyboard>
 
 						<Storyboard x:Key="PressedEnterAnimation">
 							<ColorAnimation Storyboard.TargetName="ThumbBorder" Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)" To="{StaticResource AccentColor}" Duration="0:0:0.3" />
 						</Storyboard>
 						<Storyboard x:Key="PressedExitAnimation" FillBehavior="Stop">
-							<ColorAnimation Storyboard.TargetName="ThumbBorder" Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)" To="{StaticResource PrimaryColor}" Duration="0:0:0.3" />
+							<ColorAnimation Storyboard.TargetName="ThumbBorder" Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)" To="{StaticResource BackgroundColor}" Duration="0:0:0.3" />
 						</Storyboard>
 					</ControlTemplate.Resources>
 

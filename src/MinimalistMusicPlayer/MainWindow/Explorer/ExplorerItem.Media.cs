@@ -11,7 +11,7 @@ namespace MinimalistMusicPlayer.Explorer
 		public static int MarkedItemCount { get; set; } = 0; // specifies the count of marked MediaItems
 		protected static MediaItem OldSelected { get; set; } // holds a reference to the previously-selected item if any.
 
-		public bool IsMarked { get; set; } // specifies whether this item will be added to the custom playlist
+		public bool IsMarked { get; set; } = false; // specifies whether this item will be added to the custom playlist
 		public ExtendedButton MediaIcon { get; set; }
 		public TextBlock LabelTitle { get; set; }
 		public TextBlock LabelDuration { get; set; }
@@ -45,7 +45,7 @@ namespace MinimalistMusicPlayer.Explorer
 			contentGrid.Children.Add(MediaIcon);
 
 			// title
-			LabelTitle = CreateTitleLabel(mediaFile.Name, mediaItemStyle != MediaItemStyle.Normal ? Brushes.PrimaryTextBrush : Brushes.SecondaryTextBrush);
+			LabelTitle = CreateTitleLabel(mediaFile.Name, mediaItemStyle != MediaItemStyle.Normal ? Brushes.PrimaryBrush : Brushes.SecondaryBrush);
 			contentGrid.Children.Add(LabelTitle);
 
 			// duration
@@ -54,8 +54,7 @@ namespace MinimalistMusicPlayer.Explorer
 
 			Content = contentGrid;
 
-			if (isSelected) Select(this);
-			IsMarked = false;
+			if (isSelected) Select();
 
 			LayoutTransform = new System.Windows.Media.ScaleTransform(); // used for filter animations
 		}
@@ -63,7 +62,8 @@ namespace MinimalistMusicPlayer.Explorer
 		private void MediaIconButton_Click(object sender, RoutedEventArgs e)
 		{
 			IsMarked = !IsMarked;
-			MarkMediaIcon((ExtendedButton)sender, IsMarked);
+			MarkMediaIcon(IsMarked);
+			
 			MarkedItemCount = IsMarked ? MarkedItemCount + 1 : MarkedItemCount - 1;
 			MarkedItemCountChange(this, new RoutedEventArgs()); // raise the MarkedItemCountChange event (to show/hide the PlaySelected button)
 		}
@@ -78,24 +78,24 @@ namespace MinimalistMusicPlayer.Explorer
 				HorizontalAlignment = HorizontalAlignment.Right,
 				Text = mediaFile.DurationString,
 				FontSize = 12,
-				Foreground = Brushes.SecondaryTextBrush,
+				Foreground = Brushes.SecondaryBrush,
 				Margin = new Thickness(0, Constant.ExplorerItemTextSpacing, Constant.ExplorerItemTextSpacing, 0)
 			};
 		}
 
 		// marks the media icon
-		public static async void MarkMediaIcon(ExtendedButton mediaIcon, bool isMarked)
+		public async void MarkMediaIcon(bool isMarked)
 		{
-			mediaIcon.IsSelected = isMarked;
+			MediaIcon.IsSelected = isMarked;
 			if (isMarked)
 			{
 				await Task.Delay(200).ConfigureAwait(true);
-				mediaIcon.Background = Brushes.SecondaryTextBrush;
+				MediaIcon.Background = Brushes.PrimaryBrush;
 			}
 			else
 			{
 				await Task.Delay(200).ConfigureAwait(true);
-				mediaIcon.Background = Brushes.AccentBrush;
+				MediaIcon.Background = Brushes.SecondaryBrush;
 			}
 		}
 
@@ -108,29 +108,25 @@ namespace MinimalistMusicPlayer.Explorer
 			if (isPlaylistItem)
 			{
 				await Task.Delay(200).ConfigureAwait(true);
-				MediaIcon.Background = Brushes.SecondaryTextBrush;
+				MediaIcon.Background = Brushes.PrimaryBrush;
 			}
 			else
 			{
 				await Task.Delay(200).ConfigureAwait(true);
-				MediaIcon.Background = Brushes.AccentBrush;
+				MediaIcon.Background = Brushes.SecondaryBrush;
 			}
 		}
 
 		public void SetTitleLabelForeground(bool isPlaylistItem)
 		{
-			var foregroundColor = isPlaylistItem == true ? Brushes.PrimaryTextBrush : Brushes.SecondaryTextBrush;
-			LabelTitle.Foreground = foregroundColor;
+			LabelTitle.Foreground = isPlaylistItem == true ? Brushes.PrimaryBrush : Brushes.SecondaryBrush;
 		}
 
-		public static void Select(MediaItem item)
+		public void Select()
 		{
 			OldSelected?.ToggleSelectionUi(false); // deselect the old item, if applicable
-
-			OldSelected = item; // set the OldItem to this one.
-
-			// check due to item being sometimes NULL if a directory change was made before the WindowsMediaPlayer gets a chance to play the item
-			item?.ToggleSelectionUi(true);
+			OldSelected = this; // set the OldItem to this one.
+			ToggleSelectionUi(true);
 		}
 		protected void ToggleSelectionUi(bool select)
 		{
@@ -138,7 +134,7 @@ namespace MinimalistMusicPlayer.Explorer
 
 			LabelTitle.FontWeight = select ? FontWeights.Bold : FontWeights.Normal;
 			LabelDuration.FontWeight = select ? FontWeights.Bold : FontWeights.Normal;
-			BorderBrush = select ? Brushes.AccentBrush : Brushes.PrimaryBrush;
+			BorderBrush = select ? Brushes.SecondaryBrush : Brushes.BackgroundBrush;
 		}
 
 		public void Toggle(bool show)

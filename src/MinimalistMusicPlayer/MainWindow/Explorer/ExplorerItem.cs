@@ -15,14 +15,14 @@ namespace MinimalistMusicPlayer.Explorer
 
 			// styles, margins...
 			Style = Styles.ExtendedButtonStyle;
-			BorderBrush = Brushes.PrimaryBrush;
+			BorderBrush = Brushes.BackgroundBrush;
 			Background = Brushes.TransparentBrush;
 			Margin = new Thickness(0, 3, 0, 0);
 		}
 
 		protected static TextBlock CreateTitleLabel(string title, System.Windows.Media.Brush foregroundBursh = null)
 		{
-			if (foregroundBursh == null) foregroundBursh = Brushes.PrimaryTextBrush;
+			if (foregroundBursh == null) foregroundBursh = Brushes.PrimaryBrush;
 
 			return new TextBlock()
 			{
@@ -32,24 +32,26 @@ namespace MinimalistMusicPlayer.Explorer
 
 				FontSize = 12,
 				Foreground = foregroundBursh,
-				Margin = new Thickness(Constant.ExplorerItemIconWidth + Constant.ExplorerItemTextSpacing, Constant.ExplorerItemTextSpacing, 0, Constant.ExplorerItemTextSpacing),
+				Margin = new Thickness(Constant.ExplorerItemIconSize + Constant.ExplorerItemTextSpacing, Constant.ExplorerItemTextSpacing, 0, Constant.ExplorerItemTextSpacing),
 				Width = Constant.ExplorerItemTextWidth
 			};
 		}
 		protected static ExtendedButton CreateIcon(System.Windows.Media.VisualBrush icon)
 		{
-			return new ExtendedButton()
+			var itemIcon =  new ExtendedButton()
 			{
 				HorizontalAlignment = HorizontalAlignment.Left,
-				Style = Styles.ExtendedButtonMaskStyle,
+				// Style = Styles.ExtendedButtonStyle,
 				OpacityMask = icon,
-				Background = Brushes.AccentBrush,
-				Width = Constant.ExplorerItemIconWidth,
-				Height = Constant.ExplorerItemIconHeight,
-				Margin = new Thickness(0),
+				Width = Constant.ExplorerItemIconSize,
+				Height = Constant.ExplorerItemIconSize,
+				Background = Brushes.SecondaryBrush,
+				Margin = new Thickness(-2, 0, 0, 0),
 				IsTabStop = false,
-				Focusable = false
+				Focusable = false,
 			};
+
+			return itemIcon;
 		}
 	}
 

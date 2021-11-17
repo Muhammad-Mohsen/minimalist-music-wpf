@@ -35,7 +35,7 @@ namespace MinimalistMusicPlayer
 					}
 					else if (Playlist.CurrentIndex == Playlist.IndexOf(item.FullName, CurrentDirectory)) // if @ the playlist directory
 					{
-						MediaItem.Select(item);
+						item?.Select();
 					}
 				}
 

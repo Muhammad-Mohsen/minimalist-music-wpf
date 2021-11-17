@@ -303,7 +303,7 @@ namespace MinimalistMusicPlayer
 
 		private void Window_Deactivated(object sender, EventArgs e)
 		{
-			WindowBorder.BorderBrush = Brushes.SecondaryTextBrush;
+			WindowBorder.BorderBrush = Brushes.SecondaryBrush;
 		}
 		private void Window_Activated(object sender, EventArgs e)
 		{

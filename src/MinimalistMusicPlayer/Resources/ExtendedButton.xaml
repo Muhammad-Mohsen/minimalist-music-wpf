@@ -3,8 +3,8 @@
 					xmlns:m="clr-namespace:MinimalistMusicPlayer">
 
 	<Style x:Key="ExtendedButtonStyle" TargetType="{x:Type m:ExtendedButton}">
-		<Setter Property="Background" Value="{StaticResource PrimaryBrush}" />
-		<Setter Property="Foreground" Value="{StaticResource PrimaryTextBrush}" />
+		<Setter Property="Background" Value="{StaticResource BackgroundBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
 		<Setter Property="FontSize" Value="12" />
 		<Setter Property="SnapsToDevicePixels" Value="True" />
 
@@ -23,25 +23,25 @@
 					<ControlTemplate.Resources>
 
 						<Storyboard x:Key="MouseEnterAnimation">
-							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="Background.Color" To="{StaticResource PrimaryHoverColor}" Duration="0:0:0.3" />
-							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource AccentColor}" Duration="0:0:0.3" />
+							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="Background.Color" To="{StaticResource PrimaryHoverColor}" Duration="0:0:0.2" />
+							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource SecondaryColor}" Duration="0:0:0.4" />
 						</Storyboard>
 						<Storyboard x:Key="MouseExitAnimation" FillBehavior="Stop">
-							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="Background.Color" To="{StaticResource PrimaryColor}" Duration="0:0:0.3" />
-							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource PrimaryColor}" Duration="0:0:0.3" />
+							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="Background.Color" To="{StaticResource TransparentColor}" Duration="0:0:0.2" />
+							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource TransparentColor}" Duration="0:0:0.4" />
 						</Storyboard>
 						<Storyboard x:Key="MouseExitSelectedAnimation" FillBehavior="Stop">
-							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="Background.Color" To="{StaticResource PrimaryColor}" Duration="0:0:0.3" />
+							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="Background.Color" To="{StaticResource TransparentColor}" Duration="0:0:0.2" />
 						</Storyboard>
 
 						<Storyboard x:Key="PressedEnterAnimation">
-							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource SecondaryTextColor}" Duration="0:0:0.2" />
+							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource PrimaryColor}" Duration="0:0:0.2" />
 							<!--<DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleX" To="0.99" Duration="0:0:0.1" />
 							<DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleY" To="0.99" Duration="0:0:0.1" />-->
 
 						</Storyboard>
 						<Storyboard x:Key="PressedExitAnimation" FillBehavior="Stop">
-							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource AccentColor}" Duration="0:0:0.2" />
+							<ColorAnimation Storyboard.TargetName="outerBorder" Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource SecondaryColor}" Duration="0:0:0.2" />
 							<!--<DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.1" />
 							<DoubleAnimation Storyboard.TargetName="scaleTransform" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.1" />-->
 						</Storyboard>

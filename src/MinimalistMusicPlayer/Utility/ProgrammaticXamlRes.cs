@@ -16,12 +16,11 @@ namespace MinimalistMusicPlayer.Utility
 
 	public static class Brushes
 	{
-		public static readonly SolidColorBrush PrimaryBrush = (SolidColorBrush)Application.Current.Resources["PrimaryBrush"];
+		public static readonly SolidColorBrush BackgroundBrush = (SolidColorBrush)Application.Current.Resources["BackgroundBrush"];
 		public static readonly SolidColorBrush AccentBrush = (SolidColorBrush)Application.Current.Resources["AccentBrush"];
-		public static readonly SolidColorBrush PrimaryTextBrush = (SolidColorBrush)Application.Current.Resources["PrimaryTextBrush"];
-		public static readonly SolidColorBrush SecondaryTextBrush = (SolidColorBrush)Application.Current.Resources["SecondaryTextBrush"];
+		public static readonly SolidColorBrush PrimaryBrush = (SolidColorBrush)Application.Current.Resources["PrimaryBrush"];
+		public static readonly SolidColorBrush SecondaryBrush = (SolidColorBrush)Application.Current.Resources["SecondaryBrush"];
 		public static readonly SolidColorBrush PrimaryHoverBrush = (SolidColorBrush)Application.Current.Resources["PrimaryHoverBrush"];
-		public static readonly SolidColorBrush HighlightBrush = (SolidColorBrush)Application.Current.Resources["HighlightBrush"];
 
 		public static readonly SolidColorBrush TransparentBrush = (SolidColorBrush)Application.Current.Resources["TransparentBrush"];
 	}
@@ -33,7 +32,7 @@ namespace MinimalistMusicPlayer.Utility
 		public static readonly Path Play = new Path()
 		{
 			Data = (GeometryGroup)Application.Current.Resources["Play"],
-			Stroke = Brushes.PrimaryTextBrush,
+			Stroke = Brushes.PrimaryBrush,
 			StrokeThickness = 1.5,
 			Margin = new Thickness(4),
 			Stretch = Stretch.Uniform
@@ -41,7 +40,7 @@ namespace MinimalistMusicPlayer.Utility
 		public static readonly Path Pause = new Path()
 		{
 			Data = (GeometryGroup)Application.Current.Resources["Pause"],
-			Stroke = Brushes.PrimaryTextBrush,
+			Stroke = Brushes.PrimaryBrush,
 			StrokeThickness = 1.5,
 			Margin = new Thickness(7, 5, 7, 5),
 			Stretch = Stretch.Uniform
@@ -50,7 +49,7 @@ namespace MinimalistMusicPlayer.Utility
 		public static readonly Path VolumeMute = new Path()
 		{
 			Data = (GeometryGroup)Application.Current.Resources["VolumeMute"],
-			Stroke = Brushes.PrimaryTextBrush,
+			Stroke = Brushes.PrimaryBrush,
 			StrokeThickness = 1.5,
 			Margin = new Thickness(2),
 			Stretch = Stretch.Uniform
@@ -60,7 +59,7 @@ namespace MinimalistMusicPlayer.Utility
 		public static readonly Path VolumeLow = new Path()
 		{
 			Data = (GeometryGroup)Application.Current.Resources["VolumeLow"],
-			Stroke = Brushes.PrimaryTextBrush,
+			Stroke = Brushes.PrimaryBrush,
 			StrokeThickness = 1.5,
 			Margin = new Thickness(2),
 			Stretch = Stretch.Uniform
@@ -69,7 +68,7 @@ namespace MinimalistMusicPlayer.Utility
 		public static readonly Path VolumeHigh = new Path()
 		{
 			Data = (GeometryGroup)Application.Current.Resources["VolumeHigh"],
-			Stroke = Brushes.PrimaryTextBrush,
+			Stroke = Brushes.PrimaryBrush,
 			StrokeThickness = 1.5,
 			Margin = new Thickness(2),
 			Stretch = Stretch.Uniform
@@ -78,7 +77,7 @@ namespace MinimalistMusicPlayer.Utility
 		public static readonly Path RepeatOne = new Path()
 		{
 			Data = (GeometryGroup)Application.Current.Resources["RepeatOne"],
-			Stroke = Brushes.PrimaryTextBrush,
+			Stroke = Brushes.PrimaryBrush,
 			StrokeThickness = 1.5,
 			Margin = new Thickness(1),
 			Stretch = Stretch.Uniform
@@ -87,7 +86,7 @@ namespace MinimalistMusicPlayer.Utility
 		public static readonly Path Repeat = new Path()
 		{
 			Data = (GeometryGroup)Application.Current.Resources["Repeat"],
-			Stroke = Brushes.PrimaryTextBrush,
+			Stroke = Brushes.PrimaryBrush,
 			StrokeThickness = 1.5,
 			Margin = new Thickness(1),
 			Stretch = Stretch.Uniform
@@ -96,9 +95,9 @@ namespace MinimalistMusicPlayer.Utility
 		public static readonly VisualBrush Directory = new VisualBrush()
 		{
 			Visual = new Path()
-			{
-				Data = (GeometryGroup)Application.Current.Resources["Directory"],
-				Stroke = Brushes.PrimaryTextBrush,
+		{
+			Data = (GeometryGroup)Application.Current.Resources["Directory"],
+				Stroke = Brushes.PrimaryBrush,
 				StrokeThickness = 1.5
 			},
 			Stretch = Stretch.None
@@ -106,9 +105,9 @@ namespace MinimalistMusicPlayer.Utility
 		public static readonly VisualBrush Drive = new VisualBrush()
 		{
 			Visual = new Path()
-			{
-				Data = (GeometryGroup)Application.Current.Resources["Drive"],
-				Stroke = Brushes.PrimaryTextBrush,
+		{
+			Data = (GeometryGroup)Application.Current.Resources["Drive"],
+				Stroke = Brushes.PrimaryBrush,
 				StrokeThickness = 1.5
 			},
 			Stretch = Stretch.None
@@ -117,8 +116,8 @@ namespace MinimalistMusicPlayer.Utility
 		{
 			Visual = new Path()
 			{
-				Data = (GeometryGroup)Application.Current.Resources["Media"],
-				Stroke = Brushes.PrimaryTextBrush,
+			Data = (GeometryGroup)Application.Current.Resources["Media"],
+				Stroke = Brushes.PrimaryBrush,
 				StrokeThickness = 1.5
 			},
 			Stretch = Stretch.None
@@ -126,9 +125,9 @@ namespace MinimalistMusicPlayer.Utility
 		public static readonly VisualBrush MediaPlaylist = new VisualBrush()
 		{
 			Visual = new Path()
-			{
-				Data = (GeometryGroup)Application.Current.Resources["MediaPlaylist"],
-				Stroke = Brushes.PrimaryTextBrush,
+		{
+			Data = (GeometryGroup)Application.Current.Resources["MediaPlaylist"],
+				Stroke = Brushes.PrimaryBrush,
 				StrokeThickness = 1.5
 			},
 			Stretch = Stretch.None,
