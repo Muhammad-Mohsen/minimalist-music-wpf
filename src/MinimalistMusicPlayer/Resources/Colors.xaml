@@ -12,6 +12,8 @@
 	<SolidColorBrush x:Key="PrimaryHoverBrush">#DDD</SolidColorBrush> <!-- light: #E0E0E0 - dark: #555 -->
 
 	<SolidColorBrush x:Key="TransparentBrush">#0FFF</SolidColorBrush>
+	
+	<SolidColorBrush x:Key="WarnBrush">#CD1919</SolidColorBrush>
     
 	<!--COLORS-->
 	<Color x:Key="BackgroundColor">#FFF</Color> <!-- light: #FFF - dark: ##2E2E2E -->
@@ -22,6 +24,8 @@
 	<Color x:Key="PrimaryHoverColor">#DDD</Color> <!-- light: #E0E0E0 - dark: #555 -->
 
 	<Color x:Key="TransparentColor">#0FFF</Color>
+
+	<Color x:Key="WarnColor">#CD1919</Color>
 
 	<!--CONSTANTS-->
 	<sys:Double x:Key="MainButtonSize">32</sys:Double>

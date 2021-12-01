@@ -36,7 +36,7 @@
 
 		<!-- window controls -->
 		<m:ExtendedButton x:Name="ButtonClose" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource BackgroundBrush}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" Height="30" Click="ButtonClose_Click" Focusable="False" IsTabStop="False">
-			<Path Stroke="#CD1919" StrokeThickness="1.2" Data="{StaticResource Close}" />
+			<Path Stroke="{StaticResource WarnBrush}" StrokeThickness="1.2" Data="{StaticResource Close}" />
 		</m:ExtendedButton>
 		<m:ExtendedButton x:Name="ButtonMinimize" Style="{StaticResource ExtendedButtonStyle}" BorderBrush="{StaticResource BackgroundBrush}" Margin="0,0,40,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="40" Height="30" Click="ButtonMinimize_Click" Focusable="False" IsTabStop="False">
 			<Path Stroke="{StaticResource PrimaryBrush}" StrokeThickness="1.99" Data="{StaticResource Minimize}" RenderTransformOrigin="0.5,0.5" />
